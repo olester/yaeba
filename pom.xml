@@ -1,0 +1,263 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+
+	<!-- INFORMATION SUR L'EQUIPE ET LE PROJET -->
+
+
+	<groupId>com.excilys.formation</groupId>
+	<artifactId>yaeba</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>YAEBA - Yet Another e-Banking Application</name>
+	<description>excilys, jee, formation, spring, hibernate, betterThanPatricksBank</description>
+	<url>http://code.google.com/p/yaeba/</url>
+
+	<mailingLists>
+		<mailingList>
+			<name>dev</name>
+			<post>yaeba-group@excilys.com </post>
+		</mailingList>
+	</mailingLists>
+	<developers>
+		<developer>
+			<id>john</id>
+			<name>Jonathan Gautier</name>
+			<email>jgautier@excilys.com</email>
+			<organization>excilys</organization>
+			<organizationUrl>www.excilys.com/</organizationUrl>
+			<roles>
+				<role>developper</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>hugo</id>
+			<name>Hugo Cordier</name>
+			<email>hcordier@excilys.com</email>
+			<organization>excilys</organization>
+			<organizationUrl>www.excilys.com/</organizationUrl>
+			<roles>
+				<role>developper</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>florian</id>
+			<name>Florian Lemarchan</name>
+			<email>flemarchan@excilys.com</email>
+			<organization>excilys</organization>
+			<organizationUrl>www.excilys.com/</organizationUrl>
+			<roles>
+				<role>developper</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>Yassine</id>
+			<name>Yassine Ben Khaled</name>
+			<email>ybenkhaled@excilys.com</email>
+			<organization>excilys</organization>
+			<organizationUrl>www.excilys.com/</organizationUrl>
+			<roles>
+				<role>developper</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>olivier</id>
+			<name>Olivier Le Ster</name>
+			<email>olesterr@excilys.com</email>
+			<organization>excilys</organization>
+			<organizationUrl>www.excilys.com/</organizationUrl>
+			<roles>
+				<role>developper</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<!-- INSTRUCTIONS DE COMPILATION, PROFILES ET GOAL -->
+
+	<profiles>
+		<profile>
+			<id>profil-dev</id>
+			<build>
+				<filters>
+					<!-- TODO -->
+				</filters>
+				<defaultGoal>
+					<!-- TODO -->
+				</defaultGoal>
+			</build>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<param.db.url>jdbc:mysql://localhost/devdb</param.db.url>	<!-- TODO:mysql ou hsqlDB? -->
+				<destination.name>DEV</destination.name>
+			</properties>
+		</profile>
+		<profile>
+			<id>profil-prod</id>
+			<build>
+				<filters>
+					<!-- TODO -->
+				</filters>
+				<defaultGoal>
+					<!-- TODO -->
+				</defaultGoal>
+			</build>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<param.db.url><!-- TODO -->
+				</param.db.url>
+				<destination.name>PROD</destination.name>
+			</properties>
+		</profile>
+	</profiles>
+
+	<build>
+		<finalName>formation.spring</finalName>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<version>2.7</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.3.2</version>
+					<configuration>
+						<target>1.6</target>
+						<source>1.6</source>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<!-- DEPENDENCES -->
+
+
+	<dependencies>
+		<!-- SPRING -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>3.0.0.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>3.0.0.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>3.0.0.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>3.0.0.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>3.0.0.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>3.0.0.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>3.0.0.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>3.0.0.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- JAVASSIST -->
+		<dependency>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.4.GA</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- AOP -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.6.6</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.6.6</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- DAO: HIBRENATE, HSQLDB et MYSQL -->
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>1.8.0.10</version>
+			<scope>provided</scope><!-- SCOPE???? -->
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>3.3.2.GA</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId> 
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.6</version>
+			<scope>provided</scope><!-- SCOPE???? -->
+		</dependency>
+
+		<!-- logging: slf4j, log4j, commons-logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.6.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency> <!-- SCOPE???? -->
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.12</version>
+		</dependency>
+		<dependency><!-- SCOPE???? -->
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+
+		<!-- Test unitaires. -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+	</dependencies>
+
+</project>
