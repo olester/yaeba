@@ -5,6 +5,7 @@
 		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>3.0.0.RELEASE</spring.version>
+		<hibernate.version>3.5.1-Final</hibernate.version>
 	</properties>
 
 	<!-- INFORMATION SUR L'EQUIPE ET LE PROJET -->
@@ -262,18 +263,13 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>3.3.2.GA</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>3.1.0.GA</version>
+			<version>${hibernate.version}</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>3.5.0-Beta-2</version>
+			<version>${hibernate.version}</version>
 			<scope>compile</scope>
 		</dependency>
 
