@@ -25,16 +25,15 @@
 				<div id="content">
 					<div class="post">
 						<h2 class="title">
-							<a href="#">La page que vous demandez n'existe pas!!!</a>
+							<a href="#">Mauvais login</a>
 						</h2>
 						<p class="meta">
 							<span>Code by <a href="http://code.google.com/p/yaeba">Yaeba
 									Team</a> </span>
 						</p>
 						<div class="entry">
-							<h1>:/</h1>
-							<br />
-							<a href="index.jsp">retourner à la page d'accueil</a>
+							<h1>:(</h1>
+							<br /> <a href="index.jsp">retourner à la page d'accueil</a>
 						</div>
 					</div>
 				</div>
