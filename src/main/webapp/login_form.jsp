@@ -6,16 +6,16 @@
 	request.setAttribute("title", "page de login");
 	request.setAttribute("titlePrefix", "YAEBA - Yet Another E-Banking Application");
 %>
-<jsp:include page="head.jsp"></jsp:include>
+<jsp:include page="WEB-INF/pageModules/head.jsp"></jsp:include>
 <body>
 	<div id="wrapper">
 		<!-- #logo -->
-		<jsp:include page="logo.jsp"></jsp:include>
+		<jsp:include page="WEB-INF/pageModules/logo.jsp"></jsp:include>
 		<div id="header">
 			<!-- #menu -->
-			<jsp:include page="menu.jsp"></jsp:include>
+			<jsp:include page="WEB-INF/pageModules/menu.jsp"></jsp:include>
 			<!-- #search -->
-			<jsp:include page="search.jsp"></jsp:include>
+			<jsp:include page="WEB-INF/pageModules/search.jsp"></jsp:include>
 		</div>
 		<!-- end #header -->
 		<!-- end #header-wrapper -->
@@ -48,13 +48,13 @@
 					</div>
 				</div>
 				<!-- #sidebar -->
-				<jsp:include page="sideBar.jsp"></jsp:include>
+				<jsp:include page="WEB-INF/pageModules/sideBar.jsp"></jsp:include>
 				<div style="clear: both;">&nbsp;</div>
 			</div>
 
 		</div>
 		<!-- #footer -->
-		<jsp:include page="footer.jsp"></jsp:include>
+		<jsp:include page="WEB-INF/pageModules/footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>
