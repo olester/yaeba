@@ -168,10 +168,21 @@
 	</build>
 
 	<!-- REPOSITORIES -->
+
 	<repositories>
 		<repository>
-			<id>jboss</id>
-			<url>http://repository.jboss.com/maven2</url>
+			<id>central</id>
+			<url>http://192.168.10.117:8080/nexus/content/repositories/central</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>JBoss2</id>
+			<url>http://192.168.10.117:8080/nexus/content/repositories/JBoss2</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
