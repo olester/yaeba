@@ -26,7 +26,7 @@
 	</mailingLists>
 	<developers>
 		<developer>
-			<id>john</id>
+			<id>John</id>
 			<name>Jonathan Gautier</name>
 			<email>jgautier@excilys.com</email>
 			<organization>excilys</organization>
@@ -36,7 +36,7 @@
 			</roles>
 		</developer>
 		<developer>
-			<id>hugo</id>
+			<id>Hugo</id>
 			<name>Hugo Cordier</name>
 			<email>hcordier@excilys.com</email>
 			<organization>excilys</organization>
@@ -46,7 +46,7 @@
 			</roles>
 		</developer>
 		<developer>
-			<id>florian</id>
+			<id>Florian</id>
 			<name>Florian Lemarchand</name>
 			<email>flemarchan@excilys.com</email>
 			<organization>excilys</organization>
@@ -66,7 +66,7 @@
 			</roles>
 		</developer>
 		<developer>
-			<id>olivier</id>
+			<id>Olivier</id>
 			<name>Olivier Le Ster</name>
 			<email>olesterr@excilys.com</email>
 			<organization>excilys</organization>
@@ -166,23 +166,21 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	
+	<!-- PLUGIN REPOSITORIES -->
+	<pluginRepositories>
+	    <pluginRepository>
+	      <id>central</id>
+	      <url>http://192.168.10.117:8080/nexus/content/groups/yaeba</url>
+	    </pluginRepository>
+  	</pluginRepositories>
 
 	<!-- REPOSITORIES -->
 
 	<repositories>
 		<repository>
-			<id>central</id>
-			<url>http://192.168.10.117:8080/nexus/content/repositories/central</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>JBoss2</id>
-			<url>http://192.168.10.117:8080/nexus/content/repositories/JBoss2</url>
+			<id>yaeba</id>
+			<url>http://192.168.10.117:8080/nexus/content/groups/yaeba</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
