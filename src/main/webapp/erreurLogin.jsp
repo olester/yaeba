@@ -4,7 +4,7 @@
 <html>
 <%
 	//on pourrait directement gere une jsp d'erreur avec message et code,etc...
-	request.setAttribute("title", "page perdue");
+	request.setAttribute("title", "mauvais login");
 	request.setAttribute("titlePrefix", "YAEBA - Yet Another E-Banking Application");
 %>
 <jsp:include page="WEB-INF/pageModules/head.jsp"></jsp:include>
