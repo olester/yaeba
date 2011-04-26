@@ -3,20 +3,40 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<artifactId>yaeba</artifactId>
 		<groupId>com.excilys.formation</groupId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>${project.version}</version>
 	</parent>
+
 	<groupId>com.excilys.formation</groupId>
 	<artifactId>yaeba-service-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${project.version}</version>
+
 	<name>yaeba-service-api</name>
+
 	<url>http://maven.apache.org</url>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
+	<!-- DEPENDENCES -->
 	<dependencies>
+	
+		<!-- INTERNES -->
+		<dependency>
+			<groupId>com.excilys.formation</groupId>
+			<artifactId>yaeba-dao-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.excilys.formation</groupId>
+			<artifactId>yaeba-model</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
 		<!-- Test unitaires. -->
 		<dependency>
 			<groupId>junit</groupId>

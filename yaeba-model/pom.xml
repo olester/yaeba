@@ -3,23 +3,33 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<artifactId>yaeba</artifactId>
 		<groupId>com.excilys.formation</groupId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>${project.version}</version>
 	</parent>
+
 	<groupId>com.excilys.formation</groupId>
 	<artifactId>yaeba-model</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${project.version}</version>
+
 	<name>yaeba-model</name>
+
 	<url>http://maven.apache.org</url>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
+	<!-- DEPENDENCES -->
 	<dependencies>
+
+		<!-- PAS DE DEPENDENCES INTERNES -->
+
 		<!-- JAVASSIST -->
 		<dependency>
-			<groupId>javassist</groupId>
+			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
 		</dependency>
 
@@ -49,5 +59,5 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 	</dependencies>
-	
+
 </project>
