@@ -8,9 +8,9 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <groupId>com.excilys.formation</groupId>
-  <artifactId>serviceImpl</artifactId>
+  <artifactId>yaeba-service-impl</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>serviceImpl</name>
+  <name>yaeba-service-impl</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

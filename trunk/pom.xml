@@ -1,23 +1,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<!-- PROPRIETES -->
-	
+
 	<properties>
-		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+		<java.version>1.6</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>3.0.0.RELEASE</spring.version>
-		<hibernate.version>3.5.1-Final</hibernate.version>
-		<java-assist.version>3.4.GA</java-assist.version>
-		<aspectj.version>1.6.6</aspectj.version>
-		<hsqldb.version>1.8.0.10</hsqldb.version>
-		<mysql.version>5.1.6</mysql.version>
-		<mysql.version>5.1.6</mysql.version>
+		<spring.version>3.0.5.RELEASE</spring.version>
+		<hibernate.version>3.6.3-Final</hibernate.version>
+		<javassist.version>3.14.0.GA</javassist.version>
+		<aspectj.version>1.6.10</aspectj.version>
+		<hsqldb.version>2.1.0</hsqldb.version>
+		<mysql.version>5.1.16</mysql.version>
 		<slf4j.version>1.6.1</slf4j.version>
 		<logback.version>0.9.28</logback.version>
 		<selenium.version>0.9.2</selenium.version>
-		<junit.version>4.0</junit.version>
+		<junit.version>4.8.2</junit.version>
 	</properties>
 
 	<!-- INFORMATION SUR L'EQUIPE ET LE PROJET -->
@@ -92,12 +91,12 @@
 	<!-- MODULES -->
 
 	<modules>
-		<module>metier</module>
-		<module>serviceAPI</module>
-		<module>serviceImpl</module>
-		<module>DAOAPI</module>
-		<module>DAOImpl</module>
-		<module>webApp</module>
+		<module>yaeba-model</module>
+		<module>yaeba-service-api</module>
+		<module>yaeba-service-impl</module>
+		<module>yaeba-dao-api</module>
+		<module>yaeba-dao-impl</module>
+		<module>yaeba-webapp</module>
 	</modules>
 
 	<!-- INSTRUCTIONS DE COMPILATION, PROFILES ET GOAL -->
@@ -142,6 +141,8 @@
 		</profile>
 	</profiles>
 
+
+
 	<build>
 		<finalName>yaeba</finalName>
 		<pluginManagement>
@@ -154,8 +155,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>2.3.2</version>
 					<configuration>
-						<target>1.6</target>
-						<source>1.6</source>
+						<target>${java.version}</target>
+						<source>${java.version}</source>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -268,7 +269,7 @@
 			<dependency>
 				<groupId>javassist</groupId>
 				<artifactId>javassist</artifactId>
-				<version>${java-assist.version}</version>
+				<version>${javassist.version}</version>
 				<scope>runtime</scope>
 			</dependency>
 
@@ -321,6 +322,7 @@
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
 				<version>${logback.version}</version>
+				<scope>runtime</scope>
 			</dependency>
 			<!-- <dependency> -->
 			<!-- <groupId>ch.qos.logback</groupId> -->
@@ -354,13 +356,13 @@
 
 	<dependencies>
 		<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 				<groupId>org.openqa.selenium.client-drivers</groupId> -->
-<!-- 				<artifactId>selenium-java-client-driver</artifactId> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.openqa.selenium.client-drivers</groupId> -->
+		<!-- <artifactId>selenium-java-client-driver</artifactId> -->
+		<!-- </dependency> -->
 	</dependencies>
 
 </project>
