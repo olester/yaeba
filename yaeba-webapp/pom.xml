@@ -9,11 +9,11 @@
 	</parent>
 
 	<groupId>com.excilys.formation</groupId>
-	<artifactId>webApp</artifactId>
+	<artifactId>yaeba-webapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>webApp</name>
+	<name>yaeba-webapp</name>
 
 	<properties>
 		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>

@@ -9,9 +9,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<groupId>com.excilys.formation</groupId>
-	<artifactId>serviceAPI</artifactId>
+	<artifactId>yaeba-dao-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>serviceAPI</name>
+	<name>yaeba-dao-api</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,6 +21,10 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.excilys.formation</groupId>
+			<artifactId>metier</artifactId>
 		</dependency>
 	</dependencies>
 </project>
