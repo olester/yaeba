@@ -24,7 +24,7 @@
 	<groupId>com.excilys.formation</groupId>
 	<artifactId>yaeba</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>pom</packaging>
 	<name>YAEBA - Yet Another e-Banking Application</name>
 	<description>excilys, jee, formation, spring, hibernate, betterThanPatricksBank</description>
 	<url>http://code.google.com/p/yaeba/</url>
@@ -184,22 +184,22 @@
 						</excludes>
 					</configuration>
 					<executions>
-						<execution>
-							<id>integration-tests</id>
-							<phase>integration-test</phase>
-							<goals>
-								<goal>test</goal>
-							</goals>
-							<configuration>
-								<skip>false</skip>
-								<excludes>
-									<exclude>none</exclude>
-								</excludes>
-								<includes>
-									<include>**/selenium/*Test.java</include>
-								</includes>
-							</configuration>
-						</execution>
+<!-- 						<execution> -->
+<!-- 							<id>integration-tests</id> -->
+<!-- 							<phase>integration-test</phase> -->
+<!-- 							<goals> -->
+<!-- 								<goal>test</goal> -->
+<!-- 							</goals> -->
+<!-- 							<configuration> -->
+<!-- 								<skip>false</skip> -->
+<!-- 								<excludes> -->
+<!-- 									<exclude>none</exclude> -->
+<!-- 								</excludes> -->
+<!-- 								<includes> -->
+<!-- 									<include>**/selenium/*Test.java</include> -->
+<!-- 								</includes> -->
+<!-- 							</configuration> -->
+<!-- 						</execution> -->
 					</executions>
 				</plugin>
 			</plugins>
@@ -217,6 +217,12 @@
 	<!-- REPOSITORIES -->
 
 	<repositories>
+		<repository>
+			<id>Version99</id>
+			<name>Version 99 Does Not Exist Maven repository</name>
+			<layout>default</layout>
+			<url>http://no-commons-logging.zapto.org/mvn2</url>
+		</repository>
 		<repository>
 			<id>yaeba</id>
 			<url>http://192.168.10.117:8080/nexus/content/groups/yaeba</url>
@@ -352,10 +358,15 @@
 			<artifactId>logback-classic</artifactId>
 			<version>${logback.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-access</artifactId>
-			<version>${logback.version}</version>
+<!-- 		<dependency> -->
+<!-- 			<groupId>ch.qos.logback</groupId> -->
+<!-- 			<artifactId>logback-access</artifactId> -->
+<!-- 			<version>${logback.version}</version> -->
+<!-- 		</dependency> -->
+		<dependency> <!-- suppressin de commons logging -->
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>99.0-does-not-exist</version>
 		</dependency>
 
 
@@ -377,5 +388,8 @@
 		</dependency>
 
 	</dependencies>
+	<modules>
+		<module>module-metier</module>
+	</modules>
 
 </project>
