@@ -5,20 +5,11 @@
 	<parent>
 		<artifactId>yaeba</artifactId>
 		<groupId>com.excilys.formation</groupId>
-		<version>${project.version}</version>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<groupId>com.excilys.formation</groupId>
 	<artifactId>yaeba-webapp</artifactId>
-	<version>${project.version}</version>
 	<packaging>war</packaging>
-
-	<name>yaeba-webapp</name>
-
-	<properties>
-		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
 
 	<!-- DEPENDENCES -->
 	<dependencies>
@@ -26,122 +17,30 @@
 		<dependency>
 			<groupId>com.excilys.formation</groupId>
 			<artifactId>yaeba-service-api</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.excilys.formation</groupId>
-			<artifactId>yaeba-model</artifactId>
-			<version>${project.version}</version>
+			<artifactId>yaeba-service-impl</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 
 		<!-- SPRING -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-		</dependency>
-
-		<!-- JAVASSIST -->
-		<dependency>
-			<groupId>org.javassist</groupId>
-			<artifactId>javassist</artifactId>
-		</dependency>
-
-		<!-- AOP -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-		</dependency>
-
-		<!-- logging: slf4j, logback -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-		</dependency>
-
-		<!-- Test unitaires. -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-		</dependency>
-
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework</groupId> -->
+<!-- 			<artifactId>spring-webmvc</artifactId> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.security</groupId> -->
+<!-- 			<artifactId>spring-security-config</artifactId> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.security</groupId> -->
+<!-- 			<artifactId>spring-security-core</artifactId> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.security</groupId> -->
+<!-- 			<artifactId>spring-security-web</artifactId> -->
+<!-- 		</dependency> -->
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-					<compilerArguments>
-						<endorseddirs>${endorsed.dir}</endorseddirs>
-					</compilerArguments>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.1.1</version>
-				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.1</version>
-				<executions>
-					<execution>
-						<phase>validate</phase>
-						<goals>
-							<goal>copy</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${endorsed.dir}</outputDirectory>
-							<silent>true</silent>
-							<artifactItems>
-								<artifactItem>
-									<groupId>javax</groupId>
-									<artifactId>javaee-endorsed-api</artifactId>
-									<version>6.0</version>
-									<type>jar</type>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
