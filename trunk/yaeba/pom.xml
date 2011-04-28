@@ -87,6 +87,16 @@
 				<role>developper</role>
 			</roles>
 		</developer>
+		<developer>
+			<id>Sophie</id>
+			<name>Sophie Trinh-Khanh</name>
+			<email>strinhkhanh@excilys.com</email>
+			<organization>excilys</organization>
+			<organizationUrl>www.excilys.com/</organizationUrl>
+			<roles>
+				<role>developper</role>
+			</roles>
+		</developer>
 	</developers>
 
 	<!-- MODULES -->
