@@ -1,4 +1,4 @@
-package com.excilys.formation.yaeba.DAOAPI;
+package com.excilys.formation.yaeba.daoapi;
 
 /**
  * Hello world!
