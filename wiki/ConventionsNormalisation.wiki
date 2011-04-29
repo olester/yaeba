@@ -11,7 +11,7 @@ Cocher ”Perform the selected actions on save”
 
 Puis cocher “Format source code”
 
-Telecharger le profil de formattage de code ici.
+Telecharger le profil de formattage de code : http://www.google.com/url?q=http%3A%2F%2Fyaeba.googlecode.com%2Ffiles%2Feclipse_formatter_settings.xml
 
 Dans : - Window > Preferences >Java > Code Style > Formatter
     Cliquer sur “Import”, puis choisissez le fichier xml précedemment téléchargé.
