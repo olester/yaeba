@@ -18,7 +18,9 @@
 		<logback.version>0.9.28</logback.version>
 		<selenium.version>1.0.1</selenium.version>
 		<junit.version>4.8.2</junit.version>
+		<dbcp.version>1.4</dbcp.version>
 		<project.url>http://code.google.com/p/yaeba</project.url>
+		
 	</properties>
 
 	<!-- INFORMATION SUR L'EQUIPE ET LE PROJET -->
@@ -355,6 +357,12 @@
 				<artifactId>mysql-connector-java</artifactId>
 				<version>${mysql.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>commons-dbcp</groupId>
+				<artifactId>commons-dbcp</artifactId>
+				<version>${dbcp.version}</version>
+			</dependency>
+
 
 			<!-- logging: slf4j, logback -->
 			<dependency>
