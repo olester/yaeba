@@ -1,9 +1,9 @@
-package com.excilys.formation.yaeba.dao.api;
+package com.excilys.formation.yaeba.service.api;
 
 import com.excilys.formation.yaeba.model.Utilisateur;
 
-public interface UtilisateurDao {
-
+public interface UtilisateurService {
+	
 	public Utilisateur getUtilisateurById(String id);
 
 	public void update(Utilisateur u);
@@ -11,5 +11,4 @@ public interface UtilisateurDao {
 	public void save(Utilisateur u);
 
 	public void delete(Utilisateur u);
-	
 }
