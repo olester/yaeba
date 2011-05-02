@@ -1,4 +1,4 @@
-package com.excilys.formation.yaeba.serviceAPI;
+package com.excilys.formation.yaeba.daoapi;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

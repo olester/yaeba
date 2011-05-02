@@ -1,4 +1,4 @@
-package com.excilys.formation.yaeba.metier;
+package com.excilys.formation.yaeba.model;
 
 /**
  * Hello world!

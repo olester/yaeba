@@ -1,4 +1,4 @@
-package com.excilys.formation.yaeba.serviceImpl;
+package com.excilys.formation.yaeba.daoimpl;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
