@@ -1,4 +1,4 @@
-package com.excilys.formation.yaeba.metier;
+package com.excilys.formation.yaeba.serviceimpl;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
