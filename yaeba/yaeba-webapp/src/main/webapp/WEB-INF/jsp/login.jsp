@@ -11,13 +11,12 @@
 <body>
 	<h1>Login</h1>
 
-<%-- 	<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION.message}"> --%>
-<!-- 		<font color="red"> Your login attempt was not successful, try -->
-<!-- 			again.<br /> -->
-<%-- 		<br /> Reason: <c:out --%>
-<%--   				value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />. </font> --%>
-<%--   				<c:remove var = "SPRING_SECURITY_LAST_EXCEPTION" scope = "session" /> --%>
-<%--   	</c:if> --%>
+	<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION.message}">
+		<font color="red"> Erreur d'authentification : <br />
+		<br /><c:out
+   				value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />. </font> 
+   				<c:remove var = "SPRING_SECURITY_LAST_EXCEPTION" scope = "session" /> 
+   	</c:if> 
 
 	    <form id="loginForm" action="<c:url value='j_spring_security_check'/>" method="POST">
 		<table>

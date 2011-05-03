@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -75,7 +76,7 @@ public class Utilisateur {
 		this.adresse = adresse;
 	}
 
-	@Column(name = "motdepasse", nullable = false)
+	@Column(name = "password", nullable = false)
 	public String getMotDePasse() {
 		return motDePasse;
 	}
@@ -84,7 +85,7 @@ public class Utilisateur {
 		this.motDePasse = motDePasse;
 	}
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "role_utilisateur", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	public Set<Role> getRoles() {
 		return roles;
