@@ -4,6 +4,7 @@
 <%
 	request.setAttribute("title", "page d'accueil");
 	request.setAttribute("titlePrefix", "YAEBA - Yet Another E-Banking Application");
+
 %>
 <body>
 	Page d'accueil
