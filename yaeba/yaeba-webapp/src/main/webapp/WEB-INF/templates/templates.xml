@@ -8,26 +8,44 @@
 	<!-- Default Main Template -->
 	<definition name="baseLayout" template="/WEB-INF/templates/template.jsp">
 		<put-attribute name="title" value="Simple Tiles 2 Example" type="string" />
-		<put-attribute name="header" value="/WEB-INF/templates/header.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/templates/menu.jsp" />
-		<put-attribute name="content" value="/WEB-INF/templates/blank.jsp" />
-		<put-attribute name="sidebar" value="/WEB-INF/templates/sidebar.jsp" />
-		<put-attribute name="footer-content" value="/WEB-INF/templates/footer-content.jsp" />
+		<put-attribute name="header" value="/WEB-INF/templates/components/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/templates/components/menu.jsp" />
+		<put-attribute name="content" value="/WEB-INF/templates/contents/blank.jsp" />
+		<put-attribute name="sidebar" value="/WEB-INF/templates/components/sidebar.jsp" />
+		<put-attribute name="footer-content" value="/WEB-INF/templates/components/footer-content.jsp" />
 	</definition>
 
+	<!-- Anonymous -->
 	<definition name="welcome" extends="baseLayout">
 		<put-attribute name="title" value="Accueil" />
-		<put-attribute name="content" value="/WEB-INF/templates/welcome.jsp" />
+		<put-attribute name="content" value="/WEB-INF/templates/contents/welcome.jsp" />
 	</definition>
 
 	<definition name="login" extends="baseLayout">
 		<put-attribute name="title" value="Login" />
-		<put-attribute name="content" value="/WEB-INF/templates/login.jsp" />
+		<put-attribute name="content" value="/WEB-INF/templates/contents/login.jsp" />
 	</definition>
-	
+
 	<definition name="error" extends="baseLayout">
 		<put-attribute name="title" value="Erreur" />
-		<put-attribute name="content" value="/WEB-INF/templates/error.jsp" />
+		<put-attribute name="content" value="/WEB-INF/templates/contents/error.jsp" />
+	</definition>
+
+	<!-- User -->
+	<definition name="comptes" extends="baseLayout">
+		<put-attribute name="title" value="Comptes" />
+		<put-attribute name="content" value="/WEB-INF/templates/contents/comptes.jsp" />
+	</definition>
+
+	<definition name="virements" extends="baseLayout">
+		<put-attribute name="title" value="Virements" />
+		<put-attribute name="content" value="/WEB-INF/templates/contents/virements.jsp" />
+	</definition>
+
+	<!-- Admin -->
+	<definition name="admin" extends="baseLayout">
+		<put-attribute name="title" value="Admin" />
+		<put-attribute name="content" value="/WEB-INF/templates/contents/admin.jsp" />
 	</definition>
 
 </tiles-definitions>

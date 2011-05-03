@@ -14,15 +14,17 @@ import org.springframework.stereotype.Component;
 @Component("authenticationSuccessHandler")
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+	@Override
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException,
+			ServletException {
 
 		for (GrantedAuthority ga : authentication.getAuthorities()) {
 			if (ga.getAuthority().equals("ROLE_ADMIN")) {
-				response.sendRedirect("admin/index.html");
+				response.sendRedirect("admin/panel.html");
 				return;
 			}
 		}
 
-		response.sendRedirect("welcome");
+		response.sendRedirect("user/comptes.html");
 	}
 }
