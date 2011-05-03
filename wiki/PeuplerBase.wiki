@@ -1,0 +1,17 @@
+SCRIPT SQL
+
+
+INSERT INTO role (type) VALUES ("ROLE_USER");
+INSERT INTO role (type) VALUES ("ROLE_ADMIN");
+
+INSERT INTO utilisateur (adresse, login, password, nom, prenom) VALUES ("43 rue de la joie", "user", "user", "Utilisateur", "Lambda");
+INSERT INTO utilisateur (adresse, login, password, nom, prenom) VALUES ("102 missile fixe", "admin", "admin", "Utilisateur", "Administrateur");
+
+INSERT INTO role_utilisateur (user_id, role_id) VALUES (1, 1);
+INSERT INTO role_utilisateur (user_id, role_id) VALUES (2, 1);
+INSERT INTO role_utilisateur (user_id, role_id) VALUES (2, 2);
+
+
+Encrypter mot de passes
++
+I18N
