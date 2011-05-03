@@ -2,7 +2,7 @@
 
 <div class="post">
 	<h2 class="title">
-		<a href="#">Bienvenue</a>
+		<a href="#">${title}</a>
 	</h2>
 	<p class="meta">Rapide présentation de Yaeba</p>
 	<div class="entry">
