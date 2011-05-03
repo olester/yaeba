@@ -20,7 +20,8 @@
 		<junit.version>4.8.2</junit.version>
 		<dbcp.version>1.4</dbcp.version>
 		<project.url>http://code.google.com/p/yaeba</project.url>
-		
+		<tiles.version>2.2.2</tiles.version>
+		<jstl.version>1.1.2</jstl.version>
 	</properties>
 
 	<!-- INFORMATION SUR L'EQUIPE ET LE PROJET -->
@@ -105,10 +106,10 @@
 
 	<modules>
 		<module>yaeba-model</module>
-		<module>yaeba-service-api</module>
-		<module>yaeba-service-impl</module>
 		<module>yaeba-dao-api</module>
 		<module>yaeba-dao-impl</module>
+		<module>yaeba-service-api</module>
+		<module>yaeba-service-impl</module>
 		<module>yaeba-webapp</module>
 	</modules>
 
@@ -308,6 +309,20 @@
 				<version>${spring.version}</version>
 			</dependency>
 
+			<!-- TILES -->
+			<dependency>
+				<groupId>org.apache.tiles</groupId>
+				<artifactId>tiles-jsp</artifactId>
+				<version>${tiles.version}</version>
+			</dependency>
+
+			<!-- JSTL -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jstl</artifactId>
+				<version>${jstl.version}</version>
+			</dependency>
+
 			<!-- JAVASSIST -->
 			<dependency>
 				<groupId>org.javassist</groupId>
@@ -363,11 +378,15 @@
 				<version>${dbcp.version}</version>
 			</dependency>
 
-
 			<!-- logging: slf4j, logback -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
 				<version>${slf4j.version}</version>
 			</dependency>
 			<dependency>
@@ -387,7 +406,7 @@
 				<version>99.0-does-not-exist</version>
 			</dependency>
 
-			<!-- Test unitaires. -->
+			<!-- Tests unitaires. -->
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
@@ -417,7 +436,11 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<scope>runtime</scope>
+			<!-- <scope>runtime</scope> -->
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
 		</dependency>
 	</dependencies>
 

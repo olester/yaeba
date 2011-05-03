@@ -3,6 +3,9 @@
 	<name>yaeba-webapp</name>
 	<comment>excilys, jee, formation, spring, hibernate, betterThanPatricksBank</comment>
 	<projects>
+		<project>yaeba-dao-api</project>
+		<project>yaeba-dao-impl</project>
+		<project>yaeba-model</project>
 		<project>yaeba-service-api</project>
 		<project>yaeba-service-impl</project>
 	</projects>
