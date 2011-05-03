@@ -5,20 +5,42 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><tiles:getAsString name="title" /></title>
+<title><tiles:getAsString name="title" />
+</title>
+<link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript">
+	function allumerBouton(bouton) {
+		var bouton=document.getElementById(bouton);
+		bouton.setAttribute("class", "current_page_item");
+	}
+</script>
 </head>
 <body>
-	<div id="header">
-		<tiles:insertAttribute name="header" />
+	<div id="wrapper">
+		<div id="header">
+			<tiles:insertAttribute name="header" />
+		</div>
+		<div id="menu">
+			<tiles:insertAttribute name="menu" />
+		</div>
+		<div id="page">
+			<div id="content">
+				<tiles:insertAttribute name="content" />
+			</div>
+<!-- 			<div id="sidebar"> -->
+<%-- 				<tiles:insertAttribute name="sidebar" /> --%>
+<!-- 			</div> -->
+			<div style="clear: both;">&nbsp;</div>
+		</div>
 	</div>
-	<div id="menu">
-		<tiles:insertAttribute name="menu" />
-	</div>
-	<div id="content">
-		<tiles:insertAttribute name="content" />
+	<div id="footer-content">
+		<tiles:insertAttribute name="footer-content" />
 	</div>
 	<div id="footer">
-		<tiles:insertAttribute name="footer" />
+		<p>
+			(c) 2009 Sitename.com. Design by <a href="http://www.nodethirtythree.com">nodethirtythree</a> and <a
+				href="http://www.freecsstemplates.org">Free CSS Templates</a>.
+		</p>
 	</div>
 </body>
 </html>
