@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<script type="text/javascript">allumerBouton("bouton_login");</script>
 <div class="post">
 	<h2 class="title">
 		<a href="#">Login</a>
@@ -10,13 +9,9 @@
 		<form>
 
 			<div>
-				Login : <br />
-				<input type="login" /> <br /> <br />Password : <br />
-				<input type="password" />
+				Login : <br /> <input type="login" /> <br /> <br />Password : <br /> <input type="password" />
 			</div>
-			<br />  
-			<input type="reset" />
-			<input type="submit" />
+			<br /> <input type="submit" /> <input type="reset" />
 		</form>
 	</div>
 </div>

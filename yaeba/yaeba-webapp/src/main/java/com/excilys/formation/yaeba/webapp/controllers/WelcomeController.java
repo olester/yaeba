@@ -21,4 +21,20 @@ public class WelcomeController {
 		return "login";
 	}
 
+	@RequestMapping("/error-404.html")
+	public String redirectError404(ModelMap model) {
+		model.put("title", "page perdue");
+		model.put("bouton", "");
+		model.put("error_code", "404");
+		return "error";
+	}
+
+	@RequestMapping("/error-500.html")
+	public String redirectError500(ModelMap model) {
+		model.put("title", "erreur interne au serveur");
+		model.put("bouton", "");
+		model.put("error_code", "500");
+		return "error";
+	}
+
 }
