@@ -1,4 +1,4 @@
-package com.excilys.formation.yaeba.webapp;
+package com.excilys.formation.yaeba.webapp.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
