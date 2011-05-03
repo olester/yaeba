@@ -13,12 +13,6 @@ import com.excilys.formation.yaeba.model.Utilisateur;
 @Repository
 public class UtilisateurDaoImpl extends HibernateDaoSupport implements UtilisateurDao {
 
-	// private HibernateTemplate hibernateTemplate;
-	//
-	// public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-	// this.hibernateTemplate = hibernateTemplate;
-	// }
-
 	@Autowired
 	public UtilisateurDaoImpl(SessionFactory factory) {
 		setSessionFactory(factory);
@@ -39,7 +33,7 @@ public class UtilisateurDaoImpl extends HibernateDaoSupport implements Utilisate
 	@SuppressWarnings("unchecked")
 	@Override
 	public Utilisateur getUtilisateurByLogin(String login) {
-		List<Utilisateur> l = getHibernateTemplate().find("FROM Utilisateur u WHERE login=?", login);
+		List<Utilisateur> l = getHibernateTemplate().find("from Utilisateur where login = ?", login);
 		if (l.size() > 0) {
 			return l.get(0);
 		} else {
