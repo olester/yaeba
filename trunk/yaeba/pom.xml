@@ -309,6 +309,12 @@
 				<version>${spring.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-taglibs</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
 			<!-- TILES -->
 			<dependency>
 				<groupId>org.apache.tiles</groupId>
@@ -322,6 +328,13 @@
 				<artifactId>jstl</artifactId>
 				<version>${jstl.version}</version>
 			</dependency>
+			
+			<dependency>
+                <groupId>taglibs</groupId>
+                <artifactId>standard</artifactId>
+                <version>${jstl.version}</version>
+            </dependency>
+			
 
 			<!-- JAVASSIST -->
 			<dependency>
