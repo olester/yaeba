@@ -21,7 +21,7 @@
 		<dbcp.version>1.4</dbcp.version>
 		<project.url>http://code.google.com/p/yaeba</project.url>
 		<tiles.version>2.2.2</tiles.version>
-		<jstl.version>1.1.2</jstl.version>
+		<jstl.version>1.2</jstl.version>
 	</properties>
 
 	<!-- INFORMATION SUR L'EQUIPE ET LE PROJET -->
@@ -324,17 +324,16 @@
 
 			<!-- JSTL -->
 			<dependency>
-				<groupId>javax.servlet</groupId>
+				<groupId>org.glassfish.web</groupId>
 				<artifactId>jstl</artifactId>
 				<version>${jstl.version}</version>
 			</dependency>
-			
+
 			<dependency>
-                <groupId>taglibs</groupId>
-                <artifactId>standard</artifactId>
-                <version>${jstl.version}</version>
-            </dependency>
-			
+				<groupId>org.glassfish.web</groupId>
+				<artifactId>jstl-impl</artifactId>
+				<version>${jstl.version}</version>
+			</dependency>
 
 			<!-- JAVASSIST -->
 			<dependency>
@@ -450,6 +449,7 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<!-- <scope>runtime</scope> -->
+
 		</dependency>
 	</dependencies>
 
