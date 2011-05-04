@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminRoleController {
 
-	@RequestMapping("/panel.html")
+	@RequestMapping("/admin.html")
 	public String redirectComptes(ModelMap model) {
 		model.put("title", "Index Admin");
 		model.put("bouton", "bouton_admin");
-		return "panel";
+		return "admin";
 	}
 
 }

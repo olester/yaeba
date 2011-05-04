@@ -43,9 +43,9 @@
 	</definition>
 
 	<!-- Admin -->
-	<definition name="panel" extends="baseLayout">
+	<definition name="admin" extends="baseLayout">
 		<put-attribute name="title" value="Admin" />
-		<put-attribute name="content" value="/WEB-INF/templates/contents/panel.jsp" />
+		<put-attribute name="content" value="/WEB-INF/templates/contents/admin.jsp" />
 	</definition>
 
 </tiles-definitions>
