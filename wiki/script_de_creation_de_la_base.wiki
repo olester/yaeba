@@ -1,0 +1,99 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+il ne s'agit que d'un dump genere par phpmyadmin
+
+
+= Details =
+
+-- phpMyAdmin SQL Dump
+-- version 3.2.2.1deb1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost:3306
+-- Generation Time: May 04, 2011 at 03:05 PM
+-- Server version: 5.1.37
+-- PHP Version: 5.2.10-2ubuntu6.9
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `yaeba`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role`
+--
+
+CREATE TABLE IF NOT EXISTS `role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `role`
+--
+
+INSERT INTO `role` (`id`, `type`) VALUES
+(1, 'ROLE_USER'),
+(2, 'ROLE_ADMIN');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role_utilisateur`
+--
+
+CREATE TABLE IF NOT EXISTS `role_utilisateur` (
+  `user_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`,`role_id`),
+  KEY `FK845D113A12ACBBC` (`role_id`),
+  KEY `FK845D113A1D6BCD90` (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `role_utilisateur`
+--
+
+INSERT INTO `role_utilisateur` (`user_id`, `role_id`) VALUES
+(1, 1),
+(2, 1),
+(2, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `utilisateur`
+--
+
+CREATE TABLE IF NOT EXISTS `utilisateur` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `adresse` varchar(255) DEFAULT NULL,
+  `login` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `nom` varchar(255) NOT NULL,
+  `prenom` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `login` (`login`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`id`, `adresse`, `login`, `password`, `nom`, `prenom`) VALUES
+(1, '43 rue de la joie', 'user', 'b14361404c078ffd549c03db443c3fede2f3e534d73f78f77301ed97d4a436a9fd9db05ee8b325c0ad36438b43fec8510c204fc1c1edb21d0941c00e9e2c1ce2', 'Utilisateur', 'Lambda'),
+(2, '102 missile fixe', 'admin', 'c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd472634dfac71cd34ebc35d16ab7fb8a90c81f975113d6c7538dc69dd8de9077ec', 'Utilisateur', 'Administrateur');
