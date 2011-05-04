@@ -15,7 +15,6 @@ UPDATE utilisateur SET password = "b14361404c078ffd549c03db443c3fede2f3e534d73f7
 
 UPDATE utilisateur SET password = "c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd472634dfac71cd34ebc35d16ab7fb8a90c81f975113d6c7538dc69dd8de9077ec" WHERE login='admin';
 
-
-Encrypter mot de passes
 +
+
 I18N
