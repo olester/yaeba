@@ -53,7 +53,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<scope>runtime</scope>
+<!-- 			<scope>runtime</scope> -->
 		</dependency>
 		
 		<dependency>
