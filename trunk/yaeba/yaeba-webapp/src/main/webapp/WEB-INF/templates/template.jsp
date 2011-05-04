@@ -23,7 +23,6 @@
 		</div>
 	</div>
 	<tiles:insertAttribute name="footer-content" />
-	</div>
 	<div id="footer">
 		<p>
 			(c) 2011 Yabea. Design by <a href="http://www.nodethirtythree.com">nodethirtythree</a> and <a
