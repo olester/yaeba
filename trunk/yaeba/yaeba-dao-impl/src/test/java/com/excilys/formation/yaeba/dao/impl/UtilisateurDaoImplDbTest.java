@@ -6,6 +6,7 @@ import java.io.File;
 
 import javax.sql.DataSource;
 
+import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
@@ -37,6 +38,9 @@ public class UtilisateurDaoImplDbTest {
 		java.sql.Connection con = DataSourceUtils.getConnection(dataSource);
 		IDatabaseConnection dbUnitCon = new DatabaseConnection(con, "yaeba");
 
+		DatabaseConfig config = dbUnitCon.getConfig(); // new
+		config.setFeature(DatabaseConfig.FEATURE_CASE_SENSITIVE_TABLE_NAMES, true); // new
+
 		DatabaseOperation.CLEAN_INSERT.execute(dbUnitCon, getDataSet());
 	}
 
@@ -57,7 +61,7 @@ public class UtilisateurDaoImplDbTest {
 	public void testSomethingWithDao() {
 		// myDaoUnderTest.doSomething();
 		assertTrue(true);
-		//commentaire
+		// commentaire
 
 	}
 }
