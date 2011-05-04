@@ -23,6 +23,7 @@
 		<tiles.version>2.2.2</tiles.version>
 		<jstl.version>1.2</jstl.version>
 		<dbunit.version>2.4.3</dbunit.version>
+		<servlet.version>2.5</servlet.version>
 	</properties>
 
 	<!-- INFORMATION SUR L'EQUIPE ET LE PROJET -->
@@ -315,13 +316,19 @@
 				<artifactId>spring-security-taglibs</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
-			
+
 			<dependency>
-			    <groupId>org.springframework</groupId>
-			    <artifactId>spring-test</artifactId>
-			    <version>${spring.version}</version>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${spring.version}</version>
 			</dependency>
-			
+
+			<!-- Servlet -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>${servlet.version}</version>
+			</dependency>
 
 			<!-- TILES -->
 			<dependency>
@@ -427,22 +434,22 @@
 			</dependency>
 
 			<!-- Tests unitaires. -->
-			
-			
+
+
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>${junit.version}</version>
 			</dependency>
-			
+
 			<dependency>
-			    <groupId>org.dbunit</groupId>
-			    <artifactId>dbunit</artifactId>
-			    <version>${dbunit.version}</version>		
+				<groupId>org.dbunit</groupId>
+				<artifactId>dbunit</artifactId>
+				<version>${dbunit.version}</version>
 			</dependency>
-			
-			
-			
+
+
+
 
 			<!-- Test d'integration. -->
 			<dependency>
@@ -467,8 +474,12 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<!-- <scope>runtime</scope> -->
-
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 
