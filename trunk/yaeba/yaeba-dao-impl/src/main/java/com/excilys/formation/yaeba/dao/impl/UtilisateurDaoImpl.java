@@ -20,7 +20,8 @@ public class UtilisateurDaoImpl extends HibernateDaoSupport implements Utilisate
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Utilisateur getUtilisateurById(String id) {
+	public Utilisateur getUtilisateurById(String strId) {
+		int id = Integer.parseInt(strId);
 		List<Utilisateur> l = getHibernateTemplate().find("select c from Utilisateur c where id=?", id);
 		// TODO utiliser .get
 		if (l.size() > 0) {

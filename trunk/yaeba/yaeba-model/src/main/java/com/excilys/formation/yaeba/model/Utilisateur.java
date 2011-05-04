@@ -1,5 +1,6 @@
 package com.excilys.formation.yaeba.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -26,7 +27,16 @@ public class Utilisateur {
 	private Set<Role> roles;
 
 	public Utilisateur() {
+		roles = new HashSet<Role>();
+	}
 
+	public Utilisateur(String login, String nom, String prenom, String adresse, String motDePasse, Set<Role> roles) {
+		this.login = login;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresse = adresse;
+		this.motDePasse = motDePasse;
+		this.roles = roles;
 	}
 
 	@Id
@@ -93,6 +103,36 @@ public class Utilisateur {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		Utilisateur other = (Utilisateur) obj;
+		if (adresse == null) {
+			if (other.adresse != null) return false;
+		} else if (!adresse.equals(other.adresse)) return false;
+		if (id == null) {
+			if (other.id != null) return false;
+		} else if (!id.equals(other.id)) return false;
+		if (login == null) {
+			if (other.login != null) return false;
+		} else if (!login.equals(other.login)) return false;
+		if (motDePasse == null) {
+			if (other.motDePasse != null) return false;
+		} else if (!motDePasse.equals(other.motDePasse)) return false;
+		if (nom == null) {
+			if (other.nom != null) return false;
+		} else if (!nom.equals(other.nom)) return false;
+		if (prenom == null) {
+			if (other.prenom != null) return false;
+		} else if (!prenom.equals(other.prenom)) return false;
+		if (roles == null) {
+			if (other.roles != null) return false;
+		} else if (!roles.equals(other.roles)) return false;
+		return true;
 	}
 
 }
