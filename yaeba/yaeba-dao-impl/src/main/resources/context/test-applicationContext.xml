@@ -37,5 +37,6 @@
 	<bean name="utilisateurDaoImpl" class="com.excilys.formation.yaeba.dao.impl.UtilisateurDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
 
 </beans>
