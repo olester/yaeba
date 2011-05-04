@@ -26,7 +26,7 @@
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
 			<li
 				<c:if test="${bouton eq 'bouton_admin'}"> class="current_page_item"</c:if>><a
-				href="${pageContext.request.contextPath}/admin/panel.html">Admin</a>
+				href="${pageContext.request.contextPath}/admin/admin.html">Admin</a>
 			</li>
 		</sec:authorize>
 
