@@ -8,15 +8,15 @@
 	<context:component-scan base-package="com.excilys.formation.yaeba.webapp" />
 
 	<security:http>
-	
+
 		<security:intercept-url pattern="/welcome.html" filters="none" />
 		<security:intercept-url pattern="/login.html" filters="none" />
 		<security:intercept-url pattern="/error-*.html" filters="none" />
 		<security:intercept-url pattern="/style.css" filters="none" />
 		<security:intercept-url pattern="/images/*" filters="none" />
-		
+
 		<security:intercept-url pattern="/user/**" access="ROLE_USER" />
-		
+
 		<security:intercept-url pattern="/**" access="ROLE_ADMIN" />
 
 		<security:form-login login-page="/login.html" authentication-failure-url="/error-500.html"
@@ -25,8 +25,14 @@
 		<security:logout logout-success-url="/login.html" />
 	</security:http>
 
+	<bean id="shaPasswordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
+		<constructor-arg value="512" />
+	</bean>
+
 	<security:authentication-manager>
-		<security:authentication-provider user-service-ref="userDetailsService" />
+		<security:authentication-provider user-service-ref="userDetailsService">
+			<security:password-encoder ref="shaPasswordEncoder" />
+		</security:authentication-provider>
 	</security:authentication-manager>
 
 </beans>
