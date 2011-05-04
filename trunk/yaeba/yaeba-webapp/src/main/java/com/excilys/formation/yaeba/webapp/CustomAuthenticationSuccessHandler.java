@@ -20,7 +20,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
 		for (GrantedAuthority ga : authentication.getAuthorities()) {
 			if (ga.getAuthority().equals("ROLE_ADMIN")) {
-				response.sendRedirect("admin/panel.html");
+				response.sendRedirect("admin/admin.html");
 				return;
 			}
 		}
