@@ -14,6 +14,13 @@ public class Role {
 	private Integer id;
 	private String type;
 
+	public Role() {
+	}
+
+	public Role(String type) {
+		this.type = type;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", unique = true, nullable = false, updatable = false)
@@ -32,6 +39,21 @@ public class Role {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		Role other = (Role) obj;
+		if (id == null) {
+			if (other.id != null) return false;
+		} else if (!id.equals(other.id)) return false;
+		if (type == null) {
+			if (other.type != null) return false;
+		} else if (!type.equals(other.type)) return false;
+		return true;
 	}
 
 }
