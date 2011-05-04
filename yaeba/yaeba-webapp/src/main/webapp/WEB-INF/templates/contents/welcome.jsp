@@ -4,12 +4,10 @@
 	<h2 class="title">
 		<a href="#">${title}</a>
 	</h2>
-	<p class="meta">Rapide présentation de Yaeba</p>
+	<p class="meta">Présentation de Yaeba</p>
 	<div class="entry">
 		<p>
-			This is <strong>EarthlingTwo</strong>, a free template by <a href="http://www.nodethirtythree.com">nodethirtythree</a>
-			and <a href="http://www.freecsstemplates.org">Free CSS Templates</a>. It’s kind of a sequel to an older template I
-			did for FCT a long time ago named <a href="http://www.freecsstemplates.org/preview/earthling">Earthling</a>.
+			Bienvenue sur le site de votre banque en ligne.
 		</p>
 
 	</div>

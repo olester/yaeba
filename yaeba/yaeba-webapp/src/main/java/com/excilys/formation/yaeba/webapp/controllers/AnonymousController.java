@@ -29,6 +29,14 @@ public class AnonymousController {
 		return "error";
 	}
 
+	@RequestMapping("/error-403.html")
+	public String redirectError403(ModelMap model) {
+		model.put("title", "Acces interdit");
+		model.put("bouton", "");
+		model.put("error_code", "403");
+		return "error";
+	}
+
 	@RequestMapping("/error-500.html")
 	public String redirectError500(ModelMap model) {
 		model.put("title", "Erreur interne au serveur");
