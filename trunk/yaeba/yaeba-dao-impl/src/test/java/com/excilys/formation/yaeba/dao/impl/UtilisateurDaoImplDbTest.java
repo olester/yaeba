@@ -38,10 +38,10 @@ public class UtilisateurDaoImplDbTest {
 		java.sql.Connection con = DataSourceUtils.getConnection(dataSource);
 		IDatabaseConnection dbUnitCon = new DatabaseConnection(con, "yaeba");
 
-		DatabaseConfig config = dbUnitCon.getConfig(); // new
-		config.setFeature(DatabaseConfig.FEATURE_CASE_SENSITIVE_TABLE_NAMES, true); // new
+		DatabaseConfig config = dbUnitCon.getConfig();
+		config.setFeature(DatabaseConfig.FEATURE_CASE_SENSITIVE_TABLE_NAMES, true);
 
-		DatabaseOperation.CLEAN_INSERT.execute(dbUnitCon, getDataSet());
+		DatabaseOperation.INSERT.execute(dbUnitCon, getDataSet());
 	}
 
 	@After
@@ -49,7 +49,10 @@ public class UtilisateurDaoImplDbTest {
 		java.sql.Connection con = DataSourceUtils.getConnection(dataSource);
 		IDatabaseConnection dbUnitCon = new DatabaseConnection(con, "yaeba");
 
-		// DatabaseOperation.DELETE_ALL.execute(dbUnitCon, getDataSet());
+		DatabaseConfig config = dbUnitCon.getConfig();
+		config.setFeature(DatabaseConfig.FEATURE_CASE_SENSITIVE_TABLE_NAMES, true);
+
+		DatabaseOperation.DELETE.execute(dbUnitCon, getDataSet());
 	}
 
 	private IDataSet getDataSet() throws Exception {
@@ -62,6 +65,6 @@ public class UtilisateurDaoImplDbTest {
 		// myDaoUnderTest.doSomething();
 		assertTrue(true);
 		// commentaire
-
 	}
+
 }
