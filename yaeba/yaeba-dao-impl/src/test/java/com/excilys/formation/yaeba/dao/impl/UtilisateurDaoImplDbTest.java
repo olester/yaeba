@@ -34,6 +34,7 @@ public class UtilisateurDaoImplDbTest {
 		this.dataSource = dataSource;
 	}
 
+	@Autowired
 	public void setUtilisateurDaoImpl(UtilisateurDaoImpl utilisateurDaoImpl) {
 		this.utilisateurDaoImpl = utilisateurDaoImpl;
 	}
@@ -62,7 +63,7 @@ public class UtilisateurDaoImplDbTest {
 	}
 
 	private IDataSet getDataSet() throws Exception {
-		FlatXmlDataSet f = new FlatXmlDataSet(new File("src/main/resources/dataset.xml"));
+		FlatXmlDataSet f = new FlatXmlDataSet(new File("src/test/resources/dataset.xml"));
 		return f;
 	}
 
