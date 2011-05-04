@@ -22,20 +22,21 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:/context/applicationContext.xml" })
+@ContextConfiguration(locations = { "classpath:/context/test-applicationContext.xml" })
 public class UtilisateurDaoImplDbTest {
 
 	@Autowired
 	private DataSource dataSource;
 
+	private UtilisateurDaoImpl utilisateurDaoImpl;
+
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
 
-	// @Autowired
-	// public UtilisateurDaoImplDbTest(SessionFactory factory) {
-	// setSessionFactory(factory);
-	// }
+	public void setUtilisateurDaoImpl(UtilisateurDaoImpl utilisateurDaoImpl) {
+		this.utilisateurDaoImpl = utilisateurDaoImpl;
+	}
 
 	@Before
 	public void init() throws Exception {
@@ -46,7 +47,7 @@ public class UtilisateurDaoImplDbTest {
 		DatabaseConfig config = dbUnitCon.getConfig();
 		config.setFeature(DatabaseConfig.FEATURE_CASE_SENSITIVE_TABLE_NAMES, true);
 
-		DatabaseOperation.CLEAN_INSERT.execute(dbUnitCon, getDataSet());
+		DatabaseOperation.INSERT.execute(dbUnitCon, getDataSet());
 	}
 
 	@After
@@ -57,7 +58,7 @@ public class UtilisateurDaoImplDbTest {
 		DatabaseConfig config = dbUnitCon.getConfig();
 		config.setFeature(DatabaseConfig.FEATURE_CASE_SENSITIVE_TABLE_NAMES, true);
 
-		DatabaseOperation.DELETE_ALL.execute(dbUnitCon, getDataSet());
+		DatabaseOperation.DELETE.execute(dbUnitCon, getDataSet());
 	}
 
 	private IDataSet getDataSet() throws Exception {
@@ -74,8 +75,9 @@ public class UtilisateurDaoImplDbTest {
 
 	// @Test
 	// public void testGetUtilisateurById() {
-	// Utilisateur u = getUtilisateurById(99);
-	// assertTrue(condition);
+	// Utilisateur u = utilisateurDaoImpl.getUtilisateurById("99");
+	// System.out.println(u);
+	// assertTrue(u.getNom().equals("citron"));
 	// }
 
 }
