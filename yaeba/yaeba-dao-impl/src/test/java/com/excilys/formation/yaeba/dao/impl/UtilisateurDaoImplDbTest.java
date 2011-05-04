@@ -22,7 +22,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:/context/applicationContext.xml" })
+@ContextConfiguration(locations = { "classpath:/test/*/context/applicationContext.xml" })
 public class UtilisateurDaoImplDbTest {
 
 	@Autowired
@@ -31,6 +31,11 @@ public class UtilisateurDaoImplDbTest {
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
+
+	// @Autowired
+	// public UtilisateurDaoImplDbTest(SessionFactory factory) {
+	// setSessionFactory(factory);
+	// }
 
 	@Before
 	public void init() throws Exception {
@@ -41,7 +46,7 @@ public class UtilisateurDaoImplDbTest {
 		DatabaseConfig config = dbUnitCon.getConfig();
 		config.setFeature(DatabaseConfig.FEATURE_CASE_SENSITIVE_TABLE_NAMES, true);
 
-		DatabaseOperation.INSERT.execute(dbUnitCon, getDataSet());
+		DatabaseOperation.CLEAN_INSERT.execute(dbUnitCon, getDataSet());
 	}
 
 	@After
@@ -52,7 +57,7 @@ public class UtilisateurDaoImplDbTest {
 		DatabaseConfig config = dbUnitCon.getConfig();
 		config.setFeature(DatabaseConfig.FEATURE_CASE_SENSITIVE_TABLE_NAMES, true);
 
-		DatabaseOperation.DELETE.execute(dbUnitCon, getDataSet());
+		DatabaseOperation.DELETE_ALL.execute(dbUnitCon, getDataSet());
 	}
 
 	private IDataSet getDataSet() throws Exception {
@@ -66,5 +71,11 @@ public class UtilisateurDaoImplDbTest {
 		assertTrue(true);
 		// commentaire
 	}
+
+	// @Test
+	// public void testGetUtilisateurById() {
+	// Utilisateur u = getUtilisateurById(99);
+	// assertTrue(condition);
+	// }
 
 }
