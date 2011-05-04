@@ -31,21 +31,13 @@ import com.excilys.formation.yaeba.model.Utilisateur;
 public class UtilisateurDaoImplDbTest {
 
 	@Autowired
+	private UtilisateurDaoImpl utilisateurDaoImpl;
+
+	@Autowired
 	private DataSource dataSource;
 
 	private IDatabaseConnection dbUnitCon;
 	private Connection con;
-
-	private UtilisateurDaoImpl utilisateurDaoImpl;
-
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
-
-	@Autowired
-	public void setUtilisateurDaoImpl(UtilisateurDaoImpl utilisateurDaoImpl) {
-		this.utilisateurDaoImpl = utilisateurDaoImpl;
-	}
 
 	@Before
 	public void init() throws Exception {
@@ -65,6 +57,7 @@ public class UtilisateurDaoImplDbTest {
 		con.close();
 	}
 
+	// Chargement d'une bdd de test
 	private IDataSet getDataSet() throws Exception {
 		FlatXmlDataSet f = new FlatXmlDataSet(new File("src/test/resources/dataset.xml"));
 		return f;
