@@ -17,9 +17,6 @@
 					Mot de passe : <br /> <input type="password" name="j_password" id="j_password" />
 				</p>
 				<p>
-					<input type="checkbox" name="_spring_security_remember_me" /> Se souvenir de moi
-				</p>
-				<p>
 					<input type="submit" value="Valider" /> <input type="reset" />
 				</p>
 			</div>

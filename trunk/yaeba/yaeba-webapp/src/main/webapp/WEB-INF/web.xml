@@ -49,7 +49,11 @@
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>welcome.html</welcome-file>
+		<welcome-file>login.html</welcome-file>
 	</welcome-file-list>
+	
+     <session-config>  
+        <session-timeout>5</session-timeout>  
+     </session-config>  
 
 </web-app>
