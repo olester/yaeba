@@ -8,18 +8,16 @@
 	<context:component-scan base-package="com.excilys.formation.yaeba.webapp" />
 
 	<security:http>
+		<security:intercept-url pattern="/login.html" filters="none" />		
+		<security:intercept-url pattern="/error-*.html" filters="none" />
+		<security:intercept-url pattern="/style.css" filters="none" />
+		<security:intercept-url pattern="/images/*" filters="none" />
 
-
-		<security:intercept-url pattern="/welcome.html" access="ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN" />
-		<security:intercept-url pattern="/login.html" access="ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN" />
-		<security:intercept-url pattern="/error-*.html" access="ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN" />
-		<security:intercept-url pattern="/style.css" access="ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN" />
-		<security:intercept-url pattern="/images/*" access="ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN" />
-
+		<security:intercept-url pattern="/welcome.html" access="ROLE_USER" />
 		<security:intercept-url pattern="/user/**" access="ROLE_USER" />
-
-		<security:intercept-url pattern="/**" access="ROLE_ADMIN" />
-
+		
+		<security:intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+		
 		<security:form-login login-page="/login.html" authentication-failure-url="/login.html"
 			authentication-success-handler-ref="authenticationSuccessHandler" />
 

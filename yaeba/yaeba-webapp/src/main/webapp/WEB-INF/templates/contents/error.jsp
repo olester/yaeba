@@ -7,7 +7,7 @@
 	<p class="meta">${title}</p>
 	<div class="entry">
 		<p>
-			<strong><a href="welcome.html">Revenir a la page d'accueil</a>
+			<strong><a href="${pageContext.request.contextPath }/welcome.html">Revenir a la page d'accueil</a>
 			</strong>
 		</p>
 	</div>

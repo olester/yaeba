@@ -9,7 +9,6 @@
 		<p>
 			Bienvenue sur le site de votre banque en ligne.
 		</p>
-
 	</div>
 </div>
 <div style="clear: both;">&nbsp;</div>
