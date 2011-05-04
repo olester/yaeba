@@ -3,7 +3,7 @@
 <div id="header">
 	<div id="logo">
 		<h1>
-			<a href="welcome.html">Yaeba</a>
+			<a href="${pageContext.request.contextPath}/welcome.html">Yaeba</a>
 		</h1>
 		<p>Yet Another E-Banking Application</p>
 	</div>

@@ -26,7 +26,7 @@
 	</div>
 	<div id="footer">
 		<p>
-			(c) 2009 Sitename.com. Design by <a href="http://www.nodethirtythree.com">nodethirtythree</a> and <a
+			(c) 2011 Yabea. Design by <a href="http://www.nodethirtythree.com">nodethirtythree</a> and <a
 				href="http://www.freecsstemplates.org">Free CSS Templates</a>.
 		</p>
 	</div>
