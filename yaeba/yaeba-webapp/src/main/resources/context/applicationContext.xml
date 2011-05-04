@@ -7,6 +7,7 @@
 
 	<context:component-scan base-package="com.excilys.formation.yaeba.webapp" />
 
+
 	<security:http>
 		<security:intercept-url pattern="/login.html" filters="none" />		
 		<security:intercept-url pattern="/error-*.html" filters="none" />
