@@ -5,8 +5,10 @@
 	<!-- PROPRIETES -->
 
 	<properties>
+		<!-- variables en rapport avec la compilation -->
 		<java.version>1.6</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- versions des dependences -->
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<hibernate.version>3.6.3.Final</hibernate.version>
 		<jpa2.version>1.0.0.Final</jpa2.version>
@@ -16,14 +18,22 @@
 		<mysql.version>5.1.16</mysql.version>
 		<slf4j.version>1.6.1</slf4j.version>
 		<logback.version>0.9.28</logback.version>
-		<selenium.version>1.0.1</selenium.version>
+		<selenium.driver.version>1.0.2</selenium.driver.version>
+		<selenium.version>2.0b3</selenium.version>
 		<junit.version>4.8.2</junit.version>
 		<dbcp.version>1.4</dbcp.version>
-		<project.url>http://code.google.com/p/yaeba</project.url>
 		<tiles.version>2.2.2</tiles.version>
 		<jstl.version>1.2</jstl.version>
 		<dbunit.version>2.4.3</dbunit.version>
 		<servlet.version>2.5</servlet.version>
+		<!-- versions des plugins -->
+		<eclipse.plugin.version>2.7</eclipse.plugin.version>
+		<compiler.plugin.version>2.3.2</compiler.plugin.version>
+		<selenium.plugin.version>1.1</selenium.plugin.version>
+		<jetty.version>8.0.0.M2</jetty.version>
+		<!-- divers -->
+		<jetty.port>9090</jetty.port>
+		<project.url>http://code.google.com/p/yaeba</project.url>
 	</properties>
 
 	<!-- INFORMATION SUR L'EQUIPE ET LE PROJET -->
@@ -119,41 +129,78 @@
 
 	<profiles>
 		<profile>
-			<id>profil-dev</id>
+			<id>integration-test</id>
 			<build>
-				<filters>
-					<!-- TODO -->
-				</filters>
-				<defaultGoal>
-					<!-- TODO -->
-				</defaultGoal>
-			</build>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<param.db.url>jdbc:mysql://localhost/devdb</param.db.url>
-				<destination.name>DEV</destination.name>
-			</properties>
-		</profile>
-		<profile>
-			<id>profil-prod</id>
-			<build>
-				<filters>
-					<!-- TODO -->
-				</filters>
-				<defaultGoal>
-					<!-- TODO -->
-				</defaultGoal>
+				<defaultGoal>verify</defaultGoal>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-surefire-plugin</artifactId>
+							<configuration>
+								<reportFormat>brief</reportFormat>
+								<useFile>false</useFile>
+								<excludes>
+									<exclude>**/*Test.java</exclude>
+								</excludes>
+							</configuration>
+							<executions>
+								<execution>
+									<id>test</id>
+									<phase>test</phase>
+									<configuration>
+										<skip>true</skip>
+									</configuration>
+								</execution>
+								<execution>
+									<id>surefire-integration-tests</id>
+									<phase>integration-test</phase>
+									<goals>
+										<goal>test</goal>
+									</goals>
+									<configuration>
+										<skip>false</skip>
+										<excludes>
+											<exclude>none</exclude>
+										</excludes>
+										<includes>
+											<include>**/selenium/**Test.java</include>
+										</includes>
+									</configuration>
+								</execution>
+							</executions>
+						</plugin>
+						<plugin>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>selenium-maven-plugin</artifactId>
+							<version>${selenium.plugin.version}</version>
+							<executions>
+								<execution>
+									<id>start</id>
+									<phase>pre-integration-test</phase>
+									<goals>
+										<goal>start-server</goal>
+									</goals>
+									<configuration>
+										<background>true</background>
+										<browser>*firefox</browser>
+									</configuration>
+								</execution>
+								<execution>
+									<id>stop</id>
+									<phase>post-integration-test</phase>
+									<goals>
+										<goal>stop-server</goal>
+									</goals>
+								</execution>
+							</executions>
+						</plugin>
+					</plugins>
+				</pluginManagement>
 			</build>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
-			<properties>
-				<param.db.url><!-- TODO -->
-				</param.db.url>
-				<destination.name>PROD</destination.name>
-			</properties>
 		</profile>
 	</profiles>
 
@@ -165,42 +212,15 @@
 			<plugins>
 				<plugin>
 					<artifactId>maven-eclipse-plugin</artifactId>
-					<version>2.7</version>
+					<version>${eclipse.plugin.version}</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.3.2</version>
+					<version>${compiler.plugin.version}</version>
 					<configuration>
 						<target>${java.version}</target>
 						<source>${java.version}</source>
 					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>selenium-maven-plugin</artifactId>
-					<version>1.1</version>
-					<executions>
-						<execution>
-							<id>start</id>
-							<phase>pre-integration-test</phase>
-							<goals>
-								<goal>start-server</goal>
-							</goals>
-							<configuration>
-								<background>true</background>
-								<browser>*firefox</browser>
-								<logOutput>true</logOutput>
-								<multiWindow>true</multiWindow>
-							</configuration>
-						</execution>
-						<execution>
-							<id>stop</id>
-							<phase>post-integration-test</phase>
-							<goals>
-								<goal>stop-server</goal>
-							</goals>
-						</execution>
-					</executions>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -209,30 +229,20 @@
 						<reportFormat>brief</reportFormat>
 						<useFile>false</useFile>
 						<excludes>
-							<exclude>**/selenium/*Test.java</exclude>
+							<exclude>**/selenium/**Test.java</exclude>
 						</excludes>
 					</configuration>
-					<executions>
-						<execution>
-							<id>integration-tests</id>
-							<phase>integration-test</phase>
-							<goals>
-								<goal>test</goal>
-							</goals>
-							<configuration>
-								<skip>false</skip>
-								<excludes>
-									<exclude>none</exclude>
-								</excludes>
-								<includes>
-									<include>**/selenium/*Test.java</include>
-								</includes>
-							</configuration>
-						</execution>
-					</executions>
 				</plugin>
 			</plugins>
 		</pluginManagement>
+		<plugins>
+			<plugin>
+				<artifactId>maven-eclipse-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+		</plugins>
 	</build>
 
 	<!-- DEPENDENCES -->
@@ -453,10 +463,18 @@
 
 			<!-- Test d'integration. -->
 			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-api</artifactId>
+				<version>${selenium.version}</version>
+				<type>jar</type>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
 				<groupId>org.seleniumhq.selenium.client-drivers</groupId>
 				<artifactId>selenium-java-client-driver</artifactId>
-				<version>${selenium.version}</version>
-				<scope>test</scope>
+				<version>${selenium.driver.version}</version>
+				<type>jar</type>
+				<scope>compile</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
