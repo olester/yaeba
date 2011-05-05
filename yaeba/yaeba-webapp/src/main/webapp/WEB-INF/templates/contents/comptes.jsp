@@ -16,12 +16,15 @@
 		<table>
 			<tr class="libelle">
 				<td><spring:message code="accounts.account" /></td>
+				<td><spring:message code="accounts.type" /></td>
 				<td><spring:message code="accounts.balance" /></td>
 			</tr>
-			<c:forEach var="compte" items="${comptes}" begin="0" end="9">
+			<c:forEach var="compte" items="${utilisateur.comptes}" begin="0" end="9">
 				<tr>
-					<td><a href="${pageContext.request.contextPath }/user/detailCompte.jsp?c=${compte.numeroCompte}">${compte.numeroCompte}</a>
+
+					<td class="numero"><a href="${pageContext.request.contextPath}/compte/${compte.numeroCompte}/details.html">${compte.numeroCompte}</a>
 					</td>
+					<td class="numero">${compte.libelle}</td>
 					<td>... €</td>
 				</tr>
 			</c:forEach>
