@@ -91,7 +91,7 @@ public class UtilisateurDaoImplDbTest {
 
 	@Test
 	public void testSave() {
-		Utilisateur u = new Utilisateur("login2", "nom2", "prenom2", "adresse2", "motDePasse2", null);
+		Utilisateur u = new Utilisateur("login2", "nom2", "prenom2", "adresse2", "motDePasse2", null, null);
 		utilisateurDaoImpl.save(u);
 		Utilisateur u2 = utilisateurDaoImpl.getUtilisateurByLogin("login2");
 		assertNotNull(u2);
@@ -99,9 +99,9 @@ public class UtilisateurDaoImplDbTest {
 
 	@Test
 	public void testDelete() {
-		Utilisateur u = utilisateurDaoImpl.getUtilisateurByLogin("login2");
+		Utilisateur u = utilisateurDaoImpl.getUtilisateurByLogin("monlogin");
 		utilisateurDaoImpl.delete(u);
-		Utilisateur u2 = utilisateurDaoImpl.getUtilisateurByLogin("login2");
+		Utilisateur u2 = utilisateurDaoImpl.getUtilisateurByLogin("monlogin");
 		assertNull(u2);
 	}
 

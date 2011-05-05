@@ -1,14 +1,19 @@
 package com.excilys.formation.yaeba.webapp.controllers;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.excilys.formation.yaeba.model.Compte;
+import com.excilys.formation.yaeba.service.api.CompteService;
 
 @Controller
 @RequestMapping("/user")
@@ -38,5 +43,17 @@ public class UserRoleController {
 	public String redirectVirements(ModelMap model) {
 		model.put("bouton", "bouton_virements");
 		return "virements";
+	}
+
+	@Autowired
+	private CompteService compteService;
+
+	@RequestMapping("/comptes/{numeroCompte}/details.html")
+	public String redirectDetailsCompte(
+			@PathVariable("numeroCompte") String numeroCompte, ModelMap model) {
+		Compte compte = compteService.getCompteByNumeroCompte(numeroCompte);
+		model.put("numero", numeroCompte);
+		model.put("compte", compte);
+		return "detailsCompte";
 	}
 }
