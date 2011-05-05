@@ -10,7 +10,6 @@ public class AdminRoleController {
 
 	@RequestMapping("/admin.html")
 	public String redirectComptes(ModelMap model) {
-		model.put("title", "Index Admin");
 		model.put("bouton", "bouton_admin");
 		return "admin";
 	}

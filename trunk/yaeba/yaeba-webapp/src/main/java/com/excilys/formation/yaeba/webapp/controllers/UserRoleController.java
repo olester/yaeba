@@ -10,14 +10,12 @@ public class UserRoleController {
 
 	@RequestMapping("/comptes.html")
 	public String redirectComptes(ModelMap model) {
-		model.put("title", "Comptes");
 		model.put("bouton", "bouton_comptes");
 		return "comptes";
 	}
-	
+
 	@RequestMapping("/virements.html")
 	public String redirectVirements(ModelMap model) {
-		model.put("title", "Virements");
 		model.put("bouton", "bouton_virements");
 		return "virements";
 	}
