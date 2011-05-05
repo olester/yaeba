@@ -40,6 +40,11 @@
 	<definition name="virements" extends="baseLayout">
 		<put-attribute name="content" value="/WEB-INF/templates/contents/virements.jsp" />
 	</definition>
+	
+	<definition name="detailsCompte" extends="baseLayout">
+		<put-attribute name="title" value="Details du compte" />
+		<put-attribute name="content" value="/WEB-INF/templates/contents/detailsCompte.jsp" />
+	</definition>
 
 	<!-- Admin -->
 	<definition name="admin" extends="baseLayout">
