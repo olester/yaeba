@@ -3,7 +3,7 @@
 
 <div class="post">
 	<h2 class="title">
-		<a href="/"><spring:message code="error.text" /> - ${error_code}</a>
+		<a href="/">${error_code} - ${error_text}</a>
 	</h2>
 	<p class="meta"><spring:message code="error-${error_code}.text" /></p>
 	<div class="entry">
