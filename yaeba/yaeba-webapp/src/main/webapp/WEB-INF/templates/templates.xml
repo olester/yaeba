@@ -17,34 +17,32 @@
 
 	<!-- Anonymous -->
 	<definition name="welcome" extends="baseLayout">
-		<put-attribute name="title" value="Accueil" />
 		<put-attribute name="content" value="/WEB-INF/templates/contents/welcome.jsp" />
 	</definition>
 
 	<definition name="login" extends="baseLayout">
-		<put-attribute name="title" value="Login" />
 		<put-attribute name="content" value="/WEB-INF/templates/contents/login.jsp" />
 	</definition>
 
 	<definition name="error" extends="baseLayout">
-		<put-attribute name="title" value="Erreur" />
 		<put-attribute name="content" value="/WEB-INF/templates/contents/error.jsp" />
 	</definition>
 
 	<!-- User -->
 	<definition name="comptes" extends="baseLayout">
-		<put-attribute name="title" value="Comptes" />
 		<put-attribute name="content" value="/WEB-INF/templates/contents/comptes.jsp" />
 	</definition>
 
+	<definition name="details" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/templates/contents/details.jsp" />
+	</definition>
+	
 	<definition name="virements" extends="baseLayout">
-		<put-attribute name="title" value="Virements" />
 		<put-attribute name="content" value="/WEB-INF/templates/contents/virements.jsp" />
 	</definition>
 
 	<!-- Admin -->
 	<definition name="admin" extends="baseLayout">
-		<put-attribute name="title" value="Admin" />
 		<put-attribute name="content" value="/WEB-INF/templates/contents/admin.jsp" />
 	</definition>
 

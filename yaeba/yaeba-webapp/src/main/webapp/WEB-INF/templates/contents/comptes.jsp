@@ -20,7 +20,7 @@
 			</tr>
 			<c:forEach var="compte" items="${comptes}" begin="0" end="9">
 				<tr>
-					<td class="numero"><a href="${pageContext.request.contextPath }/user/detailCompte.jsp?c=${compte.numeroCompte}">${compte.numeroCompte}</a>
+					<td><a href="${pageContext.request.contextPath }/user/detailCompte.jsp?c=${compte.numeroCompte}">${compte.numeroCompte}</a>
 					</td>
 					<td>... €</td>
 				</tr>
