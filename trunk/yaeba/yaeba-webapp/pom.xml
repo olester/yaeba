@@ -11,6 +11,25 @@
 	<artifactId>yaeba-webapp</artifactId>
 	<packaging>war</packaging>
 
+	<profiles>
+		<profile>
+			<id>integration-test</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>selenium-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+
 	<!-- DEPENDENCES -->
 	<dependencies>
 		<!-- INTERNES -->
@@ -74,7 +93,17 @@
 			<scope>provided</scope>
 		</dependency>
 
-
+		<!-- Selenium -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium.client-drivers</groupId>
+			<artifactId>selenium-java-client-driver</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 </project>
