@@ -21,17 +21,19 @@ public class Compte {
 	private String numeroCompte;
 	private String libelle;
 	private Set<Operation> operations;
-	private Date datecreation;
+	private Date dateCreation;
+	private float soldeCourant;
 
 	public Compte() {
 
 	}
 
-	public Compte(String numeroCompte, String libelle, Set<Operation> operations, Date datecreation) {
+	public Compte(String numeroCompte, String libelle, Set<Operation> operations, Date dateCreation, float soldeCourant) {
 		this.numeroCompte = numeroCompte;
 		this.operations = operations;
-		this.datecreation = datecreation;
+		this.dateCreation = dateCreation;
 		this.libelle = libelle;
+		this.soldeCourant = soldeCourant;
 	}
 
 	@Id
@@ -75,20 +77,20 @@ public class Compte {
 
 	@Column(name = "datecreation", nullable = false)
 	public Date getDatecreation() {
-		return datecreation;
+		return dateCreation;
 	}
 
 	public void setDatecreation(Date datecreation) {
-		this.datecreation = datecreation;
+		this.dateCreation = datecreation;
 	}
 
+	@Column(name = "soldecourant", nullable = false)
 	public float getSoldeCourant() {
-		float solde = 0;
-		for (Operation o : operations) {
-			solde += o.getMontant();
-		}
+		return soldeCourant;
+	}
 
-		return solde;
+	public void setSoldeCourant(float soldeCourant) {
+		this.soldeCourant = soldeCourant;
 	}
 
 }
