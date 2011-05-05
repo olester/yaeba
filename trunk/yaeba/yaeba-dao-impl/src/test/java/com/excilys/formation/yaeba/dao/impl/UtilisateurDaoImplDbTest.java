@@ -99,9 +99,9 @@ public class UtilisateurDaoImplDbTest {
 
 	@Test
 	public void testDelete() {
-		Utilisateur u = utilisateurDaoImpl.getUtilisateurByLogin("monlogin");
+		Utilisateur u = utilisateurDaoImpl.getUtilisateurByLogin("login2");
 		utilisateurDaoImpl.delete(u);
-		Utilisateur u2 = utilisateurDaoImpl.getUtilisateurByLogin("monlogin");
+		Utilisateur u2 = utilisateurDaoImpl.getUtilisateurByLogin("login2");
 		assertNull(u2);
 	}
 
