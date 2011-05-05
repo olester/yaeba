@@ -20,7 +20,7 @@ public class Compte {
 	private Integer id;
 	private String numeroCompte;
 	private String libelle;
-	private Set<Operation> operation;
+	private Set<Operation> operations;
 	private Date datecreation;
 
 	public Compte() {
@@ -29,9 +29,9 @@ public class Compte {
 
 	public Compte(String numeroCompte, String libelle, Set<Operation> operations, Date datecreation) {
 		this.numeroCompte = numeroCompte;
-		this.operation = operations;
+		this.operations = operations;
 		this.datecreation = datecreation;
-		this.libelle=libelle;
+		this.libelle = libelle;
 	}
 
 	@Id
@@ -66,11 +66,11 @@ public class Compte {
 	@OneToMany
 	@JoinTable(name = "operation_compte", joinColumns = @JoinColumn(name = "operation_id"), inverseJoinColumns = @JoinColumn(name = "compte_id"))
 	public Set<Operation> getOperations() {
-		return operation;
+		return operations;
 	}
 
 	public void setOperations(Set<Operation> operations) {
-		this.operation = operations;
+		this.operations = operations;
 	}
 
 	@Column(name = "datecreation", nullable = false)
@@ -80,6 +80,15 @@ public class Compte {
 
 	public void setDatecreation(Date datecreation) {
 		this.datecreation = datecreation;
+	}
+
+	public float getSoldeCourant() {
+		float solde = 0;
+		for (Operation o : operations) {
+			solde += o.getMontant();
+		}
+
+		return solde;
 	}
 
 }

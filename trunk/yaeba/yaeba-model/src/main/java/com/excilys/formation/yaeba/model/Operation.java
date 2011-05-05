@@ -15,14 +15,14 @@ public class Operation {
 
 	private Integer id;
 	private String libelle;
-	private int montant;
+	private float montant;
 	private Date dateCreation;
 
 	public Operation() {
 
 	}
 
-	public Operation(String libelle, int montant, Date dateCreation) {
+	public Operation(String libelle, float montant, Date dateCreation) {
 		this.libelle = libelle;
 		this.montant = montant;
 		this.dateCreation = dateCreation;
@@ -49,11 +49,11 @@ public class Operation {
 	}
 
 	@Column(name = "montant", nullable = false)
-	public int getMontant() {
+	public float getMontant() {
 		return montant;
 	}
 
-	public void setMontant(int montant) {
+	public void setMontant(float montant) {
 		this.montant = montant;
 	}
 
