@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -66,7 +65,7 @@ public class Compte {
 	}
 
 	@OneToMany
-	@JoinTable(name = "operation_compte", joinColumns = @JoinColumn(name = "operation_id"), inverseJoinColumns = @JoinColumn(name = "compte_id"))
+	@JoinColumn(name = "compte_id")
 	public Set<Operation> getOperations() {
 		return operations;
 	}

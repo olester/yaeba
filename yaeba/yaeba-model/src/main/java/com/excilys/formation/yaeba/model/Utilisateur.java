@@ -110,7 +110,7 @@ public class Utilisateur {
 	}
 
 	@OneToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "compte_utilisateur", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "compte_id"))
+	@JoinColumn(name = "utilisateur_id")
 	public Set<Compte> getComptes() {
 		return comptes;
 	}
@@ -121,48 +121,31 @@ public class Utilisateur {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
 		Utilisateur other = (Utilisateur) obj;
 		if (adresse == null) {
-			if (other.adresse != null)
-				return false;
-		} else if (!adresse.equals(other.adresse))
-			return false;
+			if (other.adresse != null) return false;
+		} else if (!adresse.equals(other.adresse)) return false;
 		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
+			if (other.id != null) return false;
+		} else if (!id.equals(other.id)) return false;
 		if (login == null) {
-			if (other.login != null)
-				return false;
-		} else if (!login.equals(other.login))
-			return false;
+			if (other.login != null) return false;
+		} else if (!login.equals(other.login)) return false;
 		if (motDePasse == null) {
-			if (other.motDePasse != null)
-				return false;
-		} else if (!motDePasse.equals(other.motDePasse))
-			return false;
+			if (other.motDePasse != null) return false;
+		} else if (!motDePasse.equals(other.motDePasse)) return false;
 		if (nom == null) {
-			if (other.nom != null)
-				return false;
-		} else if (!nom.equals(other.nom))
-			return false;
+			if (other.nom != null) return false;
+		} else if (!nom.equals(other.nom)) return false;
 		if (prenom == null) {
-			if (other.prenom != null)
-				return false;
-		} else if (!prenom.equals(other.prenom))
-			return false;
+			if (other.prenom != null) return false;
+		} else if (!prenom.equals(other.prenom)) return false;
 		if (roles == null) {
-			if (other.roles != null)
-				return false;
-		} else if (!roles.equals(other.roles))
-			return false;
+			if (other.roles != null) return false;
+		} else if (!roles.equals(other.roles)) return false;
 		return true;
 	}
 
