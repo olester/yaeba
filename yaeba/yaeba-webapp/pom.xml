@@ -11,6 +11,9 @@
 	<artifactId>yaeba-webapp</artifactId>
 	<packaging>war</packaging>
 
+	<name>yaeba-webapp</name>
+
+
 	<profiles>
 		<profile>
 			<id>integration-test</id>

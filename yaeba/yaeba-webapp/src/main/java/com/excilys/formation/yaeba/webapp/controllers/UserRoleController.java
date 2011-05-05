@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,7 +22,9 @@ import com.excilys.formation.yaeba.service.api.CompteService;
 public class UserRoleController {
 
 	@RequestMapping("/comptes.html")
-	public String redirectComptes(ModelMap model) {
+	public String redirectComptes(ModelMap model, Locale locale) {
+		ResourceBundle bundle = ResourceBundle.getBundle("messages_"+locale.getLanguage());
+		model.put("title", bundle.getString("accounts.title"));
 		model.put("bouton", "bouton_comptes");
 
 		// Pour le test d'affichage de la page jsp
@@ -40,7 +44,10 @@ public class UserRoleController {
 	}
 
 	@RequestMapping("/virements.html")
-	public String redirectVirements(ModelMap model) {
+	public String redirectVirements(ModelMap model, Locale locale) {
+		ResourceBundle bundle = ResourceBundle.getBundle("messages_"+locale.getLanguage());
+		model.put("title", bundle.getString("transfers.title"));
+		model.put("bouton", "bouton_comptes");
 		model.put("bouton", "bouton_virements");
 		return "virements";
 	}
@@ -50,7 +57,10 @@ public class UserRoleController {
 
 	@RequestMapping("/comptes/{numeroCompte}/details.html")
 	public String redirectDetailsCompte(
-			@PathVariable("numeroCompte") String numeroCompte, ModelMap model) {
+			@PathVariable("numeroCompte") String numeroCompte, ModelMap model, Locale locale) {
+		ResourceBundle bundle = ResourceBundle.getBundle("messages_"+locale.getLanguage());
+		model.put("title", bundle.getString("details.title"));
+		model.put("bouton", "bouton_comptes");
 		Compte compte = compteService.getCompteByNumeroCompte(numeroCompte);
 		model.put("numero", numeroCompte);
 		model.put("compte", compte);
