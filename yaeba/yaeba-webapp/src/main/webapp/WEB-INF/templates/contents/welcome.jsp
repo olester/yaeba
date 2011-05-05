@@ -5,7 +5,7 @@
 	<h2 class="title">
 		<a href="#"><spring:message code="welcome.title" /></a>
 	</h2>
-	<p class="meta"><spring:message code="welcome.presentation" /></p>
+	<p class="meta"><spring:message code="welcome.subtitle" /></p>
 	<div class="entry">
 		<p>
 			<spring:message code="welcome.text" />
