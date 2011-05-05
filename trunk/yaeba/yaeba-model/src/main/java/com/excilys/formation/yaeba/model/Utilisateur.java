@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,18 +26,21 @@ public class Utilisateur {
 	private String adresse;
 	private String motDePasse;
 	private Set<Role> roles;
+	private Set<Compte> comptes;
 
 	public Utilisateur() {
 		roles = new HashSet<Role>();
+		comptes = new HashSet<Compte>();
 	}
 
-	public Utilisateur(String login, String nom, String prenom, String adresse, String motDePasse, Set<Role> roles) {
+	public Utilisateur(String login, String nom, String prenom, String adresse, String motDePasse, Set<Role> roles, Set<Compte> comptes) {
 		this.login = login;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse = adresse;
 		this.motDePasse = motDePasse;
 		this.roles = roles;
+		this.comptes = comptes;
 	}
 
 	@Id
@@ -105,33 +109,59 @@ public class Utilisateur {
 		this.roles = roles;
 	}
 
+	@OneToMany(fetch = FetchType.EAGER)
+	public Set<Compte> getComptes() {
+		return comptes;
+	}
+
+	public void setComptes(Set<Compte> comptes) {
+		this.comptes = comptes;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) return true;
-		if (obj == null) return false;
-		if (getClass() != obj.getClass()) return false;
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
 		Utilisateur other = (Utilisateur) obj;
 		if (adresse == null) {
-			if (other.adresse != null) return false;
-		} else if (!adresse.equals(other.adresse)) return false;
+			if (other.adresse != null)
+				return false;
+		} else if (!adresse.equals(other.adresse))
+			return false;
 		if (id == null) {
-			if (other.id != null) return false;
-		} else if (!id.equals(other.id)) return false;
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
 		if (login == null) {
-			if (other.login != null) return false;
-		} else if (!login.equals(other.login)) return false;
+			if (other.login != null)
+				return false;
+		} else if (!login.equals(other.login))
+			return false;
 		if (motDePasse == null) {
-			if (other.motDePasse != null) return false;
-		} else if (!motDePasse.equals(other.motDePasse)) return false;
+			if (other.motDePasse != null)
+				return false;
+		} else if (!motDePasse.equals(other.motDePasse))
+			return false;
 		if (nom == null) {
-			if (other.nom != null) return false;
-		} else if (!nom.equals(other.nom)) return false;
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
 		if (prenom == null) {
-			if (other.prenom != null) return false;
-		} else if (!prenom.equals(other.prenom)) return false;
+			if (other.prenom != null)
+				return false;
+		} else if (!prenom.equals(other.prenom))
+			return false;
 		if (roles == null) {
-			if (other.roles != null) return false;
-		} else if (!roles.equals(other.roles)) return false;
+			if (other.roles != null)
+				return false;
+		} else if (!roles.equals(other.roles))
+			return false;
 		return true;
 	}
 
