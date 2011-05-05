@@ -21,7 +21,7 @@ public class LoginTest {
 
 	@Test
 	public void testTest() throws Exception {
-		selenium.open("/yaeba-webapp/");
+		selenium.open("/yaeba/");
 		assertEquals("", selenium.getTitle());
 		//
 		// selenium.type("j_username", "user");
