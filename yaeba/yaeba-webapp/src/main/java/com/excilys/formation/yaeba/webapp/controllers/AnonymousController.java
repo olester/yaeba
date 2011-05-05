@@ -9,14 +9,12 @@ public class AnonymousController {
 
 	@RequestMapping("/welcome.html")
 	public String redirectWelcome(ModelMap model) {
-		model.put("title", "Bienvenue");
 		model.put("bouton", "bouton_welcome");
 		return "welcome";
 	}
 
 	@RequestMapping("/login.html")
 	public String redirectLogin(ModelMap model) {
-		model.put("title", "Login");
 		model.put("bouton", "bouton_login");
 		return "login";
 	}

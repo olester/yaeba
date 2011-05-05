@@ -7,18 +7,19 @@
 
 	<context:component-scan base-package="com.excilys.formation.yaeba.webapp" />
 
+	<!-- Security -->
 
 	<security:http>
-		<security:intercept-url pattern="/login.html" filters="none" />		
+		<security:intercept-url pattern="/login.html" filters="none" />
 		<security:intercept-url pattern="/error-*.html" filters="none" />
 		<security:intercept-url pattern="/style.css" filters="none" />
 		<security:intercept-url pattern="/images/*" filters="none" />
 
 		<security:intercept-url pattern="/welcome.html" access="ROLE_USER" />
 		<security:intercept-url pattern="/user/**" access="ROLE_USER" />
-		
+
 		<security:intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
-		
+
 		<security:form-login login-page="/login.html" authentication-failure-url="/login.html"
 			authentication-success-handler-ref="authenticationSuccessHandler" />
 
@@ -38,4 +39,25 @@
 
 	<bean name="defaultWebSecurityExpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
 
+	<!-- I18N & L10N -->
+
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:messages" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
+	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" value="lang" />
+	</bean>
+
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="en" />
+	</bean>
+
+	<bean id="handlerMapping" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="interceptors">
+			<ref bean="localeChangeInterceptor" />
+		</property>
+	</bean>
+	
 </beans>
