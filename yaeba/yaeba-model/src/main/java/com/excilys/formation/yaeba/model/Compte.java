@@ -31,6 +31,7 @@ public class Compte {
 		this.numeroCompte = numeroCompte;
 		this.operation = operations;
 		this.datecreation = datecreation;
+		this.libelle=libelle;
 	}
 
 	@Id

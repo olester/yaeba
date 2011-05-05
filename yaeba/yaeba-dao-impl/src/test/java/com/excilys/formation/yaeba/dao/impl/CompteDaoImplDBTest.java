@@ -92,7 +92,7 @@ public class CompteDaoImplDBTest {
 
 	@Test
 	public void testSave() {
-		Compte c = new Compte("login2", null, null, new Date());
+		Compte c = new Compte("login2","Libelle", null, new Date());
 		compteDaoImpl.save(c);
 		Compte c2 = compteDaoImpl.getCompteByNumeroCompte("login2");
 		assertNotNull(c2);
