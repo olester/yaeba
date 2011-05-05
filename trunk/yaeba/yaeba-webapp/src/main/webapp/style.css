@@ -459,10 +459,10 @@ tr.libelle {
 	font-weight: bold;
 }
 
-td.numero a {
+table a {
 	text-decoration: none;
 }
 
-td.numero a:hover {
+table a:hover {
 	text-decoration: underline;
 }
