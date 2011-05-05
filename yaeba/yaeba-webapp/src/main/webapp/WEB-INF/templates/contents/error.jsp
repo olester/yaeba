@@ -5,7 +5,7 @@
 	<h2 class="title">
 		<a href="/"><spring:message code="error.text" /> - ${error_code}</a>
 	</h2>
-	<p class="meta">${title}</p>
+	<p class="meta"><spring:message code="error-${error_code}.text" /></p>
 	<div class="entry">
 		<p>
 			<strong><a href="${pageContext.request.contextPath }/welcome.html"><spring:message code="error.back" /></a>
