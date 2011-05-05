@@ -9,8 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,7 +19,7 @@ public class Compte {
 
 	private Integer id;
 	private String numeroCompte;
-	private Utilisateur utilisateur;
+	private String libelle;
 	private Set<Operation> operation;
 	private Date datecreation;
 
@@ -27,9 +27,8 @@ public class Compte {
 
 	}
 
-	public Compte(String numeroCompte, Utilisateur utilisateur, Set<Operation> operations, Date datecreation) {
+	public Compte(String numeroCompte, String libelle, Set<Operation> operations, Date datecreation) {
 		this.numeroCompte = numeroCompte;
-		this.utilisateur = utilisateur;
 		this.operation = operations;
 		this.datecreation = datecreation;
 	}
@@ -45,7 +44,7 @@ public class Compte {
 		this.id = id;
 	}
 
-	@Column(name = "numeroCompte", unique = true, nullable = false)
+	@Column(name = "numerocompte", unique = true, nullable = false)
 	public String getNumeroCompte() {
 		return numeroCompte;
 	}
@@ -54,17 +53,17 @@ public class Compte {
 		this.numeroCompte = numeroCompte;
 	}
 
-	@OneToOne
-	@JoinColumn(name = "utilisateur_id")
-	public Utilisateur getUtilisateur() {
-		return utilisateur;
+	@Column(name = "libelle", unique = false, nullable = false)
+	public String getLibelle() {
+		return libelle;
 	}
 
-	public void setUtilisateur(Utilisateur utilisateur) {
-		this.utilisateur = utilisateur;
+	public void setLibelle(String libelle) {
+		this.libelle = libelle;
 	}
 
 	@OneToMany
+	@JoinTable(name = "operation_compte", joinColumns = @JoinColumn(name = "operation_id"), inverseJoinColumns = @JoinColumn(name = "compte_id"))
 	public Set<Operation> getOperations() {
 		return operation;
 	}

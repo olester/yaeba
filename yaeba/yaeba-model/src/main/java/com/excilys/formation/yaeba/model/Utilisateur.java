@@ -110,6 +110,7 @@ public class Utilisateur {
 	}
 
 	@OneToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "compte_utilisateur", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "compte_id"))
 	public Set<Compte> getComptes() {
 		return comptes;
 	}
