@@ -12,21 +12,96 @@ il ne s'agit que d'un dump genere par phpmyadmin
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: May 04, 2011 at 03:05 PM
+-- Generation Time: May 05, 2011 at 06:13 PM
 -- Server version: 5.1.37
--- PHP Version: 5.2.10-2ubuntu6.9
+-- PHP Version: 5.2.10-2ubuntu6.10
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `yaeba`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `compte`
+--
+
+CREATE TABLE IF NOT EXISTS `compte` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `datecreation` datetime NOT NULL,
+  `libelle` varchar(255) NOT NULL,
+  `numerocompte` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `numerocompte` (`numerocompte`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `compte`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `compte_utilisateur`
+--
+
+CREATE TABLE IF NOT EXISTS `compte_utilisateur` (
+  `user_id` int(11) NOT NULL,
+  `compte_id` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`,`compte_id`),
+  UNIQUE KEY `compte_id` (`compte_id`),
+  KEY `FK835F27841D6BCD90` (`user_id`),
+  KEY `FK835F2784E0DDE6FC` (`compte_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `compte_utilisateur`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `operation`
+--
+
+CREATE TABLE IF NOT EXISTS `operation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `datecreation` datetime NOT NULL,
+  `libelle` varchar(255) NOT NULL,
+  `montant` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `operation`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `operation_compte`
+--
+
+CREATE TABLE IF NOT EXISTS `operation_compte` (
+  `operation_id` int(11) NOT NULL,
+  `compte_id` int(11) NOT NULL,
+  PRIMARY KEY (`operation_id`,`compte_id`),
+  UNIQUE KEY `compte_id` (`compte_id`),
+  KEY `FK4243CB985F1DCCDF` (`compte_id`),
+  KEY `FK4243CB9823B5D1F5` (`operation_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `operation_compte`
+--
+
 
 -- --------------------------------------------------------
 
@@ -88,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
   UNIQUE KEY `login` (`login`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100 ;
 
 --
 -- Dumping data for table `utilisateur`
