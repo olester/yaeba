@@ -30,7 +30,8 @@
 		<eclipse.plugin.version>2.7</eclipse.plugin.version>
 		<compiler.plugin.version>2.3.2</compiler.plugin.version>
 		<selenium.plugin.version>1.1</selenium.plugin.version>
-		<jetty.version>8.0.0.M2</jetty.version>
+		<tomcat.plugin.version>1.1</tomcat.plugin.version>
+		<surefire.plugin.version>2.8.1</surefire.plugin.version>
 		<!-- divers -->
 		<jetty.port>9090</jetty.port>
 		<project.url>http://code.google.com/p/yaeba</project.url>
@@ -137,6 +138,7 @@
 						<plugin>
 							<groupId>org.apache.maven.plugins</groupId>
 							<artifactId>maven-surefire-plugin</artifactId>
+							<version>${surefire.plugin.version}</version>
 							<configuration>
 								<reportFormat>brief</reportFormat>
 								<useFile>false</useFile>
@@ -175,6 +177,16 @@
 							<artifactId>selenium-maven-plugin</artifactId>
 							<version>${selenium.plugin.version}</version>
 							<executions>
+<!-- 								<execution> -->
+<!-- 									<id>xvfb</id> -->
+<!-- 									<phase>pre-integration-test</phase> -->
+<!-- 									<goals> -->
+<!-- 										<goal>xvfb</goal> -->
+<!-- 									</goals> -->
+<!-- 									<configuration> -->
+<!-- 										<display>:2</display> -->
+<!-- 									</configuration> -->
+<!-- 								</execution> -->
 								<execution>
 									<id>start</id>
 									<phase>pre-integration-test</phase>
@@ -233,9 +245,22 @@
 						</excludes>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>tomcat-maven-plugin</artifactId>
+					<version>${tomcat.plugin.version}</version>
+					<configuration>
+						<server>local_tomcat</server>
+						<url>http://localhost:8080/manager/html</url>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
+			</plugin>
 			<plugin>
 				<artifactId>maven-eclipse-plugin</artifactId>
 			</plugin>
