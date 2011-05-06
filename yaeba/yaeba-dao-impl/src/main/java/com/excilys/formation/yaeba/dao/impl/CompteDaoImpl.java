@@ -35,11 +35,7 @@ public class CompteDaoImpl extends HibernateDaoSupport implements CompteDao {
 	@Override
 	public Compte getCompteByNumeroCompte(Utilisateur u, String numeroCompte) {
 		System.out.println(u.getNom());
-		// Compte compte = (Compte) getHibernateTemplate().find("from Compte where Utilisateur = ? and numeroCompte = ?", u, numeroCompte).get(0);
-		List<Compte> comptes = getHibernateTemplate().find("from Compte where numeroCompte=?", numeroCompte);
-		System.out.println(numeroCompte);
-		// En cours de modif pour la sécurité
-		// && u.getComptes().contains(comptes.get(0))
+		List<Compte> comptes = getHibernateTemplate().find("from Compte where utilisateur_id = ? and numeroCompte = ?", u.getId(), numeroCompte);
 		if (!comptes.isEmpty()) return comptes.get(0);
 		return null;
 	}
