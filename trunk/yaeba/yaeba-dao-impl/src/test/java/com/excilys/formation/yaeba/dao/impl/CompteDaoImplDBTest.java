@@ -1,6 +1,7 @@
 package com.excilys.formation.yaeba.dao.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import java.io.File;
@@ -24,6 +25,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.excilys.formation.yaeba.model.Compte;
+import com.excilys.formation.yaeba.model.Utilisateur;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/context/test-applicationContext.xml" })
@@ -31,6 +33,8 @@ public class CompteDaoImplDBTest {
 
 	@Autowired
 	private CompteDaoImpl compteDaoImpl;
+	@Autowired
+	private UtilisateurDaoImpl utilisateurDaoImpl;
 
 	@Autowired
 	private DataSource dataSource;
@@ -68,39 +72,46 @@ public class CompteDaoImplDBTest {
 		assertNull(c);
 
 		c = compteDaoImpl.getCompteById("99");
-		assertEquals("citron", c.getNumeroCompte());
+		assertEquals("testcompte", c.getLibelle());
+	}
+
+	@Test
+	public void testGetCompteByNumeroCompte() {
+		Utilisateur u = utilisateurDaoImpl.getUtilisateurById("99");
+		assertNotNull(u);
+		Compte c = compteDaoImpl.getCompteByNumeroCompte(u, "riendutout");
+		assertNull(c);
+
+		c = compteDaoImpl.getCompteByNumeroCompte(u, "4567");
+		assertEquals("testcompte", c.getLibelle());
+	}
+
+	@Test
+	public void testUpdate() {
+		Utilisateur u = utilisateurDaoImpl.getUtilisateurById("99");
+		Compte c = compteDaoImpl.getCompteByNumeroCompte(u, "4567");
+		c.setNumeroCompte("fraise");
+		compteDaoImpl.update(c);
+		assertEquals("fraise", c.getNumeroCompte());
 	}
 
 	// @Test
-	// public void testGetCompteByLogin() {
-	// Compte c = compteDaoImpl.getCompteByNumeroCompte("riendutout");
-	// assertNull(c);
-	//
-	// c = compteDaoImpl.getCompteByNumeroCompte("citron");
-	// assertEquals("citron", c.getNumeroCompte());
-	// }
-	//
-	// @Test
-	// public void testUpdate() {
-	// Compte c = compteDaoImpl.getCompteByNumeroCompte("citron");
-	// c.setNumeroCompte("fraise");
-	// compteDaoImpl.update(c);
-	// assertEquals("fraise", c.getNumeroCompte());
-	// }
-	//
-	// @Test
 	// public void testSave() {
-	// Compte c = new Compte("login2", "login2", null, new Date(), 10.2f);
+	// Utilisateur u = utilisateurDaoImpl.getUtilisateurById("99");
+	// Compte c = new Compte("aaa", "bbb", null, new Date(), 10.2f);
+	// u.addCompte(c);
 	// compteDaoImpl.save(c);
-	// Compte c2 = compteDaoImpl.getCompteByNumeroCompte("login2");
+	// Compte c2 = compteDaoImpl.getCompteByNumeroCompte(u, "aaa");
 	// assertNotNull(c2);
 	// }
-	//
-	// @Test
-	// public void testDelete() {
-	// Compte c = compteDaoImpl.getCompteByNumeroCompte("login2");
-	// compteDaoImpl.delete(c);
-	// Compte c2 = compteDaoImpl.getCompteByNumeroCompte("login2");
-	// assertNull(c2);
-	// }
+
+	@Test
+	public void testDelete() {
+		Utilisateur u = utilisateurDaoImpl.getUtilisateurById("99");
+		Compte c = compteDaoImpl.getCompteByNumeroCompte(u, "4567");
+		assertNotNull(c);
+		compteDaoImpl.delete(c);
+		Compte c2 = compteDaoImpl.getCompteByNumeroCompte(u, "4567");
+		assertNull(c2);
+	}
 }
