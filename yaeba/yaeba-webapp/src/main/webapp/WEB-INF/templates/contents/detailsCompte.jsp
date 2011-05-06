@@ -23,14 +23,16 @@
 						<td><spring:message code="details.amount" /></td>
 					</tr>
 
+					<c:set var="compteur" value="0" />
 					<c:forEach var="operation" items="${compte.operations}" begin="0" end="9">
-						<tr>
+						<tr class="ligne_${compteur}">
 							<td><fmt:formatDate value="${operation.dateCreation}" pattern="dd/MM/yyyy" />
 							</td>
 							<td>${operation.libelle}</td>
 							<td><fmt:formatNumber value="${operation.montant}" pattern="#0.00 €" />
 							</td>
 						</tr>
+						<c:set var="compteur" value="${compteur+1}" />
 					</c:forEach>
 				</table>
 			</c:when>
