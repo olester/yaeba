@@ -1,14 +1,10 @@
 package com.excilys.formation.yaeba.dao.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.sql.Connection;
-import java.util.Date;
-import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -66,21 +62,12 @@ public class OperationDaoImplDbTest {
 	}
 
 	@Test
-	public void testGetCompteById() {
+	public void testGetOperationById() {
 		Operation o = operationDaoImpl.getOperationById("98");
 		assertNull(o);
 
 		o = operationDaoImpl.getOperationById("99");
 		assertEquals("test", o.getLibelle());
-	}
-
-	@Test
-	public void testGetCompteByLibelle() {
-		List<Operation> o = operationDaoImpl.getOperationByLibelle("riendutout");
-		assertTrue(o.isEmpty());
-
-		o = operationDaoImpl.getOperationByLibelle("test");
-		assertEquals("test", o.get(0).getLibelle());
 	}
 
 	@Test
@@ -91,20 +78,19 @@ public class OperationDaoImplDbTest {
 		assertEquals("saved", c.getLibelle());
 	}
 
-	@Test
-	public void testSave() {
-		Operation o = new Operation("opé2", 750, new Date());
-		operationDaoImpl.save(o);
-		List<Operation> l = operationDaoImpl.getOperationByLibelle("opé2");
-		assertFalse(l.isEmpty());
-	}
+	// @Test
+	// public void testSave() {
+	// Operation o = new Operation("opé2", 750, new Date());
+	// operationDaoImpl.save(o);
+	// List<Operation> l = operationDaoImpl.getOperationByLibelle("opé2");
+	// assertFalse(l.isEmpty());
+	// }
 
 	@Test
 	public void testDelete() {
-		List<Operation> l = operationDaoImpl.getOperationByLibelle("opé2");
-		Operation o = l.get(0);
-		operationDaoImpl.delete(o);
-		l = operationDaoImpl.getOperationByLibelle("opé2");
-		assertTrue(l.isEmpty());
+		Operation c = operationDaoImpl.getOperationById("99");
+		operationDaoImpl.delete(c);
+		c = operationDaoImpl.getOperationById("99");
+		assertNull(c);
 	}
 }
