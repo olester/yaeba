@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
 	<utilisateur id="99" adresse="labas" login="monlogin" password="monpassword" nom="citron" prenom="pierre" />
-	<compte id="99" datecreation="2010-01-01" numerocompte="citron" libelle="test" soldecourant="10.2"/>
-	<operation id="99" libelle="test" montant="500" datecreation="2010-01-01"/>
+	<compte id="99" datecreation="2010-01-01" numerocompte="4567" libelle="testcompte" soldecourant="10.2" utilisateur_id="99" />
+	<operation id="99" libelle="test" montant="500" datecreation="2010-01-01" compte_id="99" />
 </dataset>
