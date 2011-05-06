@@ -41,6 +41,11 @@
 			</c:otherwise>
 		</c:choose>
 
+		<br /> <br />
+		<p>
+			<a href="${pageContext.request.contextPath}/user/comptes.html"><spring:message code="details.back" /> </a>
+		</p>
+
 	</div>
 </div>
 <div style="clear: both;">&nbsp;</div>
