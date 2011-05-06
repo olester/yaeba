@@ -177,16 +177,6 @@
 							<artifactId>selenium-maven-plugin</artifactId>
 							<version>${selenium.plugin.version}</version>
 							<executions>
-<!-- 								<execution> -->
-<!-- 									<id>xvfb</id> -->
-<!-- 									<phase>pre-integration-test</phase> -->
-<!-- 									<goals> -->
-<!-- 										<goal>xvfb</goal> -->
-<!-- 									</goals> -->
-<!-- 									<configuration> -->
-<!-- 										<display>:2</display> -->
-<!-- 									</configuration> -->
-<!-- 								</execution> -->
 								<execution>
 									<id>start</id>
 									<phase>pre-integration-test</phase>
