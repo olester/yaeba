@@ -30,13 +30,6 @@ public class OperationDaoImpl extends HibernateDaoSupport implements OperationDa
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Operation> getOperationByLibelle(String libelle) {
-		List<Operation> l = getHibernateTemplate().find("select o from Operation o where libelle=?", libelle);
-		return l;
-	}
-
 	@Override
 	public void update(Operation o) {
 		getHibernateTemplate().update(o);
