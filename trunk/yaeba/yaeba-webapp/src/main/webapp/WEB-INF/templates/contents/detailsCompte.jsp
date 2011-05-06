@@ -13,21 +13,27 @@
 		<p>
 			<spring:message code="details.text" />
 		</p>
+		<c:if test="${not empty compte.operations}">
+			<table>
+				<tr class="libelle">
+					<td><spring:message code="details.date" />
+					</td>
+					<td><spring:message code="details.label" />
+					</td>
+					<td><spring:message code="details.amount" />
+					</td>
+				</tr>
 
-		<table>
-            <tr class="libelle">
-                <td><spring:message code="details.date" /></td>
-                <td><spring:message code="details.label" /></td>
-                <td><spring:message code="details.amount" /></td>
-            </tr>
-            <c:forEach var="operation" items=${compte.operations} begin="0" end="9">
-                <tr>
-                    <td>${operation.dateCreation}</td>
-                    <td>${operation.libelle}</td>
-                    <td>${operation.montant} €</td>
-                </tr>
-            </c:forEach>
-        </table>
+				<c:forEach var="operation" items="${compte.operations}" begin="0" end="9">
+					<tr>
+						<td>...</td>
+						<td>${operation.libelle}</td>
+						<td>${operation.montant} €</td>
+					</tr>
+				</c:forEach>
+
+			</table>
+		</c:if>
 
 	</div>
 </div>

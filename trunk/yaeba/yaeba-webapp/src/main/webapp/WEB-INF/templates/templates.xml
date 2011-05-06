@@ -32,10 +32,6 @@
 		<put-attribute name="content" value="/WEB-INF/templates/contents/comptes.jsp" />
 	</definition>
 
-	<definition name="details" extends="baseLayout">
-		<put-attribute name="content" value="/WEB-INF/templates/contents/details.jsp" />
-	</definition>
-	
 	<definition name="virements" extends="baseLayout">
 		<put-attribute name="content" value="/WEB-INF/templates/contents/virements.jsp" />
 	</definition>

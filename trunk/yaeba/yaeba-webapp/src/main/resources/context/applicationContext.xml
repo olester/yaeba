@@ -17,7 +17,7 @@
 
 		<security:intercept-url pattern="/welcome.html" access="ROLE_USER" />
 		<security:intercept-url pattern="/user/**" access="ROLE_USER" />
-
+		
 		<security:intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
 
 		<security:form-login login-page="/login.html" authentication-failure-url="/login.html"
