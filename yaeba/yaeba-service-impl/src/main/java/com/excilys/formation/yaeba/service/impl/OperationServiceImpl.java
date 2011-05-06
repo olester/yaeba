@@ -1,7 +1,5 @@
 package com.excilys.formation.yaeba.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,26 +19,18 @@ public class OperationServiceImpl implements OperationService {
 	}
 
 	@Override
-	public List<Operation> getOperationByLibelle(String libelle) {
-		return operationDao.getOperationByLibelle(libelle);
-	}
-
-	@Override
 	public void update(Operation o) {
 		operationDao.update(o);
-
 	}
 
 	@Override
 	public void save(Operation o) {
 		operationDao.save(o);
-
 	}
 
 	@Override
 	public void delete(Operation o) {
 		operationDao.delete(o);
-
 	}
 
 }
