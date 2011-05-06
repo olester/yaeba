@@ -1,6 +1,7 @@
 package com.excilys.formation.yaeba.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -24,7 +25,7 @@ public class Compte {
 	private float soldeCourant;
 
 	public Compte() {
-
+		operations = new HashSet<Operation>();
 	}
 
 	public Compte(String numeroCompte, String libelle, Set<Operation> operations, Date dateCreation, float soldeCourant) {
