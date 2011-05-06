@@ -23,15 +23,17 @@
 						<td><spring:message code="accounts.label" /></td>
 						<td><spring:message code="accounts.balance" /></td>
 					</tr>
-					<c:forEach var="compte" items="${utilisateur.comptes}" begin="0" end="9">
-						<tr>
 
+					<c:set var="compteur" value="0" />
+					<c:forEach var="compte" items="${utilisateur.comptes}" begin="0" end="9">
+						<tr class="ligne_${compteur}">
 							<td class="numero"><a
 								href="${pageContext.request.contextPath}/user/comptes/${compte.numeroCompte}/details.html">${compte.numeroCompte}</a>
 							</td>
 							<td class="numero">${compte.libelle}</td>
 							<td><fmt:formatNumber value="${compte.soldeCourant}" pattern="#0.00 €" /></td>
 						</tr>
+						<c:set var="compteur" value="${compteur+1}" />
 					</c:forEach>
 				</table>
 			</c:when>

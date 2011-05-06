@@ -39,14 +39,15 @@ public class UserRoleController {
 		ResourceBundle bundle = ResourceBundle.getBundle("messages_" + locale.getLanguage());
 
 		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
-		Compte compte = compteService.getCompteByNumeroCompte(u, numeroCompte);
 
-		if (compte != null) {
-			model.put("title", bundle.getString("details.title"));
-			model.put("bouton", "bouton_comptes");
-			model.put("numero", numeroCompte);
-			model.put("compte", compte);
-			return "detailsCompte";
+		for (Compte c : u.getComptes()) {
+			if (c.getNumeroCompte().equals(numeroCompte)) {
+				model.put("title", bundle.getString("details.title"));
+				model.put("bouton", "bouton_comptes");
+				model.put("numero", numeroCompte);
+				model.put("compte", c);
+				return "detailsCompte";
+			}
 		}
 
 		model.put("title", bundle.getString("welcome.title"));
