@@ -26,28 +26,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException, DataAccessException {
 		Utilisateur utilisateur = utilisateurService.getUtilisateurByLogin(login);
-		if (utilisateur == null)
-			throw new UsernameNotFoundException("Utilisateur introuvable");
+		if (utilisateur == null) throw new UsernameNotFoundException("Utilisateur introuvable");
 		return buildUserFromUtilisateur(utilisateur);
 	}
 
 	private User buildUserFromUtilisateur(Utilisateur utilisateur) {
-
-		String username = utilisateur.getLogin();
-		String password = utilisateur.getMotDePasse();
-		/*Le modèle ne permet pas de rendre un compte inactif*/
-		boolean enabled = true;
-		boolean accountNonExpired = true;
-		boolean credentialsNonExpired = true;
-		boolean accountNonLocked = true;
 
 		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		for (Role role : utilisateur.getRoles()) {
 			authorities.add(new GrantedAuthorityImpl(role.getType()));
 		}
 
-		User user = new User(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
-		return user;
+		CustomUser cu = new CustomUser(utilisateur, authorities);
+		return cu;
 	}
 
 }

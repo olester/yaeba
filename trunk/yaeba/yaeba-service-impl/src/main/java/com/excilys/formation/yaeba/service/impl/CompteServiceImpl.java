@@ -1,10 +1,13 @@
 package com.excilys.formation.yaeba.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.excilys.formation.yaeba.dao.api.CompteDao;
 import com.excilys.formation.yaeba.model.Compte;
+import com.excilys.formation.yaeba.model.Utilisateur;
 import com.excilys.formation.yaeba.service.api.CompteService;
 
 @Service
@@ -19,8 +22,8 @@ public class CompteServiceImpl implements CompteService {
 	}
 
 	@Override
-	public Compte getCompteByNumeroCompte(String numeroCompte) {
-		return compteDao.getCompteByNumeroCompte(numeroCompte);
+	public Compte getCompteByNumeroCompte(Utilisateur u, String numeroCompte) {
+		return compteDao.getCompteByNumeroCompte(u, numeroCompte);
 	}
 
 	@Override
@@ -39,6 +42,11 @@ public class CompteServiceImpl implements CompteService {
 	public void delete(Compte c) {
 		compteDao.delete(c);
 
+	}
+
+	@Override
+	public List<Compte> getCompteByUtilisateur(Utilisateur u) {
+		return compteDao.getComptes(u);
 	}
 
 }

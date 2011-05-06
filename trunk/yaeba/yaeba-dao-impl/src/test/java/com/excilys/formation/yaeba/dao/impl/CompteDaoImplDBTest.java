@@ -1,12 +1,10 @@
 package com.excilys.formation.yaeba.dao.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import java.io.File;
 import java.sql.Connection;
-import java.util.Date;
 
 import javax.sql.DataSource;
 
@@ -73,36 +71,36 @@ public class CompteDaoImplDBTest {
 		assertEquals("citron", c.getNumeroCompte());
 	}
 
-	@Test
-	public void testGetCompteByLogin() {
-		Compte c = compteDaoImpl.getCompteByNumeroCompte("riendutout");
-		assertNull(c);
-
-		c = compteDaoImpl.getCompteByNumeroCompte("citron");
-		assertEquals("citron", c.getNumeroCompte());
-	}
-
-	@Test
-	public void testUpdate() {
-		Compte c = compteDaoImpl.getCompteByNumeroCompte("citron");
-		c.setNumeroCompte("fraise");
-		compteDaoImpl.update(c);
-		assertEquals("fraise", c.getNumeroCompte());
-	}
-
-	@Test
-	public void testSave() {
-		Compte c = new Compte("login2", "login2", null, new Date(), 10.2f);
-		compteDaoImpl.save(c);
-		Compte c2 = compteDaoImpl.getCompteByNumeroCompte("login2");
-		assertNotNull(c2);
-	}
-
-	@Test
-	public void testDelete() {
-		Compte c = compteDaoImpl.getCompteByNumeroCompte("login2");
-		compteDaoImpl.delete(c);
-		Compte c2 = compteDaoImpl.getCompteByNumeroCompte("login2");
-		assertNull(c2);
-	}
+	// @Test
+	// public void testGetCompteByLogin() {
+	// Compte c = compteDaoImpl.getCompteByNumeroCompte("riendutout");
+	// assertNull(c);
+	//
+	// c = compteDaoImpl.getCompteByNumeroCompte("citron");
+	// assertEquals("citron", c.getNumeroCompte());
+	// }
+	//
+	// @Test
+	// public void testUpdate() {
+	// Compte c = compteDaoImpl.getCompteByNumeroCompte("citron");
+	// c.setNumeroCompte("fraise");
+	// compteDaoImpl.update(c);
+	// assertEquals("fraise", c.getNumeroCompte());
+	// }
+	//
+	// @Test
+	// public void testSave() {
+	// Compte c = new Compte("login2", "login2", null, new Date(), 10.2f);
+	// compteDaoImpl.save(c);
+	// Compte c2 = compteDaoImpl.getCompteByNumeroCompte("login2");
+	// assertNotNull(c2);
+	// }
+	//
+	// @Test
+	// public void testDelete() {
+	// Compte c = compteDaoImpl.getCompteByNumeroCompte("login2");
+	// compteDaoImpl.delete(c);
+	// Compte c2 = compteDaoImpl.getCompteByNumeroCompte("login2");
+	// assertNull(c2);
+	// }
 }
