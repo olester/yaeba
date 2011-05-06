@@ -119,6 +119,14 @@ public class Utilisateur {
 		this.comptes = comptes;
 	}
 
+	public void addCompte(Compte compte) {
+		this.comptes.add(compte);
+	}
+
+	public void removeCompte(Compte compte) {
+		this.comptes.remove(compte);
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) return true;
