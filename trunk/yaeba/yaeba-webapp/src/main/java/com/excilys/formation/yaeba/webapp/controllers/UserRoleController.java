@@ -2,10 +2,13 @@ package com.excilys.formation.yaeba.webapp.controllers;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.joda.time.DateTime;
+import org.joda.time.Months;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -73,18 +76,28 @@ public class UserRoleController {
 				model.put("locale", locale.getLanguage());
 				model.put("page", pageInt);
 
-				// List<Integer> anneesDispo = new ArrayList<Integer>();
-				// List<Integer> moisDispo = new ArrayList<Integer>();
-				//
-				// Months d = Months.monthsBetween(new DateTime(), c.getDateCreation());
-				// int monthsDiff = d.getMonths();
-				//
-				// int maxMois = Math.min(36, d.getYear() * d.getMonth());
-				//
-				// for (int i = 0; i < 36; i++) {
-				//
-				// }
-				// int maxMois = Math.min(36, cal.MONTH);
+				// -- Actualisation des listes déroulantes
+				Set<Integer> anneesDispo = new TreeSet<Integer>();
+				Set<Integer> moisDispo = new TreeSet<Integer>();
+
+				DateTime auj = new DateTime();
+				// Après utilisation de Joda Time dans le modèle, il faut remplacer la ligne suivante par celle ci (et supprimer ces commentaires) :
+				// DateTime dateCreation = c.getDateCreation();
+				DateTime dateCreation = new DateTime(2007, 10, 1, 0, 0, 0, 0);
+				Months d = Months.monthsBetween(dateCreation, auj);
+				int maxMois = Math.min(36, d.getMonths());
+
+				if (anneeInt == dateCreation.getYear()) moisDispo.add(dateCreation.getMonthOfYear());
+
+				for (int i = maxMois; i >= 0; i--) {
+					DateTime dateI = auj.minusMonths(i);
+					if (dateI.getYear() == anneeInt) moisDispo.add(dateI.getMonthOfYear());
+					if (!anneesDispo.contains(dateI.getYear())) anneesDispo.add(dateI.getYear());
+				}
+
+				model.put("anneesDispo", anneesDispo);
+				model.put("moisDispo", moisDispo);
+				// ---------------------------------------
 
 				return "detailsCompte";
 			}

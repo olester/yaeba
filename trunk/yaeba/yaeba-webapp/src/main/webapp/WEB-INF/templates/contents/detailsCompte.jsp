@@ -19,18 +19,19 @@
 				<form action="${pageContext.request.contextPath}/user/comptes/${compte.numeroCompte}/choix.html" method="POST">
 					<spring:message code="details.filter.txt" />
 					<select name="mois" onchange="submit()">
-						<c:forEach items="1,2,3,4,5,6,7,8,9,10,11,12" var="numMois">
+						<c:forEach items="${moisDispo}" var="numMois">
 							<option <c:if test="${numMois==mois}">selected</c:if> value="${numMois}">
 								<spring:message code="details.month.${numMois}" />
 							</option>
 						</c:forEach>
-					</select> <select name="annee" onchange="submit()">
-						<c:forEach items="2010,2011" var="numAnnee">
+					</select>
+					<select name="annee" onchange="submit()">
+						<c:forEach items="${anneesDispo}" var="numAnnee">
 							<option <c:if test="${numAnnee==annee}">selected</c:if> value="${numAnnee}">${numAnnee}</option>
 						</c:forEach>
 					</select>
 					<noscript>
-						<input type="submit" />
+						<input type="submit" value="<spring:message code='details.submit' />" />
 					</noscript>
 				</form>
 			</c:when>
