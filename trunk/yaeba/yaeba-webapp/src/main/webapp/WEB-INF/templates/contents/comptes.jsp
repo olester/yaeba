@@ -11,12 +11,11 @@
 		<spring:message code="accounts.subtitle" />
 	</p>
 	<div class="entry">
-		<p>
-			<spring:message code="accounts.text" />
-		</p>
-
 		<c:choose>
 			<c:when test="${not empty utilisateur.comptes}">
+				<p>
+					<spring:message code="accounts.text" />
+				</p>
 				<table>
 					<tr class="libelle">
 						<td><spring:message code="accounts.account" /></td>
