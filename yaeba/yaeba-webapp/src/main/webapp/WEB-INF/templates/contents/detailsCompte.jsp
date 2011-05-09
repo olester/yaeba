@@ -58,7 +58,14 @@
 					<c:set var="compteur" value="0" />
 					<c:forEach var="operation" items="${compte.getOperationsByDate(annee, mois)}" begin="0" end="9">
 						<tr class="ligne_${compteur}">
-							<td><fmt:formatDate value="${operation.dateCreation}" pattern="dd/MM/yyyy" />
+							<td><c:choose>
+									<c:when test="${locale=='en'}">
+										<fmt:formatDate value="${operation.dateCreation}" pattern="MM/dd/yyyy" />
+									</c:when>
+									<c:otherwise>
+										<fmt:formatDate value="${operation.dateCreation}" pattern="dd/MM/yyyy" />
+									</c:otherwise>
+								</c:choose>
 							</td>
 							<td>${operation.libelle}</td>
 							<td><fmt:formatNumber value="${operation.montant}" pattern="#0.00 €" />

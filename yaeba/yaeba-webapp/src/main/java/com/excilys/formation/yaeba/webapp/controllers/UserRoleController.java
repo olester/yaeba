@@ -58,6 +58,7 @@ public class UserRoleController {
 				model.put("compte", c);
 				model.put("annee", anneeInt);
 				model.put("mois", moisInt);
+				model.put("locale", locale.getLanguage());
 
 				// List<Integer> anneesDispo = new ArrayList<Integer>();
 				// List<Integer> moisDispo = new ArrayList<Integer>();
