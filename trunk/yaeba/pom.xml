@@ -11,11 +11,14 @@
 		<!-- versions des dependences -->
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<hibernate.version>3.6.3.Final</hibernate.version>
+		<jadira.version>1.8</jadira.version>
 		<jpa2.version>1.0.0.Final</jpa2.version>
 		<javassist.version>3.14.0-GA</javassist.version>
 		<aspectj.version>1.6.10</aspectj.version>
 		<hsqldb.version>2.0.0</hsqldb.version>
 		<mysql.version>5.1.16</mysql.version>
+		<joda.version>1.6.2</joda.version>
+		<joda.hibernate.version>1.2</joda.hibernate.version>
 		<slf4j.version>1.6.1</slf4j.version>
 		<logback.version>0.9.28</logback.version>
 		<selenium.driver.version>1.0.2</selenium.driver.version>
@@ -408,10 +411,16 @@
 				<version>${hibernate.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>org.jadira.usertype</groupId>
+				<artifactId>usertype.jodatime</artifactId>
+				<version>${jadira.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.hibernate.javax.persistence</groupId>
 				<artifactId>hibernate-jpa-2.0-api</artifactId>
 				<version>${jpa2.version}</version>
 			</dependency>
+
 
 			<!-- DAO: HSQLDB et MYSQL -->
 			<dependency>
@@ -429,6 +438,19 @@
 				<artifactId>commons-dbcp</artifactId>
 				<version>${dbcp.version}</version>
 			</dependency>
+
+			<!-- Joda-time -->
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>${joda.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time-hibernate</artifactId>
+				<version>${joda.hibernate.version}</version>
+			</dependency>
+
 
 			<!-- logging: slf4j, logback -->
 			<dependency>
@@ -488,13 +510,6 @@
 				<scope>compile</scope>
 			</dependency>
 
-			<!-- JodaTime -->
-			<dependency>
-				<groupId>joda-time</groupId>
-				<artifactId>joda-time</artifactId>
-				<version>1.6.2</version>
-			</dependency>
-
 		</dependencies>
 	</dependencyManagement>
 
@@ -518,6 +533,10 @@
 			<artifactId>jcl-over-slf4j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+
+
+
 	</dependencies>
 
 </project>

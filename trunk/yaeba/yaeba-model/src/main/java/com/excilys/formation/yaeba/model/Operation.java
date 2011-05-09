@@ -1,13 +1,13 @@
 package com.excilys.formation.yaeba.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.joda.time.DateTime;
 
 @Entity
 @Table(name = "operation")
@@ -16,13 +16,13 @@ public class Operation {
 	private Integer id;
 	private String libelle;
 	private float montant;
-	private Date dateCreation;
+	private DateTime dateCreation;
 
 	public Operation() {
 
 	}
 
-	public Operation(String libelle, float montant, Date dateCreation) {
+	public Operation(String libelle, float montant, DateTime dateCreation) {
 		this.libelle = libelle;
 		this.montant = montant;
 		this.dateCreation = dateCreation;
@@ -58,11 +58,11 @@ public class Operation {
 	}
 
 	@Column(name = "datecreation", nullable = false)
-	public Date getDateCreation() {
+	public DateTime getDateCreation() {
 		return dateCreation;
 	}
 
-	public void setDateCreation(Date dateCreation) {
+	public void setDateCreation(DateTime dateCreation) {
 		this.dateCreation = dateCreation;
 	}
 }
