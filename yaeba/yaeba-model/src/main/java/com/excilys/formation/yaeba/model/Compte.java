@@ -68,6 +68,7 @@ public class Compte {
 
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "compte_id")
+	// @OrderBy("datecreation")
 	public Set<Operation> getOperations() {
 		return operations;
 	}
@@ -76,13 +77,20 @@ public class Compte {
 		this.operations = operations;
 	}
 
+	public Set<Operation> getOperationsByDate(int annee, int mois) {
+		Set<Operation> operations = new HashSet<Operation>();
+		for (Operation o : getOperations())
+			if (o.getDateCreation().getYear() + 1900 == annee && o.getDateCreation().getMonth() + 1 == mois) operations.add(o);
+		return operations;
+	}
+
 	@Column(name = "datecreation", nullable = false)
-	public Date getDatecreation() {
+	public Date getDateCreation() {
 		return dateCreation;
 	}
 
-	public void setDatecreation(Date datecreation) {
-		this.dateCreation = datecreation;
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
 	}
 
 	@Column(name = "soldecourant", nullable = false)

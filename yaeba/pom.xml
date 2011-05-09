@@ -395,7 +395,7 @@
 				<version>${aspectj.version}</version>
 			</dependency>
 
-			<!-- HIBRENATE, JPA -->
+			<!-- HIBERNATE, JPA -->
 			<!-- pas de dependencies jpa ce n'est qu'une norme. -->
 			<dependency>
 				<groupId>org.hibernate</groupId>
@@ -460,7 +460,6 @@
 
 			<!-- Tests unitaires. -->
 
-
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
@@ -472,9 +471,6 @@
 				<artifactId>dbunit</artifactId>
 				<version>${dbunit.version}</version>
 			</dependency>
-
-
-
 
 			<!-- Test d'integration. -->
 			<dependency>
@@ -491,6 +487,14 @@
 				<type>jar</type>
 				<scope>compile</scope>
 			</dependency>
+
+			<!-- JodaTime -->
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 

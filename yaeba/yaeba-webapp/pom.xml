@@ -107,6 +107,13 @@
 			<artifactId>selenium-java-client-driver</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- JodaTime -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+
 	</dependencies>
 
 </project>

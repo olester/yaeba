@@ -21,13 +21,9 @@ public class OperationDaoImpl extends HibernateDaoSupport implements OperationDa
 	@SuppressWarnings("unchecked")
 	@Override
 	public Operation getOperationById(String id) {
-		List<Operation> l = getHibernateTemplate().find("select o from Operation o where id=?", Integer.parseInt(id));
-		// TODO utiliser .get
-		if (l.size() > 0) {
-			return l.get(0);
-		} else {
-			return null;
-		}
+		List<Operation> l = getHibernateTemplate().find("from Operation o where id=?", Integer.parseInt(id));
+		if (!l.isEmpty()) return l.get(0);
+		return null;
 	}
 
 	@Override
