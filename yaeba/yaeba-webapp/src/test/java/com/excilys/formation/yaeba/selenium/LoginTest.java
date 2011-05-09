@@ -21,7 +21,7 @@ public class LoginTest {
 
 	@Test
 	public void testTest() throws Exception {
-		selenium.open("/yaeba/?lang=fr");
+		selenium.open("/yaeba-webapp/?lang=fr");
 		// assertEquals("Authentication", selenium.getTitle());
 		//
 		// selenium.click("//div[@id='footer-content']/span/a[2]/img");
