@@ -9,7 +9,7 @@ public interface CompteDao {
 
 	public Compte getCompteById(String id);
 
-	public Compte getCompteByNumeroCompte(Utilisateur u, String numeroCompte);
+	public Compte getCompteByNumeroCompte(String numeroCompte);
 
 	public void update(Compte c);
 

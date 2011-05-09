@@ -42,7 +42,14 @@
 		</c:choose>
 		<br />
 		<c:choose>
-			<c:when test="${not empty compte.getOperationsByDate(annee, mois)}">
+			<c:when
+				test="${not empty compte.getOperationsByDate(annee, mois) && ((page-1)*10)>compte.getOperationsByDate(annee, mois).size()}">
+				<p>
+					<spring:message code="details.alt3" />
+				</p>
+			</c:when>
+			<c:when
+				test="${not empty compte.getOperationsByDate(annee, mois) && ((page-1)*10)<compte.getOperationsByDate(annee, mois).size()}">
 				<p>
 					<spring:message code="details.text2" />
 					<spring:message code="details.month.${mois}" />
@@ -56,8 +63,9 @@
 					</tr>
 
 					<c:set var="compteur" value="0" />
-					<c:forEach var="operation" items="${compte.getOperationsByDate(annee, mois)}" begin="0" end="9">
-						<tr class="ligne_${compteur}">
+					<c:forEach var="operation" items="${compte.getOperationsByDate(annee, mois)}" begin="${(page-1)*10}"
+						end="${page*10-1}">
+						<tr class="ligne_${compteur%2}">
 							<td><c:choose>
 									<c:when test="${locale=='en'}">
 										<fmt:formatDate value="${operation.dateCreation}" pattern="MM/dd/yyyy" />
@@ -74,6 +82,23 @@
 						<c:set var="compteur" value="${compteur+1}" />
 					</c:forEach>
 				</table>
+
+				<br />
+				<div class="previous">
+					<c:if test="${page>1}">
+						<a
+							href="${pageContext.request.contextPath}/user/comptes/${compte.numeroCompte}/${annee}/${mois}/${page-1}/details.html">&lt;
+							<spring:message code="details.previous" /> </a>
+					</c:if>
+				</div>
+				<div class="next">
+					<c:if test="${page*10<compte.getOperationsByDate(annee, mois).size()}">
+						<a
+							href="${pageContext.request.contextPath}/user/comptes/${compte.numeroCompte}/${annee}/${mois}/${page+1}/details.html"><spring:message
+								code="details.next" /> &gt;</a>
+
+					</c:if>
+				</div>
 			</c:when>
 			<c:otherwise>
 				<p>

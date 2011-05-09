@@ -22,8 +22,8 @@ public class CompteServiceImpl implements CompteService {
 	}
 
 	@Override
-	public Compte getCompteByNumeroCompte(Utilisateur u, String numeroCompte) {
-		return compteDao.getCompteByNumeroCompte(u, numeroCompte);
+	public Compte getCompteByNumeroCompte(String numeroCompte) {
+		return compteDao.getCompteByNumeroCompte(numeroCompte);
 	}
 
 	@Override

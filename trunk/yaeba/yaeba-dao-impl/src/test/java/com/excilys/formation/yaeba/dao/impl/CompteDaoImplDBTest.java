@@ -25,7 +25,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.excilys.formation.yaeba.model.Compte;
-import com.excilys.formation.yaeba.model.Utilisateur;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/context/test-applicationContext.xml" })
@@ -77,19 +76,16 @@ public class CompteDaoImplDBTest {
 
 	@Test
 	public void testGetCompteByNumeroCompte() {
-		Utilisateur u = utilisateurDaoImpl.getUtilisateurById("99");
-		assertNotNull(u);
-		Compte c = compteDaoImpl.getCompteByNumeroCompte(u, "riendutout");
+		Compte c = compteDaoImpl.getCompteByNumeroCompte("riendutout");
 		assertNull(c);
 
-		c = compteDaoImpl.getCompteByNumeroCompte(u, "4567");
+		c = compteDaoImpl.getCompteByNumeroCompte("4567");
 		assertEquals("testcompte", c.getLibelle());
 	}
 
 	@Test
 	public void testUpdate() {
-		Utilisateur u = utilisateurDaoImpl.getUtilisateurById("99");
-		Compte c = compteDaoImpl.getCompteByNumeroCompte(u, "4567");
+		Compte c = compteDaoImpl.getCompteByNumeroCompte("4567");
 		c.setNumeroCompte("fraise");
 		compteDaoImpl.update(c);
 		assertEquals("fraise", c.getNumeroCompte());
@@ -107,11 +103,10 @@ public class CompteDaoImplDBTest {
 
 	@Test
 	public void testDelete() {
-		Utilisateur u = utilisateurDaoImpl.getUtilisateurById("99");
-		Compte c = compteDaoImpl.getCompteByNumeroCompte(u, "4567");
+		Compte c = compteDaoImpl.getCompteByNumeroCompte("4567");
 		assertNotNull(c);
 		compteDaoImpl.delete(c);
-		Compte c2 = compteDaoImpl.getCompteByNumeroCompte(u, "4567");
+		Compte c2 = compteDaoImpl.getCompteByNumeroCompte("4567");
 		assertNull(c2);
 	}
 }

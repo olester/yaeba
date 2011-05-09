@@ -40,13 +40,25 @@ public class UserRoleController {
 		return "comptes";
 	}
 
-	@RequestMapping("/comptes/{numeroCompte}/{annee}/{mois}/details.html")
+	@RequestMapping("/comptes/{numeroCompte}/{annee}/{mois}/{page}/details.html")
 	public String redirectDetailsCompte(@PathVariable("numeroCompte") String numeroCompte, @PathVariable("annee") String annee,
-			@PathVariable("mois") String mois, ModelMap model, Locale locale) {
+			@PathVariable("mois") String mois, @PathVariable("page") String page, ModelMap model, Locale locale) {
 		ResourceBundle bundle = ResourceBundle.getBundle("messages_" + locale.getLanguage());
 
-		int anneeInt = Integer.parseInt(annee);
-		int moisInt = Integer.parseInt(mois);
+		int anneeInt;
+		int moisInt;
+		int pageInt;
+
+		try {
+			anneeInt = Integer.parseInt(annee);
+			moisInt = Integer.parseInt(mois);
+			pageInt = Integer.parseInt(page);
+		} catch (NumberFormatException e) {
+			model.put("title", bundle.getString("welcome.title"));
+			model.put("error_text", bundle.getString("error-404.text"));
+			model.put("error_code", "404");
+			return "error";
+		}
 
 		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
 
@@ -59,6 +71,7 @@ public class UserRoleController {
 				model.put("annee", anneeInt);
 				model.put("mois", moisInt);
 				model.put("locale", locale.getLanguage());
+				model.put("page", pageInt);
 
 				// List<Integer> anneesDispo = new ArrayList<Integer>();
 				// List<Integer> moisDispo = new ArrayList<Integer>();
@@ -87,7 +100,7 @@ public class UserRoleController {
 	public String redirectChoixDate(HttpServletRequest request, @PathVariable("numeroCompte") String numeroCompte, ModelMap model, Locale locale) {
 		String annee = request.getParameter("annee");
 		String mois = request.getParameter("mois");
-		return "redirect:/user/comptes/" + numeroCompte + "/" + annee + "/" + mois + "/details.html";
+		return "redirect:/user/comptes/" + numeroCompte + "/" + annee + "/" + mois + "/1/details.html";
 	}
 
 	@RequestMapping("/virements.html")

@@ -30,9 +30,8 @@ public class CompteDaoImpl extends HibernateDaoSupport implements CompteDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Compte getCompteByNumeroCompte(Utilisateur u, String numeroCompte) {
-		System.out.println(u.getNom());
-		List<Compte> comptes = getHibernateTemplate().find("from Compte where utilisateur_id = ? and numeroCompte = ?", u.getId(), numeroCompte);
+	public Compte getCompteByNumeroCompte(String numeroCompte) {
+		List<Compte> comptes = getHibernateTemplate().find("from Compte where numeroCompte = ?", numeroCompte);
 		if (!comptes.isEmpty()) return comptes.get(0);
 		return null;
 	}
