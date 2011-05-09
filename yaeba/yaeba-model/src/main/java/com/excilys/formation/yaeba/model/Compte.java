@@ -1,6 +1,5 @@
 package com.excilys.formation.yaeba.model;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.joda.time.DateTime;
+
 @Entity
 @Table(name = "compte")
 public class Compte {
@@ -22,14 +23,14 @@ public class Compte {
 	private String numeroCompte;
 	private String libelle;
 	private Set<Operation> operations;
-	private Date dateCreation;
+	private DateTime dateCreation;
 	private float soldeCourant;
 
 	public Compte() {
 		operations = new HashSet<Operation>();
 	}
 
-	public Compte(String numeroCompte, String libelle, Set<Operation> operations, Date dateCreation, float soldeCourant) {
+	public Compte(String numeroCompte, String libelle, Set<Operation> operations, DateTime dateCreation, float soldeCourant) {
 		this.numeroCompte = numeroCompte;
 		this.operations = operations;
 		this.dateCreation = dateCreation;
@@ -68,7 +69,6 @@ public class Compte {
 
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "compte_id")
-	// @OrderBy("datecreation")
 	public Set<Operation> getOperations() {
 		return operations;
 	}
@@ -80,16 +80,17 @@ public class Compte {
 	public Set<Operation> getOperationsByDate(int annee, int mois) {
 		Set<Operation> operations = new HashSet<Operation>();
 		for (Operation o : getOperations())
-			if (o.getDateCreation().getYear() + 1900 == annee && o.getDateCreation().getMonth() + 1 == mois) operations.add(o);
+			if (o.getDateCreation().getYear() + 1900 == annee && o.getDateCreation().getMonthOfYear() + 1 == mois)
+				operations.add(o);
 		return operations;
 	}
 
 	@Column(name = "datecreation", nullable = false)
-	public Date getDateCreation() {
+	public DateTime getDateCreation() {
 		return dateCreation;
 	}
 
-	public void setDateCreation(Date dateCreation) {
+	public void setDateCreation(DateTime dateCreation) {
 		this.dateCreation = dateCreation;
 	}
 
@@ -112,13 +113,18 @@ public class Compte {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) return true;
-		if (obj == null) return false;
-		if (getClass() != obj.getClass()) return false;
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
 		Compte other = (Compte) obj;
 		if (numeroCompte == null) {
-			if (other.numeroCompte != null) return false;
-		} else if (!numeroCompte.equals(other.numeroCompte)) return false;
+			if (other.numeroCompte != null)
+				return false;
+		} else if (!numeroCompte.equals(other.numeroCompte))
+			return false;
 		return true;
 	}
 

@@ -26,6 +26,12 @@
 				<value>com.excilys.formation.yaeba.model.Compte</value>
 			</list>
 		</property>
+		<property name="annotatedPackages">
+			<list>
+				<value>com.excilys.formation.yaeba.model</value>
+			</list>
+		</property>
+
 		<property name="dataSource" ref="dataSource" />
 		<property name="hibernateProperties">
 			<props>
