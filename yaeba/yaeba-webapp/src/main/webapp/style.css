@@ -470,3 +470,11 @@ table a:hover {
 tr.ligne_1 {
 	background-color: #eee;
 }
+
+.previous {
+	float: left;
+}
+
+.next {
+	float: right;
+}
