@@ -27,8 +27,9 @@
 		<dbcp.version>1.4</dbcp.version>
 		<tiles.version>2.2.2</tiles.version>
 		<jstl.version>1.2</jstl.version>
-		<dbunit.version>2.4.3</dbunit.version>
 		<servlet.version>2.5</servlet.version>
+		<excilys.spring-log.version>1.0.0</excilys.spring-log.version>
+		<excilys.spring.test.dbunit>1.1.0</excilys.spring.test.dbunit>
 		<!-- versions des plugins -->
 		<eclipse.plugin.version>2.7</eclipse.plugin.version>
 		<compiler.plugin.version>2.3.2</compiler.plugin.version>
@@ -494,18 +495,22 @@
 				<artifactId>commons-logging</artifactId>
 				<version>99.0-does-not-exist</version>
 			</dependency>
+			<dependency>
+				<groupId>com.excilys.utils</groupId>
+				<artifactId>spring-log</artifactId>
+				<version>${excilys.spring-log.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jul-to-slf4j</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
 
 			<!-- Tests unitaires. -->
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>${junit.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.dbunit</groupId>
-				<artifactId>dbunit</artifactId>
-				<version>${dbunit.version}</version>
 			</dependency>
 
 			<!-- Test d'integration. -->
@@ -518,6 +523,13 @@
 				<groupId>org.seleniumhq.selenium.client-drivers</groupId>
 				<artifactId>selenium-java-client-driver</artifactId>
 				<version>${selenium.driver.version}</version>
+			</dependency>
+
+			<!-- test dbunit -->
+			<dependency>
+				<groupId>com.excilys.utils</groupId>
+				<artifactId>spring-test-dbunit</artifactId>
+				<version>${excilys.spring.test.dbunit}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -542,6 +554,14 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.excilys.utils</groupId>
+			<artifactId>spring-log</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
 		</dependency>
 	</dependencies>
 
