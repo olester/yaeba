@@ -15,9 +15,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 @Entity
 @Table(name = "utilisateur")
 public class Utilisateur {
@@ -102,8 +99,7 @@ public class Utilisateur {
 		this.motDePasse = motDePasse;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@LazyCollection(LazyCollectionOption.TRUE)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "role_utilisateur", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	public Set<Role> getRoles() {
 		return roles;
@@ -113,8 +109,7 @@ public class Utilisateur {
 		this.roles = roles;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@LazyCollection(LazyCollectionOption.TRUE)
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "utilisateur_id")
 	// @OrderBy("datecreation")
 	public Set<Compte> getComptes() {

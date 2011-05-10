@@ -13,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -71,8 +69,7 @@ public class Compte {
 		this.libelle = libelle;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, targetEntity = Operation.class)
-	@LazyCollection(LazyCollectionOption.TRUE)
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Operation.class)
 	@JoinColumn(name = "compte_id")
 	public Set<Operation> getOperations() {
 		return operations;
