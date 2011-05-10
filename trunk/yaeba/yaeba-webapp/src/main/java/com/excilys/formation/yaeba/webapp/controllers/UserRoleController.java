@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.excilys.formation.yaeba.model.Compte;
+import com.excilys.formation.yaeba.model.OperationCarteBancaire;
 import com.excilys.formation.yaeba.model.Utilisateur;
 import com.excilys.formation.yaeba.service.api.OperationService;
 import com.excilys.formation.yaeba.webapp.CustomUser;
@@ -99,6 +100,11 @@ public class UserRoleController {
 				model.put("anneesDispo", anneesDispo);
 				model.put("moisDispo", moisDispo);
 				// ---------------------------------------
+
+				float sommeCB = 0;
+				for (OperationCarteBancaire o : operationService.getOperationsCBByMoisAnnee(c, anneeInt, moisInt))
+					sommeCB += o.getMontant();
+				model.put("sommeCB", sommeCB);
 
 				model.put("utilisateur", u);
 

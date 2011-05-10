@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.excilys.formation.yaeba.dao.api.OperationDao;
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.Operation;
+import com.excilys.formation.yaeba.model.OperationCarteBancaire;
 
 @Repository
 public class OperationDaoImpl extends HibernateDaoSupport implements OperationDao {
@@ -52,5 +53,16 @@ public class OperationDaoImpl extends HibernateDaoSupport implements OperationDa
 		return getHibernateTemplate().find(
 				"SELECT o FROM Compte c INNER JOIN c.operations o WHERE c = ? AND o.dateCreation BETWEEN ? AND ? ORDER BY o.dateCreation DESC", c, dateDebut,
 				dateFin);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<OperationCarteBancaire> getOperationsCBByDate(Compte c, DateTime dateDebut, DateTime dateFin) {
+		// return getHibernateTemplate()
+		// .find("SELECT o FROM Compte c INNER JOIN c.operations o WHERE c = ? AND o.class = OperationCarteBancaire AND o.dateCreation BETWEEN ? AND ? ORDER BY o.dateCreation DESC",
+		// c, dateDebut, dateFin);
+		return getHibernateTemplate()
+				.find("SELECT o FROM Compte c INNER JOIN c.operations o WHERE c = ? AND o.discriminator='OPERATIONCARTEBANCAIRE' AND o.dateCreation BETWEEN ? AND ? ORDER BY o.dateCreation DESC",
+						c, dateDebut, dateFin);
 	}
 }

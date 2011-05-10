@@ -9,7 +9,8 @@
 		<a href="#"><spring:message code="details.title" /> </a>
 	</h2>
 	<p class="meta">
-		<spring:message code="details.subtitle" /> : ${compte.libelle}
+		<spring:message code="details.subtitle" />
+		: ${compte.libelle}
 	</p>
 	<div class="entry">
 		<p>
@@ -25,8 +26,7 @@
 								<spring:message code="details.month.${numMois}" />
 							</option>
 						</c:forEach>
-					</select>
-					<select name="annee" onchange="submit()">
+					</select> <select name="annee" onchange="submit()">
 						<c:forEach items="${anneesDispo}" var="numAnnee">
 							<option <c:if test="${numAnnee==annee}">selected</c:if> value="${numAnnee}">${numAnnee}</option>
 						</c:forEach>
@@ -44,14 +44,12 @@
 		</c:choose>
 		<br />
 		<c:choose>
-			<c:when
-				test="${not empty listeOperations && ((page-1)*10)>listeOperations.size()}">
+			<c:when test="${not empty listeOperations && ((page-1)*10)>listeOperations.size()}">
 				<p>
 					<spring:message code="details.alt3" />
 				</p>
 			</c:when>
-			<c:when
-				test="${not empty listeOperations && ((page-1)*10)<listeOperations.size()}">
+			<c:when test="${not empty listeOperations && ((page-1)*10)<listeOperations.size()}">
 				<p>
 					<spring:message code="details.text2" />
 					<spring:message code="details.month.${mois}" />
@@ -65,18 +63,14 @@
 					</tr>
 
 					<c:set var="compteur" value="0" />
-					<c:forEach var="operation" items="${listeOperations}" begin="${(page-1)*10}"
-						end="${page*10-1}">
+					<c:forEach var="operation" items="${listeOperations}" begin="${(page-1)*10}" end="${page*10-1}">
 						<tr class="ligne_${compteur%2}">
-							<td>
-							<c:choose>
+							<td><c:choose>
 									<c:when test="${locale=='en'}">
-										<joda:format value="${operation.dateCreation}"
-											pattern="MM/dd/yyyy" />
+										<joda:format value="${operation.dateCreation}" pattern="MM/dd/yyyy" />
 									</c:when>
 									<c:otherwise>
-										<joda:format value="${operation.dateCreation}"
-											pattern="dd/MM/yyyy" />
+										<joda:format value="${operation.dateCreation}" pattern="dd/MM/yyyy" />
 									</c:otherwise>
 								</c:choose>
 							</td>
@@ -87,7 +81,6 @@
 						<c:set var="compteur" value="${compteur+1}" />
 					</c:forEach>
 				</table>
-
 				<br />
 				<div class="previous">
 					<c:if test="${page>1}">
@@ -104,6 +97,13 @@
 
 					</c:if>
 				</div>
+				<br /><br />
+				<table>
+					<tr>
+						<td><spring:message code="details.sum" /></td>
+						<td><fmt:formatNumber value="${sommeCB}" pattern="#0.00 €" /></td>
+					</tr>
+				</table>
 			</c:when>
 			<c:otherwise>
 				<p>
