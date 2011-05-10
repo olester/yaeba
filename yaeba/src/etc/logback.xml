@@ -4,7 +4,7 @@
 			<Pattern>%d [%thread] %level %logger - %m%n</Pattern>
 		</layout>
 	</appender>
-	<root level="WARNING">
+	<root level="WARN">
 		<appender-ref ref="CONSOLE" />
 	</root>
 </configuration>
