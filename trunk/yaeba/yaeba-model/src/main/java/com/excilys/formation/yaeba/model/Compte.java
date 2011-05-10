@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 @Entity
@@ -86,6 +87,7 @@ public class Compte {
 	}
 
 	@Column(name = "datecreation", nullable = false)
+	@Type(type = "jodaDateTime")
 	public DateTime getDateCreation() {
 		return dateCreation;
 	}
