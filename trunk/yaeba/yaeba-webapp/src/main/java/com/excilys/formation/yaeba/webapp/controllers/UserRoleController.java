@@ -100,6 +100,8 @@ public class UserRoleController {
 				model.put("moisDispo", moisDispo);
 				// ---------------------------------------
 
+				model.put("utilisateur", u);
+
 				return "detailsCompte";
 			}
 		}
@@ -123,6 +125,10 @@ public class UserRoleController {
 		model.put("title", bundle.getString("transfers.title"));
 		model.put("bouton", "bouton_comptes");
 		model.put("bouton", "bouton_virements");
+
+		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
+		model.put("utilisateur", u);
+
 		return "virements";
 	}
 

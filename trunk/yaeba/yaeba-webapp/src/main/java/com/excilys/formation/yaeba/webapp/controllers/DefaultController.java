@@ -3,18 +3,26 @@ package com.excilys.formation.yaeba.webapp.controllers;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.excilys.formation.yaeba.model.Utilisateur;
+import com.excilys.formation.yaeba.webapp.CustomUser;
+
 @Controller
-public class AnonymousController {
+public class DefaultController {
 
 	@RequestMapping("/welcome.html")
 	public String redirectWelcome(ModelMap model, Locale locale) {
 		ResourceBundle bundle = ResourceBundle.getBundle("messages_" + locale.getLanguage());
 		model.put("title", bundle.getString("welcome.title"));
 		model.put("bouton", "bouton_welcome");
+
+		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
+		model.put("utilisateur", u);
+
 		return "welcome";
 	}
 
