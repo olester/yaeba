@@ -18,10 +18,11 @@ import org.joda.time.DateTime;
 @Entity
 @Table(name = "operation")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "DISCRIMINATOR", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "OPERATION")
 public class Operation {
 
+	private String discriminator;
 	private Integer id;
 	private String libelle;
 	private double montant;
@@ -35,6 +36,15 @@ public class Operation {
 		this.libelle = libelle;
 		this.montant = montant;
 		this.dateCreation = dateCreation;
+	}
+
+	@Column(name = "discriminator", insertable = false, updatable = false)
+	public String getDiscriminator() {
+		return discriminator;
+	}
+
+	public void setDiscriminator(String discriminator) {
+		this.discriminator = discriminator;
 	}
 
 	@Id

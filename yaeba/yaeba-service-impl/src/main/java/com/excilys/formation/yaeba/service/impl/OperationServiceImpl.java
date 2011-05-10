@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.excilys.formation.yaeba.dao.api.OperationDao;
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.Operation;
+import com.excilys.formation.yaeba.model.OperationCarteBancaire;
 import com.excilys.formation.yaeba.service.api.OperationService;
 
 @Service
@@ -41,6 +42,12 @@ public class OperationServiceImpl implements OperationService {
 	public List<Operation> getOperationsByMoisAnnee(Compte c, int annee, int mois) {
 		DateTime dt = new DateTime(annee, mois, 1, 0, 0, 0, 0);
 		return operationDao.getOperationsByDate(c, dt, dt.dayOfMonth().withMaximumValue());
+	}
+
+	@Override
+	public List<OperationCarteBancaire> getOperationsCBByMoisAnnee(Compte c, int annee, int mois) {
+		DateTime dt = new DateTime(annee, mois, 1, 0, 0, 0, 0);
+		return operationDao.getOperationsCBByDate(c, dt, dt.dayOfMonth().withMaximumValue());
 	}
 
 }
