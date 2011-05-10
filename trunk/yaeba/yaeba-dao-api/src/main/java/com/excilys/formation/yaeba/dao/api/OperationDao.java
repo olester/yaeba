@@ -1,5 +1,10 @@
 package com.excilys.formation.yaeba.dao.api;
 
+import java.util.List;
+
+import org.joda.time.DateTime;
+
+import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.Operation;
 
 public interface OperationDao {
@@ -11,4 +16,7 @@ public interface OperationDao {
 	public void save(Operation o);
 
 	public void delete(Operation o);
+
+	public List<Operation> getOperationsByDate(Compte c, DateTime dateDebut, DateTime dateFin);
+
 }

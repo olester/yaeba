@@ -18,6 +18,7 @@
 		<hsqldb.version>2.0.0</hsqldb.version>
 		<mysql.version>5.1.16</mysql.version>
 		<joda.version>1.6.2</joda.version>
+		<joda.jsptags.version>1.0.2</joda.jsptags.version>
 		<slf4j.version>1.6.1</slf4j.version>
 		<logback.version>0.9.28</logback.version>
 		<selenium.driver.version>1.0.2</selenium.driver.version>
@@ -444,7 +445,11 @@
 				<artifactId>joda-time</artifactId>
 				<version>${joda.version}</version>
 			</dependency>
-
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time-jsptags</artifactId>
+				<version>${joda.jsptags.version}</version>
+			</dependency>
 
 			<!-- logging: slf4j, logback -->
 			<dependency>

@@ -2,6 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags"%>
 
 <div class="post">
 	<h2 class="title">
@@ -44,13 +45,13 @@
 		<br />
 		<c:choose>
 			<c:when
-				test="${not empty compte.getOperationsByDate(annee, mois) && ((page-1)*10)>compte.getOperationsByDate(annee, mois).size()}">
+				test="${not empty listeOperations && ((page-1)*10)>listeOperations.size()}">
 				<p>
 					<spring:message code="details.alt3" />
 				</p>
 			</c:when>
 			<c:when
-				test="${not empty compte.getOperationsByDate(annee, mois) && ((page-1)*10)<compte.getOperationsByDate(annee, mois).size()}">
+				test="${not empty listeOperations && ((page-1)*10)<listeOperations.size()}">
 				<p>
 					<spring:message code="details.text2" />
 					<spring:message code="details.month.${mois}" />
@@ -64,15 +65,18 @@
 					</tr>
 
 					<c:set var="compteur" value="0" />
-					<c:forEach var="operation" items="${compte.getOperationsByDate(annee, mois)}" begin="${(page-1)*10}"
+					<c:forEach var="operation" items="${listeOperations}" begin="${(page-1)*10}"
 						end="${page*10-1}">
 						<tr class="ligne_${compteur%2}">
-							<td><c:choose>
+							<td>
+							<c:choose>
 									<c:when test="${locale=='en'}">
-										<fmt:formatDate value="${operation.dateCreation}" pattern="MM/dd/yyyy" />
+										<joda:format value="${operation.dateCreation}"
+											pattern="MM/dd/yyyy" />
 									</c:when>
 									<c:otherwise>
-										<fmt:formatDate value="${operation.dateCreation}" pattern="dd/MM/yyyy" />
+										<joda:format value="${operation.dateCreation}"
+											pattern="dd/MM/yyyy" />
 									</c:otherwise>
 								</c:choose>
 							</td>
@@ -93,7 +97,7 @@
 					</c:if>
 				</div>
 				<div class="next">
-					<c:if test="${page*10<compte.getOperationsByDate(annee, mois).size()}">
+					<c:if test="${page*10<listeOperations.size()}">
 						<a
 							href="${pageContext.request.contextPath}/user/comptes/${compte.numeroCompte}/${annee}/${mois}/${page+1}/details.html"><spring:message
 								code="details.next" /> &gt;</a>
