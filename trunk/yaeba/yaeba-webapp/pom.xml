@@ -60,7 +60,15 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
+			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Tiles -->
 
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
@@ -68,11 +76,7 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-taglibs</artifactId>
-			<scope>runtime</scope>
-		</dependency>
+		<!-- JSTL -->
 
 		<dependency>
 			<groupId>org.glassfish.web</groupId>
@@ -89,6 +93,8 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
+		<!-- Servlet -->
 
 		<dependency>
 			<groupId>javax.servlet</groupId>

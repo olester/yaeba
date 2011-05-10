@@ -29,6 +29,7 @@
 		<dependency>
 			<groupId>org.jadira.usertype</groupId>
 			<artifactId>usertype.jodatime</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 
 	</dependencies>
