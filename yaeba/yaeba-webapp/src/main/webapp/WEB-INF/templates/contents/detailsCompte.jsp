@@ -9,8 +9,7 @@
 		<a href="#"><spring:message code="details.title" /> </a>
 	</h2>
 	<p class="meta">
-		<spring:message code="details.subtitle" />
-		: ${compte.libelle}
+		${compte.libelle}
 	</p>
 	<div class="entry">
 		<p>
