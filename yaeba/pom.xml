@@ -10,7 +10,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- versions des dependences -->
 		<spring.version>3.0.5.RELEASE</spring.version>
-		<hibernate.version>3.6.3.Final</hibernate.version>
+		<hibernate.version>3.6.4.Final</hibernate.version>
 		<jadira.version>1.8</jadira.version>
 		<jpa2.version>1.0.0.Final</jpa2.version>
 		<javassist.version>3.14.0-GA</javassist.version>
