@@ -4,116 +4,78 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-import java.io.File;
-import java.sql.Connection;
-
-import javax.sql.DataSource;
-
-import org.dbunit.database.DatabaseConfig;
-import org.dbunit.database.DatabaseConnection;
-import org.dbunit.database.IDatabaseConnection;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSet;
-import org.dbunit.operation.DatabaseOperation;
 import org.joda.time.DateTime;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
+import com.excilys.formation.yaeba.dao.api.CompteDao;
+import com.excilys.formation.yaeba.dao.api.UtilisateurDao;
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.Utilisateur;
+import com.excilys.utils.spring.log.logback.test.Logback;
+import com.excilys.utils.spring.log.logback.test.LogbackConfigurerTestExecutionListener;
+import com.excilys.utils.spring.test.dbunit.DataSet;
+import com.excilys.utils.spring.test.dbunit.DataSetTestExecutionListener;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/context/test-applicationContext.xml" })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DataSetTestExecutionListener.class, LogbackConfigurerTestExecutionListener.class })
+@DataSet("classpath:dataset.xml")
+@Logback("classpath:logback-test-dao.xml")
 public class CompteDaoImplDBTest {
 
 	@Autowired
-	private CompteDaoImpl compteDaoImpl;
+	private CompteDao compteDao;
 	@Autowired
-	private UtilisateurDaoImpl utilisateurDaoImpl;
-
-	@Autowired
-	private DataSource dataSource;
-
-	private IDatabaseConnection dbUnitCon;
-	private Connection con;
-
-	// @Test
-	// public void rien() {
-	// assertTrue(true);
-	// }
-
-	@Before
-	public void init() throws Exception {
-		// Avant le test on insère le dataSet
-		con = DataSourceUtils.getConnection(dataSource);
-		dbUnitCon = new DatabaseConnection(con, "yaeba");
-
-		DatabaseConfig config = dbUnitCon.getConfig();
-		config.setFeature(DatabaseConfig.FEATURE_CASE_SENSITIVE_TABLE_NAMES, true);
-
-		DatabaseOperation.INSERT.execute(dbUnitCon, getDataSet());
-	}
-
-	@After
-	public void after() throws Exception {
-		DatabaseOperation.DELETE.execute(dbUnitCon, getDataSet());
-		con.close();
-	}
-
-	// // Chargement d'une bdd de test
-	private IDataSet getDataSet() throws Exception {
-		FlatXmlDataSet f = new FlatXmlDataSet(new File("src/test/resources/dataset.xml"));
-		return f;
-	}
+	private UtilisateurDao utilisateurDao;
 
 	@Test
 	public void testGetCompteById() {
-		Compte c = compteDaoImpl.getCompteById("98");
+		Compte c = compteDao.getCompteById("98");
 		assertNull(c);
 
-		c = compteDaoImpl.getCompteById("99");
+		c = compteDao.getCompteById("99");
 		assertEquals("testcompte", c.getLibelle());
 	}
 
 	@Test
 	public void testGetCompteByNumeroCompte() {
-		Compte c = compteDaoImpl.getCompteByNumeroCompte("riendutout");
+		Compte c = compteDao.getCompteByNumeroCompte("riendutout");
 		assertNull(c);
 
-		c = compteDaoImpl.getCompteByNumeroCompte("4567");
+		c = compteDao.getCompteByNumeroCompte("4567");
 		assertEquals("testcompte", c.getLibelle());
 	}
 
 	@Test
 	public void testUpdate() {
-		Compte c = compteDaoImpl.getCompteByNumeroCompte("4567");
+		Compte c = compteDao.getCompteByNumeroCompte("4567");
 		c.setNumeroCompte("fraise");
-		compteDaoImpl.update(c);
+		compteDao.update(c);
 		assertEquals("fraise", c.getNumeroCompte());
 	}
 
 	@Test
 	public void testSave() {
-		Utilisateur u = utilisateurDaoImpl.getUtilisateurById("99");
+		Utilisateur u = utilisateurDao.getUtilisateurById("99");
 		Compte c = new Compte("aaa", "bbb", null, new DateTime(), 10.2f);
 		u.addCompte(c);
-		compteDaoImpl.save(c);
-		Compte c2 = compteDaoImpl.getCompteByNumeroCompte("aaa");
+		compteDao.save(c);
+		Compte c2 = compteDao.getCompteByNumeroCompte("aaa");
 		assertNotNull(c2);
 	}
 
 	@Test
 	public void testDelete() {
-		Compte c = compteDaoImpl.getCompteByNumeroCompte("4567");
+		Compte c = compteDao.getCompteByNumeroCompte("4567");
 		assertNotNull(c);
-		compteDaoImpl.delete(c);
-		Compte c2 = compteDaoImpl.getCompteByNumeroCompte("4567");
+		compteDao.delete(c);
+		Compte c2 = compteDao.getCompteByNumeroCompte("4567");
 		assertNull(c2);
 	}
 }
