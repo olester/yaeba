@@ -21,10 +21,10 @@ public class LoginTest {
 
 	@Test
 	public void testTest() throws Exception {
+
+		// EN FRANCAIS
+
 		selenium.open("/yaeba-webapp/?lang=fr");
-		// assertEquals("Authentication", selenium.getTitle());
-		//
-		// selenium.click("//div[@id='footer-content']/span/a[2]/img");
 		assertEquals("Authentification", selenium.getTitle());
 
 		selenium.type("j_username", "user");
@@ -94,6 +94,72 @@ public class LoginTest {
 		selenium.waitForPageToLoad("30000");
 		assertEquals("Authentification", selenium.getTitle());
 
+		// EN ANGLAIS
+
+		selenium.click("//div[@id='footer-content']/span/a[1]/img");
+
+		selenium.waitForPageToLoad("30000");
+		assertEquals("Authentication", selenium.getTitle());
+
+		selenium.type("j_username", "user");
+		selenium.type("j_password", "user");
+		selenium.click("//input[@value='Validate']");
+		selenium.waitForPageToLoad("30000");
+		assertEquals("Accounts", selenium.getTitle());
+
+		selenium.click("link=Transfers");
+		selenium.waitForPageToLoad("30000");
+		assertEquals("Transfers", selenium.getTitle());
+
+		selenium.click("link=Home");
+		selenium.waitForPageToLoad("30000");
+		assertEquals("Welcome", selenium.getTitle());
+
+		selenium.click("link=Accounts");
+		selenium.waitForPageToLoad("30000");
+		assertEquals("Accounts", selenium.getTitle());
+
+		selenium.click("link=Yaeba");
+		selenium.waitForPageToLoad("30000");
+		assertEquals("Welcome", selenium.getTitle());
+
+		selenium.click("link=Logout");
+		selenium.waitForPageToLoad("30000");
+		assertEquals("Authentication", selenium.getTitle());
+
+		selenium.type("j_username", "admin");
+		selenium.type("j_password", "admin");
+		selenium.click("//input[@value='Validate']");
+		selenium.waitForPageToLoad("30000");
+		assertEquals("Administration", selenium.getTitle());
+
+		selenium.click("link=Transfers");
+		selenium.waitForPageToLoad("30000");
+		assertEquals("Transfers", selenium.getTitle());
+
+		selenium.click("link=Admin");
+		selenium.waitForPageToLoad("30000");
+		assertEquals("Administration", selenium.getTitle());
+
+		selenium.click("link=Accounts");
+		selenium.waitForPageToLoad("30000");
+		assertEquals("Accounts", selenium.getTitle());
+
+		selenium.click("link=Home");
+		selenium.waitForPageToLoad("30000");
+		assertEquals("Welcome", selenium.getTitle());
+
+		selenium.click("link=Accounts");
+		selenium.waitForPageToLoad("30000");
+		assertEquals("Accounts", selenium.getTitle());
+
+		selenium.click("link=Yaeba");
+		selenium.waitForPageToLoad("30000");
+		assertEquals("Welcome", selenium.getTitle());
+
+		selenium.click("link=Logout");
+		selenium.waitForPageToLoad("30000");
+		assertEquals("Authentication", selenium.getTitle());
 	}
 
 	@After
