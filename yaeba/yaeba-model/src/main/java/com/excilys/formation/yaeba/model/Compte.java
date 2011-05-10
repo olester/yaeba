@@ -25,13 +25,14 @@ public class Compte {
 	private String libelle;
 	private Set<Operation> operations;
 	private DateTime dateCreation;
-	private float soldeCourant;
+	private double soldeCourant;
 
 	public Compte() {
 		operations = new HashSet<Operation>();
 	}
 
 	public Compte(String numeroCompte, String libelle, Set<Operation> operations, DateTime dateCreation, float soldeCourant) {
+
 		this.numeroCompte = numeroCompte;
 		this.operations = operations;
 		this.dateCreation = dateCreation;
@@ -68,7 +69,7 @@ public class Compte {
 		this.libelle = libelle;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Operation.class)
 	@JoinColumn(name = "compte_id")
 	public Set<Operation> getOperations() {
 		return operations;
@@ -81,8 +82,7 @@ public class Compte {
 	public Set<Operation> getOperationsByDate(int annee, int mois) {
 		Set<Operation> operations = new HashSet<Operation>();
 		for (Operation o : getOperations())
-			if (o.getDateCreation().getYear() + 1900 == annee && o.getDateCreation().getMonthOfYear() + 1 == mois)
-				operations.add(o);
+			if (o.getDateCreation().getYear() + 1900 == annee && o.getDateCreation().getMonthOfYear() + 1 == mois) operations.add(o);
 		return operations;
 	}
 
@@ -97,11 +97,11 @@ public class Compte {
 	}
 
 	@Column(name = "soldecourant", nullable = false)
-	public float getSoldeCourant() {
+	public double getSoldeCourant() {
 		return soldeCourant;
 	}
 
-	public void setSoldeCourant(float soldeCourant) {
+	public void setSoldeCourant(double soldeCourant) {
 		this.soldeCourant = soldeCourant;
 	}
 
@@ -115,18 +115,13 @@ public class Compte {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
 		Compte other = (Compte) obj;
 		if (numeroCompte == null) {
-			if (other.numeroCompte != null)
-				return false;
-		} else if (!numeroCompte.equals(other.numeroCompte))
-			return false;
+			if (other.numeroCompte != null) return false;
+		} else if (!numeroCompte.equals(other.numeroCompte)) return false;
 		return true;
 	}
 

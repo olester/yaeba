@@ -22,8 +22,12 @@
 			<list>
 				<value>com.excilys.formation.yaeba.model.Utilisateur</value>
 				<value>com.excilys.formation.yaeba.model.Role</value>
-				<value>com.excilys.formation.yaeba.model.Operation</value>
 				<value>com.excilys.formation.yaeba.model.Compte</value>
+				<value>com.excilys.formation.yaeba.model.Operation</value>
+				<value>com.excilys.formation.yaeba.model.OperationCheque</value>
+				<value>com.excilys.formation.yaeba.model.OperationVirementInterne</value>
+				<value>com.excilys.formation.yaeba.model.OperationCarteBancaire</value>
+
 			</list>
 		</property>
 		<property name="annotatedPackages">
