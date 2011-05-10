@@ -59,7 +59,7 @@
 					<tr class="libelle">
 						<td><spring:message code="details.date" /></td>
 						<td><spring:message code="details.label" /></td>
-						<td><spring:message code="details.amount" /></td>
+						<td style="width: 160px;"><spring:message code="details.amount" /></td>
 					</tr>
 
 					<c:set var="compteur" value="0" />
@@ -74,8 +74,10 @@
 									</c:otherwise>
 								</c:choose>
 							</td>
-							<td>${operation.libelle}</td>
-							<td><fmt:formatNumber value="${operation.montant}" pattern="#0.00 €" />
+							<td><spring:message code="details.${operation.discriminator}" /> <c:if
+									test="${operation.discriminator eq 'OPERATIONCHEQUE'}">${operation.numeroCheque}</c:if> ${operation.libelle}</td>
+							<td <c:if test="${operation.montant<0}">style="text-align:left;"</c:if>><fmt:formatNumber
+									value="${operation.montant}" pattern="#0.00 €" />
 							</td>
 						</tr>
 						<c:set var="compteur" value="${compteur+1}" />
@@ -97,7 +99,8 @@
 
 					</c:if>
 				</div>
-				<br /><br />
+				<br />
+				<br />
 				<table>
 					<tr>
 						<td><spring:message code="details.sum" /></td>

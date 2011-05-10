@@ -32,63 +32,94 @@
 	<!-- ** Utilisateur 1 ** -->
 
 	<!-- operations cartes -->
-	<operation id="1" compte_id="1" datecreation="2011-01-10 00:00:00" libelle="CB Achat velo" montant="1735.42" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operation id="1" compte_id="1" datecreation="2011-01-10 00:00:00" libelle="Achat velo" montant="-1735.42" discriminator="OPERATIONCARTEBANCAIRE" />
 	<operationcartebancaire id="1" dateeffective="2011-01-10 00:00:00" />
-	<operation id="2" compte_id="1" datecreation="2011-03-14 00:00:00" libelle="CB Achat EPO" montant="254.2" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operation id="2" compte_id="1" datecreation="2011-03-14 00:00:00" libelle="Achat EPO" montant="-254.2" discriminator="OPERATIONCARTEBANCAIRE" />
 	<operationcartebancaire id="2" dateeffective="2011-03-14 00:00:00" />
 
 	<!-- operations cheque -->
-	<operation id="3" compte_id="1" datecreation="2011-01-24 00:00:00" libelle="Cadeaux" montant="550.4" discriminator="OPERATIONCHEQUE" />
+	<operation id="3" compte_id="1" datecreation="2011-01-24 00:00:00" libelle="Cadeaux" montant="-550.4" discriminator="OPERATIONCHEQUE" />
 	<operationcheque id="3" numerocheque="1000122135" />
-	<operation id="4" compte_id="2" datecreation="2011-01-24 00:00:00" libelle="Cadeaux" montant="550.4" discriminator="OPERATIONCHEQUE" />
+	<operation id="4" compte_id="2" datecreation="2011-01-24 00:00:00" libelle="Cadeaux" montant="-550.4" discriminator="OPERATIONCHEQUE" />
 	<operationcheque id="4" numerocheque="1052454135" />
 
 	<!-- operations virement -->
-	<operation id="5" compte_id="2" datecreation="2011-03-20 00:00:00" libelle="Virement PEL Mars" montant="1200" discriminator="OPERATIONVIREMENTINTERNE" />
+	<operation id="5" compte_id="2" datecreation="2011-03-20 00:00:00" libelle="Virement PEL Mars" montant="-1200" discriminator="OPERATIONVIREMENTINTERNE" />
 	<operationvirementinterne id="5" dateeffective="2011-03-20 00:00:00" comptedebiteur="1"
 		compterecepteur="2" />
-	<operation id="6" compte_id="2" datecreation="2011-04-20 00:00:00" libelle="Virement PEL Avril" montant="1400" discriminator="OPERATIONVIREMENTINTERNE" />
+	<operation id="6" compte_id="2" datecreation="2011-04-20 00:00:00" libelle="Virement PEL Avril" montant="-1400" discriminator="OPERATIONVIREMENTINTERNE" />
 	<operationvirementinterne id="6" dateeffective="2011-04-20 00:00:00" comptedebiteur="1"
 		compterecepteur="2" />
 
 	<!-- operations cartes -->
-	<operation id="11" compte_id="1" datecreation="2011-01-10 00:00:00" libelle="CB Achat velo" montant="1735.42" discriminator="OPERATIONCARTEBANCAIRE" />
-	<operationcartebancaire id="11" dateeffective="2011-01-10 00:00:00" />
-	<operation id="12" compte_id="1" datecreation="2011-01-14 00:00:00" libelle="CB Achat EPO" montant="254.2" discriminator="OPERATIONCARTEBANCAIRE" />
-	<operationcartebancaire id="12" dateeffective="2011-01-14 00:00:00" />
-	<operation id="13" compte_id="1" datecreation="2011-01-10 00:00:00" libelle="CB Achat velo" montant="1735.42" discriminator="OPERATIONCARTEBANCAIRE" />
-	<operationcartebancaire id="13" dateeffective="2011-01-10 00:00:00" />
-	<operation id="14" compte_id="1" datecreation="2011-01-14 00:00:00" libelle="CB Achat EPO" montant="254.2" discriminator="OPERATIONCARTEBANCAIRE" />
-	<operationcartebancaire id="14" dateeffective="2011-01-14 00:00:00" />
-	<operation id="15" compte_id="1" datecreation="2011-01-10 00:00:00" libelle="CB Achat velo" montant="1735.42" discriminator="OPERATIONCARTEBANCAIRE" />
-	<operationcartebancaire id="15" dateeffective="2011-01-10 00:00:00" />
-	<operation id="16" compte_id="1" datecreation="2011-01-14 00:00:00" libelle="CB Achat EPO" montant="254.2" discriminator="OPERATIONCARTEBANCAIRE" />
-	<operationcartebancaire id="16" dateeffective="2011-01-14 00:00:00" />	<!-- operations cartes -->
-	<operation id="17" compte_id="1" datecreation="2011-01-10 00:00:00" libelle="CB Achat velo" montant="1735.42" discriminator="OPERATIONCARTEBANCAIRE" />
-	<operationcartebancaire id="17" dateeffective="2011-01-10 00:00:00" />
-	<operation id="18" compte_id="1" datecreation="2011-01-14 00:00:00" libelle="CB Achat EPO" montant="254.2" discriminator="OPERATIONCARTEBANCAIRE" />
-	<operationcartebancaire id="18" dateeffective="2011-01-14 00:00:00" />
-	<operation id="19" compte_id="1" datecreation="2011-01-10 00:00:00" libelle="CB Achat velo" montant="1735.42" discriminator="OPERATIONCARTEBANCAIRE" />
-	<operationcartebancaire id="19" dateeffective="2011-01-10 00:00:00" />
-	<operation id="20" compte_id="1" datecreation="2011-01-14 00:00:00" libelle="CB Achat EPO" montant="254.2" discriminator="OPERATIONCARTEBANCAIRE" />
-	<operationcartebancaire id="20" dateeffective="2011-01-14 00:00:00" />	<!-- operations cartes -->
-	<operation id="21" compte_id="1" datecreation="2011-01-10 00:00:00" libelle="CB Achat velo" montant="1735.42" discriminator="OPERATIONCARTEBANCAIRE" />
-	<operationcartebancaire id="21" dateeffective="2011-01-10 00:00:00" />
-	<operation id="22" compte_id="1" datecreation="2011-01-14 00:00:00" libelle="CB Achat EPO" montant="254.2" discriminator="OPERATIONCARTEBANCAIRE" />
-	<operationcartebancaire id="22" dateeffective="2011-01-14 00:00:00" />
+	<operation id="11" compte_id="1" datecreation="2011-01-01 00:00:00" libelle="Paye janvier" montant="1000" discriminator="OPERATIONVIREMENTINTERNE" />
+	<operationcartebancaire id="11" dateeffective="2011-01-14 00:00:00" />
+	<operation id="12" compte_id="1" datecreation="2011-02-01 00:00:00" libelle="Paye février" montant="1010" discriminator="OPERATIONVIREMENTINTERNE" />
+	<operationcartebancaire id="12" dateeffective="2011-01-10 00:00:00" />
+	<operation id="13" compte_id="1" datecreation="2011-03-01 00:00:00" libelle="Paye mars" montant="1020" discriminator="OPERATIONVIREMENTINTERNE" />
+	<operationcartebancaire id="13" dateeffective="2011-01-14 00:00:00" />
+	<operation id="14" compte_id="1" datecreation="2011-04-01 00:00:00" libelle="Paye avril" montant="1030" discriminator="OPERATIONVIREMENTINTERNE" />
+	<operationcartebancaire id="14" dateeffective="2011-01-10 00:00:00" />
+	<operation id="15" compte_id="1" datecreation="2011-05-01 00:00:00" libelle="Paye mai" montant="1040" discriminator="OPERATIONVIREMENTINTERNE" />
+	<operationcartebancaire id="15" dateeffective="2011-01-14 00:00:00" />
+	<operation id="16" compte_id="1" datecreation="2011-01-10 00:00:00" libelle="Mac Do 1" montant="-11" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="16" dateeffective="2011-01-10 00:00:00" />
+	<operation id="17" compte_id="1" datecreation="2011-01-15 00:00:00" libelle="Mac Do 2" montant="-17.35" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="17" dateeffective="2011-01-15 00:00:00" />
+	<operation id="18" compte_id="1" datecreation="2011-02-14 00:00:00" libelle="Mac Do 3" montant="-9.80" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="18" dateeffective="2011-02-14 00:00:00" />
+	<operation id="19" compte_id="1" datecreation="2011-02-18 00:00:00" libelle="Mac Do 4" montant="-5.56" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="19" dateeffective="2011-02-18 00:00:00" />
+	<operation id="20" compte_id="1" datecreation="2011-03-14 00:00:00" libelle="Mac Do 5" montant="-11.4" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="20" dateeffective="2011-03-14 00:00:00" />
+	<operation id="21" compte_id="1" datecreation="2011-03-10 00:00:00" libelle="Mac Do 6" montant="-25.1" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="21" dateeffective="2011-03-10 00:00:00" />
+	<operation id="22" compte_id="1" datecreation="2011-04-14 00:00:00" libelle="Mac Do 7" montant="-9.99" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="22" dateeffective="2011-04-14 00:00:00" />
+<!-- 	Pour tester la pagination -->
+	<operation id="23" compte_id="1" datecreation="2011-05-01 00:00:00" libelle="Opé mai 1" montant="-1" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="23" dateeffective="2011-05-01 00:00:00" />
+	<operation id="24" compte_id="1" datecreation="2011-05-01 00:00:00" libelle="Opé mai 2" montant="-1" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="24" dateeffective="2011-05-01 00:00:00" />
+	<operation id="25" compte_id="1" datecreation="2011-05-01 00:00:00" libelle="Opé mai 3" montant="-1" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="25" dateeffective="2011-05-01 00:00:00" />
+	<operation id="26" compte_id="1" datecreation="2011-05-01 00:00:00" libelle="Opé mai 4" montant="-1" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="26" dateeffective="2011-05-01 00:00:00" />
+	<operation id="27" compte_id="1" datecreation="2011-05-01 00:00:00" libelle="Opé mai 5" montant="-1" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="27" dateeffective="2011-05-01 00:00:00" />
+	<operation id="28" compte_id="1" datecreation="2011-05-01 00:00:00" libelle="Opé mai 6" montant="-1" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="28" dateeffective="2011-05-01 00:00:00" />
+	<operation id="29" compte_id="1" datecreation="2011-05-01 00:00:00" libelle="Opé mai 7" montant="-1" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="29" dateeffective="2011-05-01 00:00:00" />
+	<operation id="30" compte_id="1" datecreation="2011-05-01 00:00:00" libelle="Opé mai 8" montant="-1" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="30" dateeffective="2011-05-01 00:00:00" />
+	<operation id="31" compte_id="1" datecreation="2011-05-01 00:00:00" libelle="Opé mai 9" montant="-1" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="31" dateeffective="2011-05-01 00:00:00" />
+	<operation id="32" compte_id="1" datecreation="2011-05-01 00:00:00" libelle="Opé mai 10" montant="-1" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="32" dateeffective="2011-05-01 00:00:00" />
+	<operation id="33" compte_id="1" datecreation="2011-05-01 00:00:00" libelle="Opé mai 11" montant="-1" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="33" dateeffective="2011-05-01 00:00:00" />
+	<operation id="34" compte_id="1" datecreation="2011-05-01 00:00:00" libelle="Opé mai 12" montant="-1" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="34" dateeffective="2011-05-01 00:00:00" />
+	<operation id="35" compte_id="1" datecreation="2011-05-01 00:00:00" libelle="Opé mai 13" montant="-1" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="35" dateeffective="2011-05-01 00:00:00" />
+	<operation id="36" compte_id="1" datecreation="2011-05-01 00:00:00" libelle="Opé mai 14" montant="-1" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="36" dateeffective="2011-05-01 00:00:00" />
+	<operation id="37" compte_id="1" datecreation="2011-05-01 00:00:00" libelle="Opé mai 15" montant="-1" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operationcartebancaire id="37" dateeffective="2011-05-01 00:00:00" />
 	
 	<!-- ** Utilisateur 2 ** -->
 
 	<!-- operations cartes -->
-	<operation id="7" compte_id="3" datecreation="2011-05-04 00:00:00" libelle="CB Achat missiles" montant="420000" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operation id="7" compte_id="3" datecreation="2011-05-04 00:00:00" libelle="Achat missiles" montant="-420000" discriminator="OPERATIONCARTEBANCAIRE" />
 	<operationcartebancaire id="7" dateeffective="2011-05-04 00:00:00" />
-	<operation id="8" compte_id="3" datecreation="2011-04-08 00:00:00" libelle="CB Mac Do" montant="12.9" discriminator="OPERATIONCARTEBANCAIRE" />
+	<operation id="8" compte_id="3" datecreation="2011-04-08 00:00:00" libelle="Mac Do" montant="-12.9" discriminator="OPERATIONCARTEBANCAIRE" />
 	<operationcartebancaire id="8" dateeffective="2011-04-08 00:00:00" />
 
 	<!-- operations cheque -->
-	<operation id="9" compte_id="3" datecreation="2011-03-21 00:00:00" libelle="Course carrefour" montant="550.4" discriminator="OPERATIONCHEQUE" />
+	<operation id="9" compte_id="3" datecreation="2011-03-21 00:00:00" libelle="Course carrefour" montant="-550.4" discriminator="OPERATIONCHEQUE" />
 	<operationcheque id="9" numerocheque="3546541" />
-	<operation id="10" compte_id="3" datecreation="2011-02-01 00:00:00" libelle="Ak47" montant="125000" discriminator="OPERATIONCHEQUE" />
+	<operation id="10" compte_id="3" datecreation="2011-02-01 00:00:00" libelle="Ak47" montant="-125000" discriminator="OPERATIONCHEQUE" />
 	<operationcheque id="10" numerocheque="346456543" />
 
 
