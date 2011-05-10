@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 @Entity
@@ -58,6 +59,7 @@ public class Operation {
 	}
 
 	@Column(name = "datecreation", nullable = false)
+	@Type(type = "jodaDateTime")
 	public DateTime getDateCreation() {
 		return dateCreation;
 	}
