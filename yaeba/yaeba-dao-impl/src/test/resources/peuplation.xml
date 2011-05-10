@@ -19,9 +19,9 @@
 	<role_utilisateur user_id="2" role_id="2" />
 
 	<!-- comptes -->
-	<compte id="1" utilisateur_id="1" datecreation="2010-11-31 00:00:00" libelle="Compte courant" numerocompte="123777"
+	<compte id="1" utilisateur_id="1" datecreation="2010-11-30 00:00:00" libelle="Compte courant" numerocompte="123777"
 		soldecourant="258.586" />
-	<compte id="2" utilisateur_id="1" datecreation="2010-11-31 00:00:00" libelle="PEL" numerocompte="789333" soldecourant="24200" />
+	<compte id="2" utilisateur_id="1" datecreation="2010-11-30 00:00:00" libelle="PEL" numerocompte="789333" soldecourant="24200" />
 
 	<compte id="3" utilisateur_id="2" datecreation="2010-02-01 00:00:00" libelle="Compte jeune" numerocompte="666"
 		soldecourant="1000252.2" />
@@ -51,6 +51,32 @@
 	<operationvirementinterne id="6" dateeffective="2011-04-20 00:00:00" comptedebiteur="1"
 		compterecepteur="2" />
 
+	<!-- operations cartes -->
+	<operation id="11" compte_id="1" datecreation="2011-01-10 00:00:00" libelle="Achat velo" montant="1735.42" />
+	<operationcartebancaire id="11" dateeffective="2011-01-10 00:00:00" />
+	<operation id="12" compte_id="1" datecreation="2011-01-14 00:00:00" libelle="Achat EPO" montant="254.2" />
+	<operationcartebancaire id="12" dateeffective="2011-01-14 00:00:00" />	<!-- operations cartes -->
+	<operation id="13" compte_id="1" datecreation="2011-01-10 00:00:00" libelle="Achat velo" montant="1735.42" />
+	<operationcartebancaire id="13" dateeffective="2011-01-10 00:00:00" />
+	<operation id="14" compte_id="1" datecreation="2011-01-14 00:00:00" libelle="Achat EPO" montant="254.2" />
+	<operationcartebancaire id="14" dateeffective="2011-01-14 00:00:00" />
+	<operation id="15" compte_id="1" datecreation="2011-01-10 00:00:00" libelle="Achat velo" montant="1735.42" />
+	<operationcartebancaire id="15" dateeffective="2011-01-10 00:00:00" />
+	<operation id="16" compte_id="1" datecreation="2011-01-14 00:00:00" libelle="Achat EPO" montant="254.2" />
+	<operationcartebancaire id="16" dateeffective="2011-01-14 00:00:00" />	<!-- operations cartes -->
+	<operation id="17" compte_id="1" datecreation="2011-01-10 00:00:00" libelle="Achat velo" montant="1735.42" />
+	<operationcartebancaire id="17" dateeffective="2011-01-10 00:00:00" />
+	<operation id="18" compte_id="1" datecreation="2011-01-14 00:00:00" libelle="Achat EPO" montant="254.2" />
+	<operationcartebancaire id="18" dateeffective="2011-01-14 00:00:00" />
+	<operation id="19" compte_id="1" datecreation="2011-01-10 00:00:00" libelle="Achat velo" montant="1735.42" />
+	<operationcartebancaire id="19" dateeffective="2011-01-10 00:00:00" />
+	<operation id="20" compte_id="1" datecreation="2011-01-14 00:00:00" libelle="Achat EPO" montant="254.2" />
+	<operationcartebancaire id="20" dateeffective="2011-01-14 00:00:00" />	<!-- operations cartes -->
+	<operation id="21" compte_id="1" datecreation="2011-01-10 00:00:00" libelle="Achat velo" montant="1735.42" />
+	<operationcartebancaire id="21" dateeffective="2011-01-10 00:00:00" />
+	<operation id="22" compte_id="1" datecreation="2011-01-14 00:00:00" libelle="Achat EPO" montant="254.2" />
+	<operationcartebancaire id="22" dateeffective="2011-01-14 00:00:00" />
+	
 	<!-- ** Utilisateur 2 ** -->
 
 	<!-- operations cartes -->

@@ -3,11 +3,13 @@ package com.excilys.formation.yaeba.dao.impl;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.excilys.formation.yaeba.dao.api.OperationDao;
+import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.Operation;
 
 @Repository
@@ -44,4 +46,11 @@ public class OperationDaoImpl extends HibernateDaoSupport implements OperationDa
 
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Operation> getOperationsByDate(Compte c, DateTime dateDebut, DateTime dateFin) {
+		return getHibernateTemplate().find(
+				"SELECT o FROM Compte c INNER JOIN c.operations o WHERE c = ? AND o.dateCreation BETWEEN ? AND ? ORDER BY o.dateCreation DESC", c, dateDebut,
+				dateFin);
+	}
 }

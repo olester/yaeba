@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.joda.time.DateTime;
 import org.joda.time.Months;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,14 +19,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.Utilisateur;
+import com.excilys.formation.yaeba.service.api.OperationService;
 import com.excilys.formation.yaeba.webapp.CustomUser;
 
 @Controller
 @RequestMapping("/user")
 public class UserRoleController {
 
-	// @Autowired
-	// private CompteService compteService;
+	@Autowired
+	private OperationService operationService;
 
 	@RequestMapping("/comptes.html")
 	public String redirectComptes(ModelMap model, Locale locale) {
@@ -75,15 +77,14 @@ public class UserRoleController {
 				model.put("mois", moisInt);
 				model.put("locale", locale.getLanguage());
 				model.put("page", pageInt);
+				model.put("listeOperations", operationService.getOperationsByMoisAnnee(c, anneeInt, moisInt));
 
 				// -- Actualisation des listes déroulantes
 				Set<Integer> anneesDispo = new TreeSet<Integer>();
 				Set<Integer> moisDispo = new TreeSet<Integer>();
 
 				DateTime auj = new DateTime();
-				// Après utilisation de Joda Time dans le modèle, il faut remplacer la ligne suivante par celle ci (et supprimer ces commentaires) :
-				// DateTime dateCreation = c.getDateCreation();
-				DateTime dateCreation = new DateTime(2007, 10, 1, 0, 0, 0, 0);
+				DateTime dateCreation = c.getDateCreation();
 				Months d = Months.monthsBetween(dateCreation, auj);
 				int maxMois = Math.min(36, d.getMonths());
 
