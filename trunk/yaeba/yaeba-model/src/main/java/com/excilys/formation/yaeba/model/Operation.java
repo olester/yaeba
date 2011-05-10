@@ -1,10 +1,15 @@
 package com.excilys.formation.yaeba.model;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -12,18 +17,21 @@ import org.joda.time.DateTime;
 
 @Entity
 @Table(name = "operation")
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "DISCRIMINATOR", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue(value = "OPERATION")
 public class Operation {
 
 	private Integer id;
 	private String libelle;
-	private float montant;
+	private double montant;
 	private DateTime dateCreation;
 
 	public Operation() {
 
 	}
 
-	public Operation(String libelle, float montant, DateTime dateCreation) {
+	public Operation(String libelle, double montant, DateTime dateCreation) {
 		this.libelle = libelle;
 		this.montant = montant;
 		this.dateCreation = dateCreation;
@@ -50,11 +58,11 @@ public class Operation {
 	}
 
 	@Column(name = "montant", nullable = false)
-	public float getMontant() {
+	public double getMontant() {
 		return montant;
 	}
 
-	public void setMontant(float montant) {
+	public void setMontant(double montant) {
 		this.montant = montant;
 	}
 
@@ -67,4 +75,5 @@ public class Operation {
 	public void setDateCreation(DateTime dateCreation) {
 		this.dateCreation = dateCreation;
 	}
+
 }

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<!-- roles -->
+
+	<role id="1" type="ROLE_USER" />
+	<role id="2" type="ROLE_ADMIN" />
+
+	<!-- utilisateurs -->
+	<utilisateur id="1" adresse="En france" login="user"
+		password="b14361404c078ffd549c03db443c3fede2f3e534d73f78f77301ed97d4a436a9fd9db05ee8b325c0ad36438b43fec8510c204fc1c1edb21d0941c00e9e2c1ce2"
+		prenom="Richard" nom="Virenque" />
+	<utilisateur id="2" adresse="Pyong Yang" login="admin"
+		password="c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd472634dfac71cd34ebc35d16ab7fb8a90c81f975113d6c7538dc69dd8de9077ec"
+		prenom="Kim" nom="Jong-il" />
+
+	<!-- role-utilisateur -->
+	<role_utilisateur user_id="1" role_id="1" />
+	<role_utilisateur user_id="2" role_id="1" />
+	<role_utilisateur user_id="2" role_id="2" />
+
+	<!-- comptes -->
+	<compte id="1" utilisateur_id="1" datecreation="2010-11-31 00:00:00" libelle="Compte courant" numerocompte="123777"
+		soldecourant="258.586" />
+	<compte id="2" utilisateur_id="1" datecreation="2010-11-31 00:00:00" libelle="PEL" numerocompte="789333" soldecourant="24200" />
+
+	<compte id="3" utilisateur_id="2" datecreation="2010-02-01 00:00:00" libelle="Compte jeune" numerocompte="666"
+		soldecourant="1000252.2" />
+
+
+	<!-- **** OPERATIONS **** -->
+
+	<!-- ** Utilisateur 1 ** -->
+
+	<!-- operations cartes -->
+	<operation id="1" compte_id="1" datecreation="2011-01-10 00:00:00" libelle="Achat velo" montant="1735.42" />
+	<operationcartebancaire id="1" dateeffective="2011-01-10 00:00:00" />
+	<operation id="2" compte_id="1" datecreation="2011-03-14 00:00:00" libelle="Achat EPO" montant="254.2" />
+	<operationcartebancaire id="2" dateeffective="2011-03-14 00:00:00" />
+
+	<!-- operations cheque -->
+	<operation id="3" compte_id="1" datecreation="2011-01-24 00:00:00" libelle="Cadeaux" montant="550.4" />
+	<operationcheque id="3" numerocheque="1000122135" />
+	<operation id="4" compte_id="2" datecreation="2011-01-24 00:00:00" libelle="Cadeaux" montant="550.4" />
+	<operationcheque id="4" numerocheque="1052454135" />
+
+	<!-- operations virement -->
+	<operation id="5" compte_id="2" datecreation="2011-03-20 00:00:00" libelle="Virement PEL Mars" montant="1200" />
+	<operationvirementinterne id="5" dateeffective="2011-03-20 00:00:00" comptedebiteur="1"
+		compterecepteur="2" />
+	<operation id="6" compte_id="2" datecreation="2011-04-20 00:00:00" libelle="Virement PEL Avril" montant="1400" />
+	<operationvirementinterne id="6" dateeffective="2011-04-20 00:00:00" comptedebiteur="1"
+		compterecepteur="2" />
+
+	<!-- ** Utilisateur 2 ** -->
+
+	<!-- operations cartes -->
+	<operation id="7" compte_id="3" datecreation="2011-05-04 00:00:00" libelle="Achat missiles" montant="420000" />
+	<operationcartebancaire id="7" dateeffective="2011-05-04 00:00:00" />
+	<operation id="8" compte_id="3" datecreation="2011-04-08 00:00:00" libelle="Mac Do" montant="12.9" />
+	<operationcartebancaire id="8" dateeffective="2011-04-08 00:00:00" />
+
+	<!-- operations cheque -->
+	<operation id="9" compte_id="3" datecreation="2011-03-21 00:00:00" libelle="Course carrefour" montant="550.4" />
+	<operationcheque id="9" numerocheque="3546541" />
+	<operation id="10" compte_id="3" datecreation="2011-02-01 00:00:00" libelle="Ak47" montant="125000" />
+	<operationcheque id="10" numerocheque="346456543" />
+
+
+</dataset>
