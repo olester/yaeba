@@ -13,7 +13,7 @@ import com.excilys.formation.yaeba.webapp.CustomUser;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminRoleController {
+public class AdminController {
 
 	@RequestMapping("/admin.html")
 	public String redirectComptes(ModelMap model, Locale locale) {
