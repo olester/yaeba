@@ -17,12 +17,12 @@
 			</li>
 			<li
 				<c:if test="${bouton eq 'bouton_comptes'}"> class="current_page_item"</c:if>><a
-				href="${pageContext.request.contextPath}/user/comptes.html"><spring:message
+				href="${pageContext.request.contextPath}/user/comptes/comptes.html"><spring:message
 						code="menu.accounts" /> </a>
 			</li>
 			<li
 				<c:if test="${bouton eq 'bouton_virements'}"> class="current_page_item"</c:if>><a
-				href="${pageContext.request.contextPath}/user/virements.html"><spring:message
+				href="${pageContext.request.contextPath}/user/virements/virements.html"><spring:message
 						code="menu.transfers" /> </a>
 			</li>
 		</sec:authorize>

@@ -26,8 +26,8 @@ import com.excilys.formation.yaeba.service.api.OperationService;
 import com.excilys.formation.yaeba.webapp.CustomUser;
 
 @Controller
-@RequestMapping("/user")
-public class UserRoleController {
+@RequestMapping("user/comptes")
+public class ComptesController {
 
 	@Autowired
 	private OperationService operationService;
@@ -53,10 +53,12 @@ public class UserRoleController {
 		return "comptes";
 	}
 
-	@RequestMapping("/comptes/{numeroCompte}/{annee}/{mois}/{page}/details.html")
+	@RequestMapping("/{numeroCompte}/{annee}/{mois}/{page}/details.html")
 	public String redirectDetailsCompte(@PathVariable("numeroCompte") String numeroCompte, @PathVariable("annee") String annee,
 			@PathVariable("mois") String mois, @PathVariable("page") String page, ModelMap model, Locale locale) {
 		ResourceBundle bundle = ResourceBundle.getBundle("messages_" + locale.getLanguage());
+
+		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
 
 		int anneeInt;
 		int moisInt;
@@ -67,13 +69,15 @@ public class UserRoleController {
 			moisInt = Integer.parseInt(mois);
 			pageInt = Integer.parseInt(page);
 		} catch (NumberFormatException e) {
+
+			model.put("nom", u.getNom());
+			model.put("prenom", u.getPrenom());
 			model.put("title", bundle.getString("welcome.title"));
 			model.put("error_text", bundle.getString("error-404.text"));
 			model.put("error_code", "404");
 			return "error";
 		}
 
-		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
 		Compte c = compteService.getCompteByNumeroCompte(u, numeroCompte);
 
 		if (c != null) {
@@ -120,31 +124,19 @@ public class UserRoleController {
 
 		}
 
+		model.put("nom", u.getNom());
+		model.put("prenom", u.getPrenom());
 		model.put("title", bundle.getString("welcome.title"));
 		model.put("error_text", bundle.getString("error-404.text"));
 		model.put("error_code", "404");
 		return "error";
 	}
 
-	@RequestMapping(value = "/comptes/{numeroCompte}/choix.html", method = RequestMethod.POST)
+	@RequestMapping(value = "/{numeroCompte}/choix.html", method = RequestMethod.POST)
 	public String redirectChoixDate(HttpServletRequest request, @PathVariable("numeroCompte") String numeroCompte, ModelMap model, Locale locale) {
 		String annee = request.getParameter("annee");
 		String mois = request.getParameter("mois");
 		return "redirect:/user/comptes/" + numeroCompte + "/" + annee + "/" + mois + "/1/details.html";
 	}
 
-	@RequestMapping("/virements.html")
-	public String redirectVirements(ModelMap model, Locale locale) {
-		ResourceBundle bundle = ResourceBundle.getBundle("messages_" + locale.getLanguage());
-		model.put("title", bundle.getString("transfers.title"));
-		model.put("bouton", "bouton_comptes");
-		model.put("bouton", "bouton_virements");
-
-		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
-
-		model.put("nom", u.getNom());
-		model.put("prenom", u.getPrenom());
-
-		return "virements";
-	}
 }
