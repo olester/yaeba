@@ -12,6 +12,18 @@
 	<artifactId>yaeba-dao-impl</artifactId>
 	<name>yaeba-dao-impl</name>
 
+	<build>
+		<filters>
+			<filter>src/main/resources/bdd.properties</filter>
+		</filters>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+
 	<!-- DEPENDENCES -->
 	<dependencies>
 

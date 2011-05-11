@@ -212,13 +212,41 @@
 		</profile>
 		<!-- profil pour les developpeurs -->
 		<profile>
-			<id>profil-dev</id>
+			<id>dev</id>
+			<properties>
+				<param.db.url>jdbc:mysql://192.168.10.134:3306/yaeba-dev</param.db.url>
+				<param.db.driver>com.mysql.jdbc.Driver</param.db.driver>
+				<param.db.username>user</param.db.username>
+				<param.db.password>user</param.db.password>
+				<param.hibernate.dialect>org.hibernate.dialect.MySQLInnoDBDialect</param.hibernate.dialect>
+			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 		</profile>
+		<!-- profil pour l'integration et la production. -->
 		<profile>
-			<id>profil-prod</id>
+			<id>integration</id>
+			<properties>
+				<param.db.url>jdbc:mysql://192.168.10.134:3306/yaeba-test</param.db.url>
+				<param.db.driver>com.mysql.jdbc.Driver</param.db.driver>
+				<param.db.username>user</param.db.username>
+				<param.db.password>user</param.db.password>
+				<param.hibernate.dialect>org.hibernate.dialect.MySQLInnoDBDialect</param.hibernate.dialect>
+			</properties>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>demo</id>
+			<properties>
+				<param.db.url>jdbc:mysql://192.168.10.134:3306/yaeba</param.db.url>
+				<param.db.driver>com.mysql.jdbc.Driver</param.db.driver>
+				<param.db.username>user</param.db.username>
+				<param.db.password>user</param.db.password>
+				<param.hibernate.dialect>org.hibernate.dialect.MySQLInnoDBDialect</param.hibernate.dialect>
+			</properties>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
