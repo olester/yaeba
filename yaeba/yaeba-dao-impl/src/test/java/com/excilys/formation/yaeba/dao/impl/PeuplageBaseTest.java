@@ -21,7 +21,11 @@ package com.excilys.formation.yaeba.dao.impl;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.jdbc.datasource.DataSourceUtils;
 //import org.springframework.test.context.ContextConfiguration;
+//import org.springframework.test.context.TestExecutionListeners;
 //import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+//
+//import com.excilys.utils.spring.log.logback.test.Logback;
+//import com.excilys.utils.spring.log.logback.test.LogbackConfigurerTestExecutionListener;
 //
 ///**
 // * @author excilys
@@ -29,8 +33,8 @@ package com.excilys.formation.yaeba.dao.impl;
 // */
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(locations = { "classpath:/context/test-applicationContext.xml" })
-//// @TestExecutionListeners(LogbackConfigurerTestExecutionListener.class)
-//// @Logback("classpath:logback-test-dao.xml")
+//@TestExecutionListeners(LogbackConfigurerTestExecutionListener.class)
+//@Logback("classpath:logback-test-dao.xml")
 public class PeuplageBaseTest {
 
 	// @Autowired
