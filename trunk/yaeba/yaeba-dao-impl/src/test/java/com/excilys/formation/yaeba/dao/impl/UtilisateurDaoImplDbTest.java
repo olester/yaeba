@@ -20,7 +20,7 @@ import com.excilys.utils.spring.test.dbunit.DataSet;
 import com.excilys.utils.spring.test.dbunit.DataSetTestExecutionListener;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:/context/test-applicationContext.xml" })
+@ContextConfiguration(locations = { "classpath:/context/test-applicationContext.xml", "classpath:/context/test-applicationContext-HSQL.xml" })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DataSetTestExecutionListener.class, LogbackConfigurerTestExecutionListener.class })
 @DataSet("classpath:dataset.xml")
 @Logback("classpath:logback-test-dao.xml")
@@ -70,14 +70,5 @@ public class UtilisateurDaoImplDbTest {
 		Utilisateur u2 = utilisateurDao.getUtilisateurByLogin("monlogin");
 		assertNull(u2);
 	}
-
-	// Ne passe pas!!!!!!!!
-	// @Test
-	// public void testDeleteNull() {
-	// Utilisateur u = utilisateurDao.getUtilisateurByLogin("unlogininexistant");
-	// utilisateurDao.delete(u);
-	// Utilisateur u2 = utilisateurDao.getUtilisateurByLogin("unlogininexistant");
-	// assertNull(u2);
-	// }
 
 }
