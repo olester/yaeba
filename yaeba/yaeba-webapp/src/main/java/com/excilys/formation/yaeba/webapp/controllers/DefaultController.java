@@ -38,7 +38,7 @@ public class DefaultController {
 	@RequestMapping("/error-403.html")
 	public String redirectError403(ModelMap model, Locale locale) {
 		ResourceBundle bundle = ResourceBundle.getBundle("messages_" + locale.getLanguage());
-		model.put("title", bundle.getString("welcome.title"));
+		model.put("title", bundle.getString("error-403.text"));
 		model.put("error_text", bundle.getString("error-403.text"));
 		model.put("error_code", "403");
 		return "error";
@@ -47,7 +47,7 @@ public class DefaultController {
 	@RequestMapping("/error-404.html")
 	public String redirectError404(ModelMap model, Locale locale) {
 		ResourceBundle bundle = ResourceBundle.getBundle("messages_" + locale.getLanguage());
-		model.put("title", bundle.getString("welcome.title"));
+		model.put("title", bundle.getString("error-404.text"));
 		model.put("error_text", bundle.getString("error-404.text"));
 		model.put("error_code", "404");
 		return "error";
@@ -56,7 +56,7 @@ public class DefaultController {
 	@RequestMapping("/error-500.html")
 	public String redirectError500(ModelMap model, Locale locale) {
 		ResourceBundle bundle = ResourceBundle.getBundle("messages_" + locale.getLanguage());
-		model.put("title", bundle.getString("welcome.title"));
+		model.put("title", bundle.getString("error-500.text"));
 		model.put("error_text", bundle.getString("error-500.text"));
 		model.put("error_code", "500");
 		return "error";
