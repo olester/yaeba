@@ -1,8 +1,5 @@
 package com.excilys.formation.yaeba.webapp.controllers;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,9 +13,7 @@ import com.excilys.formation.yaeba.webapp.CustomUser;
 public class VirementsController {
 
 	@RequestMapping("/virements.html")
-	public String redirectVirements(ModelMap model, Locale locale) {
-		ResourceBundle bundle = ResourceBundle.getBundle("messages_" + locale.getLanguage());
-		model.put("title", bundle.getString("transfers.title"));
+	public String redirectVirements(ModelMap model) {
 		model.put("bouton", "bouton_comptes");
 		model.put("bouton", "bouton_virements");
 

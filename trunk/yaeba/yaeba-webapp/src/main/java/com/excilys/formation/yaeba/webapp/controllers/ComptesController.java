@@ -1,8 +1,6 @@
 package com.excilys.formation.yaeba.webapp.controllers;
 
 import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -35,9 +33,7 @@ public class ComptesController {
 	private CompteService compteService;
 
 	@RequestMapping("/comptes.html")
-	public String redirectComptes(ModelMap model, Locale locale) {
-		ResourceBundle bundle = ResourceBundle.getBundle("messages_" + locale.getLanguage());
-		model.put("title", bundle.getString("accounts.title"));
+	public String redirectComptes(ModelMap model) {
 		model.put("bouton", "bouton_comptes");
 
 		DateTime dt = new DateTime();
@@ -55,8 +51,7 @@ public class ComptesController {
 
 	@RequestMapping("/{numeroCompte}/{annee}/{mois}/{page}/details.html")
 	public String redirectDetailsCompte(@PathVariable("numeroCompte") String numeroCompte, @PathVariable("annee") String annee,
-			@PathVariable("mois") String mois, @PathVariable("page") String page, ModelMap model, Locale locale) {
-		ResourceBundle bundle = ResourceBundle.getBundle("messages_" + locale.getLanguage());
+			@PathVariable("mois") String mois, @PathVariable("page") String page, ModelMap model) {
 
 		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
 
@@ -72,8 +67,6 @@ public class ComptesController {
 
 			model.put("nom", u.getNom());
 			model.put("prenom", u.getPrenom());
-			model.put("title", bundle.getString("welcome.title"));
-			model.put("error_text", bundle.getString("error-404.text"));
 			model.put("error_code", "404");
 			return "error";
 		}
@@ -81,12 +74,10 @@ public class ComptesController {
 		Compte c = compteService.getCompteByNumeroCompte(u, numeroCompte);
 
 		if (c != null) {
-			model.put("title", bundle.getString("details.title"));
 			model.put("bouton", "bouton_comptes");
 			model.put("numero", numeroCompte);
 			model.put("annee", anneeInt);
 			model.put("mois", moisInt);
-			model.put("locale", locale.getLanguage());
 			model.put("page", pageInt);
 			model.put("libelle", c.getLibelle());
 			model.put("compteEstVide", compteService.isEmpty(c));
@@ -121,19 +112,16 @@ public class ComptesController {
 			model.put("nom", u.getNom());
 			model.put("prenom", u.getPrenom());
 			return "detailsCompte";
-
 		}
 
 		model.put("nom", u.getNom());
 		model.put("prenom", u.getPrenom());
-		model.put("title", bundle.getString("welcome.title"));
-		model.put("error_text", bundle.getString("error-404.text"));
 		model.put("error_code", "404");
 		return "error";
 	}
 
 	@RequestMapping(value = "/{numeroCompte}/choix.html", method = RequestMethod.POST)
-	public String redirectChoixDate(HttpServletRequest request, @PathVariable("numeroCompte") String numeroCompte, ModelMap model, Locale locale) {
+	public String redirectChoixDate(HttpServletRequest request, @PathVariable("numeroCompte") String numeroCompte, ModelMap model) {
 		String annee = request.getParameter("annee");
 		String mois = request.getParameter("mois");
 		return "redirect:/user/comptes/" + numeroCompte + "/" + annee + "/" + mois + "/1/details.html";

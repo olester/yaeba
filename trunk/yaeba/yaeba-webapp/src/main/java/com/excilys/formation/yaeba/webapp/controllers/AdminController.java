@@ -16,9 +16,7 @@ import com.excilys.formation.yaeba.webapp.CustomUser;
 public class AdminController {
 
 	@RequestMapping("/admin.html")
-	public String redirectComptes(ModelMap model, Locale locale) {
-		ResourceBundle bundle = ResourceBundle.getBundle("messages_" + locale.getLanguage());
-		model.put("title", bundle.getString("admin.title"));
+	public String redirectComptes(ModelMap model) {
 		model.put("bouton", "bouton_comptes");
 		model.put("bouton", "bouton_admin");
 

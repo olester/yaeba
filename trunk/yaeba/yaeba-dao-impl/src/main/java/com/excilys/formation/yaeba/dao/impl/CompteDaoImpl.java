@@ -23,7 +23,6 @@ public class CompteDaoImpl extends HibernateDaoSupport implements CompteDao {
 	@Override
 	public Compte getCompteById(String id) {
 		List<Compte> l = getHibernateTemplate().find("from Compte c where id=?", Integer.parseInt(id));
-		// TODO utiliser .get
 		if (!l.isEmpty()) return l.get(0);
 		return null;
 	}
