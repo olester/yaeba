@@ -1,11 +1,11 @@
 package com.excilys.formation.yaeba.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "utilisateur")
-public class Utilisateur {
+public class Utilisateur implements Serializable {
 
 	private Integer id;
 	private String login;
@@ -99,7 +99,7 @@ public class Utilisateur {
 		this.motDePasse = motDePasse;
 	}
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
 	@JoinTable(name = "roleutilisateur", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	public Set<Role> getRoles() {
 		return roles;
@@ -109,7 +109,7 @@ public class Utilisateur {
 		this.roles = roles;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany
 	@JoinColumn(name = "utilisateur_id")
 	// @OrderBy("datecreation")
 	public Set<Compte> getComptes() {

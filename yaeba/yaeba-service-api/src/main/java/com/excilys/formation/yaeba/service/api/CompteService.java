@@ -9,14 +9,9 @@ public interface CompteService {
 
 	public Compte getCompteById(String id);
 
-	public Compte getCompteByNumeroCompte(String numeroCompte);
+	public List<Compte> getComptesByUtilisateur(Utilisateur u);
 
-	public void update(Compte c);
+	public boolean isEmpty(Compte c);
 
-	public void save(Compte c);
-
-	public void delete(Compte c);
-
-	public List<Compte> getCompteByUtilisateur(Utilisateur u);
-
+	public Compte getCompteByNumeroCompte(Utilisateur u, String numeroCompte);
 }

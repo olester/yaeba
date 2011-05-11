@@ -5,6 +5,7 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.excilys.formation.yaeba.dao.api.OperationDao;
 import com.excilys.formation.yaeba.model.Compte;
@@ -13,6 +14,7 @@ import com.excilys.formation.yaeba.model.OperationCarteBancaire;
 import com.excilys.formation.yaeba.service.api.OperationService;
 
 @Service
+@Transactional(readOnly = true)
 public class OperationServiceImpl implements OperationService {
 
 	@Autowired
@@ -21,21 +23,6 @@ public class OperationServiceImpl implements OperationService {
 	@Override
 	public Operation getOperationById(String id) {
 		return operationDao.getOperationById(id);
-	}
-
-	@Override
-	public void update(Operation o) {
-		operationDao.update(o);
-	}
-
-	@Override
-	public void save(Operation o) {
-		operationDao.save(o);
-	}
-
-	@Override
-	public void delete(Operation o) {
-		operationDao.delete(o);
 	}
 
 	@Override

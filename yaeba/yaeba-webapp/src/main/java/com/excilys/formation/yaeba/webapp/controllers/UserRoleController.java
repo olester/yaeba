@@ -1,5 +1,6 @@
 package com.excilys.formation.yaeba.webapp.controllers;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.OperationCarteBancaire;
 import com.excilys.formation.yaeba.model.Utilisateur;
+import com.excilys.formation.yaeba.service.api.CompteService;
 import com.excilys.formation.yaeba.service.api.OperationService;
 import com.excilys.formation.yaeba.webapp.CustomUser;
 
@@ -29,6 +31,8 @@ public class UserRoleController {
 
 	@Autowired
 	private OperationService operationService;
+	@Autowired
+	private CompteService compteService;
 
 	@RequestMapping("/comptes.html")
 	public String redirectComptes(ModelMap model, Locale locale) {
@@ -41,7 +45,10 @@ public class UserRoleController {
 		model.put("mois", dt.getMonthOfYear());
 
 		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
-		model.put("utilisateur", u);
+		List<Compte> comptes = compteService.getComptesByUtilisateur(u);
+		model.put("comptes", comptes);
+		model.put("nom", u.getNom());
+		model.put("prenom", u.getPrenom());
 
 		return "comptes";
 	}
@@ -67,49 +74,50 @@ public class UserRoleController {
 		}
 
 		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
+		Compte c = compteService.getCompteByNumeroCompte(u, numeroCompte);
 
-		for (Compte c : u.getComptes()) {
-			if (c.getNumeroCompte().equals(numeroCompte)) {
-				model.put("title", bundle.getString("details.title"));
-				model.put("bouton", "bouton_comptes");
-				model.put("numero", numeroCompte);
-				model.put("compte", c);
-				model.put("annee", anneeInt);
-				model.put("mois", moisInt);
-				model.put("locale", locale.getLanguage());
-				model.put("page", pageInt);
-				model.put("listeOperations", operationService.getOperationsByMoisAnnee(c, anneeInt, moisInt));
+		if (c != null) {
+			model.put("title", bundle.getString("details.title"));
+			model.put("bouton", "bouton_comptes");
+			model.put("numero", numeroCompte);
+			model.put("annee", anneeInt);
+			model.put("mois", moisInt);
+			model.put("locale", locale.getLanguage());
+			model.put("page", pageInt);
+			model.put("libelle", c.getLibelle());
+			model.put("compteEstVide", compteService.isEmpty(c));
+			model.put("listeOperations", operationService.getOperationsByMoisAnnee(c, anneeInt, moisInt));
 
-				// -- Actualisation des listes déroulantes
-				Set<Integer> anneesDispo = new TreeSet<Integer>();
-				Set<Integer> moisDispo = new TreeSet<Integer>();
+			// -- Actualisation des listes déroulantes
+			Set<Integer> anneesDispo = new TreeSet<Integer>();
+			Set<Integer> moisDispo = new TreeSet<Integer>();
 
-				DateTime auj = new DateTime();
-				DateTime dateCreation = c.getDateCreation();
-				Months d = Months.monthsBetween(dateCreation, auj);
-				int maxMois = Math.min(36, d.getMonths());
+			DateTime auj = new DateTime();
+			DateTime dateCreation = c.getDateCreation();
+			Months d = Months.monthsBetween(dateCreation, auj);
+			int maxMois = Math.min(36, d.getMonths());
 
-				if (anneeInt == dateCreation.getYear()) moisDispo.add(dateCreation.getMonthOfYear());
+			if (anneeInt == dateCreation.getYear()) moisDispo.add(dateCreation.getMonthOfYear());
 
-				for (int i = maxMois; i >= 0; i--) {
-					DateTime dateI = auj.minusMonths(i);
-					if (dateI.getYear() == anneeInt) moisDispo.add(dateI.getMonthOfYear());
-					if (!anneesDispo.contains(dateI.getYear())) anneesDispo.add(dateI.getYear());
-				}
-
-				model.put("anneesDispo", anneesDispo);
-				model.put("moisDispo", moisDispo);
-				// ---------------------------------------
-
-				float sommeCB = 0;
-				for (OperationCarteBancaire o : operationService.getOperationsCBByMoisAnnee(c, anneeInt, moisInt))
-					sommeCB += o.getMontant();
-				model.put("sommeCB", sommeCB);
-
-				model.put("utilisateur", u);
-
-				return "detailsCompte";
+			for (int i = maxMois; i >= 0; i--) {
+				DateTime dateI = auj.minusMonths(i);
+				if (dateI.getYear() == anneeInt) moisDispo.add(dateI.getMonthOfYear());
+				if (!anneesDispo.contains(dateI.getYear())) anneesDispo.add(dateI.getYear());
 			}
+
+			model.put("anneesDispo", anneesDispo);
+			model.put("moisDispo", moisDispo);
+			// ---------------------------------------
+
+			float sommeCB = 0;
+			for (OperationCarteBancaire o : operationService.getOperationsCBByMoisAnnee(c, anneeInt, moisInt))
+				sommeCB += o.getMontant();
+			model.put("sommeCB", sommeCB);
+
+			model.put("nom", u.getNom());
+			model.put("prenom", u.getPrenom());
+			return "detailsCompte";
+
 		}
 
 		model.put("title", bundle.getString("welcome.title"));
@@ -133,9 +141,10 @@ public class UserRoleController {
 		model.put("bouton", "bouton_virements");
 
 		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
-		model.put("utilisateur", u);
+
+		model.put("nom", u.getNom());
+		model.put("prenom", u.getPrenom());
 
 		return "virements";
 	}
-
 }

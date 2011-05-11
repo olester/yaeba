@@ -33,28 +33,14 @@ public class UtilisateurDaoImpl extends HibernateDaoSupport implements Utilisate
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Utilisateur getUtilisateurByLogin(String login) {
-		List<Utilisateur> l = getHibernateTemplate().find("from Utilisateur where login = ?", login);
+	public Utilisateur getUtilisateurByLoginFetchRoles(String login) {
+		List<Utilisateur> l = getHibernateTemplate().find("select user from Utilisateur user join fetch user.roles where login = ?", login);
+
 		if (l.size() > 0) {
 			return l.get(0);
 		} else {
 			return null;
 		}
-	}
-
-	@Override
-	public void update(Utilisateur u) {
-		getHibernateTemplate().update(u);
-	}
-
-	@Override
-	public void save(Utilisateur u) {
-		getHibernateTemplate().save(u);
-	}
-
-	@Override
-	public void delete(Utilisateur u) {
-		getHibernateTemplate().delete(u);
 	}
 
 }

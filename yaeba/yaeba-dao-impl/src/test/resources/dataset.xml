@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
+	<role id="99" type="ROLE_USER" />
 	<utilisateur id="99" adresse="labas" login="monlogin" password="monpassword" nom="citron" prenom="pierre" />
-	<compte id="99" datecreation="2001-09-11 11:45:12" numerocompte="4567" libelle="testcompte" soldecourant="10.2" utilisateur_id="99" />
+	<roleutilisateur user_id="99" role_id="99" />
+	<compte id="99" datecreation="2001-09-11 11:45:12" numerocompte="4567" libelle="testcompte" soldecourant="10.2"
+		utilisateur_id="99" />
 	<operation id="99" libelle="test" montant="500" datecreation="2002-12-11 09:12:12" compte_id="99" />
 </dataset>

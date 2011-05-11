@@ -1,10 +1,8 @@
 package com.excilys.formation.yaeba.dao.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,37 +43,12 @@ public class CompteDaoImplDBTest {
 
 	@Test
 	public void testGetCompteByNumeroCompte() {
-		Compte c = compteDao.getCompteByNumeroCompte("riendutout");
+		Utilisateur u = utilisateurDao.getUtilisateurById("99");
+		Compte c = compteDao.getCompteByNumeroCompte(u, "riendutout");
 		assertNull(c);
 
-		c = compteDao.getCompteByNumeroCompte("4567");
+		c = compteDao.getCompteByNumeroCompte(u, "4567");
 		assertEquals("testcompte", c.getLibelle());
 	}
 
-	@Test
-	public void testUpdate() {
-		Compte c = compteDao.getCompteByNumeroCompte("4567");
-		c.setNumeroCompte("fraise");
-		compteDao.update(c);
-		assertEquals("fraise", c.getNumeroCompte());
-	}
-
-	@Test
-	public void testSave() {
-		Utilisateur u = utilisateurDao.getUtilisateurById("99");
-		Compte c = new Compte("aaa", "bbb", null, new DateTime(), 10.2f);
-		u.addCompte(c);
-		compteDao.save(c);
-		Compte c2 = compteDao.getCompteByNumeroCompte("aaa");
-		assertNotNull(c2);
-	}
-
-	@Test
-	public void testDelete() {
-		Compte c = compteDao.getCompteByNumeroCompte("4567");
-		assertNotNull(c);
-		compteDao.delete(c);
-		Compte c2 = compteDao.getCompteByNumeroCompte("4567");
-		assertNull(c2);
-	}
 }

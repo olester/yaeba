@@ -12,7 +12,7 @@
 	</p>
 	<div class="entry">
 		<c:choose>
-			<c:when test="${not empty utilisateur.comptes}">
+			<c:when test="${not empty comptes}">
 				<p>
 					<spring:message code="accounts.text" />
 				</p>
@@ -24,7 +24,7 @@
 					</tr>
 
 					<c:set var="compteur" value="0" />
-					<c:forEach var="compte" items="${utilisateur.comptes}">
+					<c:forEach var="compte" items="${comptes}">
 						<tr class="ligne_${compteur%2}">
 							<td class="numero"><a
 								href="${pageContext.request.contextPath}/user/comptes/${compte.numeroCompte}/${annee}/${mois}/1/details.html">${compte.numeroCompte}</a>

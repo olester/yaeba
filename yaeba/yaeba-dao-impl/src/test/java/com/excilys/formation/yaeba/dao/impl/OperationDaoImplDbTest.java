@@ -37,14 +37,6 @@ public class OperationDaoImplDbTest {
 		assertEquals("test", o.getLibelle());
 	}
 
-	@Test
-	public void testUpdate() {
-		Operation c = operationDao.getOperationById("99");
-		c.setLibelle("saved");
-		operationDao.update(c);
-		assertEquals("saved", c.getLibelle());
-	}
-
 	// @Test
 	// public void testSave() {
 	// Operation o = new Operation("opé2", 750, new DateTime());
@@ -53,11 +45,4 @@ public class OperationDaoImplDbTest {
 	// assertNotNull(o1);
 	// }
 
-	@Test
-	public void testDelete() {
-		Operation c = operationDao.getOperationById("99");
-		operationDao.delete(c);
-		c = operationDao.getOperationById("99");
-		assertNull(c);
-	}
 }
