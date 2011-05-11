@@ -6,11 +6,5 @@ public interface UtilisateurService {
 
 	public Utilisateur getUtilisateurById(String id);
 
-	public void update(Utilisateur u);
-
-	public void save(Utilisateur u);
-
-	public void delete(Utilisateur u);
-
-	public Utilisateur getUtilisateurByLogin(String login);
+	public Utilisateur getUtilisateurByLoginFetchRoles(String login);
 }

@@ -9,14 +9,10 @@ public interface CompteDao {
 
 	public Compte getCompteById(String id);
 
-	public Compte getCompteByNumeroCompte(String numeroCompte);
-
-	public void update(Compte c);
-
-	public void save(Compte c);
-
-	public void delete(Compte c);
+	public Compte getCompteByNumeroCompte(Utilisateur u, String numeroCompte);
 
 	public List<Compte> getComptes(Utilisateur u);
+
+	public boolean isEmpty(Compte c);
 
 }

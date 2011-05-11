@@ -1,7 +1,6 @@
 package com.excilys.formation.yaeba.dao.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
@@ -40,35 +39,11 @@ public class UtilisateurDaoImplDbTest {
 
 	@Test
 	public void testGetUtilisateurByLogin() {
-		Utilisateur u = utilisateurDao.getUtilisateurByLogin("riendutout");
+		Utilisateur u = utilisateurDao.getUtilisateurByLoginFetchRoles("riendutout");
 		assertNull(u);
 
-		u = utilisateurDao.getUtilisateurByLogin("monlogin");
+		u = utilisateurDao.getUtilisateurByLoginFetchRoles("monlogin");
 		assertEquals("citron", u.getNom());
-	}
-
-	@Test
-	public void testUpdate() {
-		Utilisateur u = utilisateurDao.getUtilisateurByLogin("monlogin");
-		u.setNom("fraise");
-		utilisateurDao.update(u);
-		assertEquals("fraise", u.getNom());
-	}
-
-	@Test
-	public void testSave() {
-		Utilisateur u = new Utilisateur("login2", "nom2", "prenom2", "adresse2", "motDePasse2", null, null);
-		utilisateurDao.save(u);
-		Utilisateur u2 = utilisateurDao.getUtilisateurByLogin("login2");
-		assertNotNull(u2);
-	}
-
-	@Test
-	public void testDelete() {
-		Utilisateur u = utilisateurDao.getUtilisateurByLogin("monlogin");
-		utilisateurDao.delete(u);
-		Utilisateur u2 = utilisateurDao.getUtilisateurByLogin("monlogin");
-		assertNull(u2);
 	}
 
 }

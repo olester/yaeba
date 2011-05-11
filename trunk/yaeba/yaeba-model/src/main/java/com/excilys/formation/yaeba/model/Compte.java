@@ -1,11 +1,11 @@
 package com.excilys.formation.yaeba.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,8 +18,12 @@ import org.joda.time.DateTime;
 
 @Entity
 @Table(name = "compte")
-public class Compte {
+public class Compte implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3782823641514579337L;
 	private Integer id;
 	private String numeroCompte;
 	private String libelle;
@@ -69,7 +73,7 @@ public class Compte {
 		this.libelle = libelle;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Operation.class)
+	@OneToMany(targetEntity = Operation.class)
 	@JoinColumn(name = "compte_id")
 	public Set<Operation> getOperations() {
 		return operations;
@@ -82,8 +86,7 @@ public class Compte {
 	public Set<Operation> getOperationsByDate(int annee, int mois) {
 		Set<Operation> operations = new HashSet<Operation>();
 		for (Operation o : getOperations())
-			if (o.getDateCreation().getYear() + 1900 == annee && o.getDateCreation().getMonthOfYear() + 1 == mois)
-				operations.add(o);
+			if (o.getDateCreation().getYear() + 1900 == annee && o.getDateCreation().getMonthOfYear() + 1 == mois) operations.add(o);
 		return operations;
 	}
 
@@ -116,18 +119,13 @@ public class Compte {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
 		Compte other = (Compte) obj;
 		if (numeroCompte == null) {
-			if (other.numeroCompte != null)
-				return false;
-		} else if (!numeroCompte.equals(other.numeroCompte))
-			return false;
+			if (other.numeroCompte != null) return false;
+		} else if (!numeroCompte.equals(other.numeroCompte)) return false;
 		return true;
 	}
 

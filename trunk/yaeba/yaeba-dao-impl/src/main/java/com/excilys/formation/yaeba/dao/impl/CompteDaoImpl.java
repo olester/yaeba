@@ -30,35 +30,25 @@ public class CompteDaoImpl extends HibernateDaoSupport implements CompteDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Compte getCompteByNumeroCompte(String numeroCompte) {
-		List<Compte> comptes = getHibernateTemplate().find("from Compte where numeroCompte = ?", numeroCompte);
+	public Compte getCompteByNumeroCompte(Utilisateur u, String numeroCompte) {
+		List<Compte> comptes = getHibernateTemplate().find("SELECT c FROM Utilisateur u INNER JOIN u.comptes c WHERE u = ? AND c.numeroCompte = ?", u,
+				numeroCompte);
 		if (!comptes.isEmpty()) return comptes.get(0);
 		return null;
-	}
-
-	@Override
-	public void update(Compte c) {
-		getHibernateTemplate().update(c);
-
-	}
-
-	@Override
-	public void save(Compte c) {
-		getHibernateTemplate().save(c);
-
-	}
-
-	@Override
-	public void delete(Compte c) {
-		getHibernateTemplate().delete(c);
-
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Compte> getComptes(Utilisateur u) {
-		List<Compte> c = getHibernateTemplate().find("from Compte where Utilisateur = ?", u);
+		List<Compte> c = getHibernateTemplate().find("select u.comptes from Utilisateur u where u = ?", u);
 		return c;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean isEmpty(Compte c) {
+		List<Compte> compte = getHibernateTemplate().find("from Compte c where c.operations.size > 0 AND c=?", c);
+		return !compte.isEmpty();
 	}
 
 }

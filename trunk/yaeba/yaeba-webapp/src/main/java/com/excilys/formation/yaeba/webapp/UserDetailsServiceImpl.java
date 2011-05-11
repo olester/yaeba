@@ -11,13 +11,13 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.excilys.formation.yaeba.model.Role;
 import com.excilys.formation.yaeba.model.Utilisateur;
 import com.excilys.formation.yaeba.service.api.UtilisateurService;
 
-@Service("userDetailsService")
+@Component("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
@@ -25,7 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException, DataAccessException {
-		Utilisateur utilisateur = utilisateurService.getUtilisateurByLogin(login);
+		Utilisateur utilisateur = utilisateurService.getUtilisateurByLoginFetchRoles(login);
 		if (utilisateur == null) throw new UsernameNotFoundException("Utilisateur introuvable");
 		return buildUserFromUtilisateur(utilisateur);
 	}

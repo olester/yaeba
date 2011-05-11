@@ -1,13 +1,17 @@
 <configuration>
+
+	<contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+		<resetJUL>true</resetJUL>
+	</contextListener>
+	
 	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 		<layout class="ch.qos.logback.classic.PatternLayout">
 			<Pattern>%d [%thread] %level %logger - %m%n</Pattern>
 		</layout>
 	</appender>
+	
 	<root level="WARN">
 		<appender-ref ref="CONSOLE" />
 	</root>
-	<contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
-		<resetJUL>true</resetJUL>
-	</contextListener>
+
 </configuration>

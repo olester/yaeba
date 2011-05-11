@@ -12,12 +12,6 @@ public interface OperationDao {
 
 	public Operation getOperationById(String id);
 
-	public void update(Operation o);
-
-	public void save(Operation o);
-
-	public void delete(Operation o);
-
 	public List<Operation> getOperationsByDate(Compte c, DateTime dateDebut, DateTime dateFin);
 
 	public List<OperationCarteBancaire> getOperationsCBByDate(Compte c, DateTime dateDebut, DateTime dateFin);

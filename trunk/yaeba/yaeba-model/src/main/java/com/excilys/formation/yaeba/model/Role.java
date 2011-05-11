@@ -1,5 +1,7 @@
 package com.excilys.formation.yaeba.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +11,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "role")
-public class Role {
+public class Role implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5901131568102177026L;
 	private Integer id;
 	private String type;
 

@@ -29,24 +29,6 @@ public class OperationDaoImpl extends HibernateDaoSupport implements OperationDa
 		return null;
 	}
 
-	@Override
-	public void update(Operation o) {
-		getHibernateTemplate().update(o);
-
-	}
-
-	@Override
-	public void save(Operation o) {
-		getHibernateTemplate().save(o);
-
-	}
-
-	@Override
-	public void delete(Operation o) {
-		getHibernateTemplate().delete(o);
-
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Operation> getOperationsByDate(Compte c, DateTime dateDebut, DateTime dateFin) {
@@ -65,4 +47,5 @@ public class OperationDaoImpl extends HibernateDaoSupport implements OperationDa
 				.find("SELECT o FROM Compte c INNER JOIN c.operations o WHERE c = ? AND o.discriminator='OPERATIONCARTEBANCAIRE' AND o.dateCreation BETWEEN ? AND ? ORDER BY o.dateCreation DESC",
 						c, dateDebut, dateFin);
 	}
+
 }
