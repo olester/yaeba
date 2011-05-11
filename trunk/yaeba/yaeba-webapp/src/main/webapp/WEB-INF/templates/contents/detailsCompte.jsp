@@ -132,7 +132,7 @@
 
 		<br /> <br />
 		<p>
-			<a href="${pageContext.request.contextPath}/user/comptes/comptes.html"><spring:message
+			<a href="${pageContext.request.contextPath}/user/comptes.html"><spring:message
 					code="details.back" /> </a>
 		</p>
 
