@@ -13,12 +13,24 @@
 <body>
 	<div id="wrapper">
 		<tiles:insertAttribute name="header" />
-		<tiles:insertAttribute name="menu" />
 		<div id="page">
 			<div id="content">
-				<tiles:insertAttribute name="content" />
+				<div class="post">
+					<h2 class="title">
+						<a href="/"><tiles:insertAttribute name="errorcode" /> - <spring:message code="${key}" /></a>
+					</h2>
+					<p class="meta">
+						<spring:message code="${key}" />
+					</p>
+					<div class="entry">
+						<p>
+							<strong><a href="${pageContext.request.contextPath }/welcome.html"><spring:message code="error.back" />
+							</a> </strong>
+						</p>
+					</div>
+				</div>
+				<div style="clear: both;">&nbsp;</div>
 			</div>
-			<tiles:insertAttribute name="sidebar" />
 			<div style="clear: both;">&nbsp;</div>
 		</div>
 	</div>

@@ -1,8 +1,5 @@
 package com.excilys.formation.yaeba.webapp.controllers;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,9 +12,7 @@ import com.excilys.formation.yaeba.webapp.CustomUser;
 public class DefaultController {
 
 	@RequestMapping("/welcome.html")
-	public String redirectWelcome(ModelMap model, Locale locale) {
-		ResourceBundle bundle = ResourceBundle.getBundle("messages_" + locale.getLanguage());
-		model.put("title", bundle.getString("welcome.title"));
+	public String redirectWelcome(ModelMap model) {
 		model.put("bouton", "bouton_welcome");
 
 		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
@@ -28,38 +23,24 @@ public class DefaultController {
 	}
 
 	@RequestMapping("/login.html")
-	public String redirectLogin(ModelMap model, Locale locale) {
-		ResourceBundle bundle = ResourceBundle.getBundle("messages_" + locale.getLanguage());
-		model.put("title", bundle.getString("login.title"));
+	public String redirectLogin(ModelMap model) {
 		model.put("bouton", "bouton_login");
 		return "login";
 	}
 
 	@RequestMapping("/error-403.html")
-	public String redirectError403(ModelMap model, Locale locale) {
-		ResourceBundle bundle = ResourceBundle.getBundle("messages_" + locale.getLanguage());
-		model.put("title", bundle.getString("error-403.text"));
-		model.put("error_text", bundle.getString("error-403.text"));
-		model.put("error_code", "403");
-		return "error";
+	public String redirectError403(ModelMap model) {
+		return "error-403";
 	}
 
 	@RequestMapping("/error-404.html")
-	public String redirectError404(ModelMap model, Locale locale) {
-		ResourceBundle bundle = ResourceBundle.getBundle("messages_" + locale.getLanguage());
-		model.put("title", bundle.getString("error-404.text"));
-		model.put("error_text", bundle.getString("error-404.text"));
-		model.put("error_code", "404");
-		return "error";
+	public String redirectError404(ModelMap model) {
+		return "error-404";
 	}
 
 	@RequestMapping("/error-500.html")
-	public String redirectError500(ModelMap model, Locale locale) {
-		ResourceBundle bundle = ResourceBundle.getBundle("messages_" + locale.getLanguage());
-		model.put("title", bundle.getString("error-500.text"));
-		model.put("error_text", bundle.getString("error-500.text"));
-		model.put("error_code", "500");
-		return "error";
+	public String redirectError500(ModelMap model) {
+		return "error-500";
 	}
 
 }

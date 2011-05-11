@@ -23,7 +23,6 @@ public class UtilisateurDaoImpl extends HibernateDaoSupport implements Utilisate
 	public Utilisateur getUtilisateurById(String strId) {
 		int id = Integer.parseInt(strId);
 		List<Utilisateur> l = getHibernateTemplate().find("select c from Utilisateur c where id=?", id);
-		// TODO utiliser .get
 		if (l.size() > 0) {
 			return l.get(0);
 		} else {
