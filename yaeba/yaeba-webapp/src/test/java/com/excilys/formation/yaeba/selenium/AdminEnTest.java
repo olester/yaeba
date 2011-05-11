@@ -6,7 +6,6 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.thoughtworks.selenium.DefaultSelenium;
@@ -43,6 +42,12 @@ public class AdminEnTest {
 		selenium.waitForPageToLoad("30000");
 	}
 
+	/**
+	 * Login, logout
+	 * 
+	 * @throws Exception
+	 */
+
 	@Test
 	public void testLogoutLogin() throws Exception {
 		selenium.click("link=Logout");
@@ -55,6 +60,12 @@ public class AdminEnTest {
 		selenium.waitForPageToLoad("30000");
 		assertEquals("Administration", selenium.getTitle());
 	}
+
+	/**
+	 * Navigation
+	 * 
+	 * @throws Exception
+	 */
 
 	@Test
 	public void testNavVirements() throws Exception {
@@ -104,13 +115,30 @@ public class AdminEnTest {
 		assertEquals("Accounts", selenium.getTitle());
 	}
 
+	/**
+	 * Erreurs
+	 * 
+	 * @throws Exception
+	 */
+
 	@Test
-	@Ignore
 	public void testErreur404() throws Exception {
-		selenium.open("/yaeba-webapp/user/nimportequoi.html");
-		selenium.waitForPageToLoad("30000");
+		try {
+			selenium.open("/yaeba-webapp/nimportequoi");
+			selenium.waitForPageToLoad("30000");
+		} catch (Exception e) {
+			assertEquals("XHR ERROR: URL = http://localhost:8080/yaeba-webapp/nimportequoi Response_Code = 404 Error_Message = Not Found", e.getMessage());
+		}
 		assertEquals("Not found", selenium.getTitle());
+		selenium.click("link=Back to home");
+		selenium.waitForPageToLoad("30000");
 	}
+
+	/**
+	 * Navigation details compte
+	 * 
+	 * @throws Exception
+	 */
 
 	@Test
 	public void testDetailsCompte() throws Exception {
@@ -133,6 +161,32 @@ public class AdminEnTest {
 		selenium.click("link=Back to your accounts list");
 		selenium.waitForPageToLoad("30000");
 		assertEquals("Accounts", selenium.getTitle());
+	}
+
+	@Test
+	public void testChoixMois() throws Exception {
+		selenium.click("link=Accounts");
+		selenium.waitForPageToLoad("30000");
+
+		selenium.click("link=666");
+		selenium.waitForPageToLoad("30000");
+
+		selenium.select("mois", "label=April");
+		selenium.waitForPageToLoad("30000");
+		assertEquals("4", selenium.getValue("mois"));
+	}
+
+	@Test
+	public void testChoixAnnee() throws Exception {
+		selenium.click("link=Accounts");
+		selenium.waitForPageToLoad("30000");
+
+		selenium.click("link=666");
+		selenium.waitForPageToLoad("30000");
+
+		selenium.select("annee", "label=2010");
+		selenium.waitForPageToLoad("30000");
+		assertEquals("2010", selenium.getValue("annee"));
 	}
 
 }

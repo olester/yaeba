@@ -6,7 +6,6 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.thoughtworks.selenium.DefaultSelenium;
@@ -43,6 +42,12 @@ public class UserFrTest {
 		selenium.waitForPageToLoad("30000");
 	}
 
+	/**
+	 * Login, logout
+	 * 
+	 * @throws Exception
+	 */
+
 	@Test
 	public void testLogoutLogin() throws Exception {
 		selenium.click("link=Déconnexion");
@@ -55,6 +60,12 @@ public class UserFrTest {
 		selenium.waitForPageToLoad("30000");
 		assertEquals("Comptes", selenium.getTitle());
 	}
+
+	/**
+	 * Navigation
+	 * 
+	 * @throws Exception
+	 */
 
 	@Test
 	public void testNavVirements() throws Exception {
@@ -95,21 +106,43 @@ public class UserFrTest {
 		assertEquals("Comptes", selenium.getTitle());
 	}
 
+	/**
+	 * Erreurs
+	 * 
+	 * @throws Exception
+	 */
+
 	@Test
-	@Ignore
 	public void testErreur403() throws Exception {
-		selenium.open("/yaeba-webapp/admin/untrucadmin");
-		selenium.waitForPageToLoad("30000");
+		try {
+			selenium.open("/yaeba-webapp/admin/untrucadmin");
+			selenium.waitForPageToLoad("30000");
+		} catch (Exception e) {
+			assertEquals("XHR ERROR: URL = http://localhost:8080/yaeba-webapp/admin/untrucadmin Response_Code = 403 Error_Message = Forbidden", e.getMessage());
+		}
 		assertEquals("Accès interdit", selenium.getTitle());
+		selenium.click("link=Revenir à l'accueil");
+		selenium.waitForPageToLoad("30000");
 	}
 
 	@Test
-	@Ignore
 	public void testErreur404() throws Exception {
-		selenium.open("/yaeba-webapp/user/nimportequoi.html");
-		selenium.waitForPageToLoad("30000");
+		try {
+			selenium.open("/yaeba-webapp/nimportequoi");
+			selenium.waitForPageToLoad("30000");
+		} catch (Exception e) {
+			assertEquals("XHR ERROR: URL = http://localhost:8080/yaeba-webapp/nimportequoi Response_Code = 404 Error_Message = Not Found", e.getMessage());
+		}
 		assertEquals("Page perdue", selenium.getTitle());
+		selenium.click("link=Revenir à l'accueil");
+		selenium.waitForPageToLoad("30000");
 	}
+
+	/**
+	 * Navigation details compte
+	 * 
+	 * @throws Exception
+	 */
 
 	@Test
 	public void testDetailsCompte() throws Exception {
@@ -128,14 +161,24 @@ public class UserFrTest {
 		assertEquals("Comptes", selenium.getTitle());
 	}
 
-	// @Test
-	// @Ignore
-	// public void testChoixMois() throws Exception {
-	// selenium.click("link=123777");
-	// selenium.waitForPageToLoad("30000");
-	//
-	// selenium.select("mois", "label=Avril");
-	// selenium.waitForPageToLoad("30000");
-	// }
+	@Test
+	public void testChoixMois() throws Exception {
+		selenium.click("link=123777");
+		selenium.waitForPageToLoad("30000");
+
+		selenium.select("mois", "label=Avril");
+		selenium.waitForPageToLoad("30000");
+		assertEquals("4", selenium.getValue("mois"));
+	}
+
+	@Test
+	public void testChoixAnnee() throws Exception {
+		selenium.click("link=123777");
+		selenium.waitForPageToLoad("30000");
+
+		selenium.select("annee", "label=2010");
+		selenium.waitForPageToLoad("30000");
+		assertEquals("2010", selenium.getValue("annee"));
+	}
 
 }
