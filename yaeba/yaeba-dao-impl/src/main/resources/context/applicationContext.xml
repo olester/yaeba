@@ -8,7 +8,7 @@
 
 	<context:annotation-config />
 	<context:component-scan base-package="com.excilys.formation.yaeba.dao.impl" />
-	<context:property-placeholder location="classpath:bdd.properties" />
+	<context:property-placeholder location="classpath:/bdd.properties" />
 
 	<bean name="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${db.driver}" />
