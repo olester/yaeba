@@ -21,7 +21,7 @@ public class OperationServiceImpl implements OperationService {
 	private OperationDao operationDao;
 
 	@Override
-	public Operation getOperationById(String id) {
+	public Operation getOperationById(int id) {
 		return operationDao.getOperationById(id);
 	}
 
