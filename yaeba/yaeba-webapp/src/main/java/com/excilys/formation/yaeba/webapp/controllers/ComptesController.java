@@ -63,6 +63,9 @@ public class ComptesController {
 			anneeInt = Integer.parseInt(annee);
 			moisInt = Integer.parseInt(mois);
 			pageInt = Integer.parseInt(page);
+			if (anneeInt < 0 || anneeInt > new DateTime().getYear()) throw new NumberFormatException();
+			if (moisInt < 0 || moisInt > 12) throw new NumberFormatException();
+			if (pageInt <= 0) throw new NumberFormatException();
 		} catch (NumberFormatException e) {
 			return "redirect:/error-404.html";
 		}
