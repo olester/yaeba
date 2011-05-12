@@ -26,7 +26,7 @@ public class UtilisateurDaoImpl extends HibernateDaoSupport implements Utilisate
 	@SuppressWarnings("unchecked")
 	@Override
 	public Utilisateur getUtilisateurByLoginFetchRoles(String login) {
-		List<Utilisateur> l = getHibernateTemplate().find("select user from Utilisateur user join fetch user.roles where login = ?", login);
+		List<Utilisateur> l = getHibernateTemplate().find("FROM Utilisateur u JOIN FETCH u.roles WHERE u.login = ?", login);
 
 		if (l.size() > 0) {
 			return l.get(0);
@@ -34,5 +34,4 @@ public class UtilisateurDaoImpl extends HibernateDaoSupport implements Utilisate
 			return null;
 		}
 	}
-
 }
