@@ -14,8 +14,6 @@ public class DefaultController {
 
 	@RequestMapping("/welcome.html")
 	public String redirectWelcome(ModelMap model) {
-		model.put("bouton", "bouton_welcome");
-
 		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
 		model.put("utilisateur", u);
 
@@ -24,7 +22,6 @@ public class DefaultController {
 
 	@RequestMapping("/login.html")
 	public String redirectLogin(ModelMap model) {
-		model.put("bouton", "bouton_login");
 		return "login";
 	}
 
