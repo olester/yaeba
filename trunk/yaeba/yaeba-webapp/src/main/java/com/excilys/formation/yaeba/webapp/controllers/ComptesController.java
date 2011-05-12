@@ -95,6 +95,15 @@ public class ComptesController {
 			Months d = Months.monthsBetween(dateCreation, auj);
 			int maxMois = Math.min(36, d.getMonths());
 
+			if ((anneeInt < Math.max(c.getDateCreation().getYear(), auj.minusMonths(36).getYear()))
+					|| (anneeInt == Math.max(c.getDateCreation().getYear(), auj.minusMonths(36).getYear()) && moisInt < Math.max(c.getDateCreation()
+							.getMonthOfYear(), auj.minusMonths(36).getMonthOfYear()))) {
+				model.clear();
+				return "redirect:/error-404.html";
+			}
+			System.out.println(Math.max(c.getDateCreation().getYear(), auj.minusMonths(36).getYear()));
+			System.out.println(Math.max(c.getDateCreation().getMonthOfYear(), auj.minusMonths(36).getMonthOfYear()));
+
 			if (anneeInt == dateCreation.getYear()) moisDispo.add(dateCreation.getMonthOfYear());
 
 			for (int i = maxMois; i >= 0; i--) {
@@ -122,7 +131,20 @@ public class ComptesController {
 	@RequestMapping(value = "/{numeroCompte}/choix.html", method = RequestMethod.POST)
 	public String redirectChoixDate(HttpServletRequest request, @PathVariable("numeroCompte") String numeroCompte, ModelMap model) {
 		String annee = request.getParameter("annee");
+		String anneeEx = request.getParameter("anneeEx");
 		String mois = request.getParameter("mois");
+
+		if (annee != anneeEx) {
+			try {
+				int anneeInt = Integer.parseInt(annee);
+				if (anneeInt == new DateTime().getYear()) mois = "1";
+				else
+					mois = "12";
+			} catch (NumberFormatException e) {
+				return "redirect:/error-404.html";
+			}
+		}
+
 		return "redirect:/user/comptes/" + numeroCompte + "/" + annee + "/" + mois + "/1/details.html";
 	}
 
