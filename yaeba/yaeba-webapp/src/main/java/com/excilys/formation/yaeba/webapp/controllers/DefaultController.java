@@ -3,6 +3,7 @@ package com.excilys.formation.yaeba.webapp.controllers;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.excilys.formation.yaeba.model.Utilisateur;
@@ -28,19 +29,16 @@ public class DefaultController {
 		return "login";
 	}
 
-	@RequestMapping("/error-403.html")
-	public String redirectError403(ModelMap model) {
-		return "error-403";
-	}
-
-	@RequestMapping("/error-404.html")
-	public String redirectError404(ModelMap model) {
+	@RequestMapping("/error-{code}.html")
+	public String redirectError(@PathVariable("code") String code, ModelMap model) {
+		int codeInt;
+		try {
+			codeInt = Integer.parseInt(code);
+		} catch (NumberFormatException e) {
+			return "error-404";
+		}
+		if (codeInt == 403 || codeInt == 404 || codeInt == 500) return "error-" + codeInt;
 		return "error-404";
-	}
-
-	@RequestMapping("/error-500.html")
-	public String redirectError500(ModelMap model) {
-		return "error-500";
 	}
 
 }

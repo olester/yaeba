@@ -53,8 +53,6 @@ public class ComptesController {
 	public String redirectDetailsCompte(@PathVariable("numeroCompte") String numeroCompte, @PathVariable("annee") String annee,
 			@PathVariable("mois") String mois, @PathVariable("page") String page, ModelMap model) {
 
-		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
-
 		int anneeInt;
 		int moisInt;
 		int pageInt;
@@ -64,13 +62,10 @@ public class ComptesController {
 			moisInt = Integer.parseInt(mois);
 			pageInt = Integer.parseInt(page);
 		} catch (NumberFormatException e) {
-
-			model.put("nom", u.getNom());
-			model.put("prenom", u.getPrenom());
-			model.put("error_code", "404");
-			return "error";
+			return "redirect:/error-404.html";
 		}
 
+		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
 		Compte c = compteService.getCompteByNumeroCompte(u, numeroCompte);
 
 		if (c != null) {
@@ -114,10 +109,7 @@ public class ComptesController {
 			return "detailsCompte";
 		}
 
-		model.put("nom", u.getNom());
-		model.put("prenom", u.getPrenom());
-		model.put("error_code", "404");
-		return "error";
+		return "redirect:/error-404.html";
 	}
 
 	@RequestMapping(value = "/{numeroCompte}/choix.html", method = RequestMethod.POST)
