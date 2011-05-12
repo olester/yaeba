@@ -24,6 +24,7 @@
 	<definition name="welcome" extends="baseLayout">
 		<put-attribute name="content" value="/WEB-INF/templates/contents/welcome.jsp" />
 		<put-attribute name="title" value="welcome.title" />
+		<put-attribute name="button" value="button_welcome" />
 	</definition>
 
 	<definition name="login" extends="baseLayout">
@@ -50,22 +51,26 @@
 	<definition name="comptes" extends="baseLayout">
 		<put-attribute name="content" value="/WEB-INF/templates/contents/comptes.jsp" />
 		<put-attribute name="title" value="accounts.title" />
+		<put-attribute name="button" value="button_accounts" />
 	</definition>
 
 	<definition name="virements" extends="baseLayout">
 		<put-attribute name="content" value="/WEB-INF/templates/contents/virements.jsp" />
 		<put-attribute name="title" value="transfers.title" />
+		<put-attribute name="button" value="button_transfers" />
 	</definition>
 	
 	<definition name="detailsCompte" extends="baseLayout">
 		<put-attribute name="content" value="/WEB-INF/templates/contents/detailsCompte.jsp" />
 		<put-attribute name="title" value="details.title" />
+		<put-attribute name="button" value="button_accounts" />
 	</definition>
 
 	<!-- Admin -->
 	<definition name="admin" extends="baseLayout">
 		<put-attribute name="content" value="/WEB-INF/templates/contents/admin.jsp" />
 		<put-attribute name="title" value="admin.title" />
+		<put-attribute name="button" value="button_admin" />
 	</definition>
 
 </tiles-definitions>

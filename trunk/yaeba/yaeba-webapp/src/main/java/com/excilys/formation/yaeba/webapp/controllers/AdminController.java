@@ -14,8 +14,6 @@ public class AdminController {
 
 	@RequestMapping("/admin.html")
 	public String redirectComptes(ModelMap model) {
-		model.put("bouton", "bouton_admin");
-
 		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
 		model.put("utilisateur", u);
 
