@@ -3,7 +3,6 @@ package com.excilys.formation.yaeba.model;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,7 +12,6 @@ import org.joda.time.DateTime;
 
 @Entity
 @Table(name = "operationvirementinterne")
-@DiscriminatorValue("operationvirementinterne")
 public class OperationVirementInterne extends Operation implements Serializable {
 
 	/**

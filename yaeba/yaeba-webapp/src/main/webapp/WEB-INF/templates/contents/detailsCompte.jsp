@@ -28,7 +28,6 @@
 							<option <c:if test="${numAnnee==dateBean.annee}">selected</c:if> value="${numAnnee}">${numAnnee}</option>
 						</c:forEach>
 					</select>
-					<input type="hidden" name="anneeEx" value="${dateBean.annee}" />
 					<noscript>
 						<input type="submit" value="<spring:message code='details.submit' />" />
 					</noscript>
@@ -55,6 +54,12 @@
 				</p>
 				<table>
 					<tr class="libelle">
+						<td><spring:message code="details.date" />
+						</td>
+						<td><spring:message code="details.label" />
+						</td>
+						<td style="width: 160px;"><spring:message code="details.amount" />
+						</td>
 						<td><spring:message code="details.date" /></td>
 						<td><spring:message code="details.label" /></td>
 						<td style="width: 160px;"><spring:message code="details.amount" /></td>
@@ -70,13 +75,10 @@
 									<c:otherwise>
 										<joda:format value="${operation.dateCreation}" pattern="dd/MM/yyyy" />
 									</c:otherwise>
-								</c:choose>
-							</td>
-							<td><spring:message code="details.${operation.discriminator}" /> <c:if
-									test="${operation.discriminator eq 'OPERATIONCHEQUE'}">${operation.numeroCheque}</c:if> ${operation.libelle}</td>
+								</c:choose></td>
+							<td>${operation.libelle}</td>
 							<td <c:if test="${operation.montant<0}">style="text-align:left;"</c:if>><fmt:formatNumber
-									value="${operation.montant}" pattern="#0.00 €" />
-							</td>
+									value="${operation.montant}" pattern="#0.00 €" /></td>
 						</tr>
 						<c:set var="compteur" value="${compteur+1}" />
 					</c:forEach>

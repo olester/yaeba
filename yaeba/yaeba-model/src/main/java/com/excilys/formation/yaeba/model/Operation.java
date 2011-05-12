@@ -3,8 +3,6 @@ package com.excilys.formation.yaeba.model;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +19,6 @@ import org.joda.time.DateTime;
 @Entity
 @Table(name = "operation")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
 public class Operation implements Serializable {
 
 	private static final long serialVersionUID = -2365460360189503621L;
