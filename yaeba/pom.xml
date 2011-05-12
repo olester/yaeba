@@ -10,6 +10,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- versions des dependences -->
 		<spring.version>3.0.5.RELEASE</spring.version>
+		<spring.security.version>3.0.5.RELEASE</spring.security.version>
 		<hibernate.version>3.6.4.Final</hibernate.version>
 		<jadira.version>1.8</jadira.version>
 		<jpa2.version>1.0.0.Final</jpa2.version>
@@ -213,13 +214,6 @@
 		<!-- profil pour les developpeurs -->
 		<profile>
 			<id>dev</id>
-			<properties>
-				<param.db.url>jdbc:mysql://192.168.10.134:3306/yaeba-dev</param.db.url>
-				<param.db.driver>com.mysql.jdbc.Driver</param.db.driver>
-				<param.db.username>user</param.db.username>
-				<param.db.password>user</param.db.password>
-				<param.hibernate.dialect>org.hibernate.dialect.MySQLInnoDBDialect</param.hibernate.dialect>
-			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
@@ -227,26 +221,12 @@
 		<!-- profil pour l'integration et la production. -->
 		<profile>
 			<id>integration</id>
-			<properties>
-				<param.db.url>jdbc:mysql://192.168.10.134:3306/yaeba-test</param.db.url>
-				<param.db.driver>com.mysql.jdbc.Driver</param.db.driver>
-				<param.db.username>user</param.db.username>
-				<param.db.password>user</param.db.password>
-				<param.hibernate.dialect>org.hibernate.dialect.MySQLInnoDBDialect</param.hibernate.dialect>
-			</properties>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
 		</profile>
 		<profile>
 			<id>demo</id>
-			<properties>
-				<param.db.url>jdbc:mysql://192.168.10.134:3306/yaeba</param.db.url>
-				<param.db.driver>com.mysql.jdbc.Driver</param.db.driver>
-				<param.db.username>user</param.db.username>
-				<param.db.password>user</param.db.password>
-				<param.hibernate.dialect>org.hibernate.dialect.MySQLInnoDBDialect</param.hibernate.dialect>
-			</properties>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
@@ -371,23 +351,23 @@
 			<dependency>
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-config</artifactId>
-				<version>${spring.version}</version>
+				<version>${spring.security.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-core</artifactId>
-				<version>${spring.version}</version>
+				<version>${spring.security.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-web</artifactId>
-				<version>${spring.version}</version>
+				<version>${spring.security.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-taglibs</artifactId>
-				<version>${spring.version}</version>
+				<version>${spring.security.version}</version>
 			</dependency>
 
 			<dependency>
@@ -511,7 +491,6 @@
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
 				<version>${logback.version}</version>
-				<scope>runtime</scope>
 			</dependency>
 			<!-- <dependency> si on veut acceder a logback via http -->
 			<!-- <groupId>ch.qos.logback</groupId> -->

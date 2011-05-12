@@ -34,16 +34,16 @@ public class CompteDaoImplDBTest {
 
 	@Test
 	public void testGetCompteById() {
-		Compte c = compteDao.getCompteById("98");
+		Compte c = compteDao.getCompteById(98);
 		assertNull(c);
 
-		c = compteDao.getCompteById("99");
+		c = compteDao.getCompteById(99);
 		assertEquals("testcompte", c.getLibelle());
 	}
 
 	@Test
 	public void testGetCompteByNumeroCompte() {
-		Utilisateur u = utilisateurDao.getUtilisateurById("99");
+		Utilisateur u = utilisateurDao.getUtilisateurById(99);
 		Compte c = compteDao.getCompteByNumeroCompte(u, "riendutout");
 		assertNull(c);
 

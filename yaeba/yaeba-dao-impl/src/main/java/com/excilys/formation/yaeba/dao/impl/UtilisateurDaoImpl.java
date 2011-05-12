@@ -18,16 +18,9 @@ public class UtilisateurDaoImpl extends HibernateDaoSupport implements Utilisate
 		setSessionFactory(factory);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public Utilisateur getUtilisateurById(String strId) {
-		int id = Integer.parseInt(strId);
-		List<Utilisateur> l = getHibernateTemplate().find("select c from Utilisateur c where id=?", id);
-		if (l.size() > 0) {
-			return l.get(0);
-		} else {
-			return null;
-		}
+	public Utilisateur getUtilisateurById(int id) {
+		return getHibernateTemplate().get(Utilisateur.class, id);
 	}
 
 	@SuppressWarnings("unchecked")

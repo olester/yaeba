@@ -10,10 +10,10 @@ import com.excilys.formation.yaeba.model.OperationCarteBancaire;
 
 public interface OperationDao {
 
-	public Operation getOperationById(String id);
+	Operation getOperationById(int id);
 
-	public List<Operation> getOperationsByDate(Compte c, DateTime dateDebut, DateTime dateFin);
+	List<Operation> getOperationsByDate(Compte c, DateTime dateDebut, DateTime dateFin);
 
-	public List<OperationCarteBancaire> getOperationsCBByDate(Compte c, DateTime dateDebut, DateTime dateFin);
+	List<OperationCarteBancaire> getOperationsCBByDate(Compte c, DateTime dateDebut, DateTime dateFin);
 
 }

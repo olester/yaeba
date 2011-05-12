@@ -4,8 +4,8 @@ import com.excilys.formation.yaeba.model.Utilisateur;
 
 public interface UtilisateurDao {
 
-	public Utilisateur getUtilisateurById(String id);
+	Utilisateur getUtilisateurById(int id);
 
-	public Utilisateur getUtilisateurByLoginFetchRoles(String login);
+	Utilisateur getUtilisateurByLoginFetchRoles(String login);
 
 }

@@ -18,16 +18,21 @@
 	</bean>
 
 	<bean name="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-		<property name="annotatedClasses">
-			<list>
-				<value>com.excilys.formation.yaeba.model.Utilisateur</value>
-				<value>com.excilys.formation.yaeba.model.Role</value>
-				<value>com.excilys.formation.yaeba.model.Compte</value>
-				<value>com.excilys.formation.yaeba.model.Operation</value>
-				<value>com.excilys.formation.yaeba.model.OperationCheque</value>
-				<value>com.excilys.formation.yaeba.model.OperationVirementInterne</value>
-				<value>com.excilys.formation.yaeba.model.OperationCarteBancaire</value>
+		<!-- <property name="annotatedClasses"> -->
+		<!-- <list> -->
+		<!-- <value>com.excilys.formation.yaeba.model.Utilisateur</value> -->
+		<!-- <value>com.excilys.formation.yaeba.model.Role</value> -->
+		<!-- <value>com.excilys.formation.yaeba.model.Compte</value> -->
+		<!-- <value>com.excilys.formation.yaeba.model.Operation</value> -->
+		<!-- <value>com.excilys.formation.yaeba.model.OperationCheque</value> -->
+		<!-- <value>com.excilys.formation.yaeba.model.OperationVirementInterne</value> -->
+		<!-- <value>com.excilys.formation.yaeba.model.OperationCarteBancaire</value> -->
 
+		<!-- </list> -->
+		<!-- </property> -->
+		<property name="packagesToScan">
+			<list>
+				<value>com.excilys.formation.yaeba.model</value>
 			</list>
 		</property>
 		<property name="annotatedPackages">
@@ -41,7 +46,7 @@
 			<props>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 				<prop key="hibernate.show_sql">true</prop>
-<!-- 				<prop key="hibernate.hbm2ddl.auto">update</prop> -->
+				<!-- <prop key="hibernate.hbm2ddl.auto">update</prop> -->
 			</props>
 		</property>
 	</bean>
