@@ -7,12 +7,12 @@ import com.excilys.formation.yaeba.model.Utilisateur;
 
 public interface CompteDao {
 
-	public Compte getCompteById(String id);
+	Compte getCompteById(int id);
 
-	public Compte getCompteByNumeroCompte(Utilisateur u, String numeroCompte);
+	Compte getCompteByNumeroCompte(Utilisateur u, String numeroCompte);
 
-	public List<Compte> getComptes(Utilisateur u);
+	List<Compte> getComptes(Utilisateur u);
 
-	public boolean isEmpty(Compte c);
+	boolean isEmpty(Compte c);
 
 }

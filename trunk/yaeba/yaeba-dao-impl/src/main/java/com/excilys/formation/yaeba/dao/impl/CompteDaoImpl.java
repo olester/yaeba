@@ -19,12 +19,9 @@ public class CompteDaoImpl extends HibernateDaoSupport implements CompteDao {
 		setSessionFactory(factory);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public Compte getCompteById(String id) {
-		List<Compte> l = getHibernateTemplate().find("from Compte c where id=?", Integer.parseInt(id));
-		if (!l.isEmpty()) return l.get(0);
-		return null;
+	public Compte getCompteById(int id) {
+		return getHibernateTemplate().get(Compte.class, id);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -30,10 +30,10 @@ public class UtilisateurDaoImplDbTest {
 
 	@Test
 	public void testGetUtilisateurById() {
-		Utilisateur u = utilisateurDao.getUtilisateurById("98");
+		Utilisateur u = utilisateurDao.getUtilisateurById(98);
 		assertNull(u);
 
-		u = utilisateurDao.getUtilisateurById("99");
+		u = utilisateurDao.getUtilisateurById(99);
 		assertEquals("citron", u.getNom());
 	}
 

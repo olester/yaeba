@@ -21,12 +21,9 @@ public class OperationDaoImpl extends HibernateDaoSupport implements OperationDa
 		setSessionFactory(factory);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public Operation getOperationById(String id) {
-		List<Operation> l = getHibernateTemplate().find("from Operation o where id=?", Integer.parseInt(id));
-		if (!l.isEmpty()) return l.get(0);
-		return null;
+	public Operation getOperationById(int id) {
+		return getHibernateTemplate().get(Operation.class, id);
 	}
 
 	@SuppressWarnings("unchecked")

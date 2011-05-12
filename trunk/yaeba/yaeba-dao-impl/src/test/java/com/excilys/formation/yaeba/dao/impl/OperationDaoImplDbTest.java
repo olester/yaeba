@@ -30,10 +30,10 @@ public class OperationDaoImplDbTest {
 
 	@Test
 	public void testGetOperationById() {
-		Operation o = operationDao.getOperationById("98");
+		Operation o = operationDao.getOperationById(98);
 		assertNull(o);
 
-		o = operationDao.getOperationById("99");
+		o = operationDao.getOperationById(99);
 		assertEquals("test", o.getLibelle());
 	}
 
