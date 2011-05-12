@@ -27,7 +27,7 @@ public class UtilisateurDaoImpl extends HibernateDaoSupport implements Utilisate
 	@Override
 	public Utilisateur getUtilisateurByLoginFetchRoles(String login) {
 		List<Utilisateur> l = getHibernateTemplate().find("FROM Utilisateur u JOIN FETCH u.roles WHERE u.login = ?", login);
-		if (l.isEmpty()) return l.get(0);
+		if (!l.isEmpty()) return l.get(0);
 		return null;
 	}
 }
