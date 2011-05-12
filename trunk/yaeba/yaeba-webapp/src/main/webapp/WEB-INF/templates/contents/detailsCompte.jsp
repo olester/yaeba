@@ -28,6 +28,7 @@
 							<option <c:if test="${numAnnee==dateBean.annee}">selected</c:if> value="${numAnnee}">${numAnnee}</option>
 						</c:forEach>
 					</select>
+					<input type="hidden" name="anneeEx" value="${dateBean.annee}" />
 					<noscript>
 						<input type="submit" value="<spring:message code='details.submit' />" />
 					</noscript>
