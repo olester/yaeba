@@ -14,12 +14,10 @@ public class AdminController {
 
 	@RequestMapping("/admin.html")
 	public String redirectComptes(ModelMap model) {
-		model.put("bouton", "bouton_comptes");
 		model.put("bouton", "bouton_admin");
 
 		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
-		model.put("nom", u.getNom());
-		model.put("prenom", u.getPrenom());
+		model.put("utilisateur", u);
 
 		return "admin";
 	}

@@ -22,6 +22,7 @@ import com.excilys.formation.yaeba.model.Utilisateur;
 import com.excilys.formation.yaeba.service.api.CompteService;
 import com.excilys.formation.yaeba.service.api.OperationService;
 import com.excilys.formation.yaeba.webapp.CustomUser;
+import com.excilys.formation.yaeba.webapp.DateBean;
 
 @Controller
 @RequestMapping("user/comptes")
@@ -31,28 +32,29 @@ public class ComptesController {
 	private OperationService operationService;
 	@Autowired
 	private CompteService compteService;
+	@Autowired
+	private DateBean dateBean;
 
 	@RequestMapping("/comptes.html")
 	public String redirectComptes(ModelMap model) {
 		model.put("bouton", "bouton_comptes");
 
 		DateTime dt = new DateTime();
-		model.put("annee", dt.getYear());
-		model.put("mois", dt.getMonthOfYear());
+		dateBean.setAnnee(dt.getYear());
+		dateBean.setMois(dt.getMonthOfYear());
+		model.put("dateBean", dateBean);
 
 		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
 		List<Compte> comptes = compteService.getComptesByUtilisateur(u);
 		model.put("comptes", comptes);
-		model.put("nom", u.getNom());
-		model.put("prenom", u.getPrenom());
 
+		model.put("utilisateur", u);
 		return "comptes";
 	}
 
 	@RequestMapping("/{numeroCompte}/{annee}/{mois}/{page}/details.html")
 	public String redirectDetailsCompte(@PathVariable("numeroCompte") String numeroCompte, @PathVariable("annee") String annee,
 			@PathVariable("mois") String mois, @PathVariable("page") String page, ModelMap model) {
-
 		int anneeInt;
 		int moisInt;
 		int pageInt;
@@ -71,8 +73,11 @@ public class ComptesController {
 		if (c != null) {
 			model.put("bouton", "bouton_comptes");
 			model.put("numero", numeroCompte);
-			model.put("annee", anneeInt);
-			model.put("mois", moisInt);
+
+			dateBean.setAnnee(anneeInt);
+			dateBean.setMois(moisInt);
+			model.put("dateBean", dateBean);
+
 			model.put("page", pageInt);
 			model.put("libelle", c.getLibelle());
 			model.put("compteEstVide", compteService.isEmpty(c));
@@ -104,8 +109,7 @@ public class ComptesController {
 				sommeCB += o.getMontant();
 			model.put("sommeCB", sommeCB);
 
-			model.put("nom", u.getNom());
-			model.put("prenom", u.getPrenom());
+			model.put("utilisateur", u);
 			return "detailsCompte";
 		}
 

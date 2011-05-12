@@ -9,7 +9,7 @@
 	<ul>
 		<li><p>
 				<sec:authorize access="isAuthenticated()">
-					<spring:message code="sidebar.login" /> ${prenom} ${nom}
+					<spring:message code="sidebar.login" /> ${utilisateur.prenom} ${utilisateur.nom}
 		<br />
 					<a href='<c:url value="/j_spring_security_logout" />'><spring:message
 							code="sidebar.logout" /> </a>

@@ -14,13 +14,10 @@ public class VirementsController {
 
 	@RequestMapping("/virements.html")
 	public String redirectVirements(ModelMap model) {
-		model.put("bouton", "bouton_comptes");
 		model.put("bouton", "bouton_virements");
 
 		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
-
-		model.put("nom", u.getNom());
-		model.put("prenom", u.getPrenom());
+		model.put("utilisateur", u);
 
 		return "virements";
 	}
