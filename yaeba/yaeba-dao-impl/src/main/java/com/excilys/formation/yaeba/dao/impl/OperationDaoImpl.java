@@ -36,9 +36,14 @@ public class OperationDaoImpl extends HibernateDaoSupport implements OperationDa
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<OperationCarteBancaire> getOperationsCBByDate(Compte c, DateTime dateDebut, DateTime dateFin) {
-		return getHibernateTemplate()
-				.find("FROM Operation o WHERE o.compte = ? AND o.discriminator='OPERATIONCARTEBANCAIRE' AND o.dateCreation BETWEEN ? AND ? ORDER BY o.dateCreation DESC",
-						c, dateDebut, dateFin);
+		return getHibernateTemplate().find("FROM OperationCarteBancaire o WHERE o.compte = ? AND o.dateCreation BETWEEN ? AND ? ORDER BY o.dateCreation DESC",
+				c, dateDebut, dateFin);
+	}
+
+	@Override
+	public void create(Operation o) {
+		getHibernateTemplate().save(o);
+
 	}
 
 }

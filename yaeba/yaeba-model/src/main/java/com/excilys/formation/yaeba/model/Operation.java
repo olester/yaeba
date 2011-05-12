@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,17 +22,10 @@ import org.joda.time.DateTime;
 @Table(name = "operation")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue(value = "OPERATION")
 public class Operation implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2365460360189503621L;
-	/**
-	 * 
-	 */
-	private String discriminator;
+
 	private Integer id;
 	private String libelle;
 	private double montant;
@@ -42,15 +34,6 @@ public class Operation implements Serializable {
 
 	public Operation() {
 
-	}
-
-	@Column(name = "discriminator", insertable = false, updatable = false)
-	public String getDiscriminator() {
-		return discriminator;
-	}
-
-	public void setDiscriminator(String discriminator) {
-		this.discriminator = discriminator;
 	}
 
 	@Id

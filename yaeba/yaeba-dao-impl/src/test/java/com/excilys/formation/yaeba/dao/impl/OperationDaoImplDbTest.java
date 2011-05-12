@@ -1,8 +1,10 @@
 package com.excilys.formation.yaeba.dao.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 
 import com.excilys.formation.yaeba.dao.api.OperationDao;
 import com.excilys.formation.yaeba.model.Operation;
+import com.excilys.formation.yaeba.model.OperationCarteBancaire;
 import com.excilys.utils.spring.log.logback.test.Logback;
 import com.excilys.utils.spring.log.logback.test.LogbackConfigurerTestExecutionListener;
 import com.excilys.utils.spring.test.dbunit.DataSet;
@@ -37,12 +40,16 @@ public class OperationDaoImplDbTest {
 		assertEquals("test", o.getLibelle());
 	}
 
-	// @Test
-	// public void testSave() {
-	// Operation o = new Operation("opé2", 750, new DateTime());
-	// operationDao.save(o);
-	// Operation o1 = operationDao.getOperationById("opé2");
-	// assertNotNull(o1);
-	// }
+	@Test
+	public void testSave() {
 
+		OperationCarteBancaire o = new OperationCarteBancaire();
+		o.setDateCreation(new DateTime());
+		o.setMontant(13246487);
+		o.setLibelle("test");
+		o.setDateEffective(new DateTime());
+		operationDao.create(o);
+		Operation o1 = operationDao.getOperationById(o.getId());
+		assertNotNull(o1);
+	}
 }
