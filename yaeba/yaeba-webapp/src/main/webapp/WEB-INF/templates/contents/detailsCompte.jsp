@@ -60,9 +60,6 @@
 						</td>
 						<td style="width: 160px;"><spring:message code="details.amount" />
 						</td>
-						<td><spring:message code="details.date" /></td>
-						<td><spring:message code="details.label" /></td>
-						<td style="width: 160px;"><spring:message code="details.amount" /></td>
 					</tr>
 
 					<c:set var="compteur" value="0" />
