@@ -37,4 +37,9 @@ public class OperationServiceImpl implements OperationService {
 		return operationDao.getOperationsCBByDate(c, dt, dt.dayOfMonth().withMaximumValue());
 	}
 
+	@Override
+	public void create(Operation o) {
+		operationDao.create(o);
+	}
+
 }
