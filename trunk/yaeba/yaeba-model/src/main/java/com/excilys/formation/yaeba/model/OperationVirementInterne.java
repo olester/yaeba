@@ -1,5 +1,7 @@
 package com.excilys.formation.yaeba.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -10,23 +12,18 @@ import org.joda.time.DateTime;
 
 @Entity(name = "operationvirementinterne")
 @DiscriminatorValue("OPERATIONVIREMENTINTERNE")
-public class OperationVirementInterne extends Operation {
+public class OperationVirementInterne extends Operation implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3815970073513291893L;
 	private Compte compteRecepteur;
 	private Compte compteDebiteur;
 
 	private DateTime dateEffective;
 
 	public OperationVirementInterne() {
-
-	}
-
-	public OperationVirementInterne(String libelle, double montant, DateTime dateCreation, int numeroCheque, Compte compteRecepteur, DateTime dateEffective,
-			Compte compteDebiteur) {
-		super(libelle, montant, dateCreation);
-		this.compteRecepteur = compteRecepteur;
-		this.dateEffective = dateEffective;
-		this.compteDebiteur = compteDebiteur;
 
 	}
 

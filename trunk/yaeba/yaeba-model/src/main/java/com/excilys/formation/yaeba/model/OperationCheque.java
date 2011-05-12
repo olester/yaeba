@@ -1,24 +1,23 @@
 package com.excilys.formation.yaeba.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import org.joda.time.DateTime;
-
 @Entity(name = "operationcheque")
 @DiscriminatorValue("OPERATIONCHEQUE")
-public class OperationCheque extends Operation {
+public class OperationCheque extends Operation implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -330978500644908892L;
 	private int numeroCheque;
 
 	public OperationCheque() {
 
-	}
-
-	public OperationCheque(String libelle, double montant, DateTime dateCreation, int numeroCheque) {
-		super(libelle, montant, dateCreation);
-		this.numeroCheque = numeroCheque;
 	}
 
 	@Column(name = "numerocheque", nullable = false)

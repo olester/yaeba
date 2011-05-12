@@ -1,5 +1,7 @@
 package com.excilys.formation.yaeba.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -20,8 +22,15 @@ import org.joda.time.DateTime;
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "OPERATION")
-public class Operation {
+public class Operation implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2365460360189503621L;
+	/**
+	 * 
+	 */
 	private String discriminator;
 	private Integer id;
 	private String libelle;
@@ -30,12 +39,6 @@ public class Operation {
 
 	public Operation() {
 
-	}
-
-	public Operation(String libelle, double montant, DateTime dateCreation) {
-		this.libelle = libelle;
-		this.montant = montant;
-		this.dateCreation = dateCreation;
 	}
 
 	@Column(name = "discriminator", insertable = false, updatable = false)

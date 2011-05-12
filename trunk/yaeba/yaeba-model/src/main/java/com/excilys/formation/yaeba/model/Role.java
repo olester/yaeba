@@ -23,10 +23,6 @@ public class Role implements Serializable {
 	public Role() {
 	}
 
-	public Role(String type) {
-		this.type = type;
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", unique = true, nullable = false, updatable = false)

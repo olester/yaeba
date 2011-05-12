@@ -19,6 +19,13 @@ import javax.persistence.Table;
 @Table(name = "utilisateur")
 public class Utilisateur implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6085668591967161033L;
+	/**
+	 * 
+	 */
 	private Integer id;
 	private String login;
 	private String nom;
@@ -31,16 +38,6 @@ public class Utilisateur implements Serializable {
 	public Utilisateur() {
 		roles = new HashSet<Role>();
 		comptes = new HashSet<Compte>();
-	}
-
-	public Utilisateur(String login, String nom, String prenom, String adresse, String motDePasse, Set<Role> roles, Set<Compte> comptes) {
-		this.login = login;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.adresse = adresse;
-		this.motDePasse = motDePasse;
-		this.roles = roles;
-		this.comptes = comptes;
 	}
 
 	@Id
