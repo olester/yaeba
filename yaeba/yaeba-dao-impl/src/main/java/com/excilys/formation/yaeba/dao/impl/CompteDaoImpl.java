@@ -27,8 +27,7 @@ public class CompteDaoImpl extends HibernateDaoSupport implements CompteDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Compte getCompteByNumeroCompte(Utilisateur u, String numeroCompte) {
-		List<Compte> comptes = getHibernateTemplate().find("SELECT c FROM Utilisateur u INNER JOIN u.comptes c WHERE u = ? AND c.numeroCompte = ?", u,
-				numeroCompte);
+		List<Compte> comptes = getHibernateTemplate().find("FROM Compte c WHERE c.utilisateur = ? AND c.numeroCompte = ?", u, numeroCompte);
 		if (!comptes.isEmpty()) return comptes.get(0);
 		return null;
 	}
@@ -36,14 +35,14 @@ public class CompteDaoImpl extends HibernateDaoSupport implements CompteDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Compte> getComptes(Utilisateur u) {
-		List<Compte> c = getHibernateTemplate().find("select u.comptes from Utilisateur u where u = ?", u);
+		List<Compte> c = getHibernateTemplate().find("FROM Compte c WHERE c.utilisateur = ?", u);
 		return c;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean isEmpty(Compte c) {
-		List<Compte> compte = getHibernateTemplate().find("from Compte c where c.operations.size > 0 AND c=?", c);
+		List<Compte> compte = getHibernateTemplate().find("FROM Compte c WHERE c.operations.size > 0 AND c=?", c);
 		return !compte.isEmpty();
 	}
 

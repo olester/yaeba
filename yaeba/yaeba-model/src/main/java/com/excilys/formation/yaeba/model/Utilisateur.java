@@ -106,8 +106,7 @@ public class Utilisateur implements Serializable {
 		this.roles = roles;
 	}
 
-	@OneToMany
-	@JoinColumn(name = "utilisateur_id")
+	@OneToMany(mappedBy = "utilisateur")
 	// @OrderBy("datecreation")
 	public Set<Compte> getComptes() {
 		return comptes;

@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -36,6 +38,7 @@ public class Operation implements Serializable {
 	private String libelle;
 	private double montant;
 	private DateTime dateCreation;
+	private Compte compte;
 
 	public Operation() {
 
@@ -87,6 +90,16 @@ public class Operation implements Serializable {
 
 	public void setDateCreation(DateTime dateCreation) {
 		this.dateCreation = dateCreation;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "compte_id")
+	public Compte getCompte() {
+		return compte;
+	}
+
+	public void setCompte(Compte compte) {
+		this.compte = compte;
 	}
 
 }

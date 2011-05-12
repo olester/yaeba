@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -30,6 +31,7 @@ public class Compte implements Serializable {
 	private Set<Operation> operations;
 	private DateTime dateCreation;
 	private double soldeCourant;
+	private Utilisateur utilisateur;
 
 	public Compte() {
 		operations = new HashSet<Operation>();
@@ -73,8 +75,7 @@ public class Compte implements Serializable {
 		this.libelle = libelle;
 	}
 
-	@OneToMany(targetEntity = Operation.class)
-	@JoinColumn(name = "compte_id")
+	@OneToMany(mappedBy = "compte")
 	public Set<Operation> getOperations() {
 		return operations;
 	}
@@ -107,6 +108,16 @@ public class Compte implements Serializable {
 
 	public void setSoldeCourant(double soldeCourant) {
 		this.soldeCourant = soldeCourant;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "utilisateur_id")
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 	@Override
