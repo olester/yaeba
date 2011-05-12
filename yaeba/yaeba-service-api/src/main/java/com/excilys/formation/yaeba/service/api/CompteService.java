@@ -7,11 +7,11 @@ import com.excilys.formation.yaeba.model.Utilisateur;
 
 public interface CompteService {
 
-	public Compte getCompteById(String id);
+	Compte getCompteById(int id);
 
-	public List<Compte> getComptesByUtilisateur(Utilisateur u);
+	List<Compte> getComptesByUtilisateur(Utilisateur u);
 
-	public boolean isEmpty(Compte c);
+	boolean isEmpty(Compte c);
 
-	public Compte getCompteByNumeroCompte(Utilisateur u, String numeroCompte);
+	Compte getCompteByNumeroCompte(Utilisateur u, String numeroCompte);
 }

@@ -13,6 +13,9 @@
 <body>
 	<div id="wrapper">
 		<tiles:insertAttribute name="header" />
+		<div id="menu">
+
+		</div>
 		<div id="page">
 			<div id="content">
 				<div class="post">

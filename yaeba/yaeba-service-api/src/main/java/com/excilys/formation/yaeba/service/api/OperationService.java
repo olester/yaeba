@@ -8,9 +8,9 @@ import com.excilys.formation.yaeba.model.OperationCarteBancaire;
 
 public interface OperationService {
 
-	public Operation getOperationById(String id);
+	Operation getOperationById(int id);
 
-	public List<Operation> getOperationsByMoisAnnee(Compte c, int annee, int mois);
+	List<Operation> getOperationsByMoisAnnee(Compte c, int annee, int mois);
 
-	public List<OperationCarteBancaire> getOperationsCBByMoisAnnee(Compte c, int annee, int mois);
+	List<OperationCarteBancaire> getOperationsCBByMoisAnnee(Compte c, int annee, int mois);
 }

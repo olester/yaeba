@@ -19,7 +19,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		this.utilisateurDao = utilisateurDao;
 	}
 
-	public Utilisateur getUtilisateurById(String id) {
+	public Utilisateur getUtilisateurById(int id) {
 		return utilisateurDao.getUtilisateurById(id);
 	}
 

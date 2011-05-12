@@ -19,7 +19,7 @@ public class CompteServiceImpl implements CompteService {
 	private CompteDao compteDao;
 
 	@Override
-	public Compte getCompteById(String id) {
+	public Compte getCompteById(int id) {
 		return compteDao.getCompteById(id);
 	}
 
