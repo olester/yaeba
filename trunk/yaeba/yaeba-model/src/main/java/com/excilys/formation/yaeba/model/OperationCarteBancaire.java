@@ -3,7 +3,6 @@ package com.excilys.formation.yaeba.model;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -11,12 +10,8 @@ import org.joda.time.DateTime;
 
 @Entity
 @Table(name = "operationcartebancaire")
-@DiscriminatorValue("operationcartebancaire")
 public class OperationCarteBancaire extends Operation implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 959175591783754961L;
 	private DateTime dateEffective;
 

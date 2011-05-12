@@ -3,13 +3,11 @@ package com.excilys.formation.yaeba.model;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "operationcheque")
-@DiscriminatorValue("operationcheque")
 public class OperationCheque extends Operation implements Serializable {
 
 	/**

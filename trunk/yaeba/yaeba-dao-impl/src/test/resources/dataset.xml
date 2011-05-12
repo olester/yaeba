@@ -6,4 +6,5 @@
 	<compte id="99" datecreation="2001-09-11 11:45:12" numerocompte="4567" libelle="testcompte" soldecourant="10.2"
 		utilisateur_id="99" />
 	<operation id="99" libelle="test" montant="500" datecreation="2002-12-11 09:12:12" compte_id="99" />
+	<operationcartebancaire id="99" dateeffective="2002-12-11 19:12:12" />
 </dataset>
