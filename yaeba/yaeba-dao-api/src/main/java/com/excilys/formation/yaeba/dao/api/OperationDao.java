@@ -16,4 +16,5 @@ public interface OperationDao {
 
 	List<OperationCarteBancaire> getOperationsCBByDate(Compte c, DateTime dateDebut, DateTime dateFin);
 
+	void create(Operation o);
 }
