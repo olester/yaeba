@@ -27,7 +27,7 @@
 					<c:forEach var="compte" items="${comptes}">
 						<tr class="ligne_${compteur%2}">
 							<td class="numero"><a
-								href="${pageContext.request.contextPath}/user/comptes/${compte.numeroCompte}/${annee}/${mois}/1/details.html">${compte.numeroCompte}</a>
+								href="${pageContext.request.contextPath}/user/comptes/${compte.numeroCompte}/${dateBean.annee}/${dateBean.mois}/1/details.html">${compte.numeroCompte}</a>
 							</td>
 							<td class="numero">${compte.libelle}</td>
 							<td><fmt:formatNumber value="${compte.soldeCourant}" pattern="#0.00 €" /></td>

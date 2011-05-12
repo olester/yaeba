@@ -22,14 +22,14 @@
 					<spring:message code="details.filter.txt" />
 					<select name="mois" onchange="submit()">
 						<c:forEach items="${moisDispo}" var="numMois">
-							<option <c:if test="${numMois==mois}">selected</c:if>
+							<option <c:if test="${numMois==dateBean.mois}">selected</c:if>
 								value="${numMois}">
 								<spring:message code="details.month.${numMois}" />
 							</option>
 						</c:forEach>
 					</select> <select name="annee" onchange="submit()">
 						<c:forEach items="${anneesDispo}" var="numAnnee">
-							<option <c:if test="${numAnnee==annee}">selected</c:if>
+							<option <c:if test="${numAnnee==dateBean.annee}">selected</c:if>
 								value="${numAnnee}">${numAnnee}</option>
 						</c:forEach>
 					</select>
@@ -57,8 +57,8 @@
 				test="${not empty listeOperations && ((page-1)*10)<listeOperations.size()}">
 				<p>
 					<spring:message code="details.text2" />
-					<spring:message code="details.month.${mois}" />
-					${annee} :
+					<spring:message code="details.month.${dateBean.mois}" />
+					${dateBean.annee} :
 				</p>
 				<table>
 					<tr class="libelle">
@@ -100,14 +100,14 @@
 				<div class="previous">
 					<c:if test="${page>1}">
 						<a
-							href="${pageContext.request.contextPath}/user/comptes/${numero}/${annee}/${mois}/${page-1}/details.html">&lt;
+							href="${pageContext.request.contextPath}/user/comptes/${numero}/${dateBean.annee}/${dateBean.mois}/${page-1}/details.html">&lt;
 							<spring:message code="details.previous" /> </a>
 					</c:if>
 				</div>
 				<div class="next">
 					<c:if test="${page*10<listeOperations.size()}">
 						<a
-							href="${pageContext.request.contextPath}/user/comptes/${numero}/${annee}/${mois}/${page+1}/details.html"><spring:message
+							href="${pageContext.request.contextPath}/user/comptes/${numero}/${dateBean.annee}/${dateBean.mois}/${page+1}/details.html"><spring:message
 								code="details.next" /> &gt;</a>
 
 					</c:if>

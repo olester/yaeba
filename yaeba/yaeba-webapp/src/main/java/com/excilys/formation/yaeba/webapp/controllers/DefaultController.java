@@ -17,8 +17,7 @@ public class DefaultController {
 		model.put("bouton", "bouton_welcome");
 
 		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
-		model.put("nom", u.getNom());
-		model.put("prenom", u.getPrenom());
+		model.put("utilisateur", u);
 
 		return "welcome";
 	}
