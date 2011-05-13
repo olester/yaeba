@@ -21,6 +21,7 @@
 						<td><spring:message code="accounts.account" /></td>
 						<td><spring:message code="accounts.label" /></td>
 						<td><spring:message code="accounts.balance" /></td>
+						<td><spring:message code="accounts.outstanding" /></td>
 					</tr>
 
 					<c:set var="compteur" value="0" />
@@ -31,6 +32,10 @@
 							</td>
 							<td class="numero">${compte.libelle}</td>
 							<td><fmt:formatNumber value="${compte.soldeCourant}" pattern="#0.00 €" /></td>
+							
+							
+							<td><c:if test="${compte.cards}">J'ai des cartes</c:if></td>
+							
 						</tr>
 						<c:set var="compteur" value="${compteur+1}" />
 					</c:forEach>
