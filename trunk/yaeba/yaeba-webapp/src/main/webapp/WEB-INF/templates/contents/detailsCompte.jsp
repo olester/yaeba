@@ -61,7 +61,7 @@
 			</c:when>
 			<c:when test="${not empty listeOperations && ((page-1)*10)<listeOperations.size()}">
 				<p>
-					<spring:message code="details.text2" />
+					<spring:message code="details.text" />
 					<spring:message code="details.month.${dateBean.mois}" />
 					${dateBean.annee} :
 				</p>
@@ -86,7 +86,7 @@
 										<joda:format value="${operation.dateCreation}" pattern="dd/MM/yyyy" />
 									</c:otherwise>
 								</c:choose></td>
-							<td><spring:message code="details.title" /> <%-- 							<c:if test="${operation.class.name='OperationCheque'}"> --%>
+							<td><%-- 							<c:if test="${operation.class.name='OperationCheque'}"> --%>
 								<%-- 							<spring:message code="details.OPERATIONCHEQUE" /> ${operation.numeroCheque} --%> <%-- 							</c:if> --%>
 								${operation.libelle}</td>
 							<td <c:if test="${operation.montant<0}">style="text-align:left;"</c:if>><fmt:formatNumber
