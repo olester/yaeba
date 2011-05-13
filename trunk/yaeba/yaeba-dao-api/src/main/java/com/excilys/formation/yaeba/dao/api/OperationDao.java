@@ -18,6 +18,10 @@ public interface OperationDao {
 
 	List<Operation> getOperationsNoCBByDate(Compte c, DateTime dateDebut, DateTime dateFin);
 
+	List<Operation> getOperationsNoCBByDate(Compte c, DateTime dateDebut, DateTime dateFin, int page, int nbResultats);
+
+	long getNbOperationsNoCBByDate(Compte c, DateTime dateDebut, DateTime dateFin);
+
 	List<OperationCarteBancaire> getOperationsCBByDate(Compte c, DateTime dateDebut, DateTime dateFin);
 
 	List<OperationVirementInterne> getVirementsInternes(Utilisateur u);

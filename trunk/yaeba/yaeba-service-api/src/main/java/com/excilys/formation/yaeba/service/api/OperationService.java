@@ -16,6 +16,10 @@ public interface OperationService {
 
 	List<Operation> getOperationsNoCBByMoisAnnee(Compte c, int annee, int mois);
 
+	List<Operation> getOperationsNoCBByMoisAnnee(Compte c, int annee, int mois, int page, int nbResultats);
+
+	long getNbOperationsNoCBByMoisAnnee(Compte c, int annee, int mois);
+
 	List<OperationCarteBancaire> getOperationsCBByMoisAnnee(Compte c, int annee, int mois);
 
 	List<OperationVirementInterne> getVirementsInternes(Utilisateur u);

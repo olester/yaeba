@@ -2,6 +2,7 @@ package com.excilys.formation.yaeba.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,28 @@ public class OperationDaoImpl extends HibernateDaoSupport implements OperationDa
 		return getHibernateTemplate().find(
 				"FROM Operation o WHERE o.compte = ? AND o.class<>OperationCarteBancaire AND o.dateCreation BETWEEN ? AND ? ORDER BY o.dateCreation DESC", c,
 				dateDebut, dateFin);
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public List<Operation> getOperationsNoCBByDate(Compte c, DateTime dateDebut, DateTime dateFin, int page, int nbResultats) {
+		int offset = (page * nbResultats) - nbResultats +1;
+		String queryString = "FROM Operation o WHERE o.compte = ? AND o.class<>OperationCarteBancaire AND o.dateCreation BETWEEN ? AND ? ORDER BY o.dateCreation DESC";
+		Query q = getSession().createQuery(queryString);
+		q.setParameter(0, c);
+		q.setParameter(1, dateDebut);
+		q.setParameter(2, dateFin);
+		q.setMaxResults(nbResultats);
+		q.setFirstResult(offset);
+		List res = q.list();
+		return res;
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public long getNbOperationsNoCBByDate(Compte c, DateTime dateDebut, DateTime dateFin) {
+		List res = getHibernateTemplate().find("SELECT count(*) from Operation o WHERE o.compte = ? AND o.class<>OperationCarteBancaire AND o.dateCreation BETWEEN ? AND ?", c, dateDebut, dateFin);
+		return ((Long)res.get(0)).intValue();
 	}
 
 	@SuppressWarnings("unchecked")
