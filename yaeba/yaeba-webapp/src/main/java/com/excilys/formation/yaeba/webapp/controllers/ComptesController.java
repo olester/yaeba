@@ -1,6 +1,7 @@
 package com.excilys.formation.yaeba.webapp.controllers;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -68,7 +69,7 @@ public class ComptesController {
 	@RequestMapping("/{numeroCompte}/{annee}/{mois}/{page}/details.html")
 	public String redirectDetailsCompte(@PathVariable("numeroCompte") String numeroCompte, @PathVariable("annee") String annee,
 			@PathVariable("mois") String mois, @PathVariable("page") String page,
-			@RequestParam(value = "excel", defaultValue = "false", required = false) String excel, ModelMap model) {
+			@RequestParam(value = "excel", defaultValue = "false", required = false) String excel, ModelMap model, Locale locale) {
 		int anneeInt;
 		int moisInt;
 		int pageInt;
@@ -134,6 +135,8 @@ public class ComptesController {
 				model.put("listeOperations", operationService.getOperationsByMoisAnnee(c, anneeInt, moisInt));
 				return "ExcelBean";
 			}
+
+			model.put("locale", locale.getLanguage());
 
 			model.put("compteEstVide", compteService.isEmpty(c));
 			model.put("page", pageInt);

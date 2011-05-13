@@ -60,17 +60,23 @@
 		<put-attribute name="button" value="button_transfers" />
 	</definition>
 
+	<definition name="historique" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/templates/contents/historiqueVirements.jsp" />
+		<put-attribute name="title" value="histo.title" />
+		<put-attribute name="button" value="button_transfers" />
+	</definition>
+
 	<definition name="detailsCompte" extends="baseLayout">
 		<put-attribute name="content" value="/WEB-INF/templates/contents/detailsCompte.jsp" />
 		<put-attribute name="title" value="details.title" />
 		<put-attribute name="button" value="button_accounts" />
 	</definition>
 
-	<definition name="detailsCC" extends="baseLayout">
-		<put-attribute name="content" value="/WEB-INF/templates/contents/detailsCC.jsp" />
-		<put-attribute name="title" value="details.title" />
-		<put-attribute name="button" value="button_accounts" />
-	</definition>
+	<!-- <definition name="detailsCC" extends="baseLayout"> -->
+	<!-- <put-attribute name="content" value="/WEB-INF/templates/contents/detailsCC.jsp" /> -->
+	<!-- <put-attribute name="title" value="details.title" /> -->
+	<!-- <put-attribute name="button" value="button_accounts" /> -->
+	<!-- </definition> -->
 
 	<!-- Admin -->
 	<definition name="admin" extends="baseLayout">
