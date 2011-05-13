@@ -5,6 +5,7 @@
 <%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags"%>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-1.6.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jqueryRotate-2.1.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/toggle.js"></script>
 
 <div class="post">
@@ -86,9 +87,9 @@
 										<joda:format value="${operation.dateCreation}" pattern="dd/MM/yyyy" />
 									</c:otherwise>
 								</c:choose></td>
-							<td><%-- 							<c:if test="${operation.class.name='OperationCheque'}"> --%>
-								<%-- 							<spring:message code="details.OPERATIONCHEQUE" /> ${operation.numeroCheque} --%> <%-- 							</c:if> --%>
-								${operation.libelle}</td>
+							<td>
+								<%-- 							<c:if test="${operation.class.name='OperationCheque'}"> --%> <%-- 							<spring:message code="details.OPERATIONCHEQUE" /> ${operation.numeroCheque} --%>
+								<%-- 							</c:if> --%> ${operation.libelle}</td>
 							<td <c:if test="${operation.montant<0}">style="text-align:left;"</c:if>><fmt:formatNumber
 									value="${operation.montant}" pattern="#0.00 EUR" />
 							</td>
@@ -126,8 +127,11 @@
 				<br />
 				<table>
 					<tr>
-						<td><a id="action" style="cursor: pointer;" title="<spring:message code='details.cc.link' />"><spring:message
-									code="details.sum" /> </a></td>
+						<td><a id="action2" style="cursor: pointer;" title="<spring:message code='details.cc.link' />"><img
+								style="margin-right: 15px; vertical-align: middle;" id="arrow" src="${pageContext.request.contextPath}/images/arrow.png" /> </a> <a
+							id="action" style="cursor: pointer;" title="<spring:message code='details.cc.link' />"><spring:message
+									code="details.sum" /> </a>
+						</td>
 						<td><fmt:formatNumber value="${sommeCB}" pattern="#0.00 €" /></td>
 					</tr>
 				</table>
