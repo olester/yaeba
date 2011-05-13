@@ -12,7 +12,7 @@ public interface OperationDao {
 
 	Operation getOperationById(int id);
 
-	List<Operation> getOperationsByDate(Compte c, DateTime dateDebut, DateTime dateFin);
+	List<Operation> getOperationsNoCBByDate(Compte c, DateTime dateDebut, DateTime dateFin);
 
 	List<OperationCarteBancaire> getOperationsCBByDate(Compte c, DateTime dateDebut, DateTime dateFin);
 

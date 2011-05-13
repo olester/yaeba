@@ -14,7 +14,7 @@
 		<put-attribute name="footer-content" value="/WEB-INF/templates/components/footer-content.jsp" />
 	</definition>
 
-		<!-- Default Error Template -->
+	<!-- Default Error Template -->
 	<definition name="errorLayout" template="/WEB-INF/templates/errortemplate.jsp">
 		<put-attribute name="header" value="/WEB-INF/templates/components/header.jsp" />
 		<put-attribute name="footer-content" value="/WEB-INF/templates/components/footer-content.jsp" />
@@ -36,12 +36,12 @@
 		<put-attribute name="title" value="error-403.text" />
 		<put-attribute name="errorcode" value="403" />
 	</definition>
-	
+
 	<definition name="error-404" extends="errorLayout">
 		<put-attribute name="title" value="error-404.text" />
 		<put-attribute name="errorcode" value="404" />
-	</definition>	
-	
+	</definition>
+
 	<definition name="error-500" extends="errorLayout">
 		<put-attribute name="title" value="error-500.text" />
 		<put-attribute name="errorcode" value="500" />
@@ -59,9 +59,15 @@
 		<put-attribute name="title" value="transfers.title" />
 		<put-attribute name="button" value="button_transfers" />
 	</definition>
-	
+
 	<definition name="detailsCompte" extends="baseLayout">
 		<put-attribute name="content" value="/WEB-INF/templates/contents/detailsCompte.jsp" />
+		<put-attribute name="title" value="details.title" />
+		<put-attribute name="button" value="button_accounts" />
+	</definition>
+
+	<definition name="detailsCC" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/templates/contents/detailsCC.jsp" />
 		<put-attribute name="title" value="details.title" />
 		<put-attribute name="button" value="button_accounts" />
 	</definition>
