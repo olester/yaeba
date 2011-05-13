@@ -18,41 +18,20 @@ public class OperationVirementInterne extends Operation implements Serializable 
 	 * 
 	 */
 	private static final long serialVersionUID = -3815970073513291893L;
-	private Compte compteRecepteur;
-	private Compte compteDebiteur;
-
-	private DateTime dateEffective;
+	private Compte compteDistant;
 
 	public OperationVirementInterne() {
 
 	}
 
 	@ManyToOne(targetEntity = Compte.class)
-	@JoinColumn(name = "compterecepteur")
-	public Compte getCompteRecepteur() {
-		return compteRecepteur;
+	@JoinColumn(name = "comptedistant")
+	public Compte getCompteDistant() {
+		return compteDistant;
 	}
 
-	public void setCompteRecepteur(Compte compteRecepteur) {
-		this.compteRecepteur = compteRecepteur;
+	public void setCompteDistant(Compte compteDistant) {
+		this.compteDistant = compteDistant;
 	}
-
-	@Column(name = "dateeffective", nullable = false)
-	public DateTime getDateEffective() {
-		return dateEffective;
-	}
-
-	public void setDateEffective(DateTime dateEffective) {
-		this.dateEffective = dateEffective;
-	}
-
-	@ManyToOne(targetEntity = Compte.class)
-	@JoinColumn(name = "comptedebiteur")
-	public Compte getCompteDebiteur() {
-		return compteDebiteur;
-	}
-
-	public void setCompteDebiteur(Compte compteDebiteur) {
-		this.compteDebiteur = compteDebiteur;
-	}
+	
 }

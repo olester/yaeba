@@ -11,6 +11,10 @@
 			<spring:message code="inprogress.unavailable" />
 		</p>
 
+		<p>
+			<a href="${pageContext.request.contextPath}/user/virements/historique.html"><spring:message code="histo.link" /> </a>
+		</p>
+		
 	</div>
 </div>
 <div style="clear: both;">&nbsp;</div>

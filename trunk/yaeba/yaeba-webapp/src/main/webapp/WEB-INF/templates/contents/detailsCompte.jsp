@@ -90,7 +90,7 @@
 								<%-- 							<spring:message code="details.OPERATIONCHEQUE" /> ${operation.numeroCheque} --%> <%-- 							</c:if> --%>
 								${operation.libelle}</td>
 							<td <c:if test="${operation.montant<0}">style="text-align:left;"</c:if>><fmt:formatNumber
-									value="${operation.montant}" pattern="#0.00 €" />
+									value="${operation.montant}" pattern="#0.00 EUR" />
 							</td>
 						</tr>
 						<c:set var="compteur" value="${compteur+1}" />

@@ -12,6 +12,8 @@ import com.excilys.formation.yaeba.dao.api.OperationDao;
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.Operation;
 import com.excilys.formation.yaeba.model.OperationCarteBancaire;
+import com.excilys.formation.yaeba.model.OperationVirementInterne;
+import com.excilys.formation.yaeba.model.Utilisateur;
 
 @Repository
 public class OperationDaoImpl extends HibernateDaoSupport implements OperationDao {
@@ -52,6 +54,12 @@ public class OperationDaoImpl extends HibernateDaoSupport implements OperationDa
 	public void create(Operation o) {
 		getHibernateTemplate().save(o);
 
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<OperationVirementInterne> getVirementsInternes(Utilisateur u) {
+		return getHibernateTemplate().find("FROM OperationVirementInterne o WHERE o.compte.utilisateur=? AND o.montant<0", u);
 	}
 
 }

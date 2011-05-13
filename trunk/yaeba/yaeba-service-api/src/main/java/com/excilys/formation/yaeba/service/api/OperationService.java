@@ -5,6 +5,8 @@ import java.util.List;
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.Operation;
 import com.excilys.formation.yaeba.model.OperationCarteBancaire;
+import com.excilys.formation.yaeba.model.OperationVirementInterne;
+import com.excilys.formation.yaeba.model.Utilisateur;
 
 public interface OperationService {
 
@@ -15,6 +17,8 @@ public interface OperationService {
 	List<Operation> getOperationsNoCBByMoisAnnee(Compte c, int annee, int mois);
 
 	List<OperationCarteBancaire> getOperationsCBByMoisAnnee(Compte c, int annee, int mois);
+
+	List<OperationVirementInterne> getVirementsInternes(Utilisateur u);
 
 	void create(Operation o);
 }

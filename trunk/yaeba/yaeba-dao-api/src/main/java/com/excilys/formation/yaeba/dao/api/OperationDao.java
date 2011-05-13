@@ -7,6 +7,8 @@ import org.joda.time.DateTime;
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.Operation;
 import com.excilys.formation.yaeba.model.OperationCarteBancaire;
+import com.excilys.formation.yaeba.model.OperationVirementInterne;
+import com.excilys.formation.yaeba.model.Utilisateur;
 
 public interface OperationDao {
 
@@ -17,6 +19,8 @@ public interface OperationDao {
 	List<Operation> getOperationsNoCBByDate(Compte c, DateTime dateDebut, DateTime dateFin);
 
 	List<OperationCarteBancaire> getOperationsCBByDate(Compte c, DateTime dateDebut, DateTime dateFin);
+
+	List<OperationVirementInterne> getVirementsInternes(Utilisateur u);
 
 	void create(Operation o);
 }
