@@ -93,6 +93,12 @@
 			</exclusions>
 		</dependency>
 
+		<!-- Export Excel -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-scratchpad</artifactId>
+		</dependency>
+
 		<!-- Servlet -->
 
 		<dependency>

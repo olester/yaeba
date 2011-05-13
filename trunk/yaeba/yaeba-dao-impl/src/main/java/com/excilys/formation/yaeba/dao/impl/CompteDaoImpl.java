@@ -43,7 +43,7 @@ public class CompteDaoImpl extends HibernateDaoSupport implements CompteDao {
 	@Override
 	public boolean isEmpty(Compte c) {
 		List<Compte> compte = getHibernateTemplate().find("FROM Compte c WHERE c.operations.size > 0 AND c=?", c);
-		return !compte.isEmpty();
+		return compte.isEmpty();
 	}
 
 }
