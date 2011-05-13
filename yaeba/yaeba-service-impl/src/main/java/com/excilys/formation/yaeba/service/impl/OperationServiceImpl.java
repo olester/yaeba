@@ -40,6 +40,18 @@ public class OperationServiceImpl implements OperationService {
 	}
 
 	@Override
+	public List<Operation> getOperationsNoCBByMoisAnnee(Compte c, int annee, int mois,int page, int nbResultats) {
+		DateTime dt = new DateTime(annee, mois, 1, 0, 0, 0, 0);
+		return operationDao.getOperationsNoCBByDate(c, dt, dt.plusMonths(1),page, nbResultats);
+	}
+
+	@Override
+	public long getNbOperationsNoCBByMoisAnnee(Compte c, int annee, int mois) {
+		DateTime dt = new DateTime(annee, mois, 1, 0, 0, 0, 0);
+		return operationDao.getNbOperationsNoCBByDate(c, dt, dt.plusMonths(1));
+	}
+
+	@Override
 	public List<OperationCarteBancaire> getOperationsCBByMoisAnnee(Compte c, int annee, int mois) {
 		DateTime dt = new DateTime(annee, mois, 1, 0, 0, 0, 0);
 		return operationDao.getOperationsCBByDate(c, dt, dt.plusMonths(1));

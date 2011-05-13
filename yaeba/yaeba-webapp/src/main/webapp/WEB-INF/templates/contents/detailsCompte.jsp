@@ -55,12 +55,12 @@
 			</c:when>
 		</c:choose>
 		<c:choose>
-			<c:when test="${not empty listeOperations && ((page-1)*10)>listeOperations.size()}">
+			<c:when test="${not empty listeOperations && page > nbPages}">
 				<p>
 					<spring:message code="details.alt3" />
 				</p>
 			</c:when>
-			<c:when test="${not empty listeOperations && ((page-1)*10)<listeOperations.size()}">
+			<c:when test="${not empty listeOperations && page <= nbPages}">
 				<p>
 					<spring:message code="details.text" />
 					<spring:message code="details.month.${dateBean.mois}" />
@@ -77,7 +77,7 @@
 					</tr>
 
 					<c:set var="compteur" value="0" />
-					<c:forEach var="operation" items="${listeOperations}" begin="${(page-1)*10}" end="${page*10-1}">
+					<c:forEach var="operation" items="${listeOperations}">
 						<tr class="ligne_${compteur%2}">
 							<td><c:choose>
 									<c:when test="${locale=='en'}">
@@ -106,7 +106,7 @@
 					</c:if>
 				</div>
 				<div class="next">
-					<c:if test="${page*10<listeOperations.size()}">
+					<c:if test="${page<nbPages}">
 						<a
 							href="${pageContext.request.contextPath}/user/comptes/${numero}/${dateBean.annee}/${dateBean.mois}/${page+1}/details.html"><spring:message
 								code="details.next" /> &gt;</a>
