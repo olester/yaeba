@@ -11,9 +11,9 @@
 		</p>
 	</div>
 	<span style="float: right">
-		<a href="?lang=en"><img src="${pageContext.request.contextPath}/images/drapeau_gb.png" border="0" width="24" /></a>
+		<a href="?lang=en"><img src="${pageContext.request.contextPath}/images/drapeau_gb.png" width="24" /></a>
 		&nbsp;&nbsp;
-		<a href="?lang=fr"><img src="${pageContext.request.contextPath}/images/drapeau_fr.png" border="0" width="24" /></a>
+		<a href="?lang=fr"><img src="${pageContext.request.contextPath}/images/drapeau_fr.png" width="24" /></a>
 	</span>
 	<div class="column2">
 		<ul class="list">

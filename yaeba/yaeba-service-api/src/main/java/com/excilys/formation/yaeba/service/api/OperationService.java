@@ -10,6 +10,8 @@ public interface OperationService {
 
 	Operation getOperationById(int id);
 
+	List<Operation> getOperationsByMoisAnnee(Compte c, int annee, int mois);
+
 	List<Operation> getOperationsNoCBByMoisAnnee(Compte c, int annee, int mois);
 
 	List<OperationCarteBancaire> getOperationsCBByMoisAnnee(Compte c, int annee, int mois);

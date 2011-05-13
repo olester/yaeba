@@ -443,3 +443,7 @@ tr.ligne_1 {
 .next {
 	float: right;
 }
+
+img {
+	border-width: 0px
+}

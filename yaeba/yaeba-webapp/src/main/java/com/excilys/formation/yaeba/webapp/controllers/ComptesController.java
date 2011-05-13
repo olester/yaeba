@@ -15,6 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.OperationCarteBancaire;
@@ -52,7 +53,8 @@ public class ComptesController {
 
 	@RequestMapping("/{numeroCompte}/{annee}/{mois}/{page}/details.html")
 	public String redirectDetailsCompte(@PathVariable("numeroCompte") String numeroCompte, @PathVariable("annee") String annee,
-			@PathVariable("mois") String mois, @PathVariable("page") String page, ModelMap model) {
+			@PathVariable("mois") String mois, @PathVariable("page") String page,
+			@RequestParam(value = "excel", defaultValue = "false", required = false) String excel, ModelMap model) {
 		int anneeInt;
 		int moisInt;
 		int pageInt;
@@ -72,16 +74,12 @@ public class ComptesController {
 		Compte c = compteService.getCompteByNumeroCompte(u, numeroCompte);
 
 		if (c != null) {
+			model.put("utilisateur", u);
 			model.put("numero", numeroCompte);
-
 			dateBean.setAnnee(anneeInt);
 			dateBean.setMois(moisInt);
 			model.put("dateBean", dateBean);
-
-			model.put("page", pageInt);
 			model.put("libelle", c.getLibelle());
-			model.put("compteEstVide", compteService.isEmpty(c));
-			model.put("listeOperations", operationService.getOperationsNoCBByMoisAnnee(c, anneeInt, moisInt));
 
 			// -- Actualisation des listes déroulantes
 			Set<Integer> anneesDispo = new TreeSet<Integer>();
@@ -96,7 +94,6 @@ public class ComptesController {
 			if (dtMax.compareTo(auj.minusMonths(36)) < 0) dtMax = auj.minusMonths(36);
 			if (anneeInt < dtMax.getYear() || (anneeInt == dtMax.getYear() && moisInt < dtMax.getMonthOfYear())) {
 				model.clear();
-				System.out.println("Tchao !");
 				return "redirect:/error-404.html";
 			}
 
@@ -107,9 +104,6 @@ public class ComptesController {
 				if (dateI.getYear() == anneeInt) moisDispo.add(dateI.getMonthOfYear());
 				if (!anneesDispo.contains(dateI.getYear())) anneesDispo.add(dateI.getYear());
 			}
-
-			model.put("anneesDispo", anneesDispo);
-			model.put("moisDispo", moisDispo);
 			// ---------------------------------------
 
 			List<OperationCarteBancaire> listeOperationsCB = operationService.getOperationsCBByMoisAnnee(c, anneeInt, moisInt);
@@ -122,7 +116,18 @@ public class ComptesController {
 				model.put("listeOperationsCB", listeOperationsCB);
 			}
 
-			model.put("utilisateur", u);
+			if (excel.equals("true")) {
+				model.put("listeOperations", operationService.getOperationsByMoisAnnee(c, anneeInt, moisInt));
+				return "ExcelBean";
+			}
+
+			model.put("compteEstVide", compteService.isEmpty(c));
+			model.put("page", pageInt);
+			model.put("listeOperations", operationService.getOperationsNoCBByMoisAnnee(c, anneeInt, moisInt));
+
+			model.put("anneesDispo", anneesDispo);
+			model.put("moisDispo", moisDispo);
+
 			return "detailsCompte";
 		}
 
