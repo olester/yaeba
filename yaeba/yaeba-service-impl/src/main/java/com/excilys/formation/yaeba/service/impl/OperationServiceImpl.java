@@ -26,9 +26,9 @@ public class OperationServiceImpl implements OperationService {
 	}
 
 	@Override
-	public List<Operation> getOperationsByMoisAnnee(Compte c, int annee, int mois) {
+	public List<Operation> getOperationsNoCBByMoisAnnee(Compte c, int annee, int mois) {
 		DateTime dt = new DateTime(annee, mois, 1, 0, 0, 0, 0);
-		return operationDao.getOperationsByDate(c, dt, dt.dayOfMonth().withMaximumValue());
+		return operationDao.getOperationsNoCBByDate(c, dt, dt.dayOfMonth().withMaximumValue());
 	}
 
 	@Override

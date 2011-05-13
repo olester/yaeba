@@ -81,7 +81,7 @@ public class ComptesController {
 			model.put("page", pageInt);
 			model.put("libelle", c.getLibelle());
 			model.put("compteEstVide", compteService.isEmpty(c));
-			model.put("listeOperations", operationService.getOperationsByMoisAnnee(c, anneeInt, moisInt));
+			model.put("listeOperations", operationService.getOperationsNoCBByMoisAnnee(c, anneeInt, moisInt));
 
 			// -- Actualisation des listes déroulantes
 			Set<Integer> anneesDispo = new TreeSet<Integer>();
@@ -112,10 +112,15 @@ public class ComptesController {
 			model.put("moisDispo", moisDispo);
 			// ---------------------------------------
 
-			float sommeCB = 0;
-			for (OperationCarteBancaire o : operationService.getOperationsCBByMoisAnnee(c, anneeInt, moisInt))
-				sommeCB += o.getMontant();
-			model.put("sommeCB", sommeCB);
+			List<OperationCarteBancaire> listeOperationsCB = operationService.getOperationsCBByMoisAnnee(c, anneeInt, moisInt);
+			model.put("nbCB", listeOperationsCB.size());
+			if (!listeOperationsCB.isEmpty()) {
+				float sommeCB = 0;
+				for (OperationCarteBancaire o : listeOperationsCB)
+					sommeCB += o.getMontant();
+				model.put("sommeCB", sommeCB);
+				model.put("listeOperationsCB", listeOperationsCB);
+			}
 
 			model.put("utilisateur", u);
 			return "detailsCompte";
