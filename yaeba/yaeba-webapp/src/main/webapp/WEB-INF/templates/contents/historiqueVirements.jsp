@@ -6,16 +6,12 @@
 
 <div class="post">
 	<h2 class="title">
-		<a href="#"><spring:message code="histo.title" /> </a>
+		<a href="#"><spring:message code="transfers.title" /> </a>
 	</h2>
+	<p class="meta"><spring:message code="histo.title" /></p>
 	<div class="entry">
 		<c:choose>
-			<c:when test="${not empty listeVirements && ((page-1)*10)>listeVirements.size()}">
-				<p>
-					<spring:message code="details.alt3" />
-				</p>
-			</c:when>
-			<c:when test="${not empty listeVirements && ((page-1)*10)<listeVirements.size()}">
+			<c:when test="${not empty listeVirements}">
 				<p>
 					<spring:message code="histo.text" />
 				</p>
@@ -43,8 +39,8 @@
 							<td>
 								<%-- 							<c:if test="${operation.class.name='OperationCheque'}"> --%> <%-- 							<spring:message code="details.OPERATIONCHEQUE" /> ${operation.numeroCheque} --%>
 								<%-- 							</c:if> --%> ${virement.libelle}</td>
-							<td>${virement.compte.libelle} (${virement.compte.numeroCompte})</td>
-							<td>${virement.compteDistant.libelle} (${virement.compteDistant.numeroCompte})</td>
+							<td><a href="${pageContext.request.contextPath}/user/comptes/${virement.compte.numeroCompte}/${dateBean.annee}/${dateBean.mois}/1/details.html">${virement.compte.libelle} (${virement.compte.numeroCompte})</a></td>
+							<td><a href="${pageContext.request.contextPath}/user/comptes/${virement.compteDistant.numeroCompte}/${dateBean.annee}/${dateBean.mois}/1/details.html">${virement.compteDistant.libelle} (${virement.compteDistant.numeroCompte})</a></td>
 							<td><fmt:formatNumber value="${-virement.montant}" pattern="#0.00 EUR" /></td>
 						</tr>
 						<c:set var="compteur" value="${compteur+1}" />
