@@ -1,0 +1,1 @@
+ALTER TABLE `compte` ADD COLUMN `cards` TINYINT(1) NOT NULL AFTER `utilisateur_id`;

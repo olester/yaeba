@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,19 +33,20 @@ public class Compte implements Serializable {
 	private DateTime dateCreation;
 	private double soldeCourant;
 	private Utilisateur utilisateur;
+	private boolean cards;
 
 	public Compte() {
 		operations = new HashSet<Operation>();
 	}
 
-	public Compte(String numeroCompte, String libelle, Set<Operation> operations, DateTime dateCreation, float soldeCourant) {
-
-		this.numeroCompte = numeroCompte;
-		this.operations = operations;
-		this.dateCreation = dateCreation;
-		this.libelle = libelle;
-		this.soldeCourant = soldeCourant;
-	}
+	// public Compte(String numeroCompte, String libelle, Set<Operation> operations, DateTime dateCreation, float soldeCourant) {
+	//
+	// this.numeroCompte = numeroCompte;
+	// this.operations = operations;
+	// this.dateCreation = dateCreation;
+	// this.libelle = libelle;
+	// this.soldeCourant = soldeCourant;
+	// }
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -120,11 +122,30 @@ public class Compte implements Serializable {
 		this.utilisateur = utilisateur;
 	}
 
+	@Column(name = "cards", nullable = false)
+	@Basic
+	public boolean isCards() {
+		return cards;
+	}
+
+	public void setCards(boolean cards) {
+		this.cards = cards;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + (cards ? 1231 : 1237);
+		result = prime * result + ((dateCreation == null) ? 0 : dateCreation.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((libelle == null) ? 0 : libelle.hashCode());
 		result = prime * result + ((numeroCompte == null) ? 0 : numeroCompte.hashCode());
+		result = prime * result + ((operations == null) ? 0 : operations.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(soldeCourant);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((utilisateur == null) ? 0 : utilisateur.hashCode());
 		return result;
 	}
 
@@ -134,9 +155,26 @@ public class Compte implements Serializable {
 		if (obj == null) return false;
 		if (getClass() != obj.getClass()) return false;
 		Compte other = (Compte) obj;
+		if (cards != other.cards) return false;
+		if (dateCreation == null) {
+			if (other.dateCreation != null) return false;
+		} else if (!dateCreation.equals(other.dateCreation)) return false;
+		if (id == null) {
+			if (other.id != null) return false;
+		} else if (!id.equals(other.id)) return false;
+		if (libelle == null) {
+			if (other.libelle != null) return false;
+		} else if (!libelle.equals(other.libelle)) return false;
 		if (numeroCompte == null) {
 			if (other.numeroCompte != null) return false;
 		} else if (!numeroCompte.equals(other.numeroCompte)) return false;
+		if (operations == null) {
+			if (other.operations != null) return false;
+		} else if (!operations.equals(other.operations)) return false;
+		if (Double.doubleToLongBits(soldeCourant) != Double.doubleToLongBits(other.soldeCourant)) return false;
+		if (utilisateur == null) {
+			if (other.utilisateur != null) return false;
+		} else if (!utilisateur.equals(other.utilisateur)) return false;
 		return true;
 	}
 
