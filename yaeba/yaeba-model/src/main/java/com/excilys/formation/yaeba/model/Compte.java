@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -33,7 +34,8 @@ public class Compte implements Serializable {
 	private DateTime dateCreation;
 	private double soldeCourant;
 	private Utilisateur utilisateur;
-	private boolean cards;
+	private boolean cards; // TODO refactoré ce nom en isAssociatedWithCards
+	transient private double encoursCarte;
 
 	public Compte() {
 		operations = new HashSet<Operation>();
@@ -86,13 +88,6 @@ public class Compte implements Serializable {
 		this.operations = operations;
 	}
 
-	public Set<Operation> getOperationsByDate(int annee, int mois) {
-		Set<Operation> operations = new HashSet<Operation>();
-		for (Operation o : getOperations())
-			if (o.getDateCreation().getYear() + 1900 == annee && o.getDateCreation().getMonthOfYear() + 1 == mois) operations.add(o);
-		return operations;
-	}
-
 	@Column(name = "datecreation", nullable = false)
 	@Type(type = "jodaDateTime")
 	public DateTime getDateCreation() {
@@ -130,6 +125,15 @@ public class Compte implements Serializable {
 
 	public void setCards(boolean cards) {
 		this.cards = cards;
+	}
+
+	@Transient
+	public double getEncoursCarte() {
+		return encoursCarte;
+	}
+
+	public void setEncoursCarte(double encoursCarte) {
+		this.encoursCarte = encoursCarte;
 	}
 
 	@Override

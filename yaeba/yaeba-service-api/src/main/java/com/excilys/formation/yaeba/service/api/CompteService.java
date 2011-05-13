@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.Utilisateur;
+import com.excilys.formation.yaeba.model.exception.NoCardException;
 
 public interface CompteService {
 
@@ -14,4 +15,6 @@ public interface CompteService {
 	boolean isEmpty(Compte c);
 
 	Compte getCompteByNumeroCompte(Utilisateur u, String numeroCompte);
+
+	double getEncoursCarte(Compte c) throws NoCardException;
 }

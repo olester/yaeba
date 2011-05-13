@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.joda.time.DateTime;
 import org.joda.time.Months;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.OperationCarteBancaire;
 import com.excilys.formation.yaeba.model.Utilisateur;
+import com.excilys.formation.yaeba.model.exception.NoCardException;
 import com.excilys.formation.yaeba.service.api.CompteService;
 import com.excilys.formation.yaeba.service.api.OperationService;
 import com.excilys.formation.yaeba.webapp.CustomUser;
@@ -28,6 +31,8 @@ import com.excilys.formation.yaeba.webapp.DateBean;
 @Controller
 @RequestMapping("user/comptes")
 public class ComptesController {
+
+	Logger l = LoggerFactory.getLogger(ComptesController.class);
 
 	@Autowired
 	private OperationService operationService;
@@ -45,6 +50,15 @@ public class ComptesController {
 
 		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
 		List<Compte> comptes = compteService.getComptesByUtilisateur(u);
+
+		for (Compte c : comptes) {
+			try {
+				if (c.isCards()) c.setEncoursCarte(compteService.getEncoursCarte(c));
+			} catch (NoCardException e) {
+				l.error(e.getMessage());
+			}
+		}
+
 		model.put("comptes", comptes);
 
 		model.put("utilisateur", u);
