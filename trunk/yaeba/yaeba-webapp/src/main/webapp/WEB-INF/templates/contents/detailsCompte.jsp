@@ -67,9 +67,12 @@
 				</p>
 				<table>
 					<tr class="libelle">
-						<td><spring:message code="details.date" /></td>
-						<td><spring:message code="details.label" /></td>
-						<td style="width: 160px;"><spring:message code="details.amount" /></td>
+						<td><spring:message code="details.date" />
+						</td>
+						<td><spring:message code="details.label" />
+						</td>
+						<td style="width: 160px;"><spring:message code="details.amount" />
+						</td>
 					</tr>
 
 					<c:set var="compteur" value="0" />
@@ -82,13 +85,13 @@
 									<c:otherwise>
 										<joda:format value="${operation.dateCreation}" pattern="dd/MM/yyyy" />
 									</c:otherwise>
-								</c:choose>
-							</td>
+								</c:choose></td>
 							<td><spring:message code="details.title" /> <%-- 							<c:if test="${operation.class.name='OperationCheque'}"> --%>
 								<%-- 							<spring:message code="details.OPERATIONCHEQUE" /> ${operation.numeroCheque} --%> <%-- 							</c:if> --%>
 								${operation.libelle}</td>
 							<td <c:if test="${operation.montant<0}">style="text-align:left;"</c:if>><fmt:formatNumber
-									value="${operation.montant}" pattern="#0.00 €" /></td>
+									value="${operation.montant}" pattern="#0.00 €" />
+							</td>
 						</tr>
 						<c:set var="compteur" value="${compteur+1}" />
 					</c:forEach>
@@ -124,38 +127,22 @@
 				<table>
 					<tr>
 						<td><a id="action" style="cursor: pointer;" title="<spring:message code='details.cc.link' />"><spring:message
-									code="details.sum" /> </a>
-						</td>
-						<td><fmt:formatNumber value="${sommeCB}" pattern="#0.00 €" />
-						</td>
+									code="details.sum" /> </a></td>
+						<td><fmt:formatNumber value="${sommeCB}" pattern="#0.00 €" /></td>
 					</tr>
 				</table>
 				<div id="deroulant" style="display: none;">
 					<table>
 						<tr class="libelle">
-							<td><spring:message code="details.date" />
-							</td>
-							<td><spring:message code="details.label" />
-							</td>
-							<td style="width: 160px;"><spring:message code="details.amount" />
-							</td>
-							<td><spring:message code="details.cc.date" />
-							</td>
+							<td><spring:message code="details.cc.effective.date" /></td>
+							<td><spring:message code="details.label" /></td>
+							<td style="width: 160px;"><spring:message code="details.amount" /></td>
+							<td><spring:message code="details.cc.creation.date" /></td>
 						</tr>
 
 						<c:set var="compteur" value="0" />
 						<c:forEach var="operation" items="${listeOperationsCB}">
 							<tr class="ligne_${compteur%2}">
-								<td><c:choose>
-										<c:when test="${locale=='en'}">
-											<joda:format value="${operation.dateCreation}" pattern="MM/dd/yyyy" />
-										</c:when>
-										<c:otherwise>
-											<joda:format value="${operation.dateCreation}" pattern="dd/MM/yyyy" />
-										</c:otherwise>
-									</c:choose></td>
-								<td><spring:message code="details.OPERATIONCARTEBANCAIRE" /> ${operation.libelle}</td>
-								<td><fmt:formatNumber value="${operation.montant}" pattern="#0.00 €" /></td>
 								<td><c:choose>
 										<c:when test="${locale=='en'}">
 											<joda:format value="${operation.dateEffective}" pattern="MM/dd/yyyy" />
@@ -164,6 +151,18 @@
 											<joda:format value="${operation.dateEffective}" pattern="dd/MM/yyyy" />
 										</c:otherwise>
 									</c:choose></td>
+								<td><spring:message code="details.OPERATIONCARTEBANCAIRE" /> ${operation.libelle}</td>
+								<td><fmt:formatNumber value="${operation.montant}" pattern="#0.00 €" />
+								</td>
+								<td><c:choose>
+										<c:when test="${locale=='en'}">
+											<joda:format value="${operation.dateCreation}" pattern="MM/dd/yyyy" />
+										</c:when>
+										<c:otherwise>
+											<joda:format value="${operation.dateCreation}" pattern="dd/MM/yyyy" />
+										</c:otherwise>
+									</c:choose>
+								</td>
 							</tr>
 							<c:set var="compteur" value="${compteur+1}" />
 						</c:forEach>
