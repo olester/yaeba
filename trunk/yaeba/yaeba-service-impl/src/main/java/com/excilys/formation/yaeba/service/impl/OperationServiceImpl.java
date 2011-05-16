@@ -8,12 +8,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.excilys.formation.yaeba.dao.api.OperationDao;
+import com.excilys.formation.yaeba.dao.api.UtilisateurDao;
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.Operation;
 import com.excilys.formation.yaeba.model.OperationCarteBancaire;
 import com.excilys.formation.yaeba.model.OperationVirementInterne;
 import com.excilys.formation.yaeba.model.Utilisateur;
+import com.excilys.formation.yaeba.service.api.CompteService;
 import com.excilys.formation.yaeba.service.api.OperationService;
+import com.excilys.formation.yaeba.service.api.exception.PermissionRefuseeException;
+import com.excilys.formation.yaeba.service.api.exception.SoldeInsuffisantException;
 
 @Service
 @Transactional(readOnly = true)
@@ -21,6 +25,12 @@ public class OperationServiceImpl implements OperationService {
 
 	@Autowired
 	private OperationDao operationDao;
+
+	@Autowired
+	private CompteService compteService;
+
+	@Autowired
+	private UtilisateurDao utilisateurDao;
 
 	@Override
 	public Operation getOperationById(int id) {
@@ -64,9 +74,46 @@ public class OperationServiceImpl implements OperationService {
 
 	@Override
 	@Transactional(readOnly = false)
-	public void createVirement(OperationVirementInterne o, OperationVirementInterne o1) {
-		create(o);
-		create(o1);
+	public void createVirement(int idCompteEmetteur, int idCompteRecepteur, double montant) throws SoldeInsuffisantException, PermissionRefuseeException {
+
+		Compte em = compteService.getCompteById(idCompteEmetteur);
+
+		if (!compteService.isApprovisionne(em, montant)) {
+			throw new SoldeInsuffisantException(em, montant);
+		}
+
+		Compte rcpt = compteService.getCompteById(idCompteRecepteur);
+
+		if (!utilisateurDao.getOwner(em).equals(utilisateurDao.getOwner(rcpt))) {
+			throw new PermissionRefuseeException(em, rcpt);
+		}
+
+		DateTime dt = new DateTime();
+
+		// Creation des 2 virements
+		OperationVirementInterne operation = new OperationVirementInterne();
+		OperationVirementInterne operationInverse = new OperationVirementInterne();
+
+		// Operation compte emetteur
+		operationInverse.setCompte(em);
+		operationInverse.setCompteDistant(rcpt);
+		operationInverse.setDateCreation(dt);
+		operationInverse.setLibelle("Virement emis Compte n°" + operationInverse.getCompteDistant().getNumeroCompte());
+		operationInverse.setMontant(-(montant));
+
+		// Operation compte recu
+		operation.setCompte(rcpt);
+		operation.setCompteDistant(em);
+		operation.setDateCreation(dt);
+		operation.setLibelle("Virement recu Compte n°" + operation.getCompteDistant().getNumeroCompte());
+		operation.setMontant(montant);
+
+		em.setSoldeCourant(em.getSoldeCourant() - montant);
+		rcpt.setSoldeCourant(rcpt.getSoldeCourant() + montant);
+
+		create(operation);
+		create(operationInverse);
+
 	}
 
 }

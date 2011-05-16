@@ -73,7 +73,7 @@
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-jsp</artifactId>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency>	
 
 		<!-- JSTL -->
 
@@ -111,7 +111,7 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-api</artifactId>
-			<scope>test</scope>
+			<scope>test</scope>	
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium.client-drivers</groupId>
@@ -127,6 +127,11 @@
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time-jsptags</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.excilys.utils</groupId>
+			<artifactId>flash-scope</artifactId>
 		</dependency>
 
 	</dependencies>

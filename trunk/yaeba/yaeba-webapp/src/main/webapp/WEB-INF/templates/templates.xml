@@ -78,11 +78,19 @@
 	<!-- <put-attribute name="button" value="button_accounts" /> -->
 	<!-- </definition> -->
 
+	<definition name="confirmation" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/templates/contents/confirmation.jsp" />
+		<put-attribute name="title" value="transfers.confirmation.title" />
+		<put-attribute name="button" value="button_transfers" />
+	</definition>
+
+
 	<!-- Admin -->
 	<definition name="admin" extends="baseLayout">
 		<put-attribute name="content" value="/WEB-INF/templates/contents/admin.jsp" />
 		<put-attribute name="title" value="admin.title" />
 		<put-attribute name="button" value="button_admin" />
 	</definition>
+	
 
 </tiles-definitions>

@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.OperationCarteBancaire;
 import com.excilys.formation.yaeba.model.Utilisateur;
-import com.excilys.formation.yaeba.model.exception.NoCardException;
 import com.excilys.formation.yaeba.service.api.CompteService;
 import com.excilys.formation.yaeba.service.api.OperationService;
+import com.excilys.formation.yaeba.service.api.exception.NoCardException;
 import com.excilys.formation.yaeba.webapp.CustomUser;
 import com.excilys.formation.yaeba.webapp.DateBean;
 
@@ -72,6 +72,9 @@ public class ComptesController {
 	public String redirectDetailsCompte(@PathVariable("numeroCompte") String numeroCompte, @PathVariable("annee") String annee,
 			@PathVariable("mois") String mois, @PathVariable("page") String page,
 			@RequestParam(value = "excel", defaultValue = "false", required = false) String excel, ModelMap model, Locale locale) {
+
+		// TODO A refactorer
+
 		int anneeInt;
 		int moisInt;
 		int pageInt;

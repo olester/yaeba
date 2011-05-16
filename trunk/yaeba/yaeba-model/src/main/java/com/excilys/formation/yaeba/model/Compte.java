@@ -30,25 +30,12 @@ public class Compte implements Serializable {
 	private Integer id;
 	private String numeroCompte;
 	private String libelle;
-	private Set<Operation> operations;
+	private Set<Operation> operations = new HashSet<Operation>();
 	private DateTime dateCreation;
 	private double soldeCourant;
 	private Utilisateur utilisateur;
 	private boolean cards; // TODO refactoré ce nom en isAssociatedWithCards
 	transient private double encoursCarte;
-
-	public Compte() {
-		operations = new HashSet<Operation>();
-	}
-
-	// public Compte(String numeroCompte, String libelle, Set<Operation> operations, DateTime dateCreation, float soldeCourant) {
-	//
-	// this.numeroCompte = numeroCompte;
-	// this.operations = operations;
-	// this.dateCreation = dateCreation;
-	// this.libelle = libelle;
-	// this.soldeCourant = soldeCourant;
-	// }
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
