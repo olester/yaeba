@@ -32,6 +32,7 @@
 		<servlet.version>2.5</servlet.version>
 		<excilys.spring-log.version>1.0.0</excilys.spring-log.version>
 		<excilys.spring.test.dbunit>1.1.0</excilys.spring.test.dbunit>
+		<mockito.version>1.8.5</mockito.version>
 		<!-- versions des plugins -->
 		<eclipse.plugin.version>2.7</eclipse.plugin.version>
 		<compiler.plugin.version>2.3.2</compiler.plugin.version>
@@ -547,6 +548,14 @@
 				<artifactId>spring-test-dbunit</artifactId>
 				<version>${excilys.spring.test.dbunit}</version>
 			</dependency>
+
+			<!-- Tests Mockito -->
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>${mockito.version}</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
