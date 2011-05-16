@@ -2,6 +2,7 @@ package com.excilys.formation.yaeba.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,10 +29,6 @@ public class Operation implements Serializable {
 	private double montant;
 	private DateTime dateCreation;
 	private Compte compte;
-
-	public Operation() {
-
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -72,7 +69,7 @@ public class Operation implements Serializable {
 		this.dateCreation = dateCreation;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "compte_id")
 	public Compte getCompte() {
 		return compte;
@@ -82,4 +79,44 @@ public class Operation implements Serializable {
 		this.compte = compte;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((compte == null) ? 0 : compte.getId().hashCode());
+		result = prime * result + ((dateCreation == null) ? 0 : dateCreation.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((libelle == null) ? 0 : libelle.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(montant);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		Operation other = (Operation) obj;
+		if (compte == null) {
+			if (other.compte != null) return false;
+		} else if (!compte.getId().equals(other.compte.getId())) return false;
+		if (dateCreation == null) {
+			if (other.dateCreation != null) return false;
+		} else if (!dateCreation.equals(other.dateCreation)) return false;
+		if (id == null) {
+			if (other.id != null) return false;
+		} else if (!id.equals(other.id)) return false;
+		if (libelle == null) {
+			if (other.libelle != null) return false;
+		} else if (!libelle.equals(other.libelle)) return false;
+		if (Double.doubleToLongBits(montant) != Double.doubleToLongBits(other.montant)) return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Operation [id=" + id + ", libelle=" + libelle + ", montant=" + montant + ", dateCreation=" + dateCreation + ", compte=" + compte.getId() + "]";
+	}
 }

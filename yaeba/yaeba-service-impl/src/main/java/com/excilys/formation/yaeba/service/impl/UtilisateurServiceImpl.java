@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.excilys.formation.yaeba.dao.api.UtilisateurDao;
+import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.Utilisateur;
 import com.excilys.formation.yaeba.service.api.UtilisateurService;
 
@@ -23,7 +24,13 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		return utilisateurDao.getUtilisateurById(id);
 	}
 
+	@Override
 	public Utilisateur getUtilisateurByLoginFetchRoles(String login) {
 		return utilisateurDao.getUtilisateurByLoginFetchRoles(login);
+	}
+
+	@Override
+	public Utilisateur getOwner(Compte c) {
+		return utilisateurDao.getOwner(c);
 	}
 }

@@ -11,9 +11,9 @@ import com.excilys.formation.yaeba.dao.api.CompteDao;
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.OperationCarteBancaire;
 import com.excilys.formation.yaeba.model.Utilisateur;
-import com.excilys.formation.yaeba.model.exception.NoCardException;
 import com.excilys.formation.yaeba.service.api.CompteService;
 import com.excilys.formation.yaeba.service.api.OperationService;
+import com.excilys.formation.yaeba.service.api.exception.NoCardException;
 
 @Service
 @Transactional(readOnly = true)
@@ -52,8 +52,13 @@ public class CompteServiceImpl implements CompteService {
 		List<OperationCarteBancaire> operationsCB = operationService.getOperationsCBByMoisAnnee(c, now.getYear(), now.getMonthOfYear());
 		double result = 0;
 		for (OperationCarteBancaire o : operationsCB) {
-			if (o.getDateEffective().compareTo(now) > 0) result += o.getMontant();
+			if (o.getDateEffective().isAfter(now)) result += o.getMontant();
 		}
 		return result;
+	}
+
+	@Override
+	public boolean isApprovisionne(Compte c, double montant) {
+		return c.getSoldeCourant() >= montant;
 	}
 }

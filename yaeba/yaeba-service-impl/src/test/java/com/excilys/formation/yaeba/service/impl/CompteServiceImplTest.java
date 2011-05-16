@@ -15,9 +15,9 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.OperationCarteBancaire;
-import com.excilys.formation.yaeba.model.exception.NoCardException;
 import com.excilys.formation.yaeba.service.api.CompteService;
 import com.excilys.formation.yaeba.service.api.OperationService;
+import com.excilys.formation.yaeba.service.api.exception.NoCardException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CompteServiceImplTest {
