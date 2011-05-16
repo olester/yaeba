@@ -16,8 +16,6 @@ public interface OperationService {
 
 	List<Operation> getOperationsByMoisAnnee(Compte c, int annee, int mois);
 
-	List<Operation> getOperationsNoCBByMoisAnnee(Compte c, int annee, int mois);
-
 	List<Operation> getOperationsNoCBByMoisAnnee(Compte c, int annee, int mois, int page, int nbResultats);
 
 	long getNbOperationsNoCBByMoisAnnee(Compte c, int annee, int mois);

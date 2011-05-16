@@ -1,10 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
 	<role id="99" type="ROLE_USER" />
+
+	<!-- utilisateur citron -->
 	<utilisateur id="99" adresse="labas" login="monlogin" password="monpassword" nom="citron" prenom="pierre" />
 	<roleutilisateur user_id="99" role_id="99" />
+	
+	<!-- compte 99 -->
 	<compte id="99" datecreation="2001-09-11 11:45:12" numerocompte="4567" libelle="testcompte" soldecourant="10.2"
-		utilisateur_id="99" cards="true"/>
-	<operation id="99" libelle="test" montant="500" datecreation="2002-12-11 09:12:12" compte_id="99" />
+		utilisateur_id="99" cards="true" />
+	<!-- carte bancaire -->
+	<operation id="99" libelle="testcb" montant="500" datecreation="2002-12-11 09:12:12" compte_id="99" />
 	<operationcartebancaire id="99" dateeffective="2002-12-11 19:12:12" />
+	<operation id="100" libelle="testcb2" montant="1500" datecreation="2003-01-11 09:12:12" compte_id="99" />
+	<operationcartebancaire id="100" dateeffective="2003-01-11 19:12:12" />
+	<!-- cheque -->
+	<operation id="101" libelle="testcheque" montant="500" datecreation="2003-01-11 09:12:12" compte_id="99" />
+	<operationcheque id="101" numerocheque="789456" />
+	<operation id="102" libelle="testcheque2" montant="600" datecreation="2003-01-11 09:12:12" compte_id="99" />
+	<operationcheque id="102" numerocheque="123456" />
+	<operation id="103" libelle="testcheque3" montant="700" datecreation="2003-01-11 09:12:12" compte_id="99" />
+	<operationcheque id="103" numerocheque="654321" />
+	<!-- virement interne -->
+	<operation id="104" libelle="vir 99 -> 100" montant="-500" datecreation="2003-01-11 09:12:12" compte_id="99" />
+	<operationvirementinterne id="104" comptedistant="100" />
+	
+	<!-- compte 100 -->
+	<compte id="100" datecreation="2001-09-11 11:45:12" numerocompte="1234" libelle="testcompte2" soldecourant="1540"
+		utilisateur_id="99" cards="false" />
+	<!-- virement interne -->
+	<operation id="105" libelle="vir 99 -> 100" montant="500" datecreation="2003-01-11 09:12:12" compte_id="100" />
+	<operationvirementinterne id="105" comptedistant="99" />
 </dataset>

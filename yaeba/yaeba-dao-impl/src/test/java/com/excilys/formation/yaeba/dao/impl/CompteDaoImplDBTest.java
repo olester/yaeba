@@ -1,7 +1,11 @@
 package com.excilys.formation.yaeba.dao.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,6 +53,26 @@ public class CompteDaoImplDBTest {
 
 		c = compteDao.getCompteByNumeroCompte(u, "4567");
 		assertEquals("testcompte", c.getLibelle());
+	}
+
+	@Test
+	public void testGetComptes() {
+		Utilisateur u = utilisateurDao.getUtilisateurById(99);
+		List<Compte> comptes = compteDao.getComptes(u);
+
+		assertEquals(2, comptes.size());
+		assertEquals("testcompte", comptes.get(0).getLibelle());
+		assertEquals("testcompte2", comptes.get(1).getLibelle());
+	}
+
+	@Test
+	public void testIsEmpty() {
+		Utilisateur u = utilisateurDao.getUtilisateurById(99);
+		Compte c = compteDao.getCompteByNumeroCompte(u, "4567");
+		assertFalse(compteDao.isEmpty(c));
+
+		c = compteDao.getCompteByNumeroCompte(u, "1234");
+		assertTrue(compteDao.isEmpty(c));
 	}
 
 }
