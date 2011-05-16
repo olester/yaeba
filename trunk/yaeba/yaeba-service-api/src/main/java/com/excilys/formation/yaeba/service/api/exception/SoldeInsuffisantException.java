@@ -1,9 +1,9 @@
-package com.excilys.formation.yaeba.model.exception;
+package com.excilys.formation.yaeba.service.api.exception;
 
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.OperationVirementInterne;
 
-public class SoldeInsuffisantException extends BusinessException {
+public class SoldeInsuffisantException extends CompteException {
 
 	/**
 	 * 
@@ -14,10 +14,18 @@ public class SoldeInsuffisantException extends BusinessException {
 
 	private OperationVirementInterne virement;
 
+	private double montant;
+
 	public SoldeInsuffisantException(Compte c, OperationVirementInterne v) {
 		super("le compte " + c.getLibelle() + " " + c.getNumeroCompte() + " n'as pas un solde suffisant pour le virement demandé.");
 		compte = c;
 		virement = v;
+	}
+
+	public SoldeInsuffisantException(Compte c, double m) {
+		super("le compte " + c.getLibelle() + " " + c.getNumeroCompte() + " n'as pas un solde suffisant pour le virement demandé.");
+		compte = c;
+		montant = m;
 	}
 
 	public Compte getCompte() {
@@ -34,6 +42,14 @@ public class SoldeInsuffisantException extends BusinessException {
 
 	public void setVirement(OperationVirementInterne virement) {
 		this.virement = virement;
+	}
+
+	public double getMontant() {
+		return montant;
+	}
+
+	public void setMontant(double montant) {
+		this.montant = montant;
 	}
 
 }
