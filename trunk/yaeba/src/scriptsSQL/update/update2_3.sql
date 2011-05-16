@@ -9,3 +9,28 @@ INSERT INTO `operation` (`id`, `compte_id`, `datecreation`, `libelle`, `montant`
 INSERT INTO `operationvirementinterne` (`id`, `comptedistant`) VALUES
 (38, 1),
 (39, 2);
+
+DELETE FROM `operationcartebancaire` WHERE `id` > 18;
+
+UPDATE `operationcartebancaire` SET `datecreation` = '2011-05-04 00:00:00' WHERE `id` > 12;
+
+INSERT INTO `operationcheque` (`id`, `numerocheque`) VALUES
+(19, 19000),
+(20, 20000),
+(21, 21000),
+(22, 22000),
+(23, 23000),
+(24, 24000),
+(25, 25000),
+(26, 26000),
+(27, 27000),
+(28, 28000),
+(29, 29000),
+(30, 30000),
+(31, 31000),
+(32, 32000),
+(33, 33000),
+(34, 34000),
+(35, 35000),
+(36, 36000),
+(37, 37000);
