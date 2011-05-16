@@ -25,4 +25,6 @@ public interface OperationService {
 	List<OperationVirementInterne> getVirementsInternes(Utilisateur u);
 
 	void create(Operation o);
+
+	void createVirement(OperationVirementInterne o1, OperationVirementInterne o2);
 }

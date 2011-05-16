@@ -63,8 +63,16 @@ public class OperationServiceImpl implements OperationService {
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public void create(Operation o) {
 		operationDao.create(o);
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public void createVirement(OperationVirementInterne o, OperationVirementInterne o1) {
+		create(o);
+		create(o1);
 	}
 
 }
