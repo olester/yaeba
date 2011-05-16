@@ -7,6 +7,8 @@ import com.excilys.formation.yaeba.model.Operation;
 import com.excilys.formation.yaeba.model.OperationCarteBancaire;
 import com.excilys.formation.yaeba.model.OperationVirementInterne;
 import com.excilys.formation.yaeba.model.Utilisateur;
+import com.excilys.formation.yaeba.model.exception.PermissionRefuseeException;
+import com.excilys.formation.yaeba.model.exception.SoldeInsuffisantException;
 
 public interface OperationService {
 
@@ -26,5 +28,5 @@ public interface OperationService {
 
 	void create(Operation o);
 
-	void createVirement(OperationVirementInterne o1, OperationVirementInterne o2);
+	void createVirement(OperationVirementInterne o1, OperationVirementInterne o2) throws SoldeInsuffisantException, PermissionRefuseeException;
 }
