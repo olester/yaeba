@@ -1,8 +1,8 @@
-package com.excilys.formation.yaeba.model.exception;
+package com.excilys.formation.yaeba.service.api.exception;
 
 import com.excilys.formation.yaeba.model.Compte;
 
-public class PermissionRefuseeException extends BusinessException {
+public class PermissionRefuseeException extends VirementException {
 
 	private Compte credite;
 
