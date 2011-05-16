@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>yaeba</artifactId>
+		<groupId>com.excilys.formation</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>yaeba-ws-soap</artifactId>
+	<packaging>war</packaging>
+
+	<name>yaeba-ws-soap</name>
+
+
+	<profiles>
+		<profile>
+			<id>webservice-test</id>
+			<build>
+				<plugins>
+					<!-- TODO: mettre en place les tests avec soapUI -->
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+
+	<!-- DEPENDENCES -->
+	<dependencies>
+		<!-- INTERNES -->
+		<dependency>
+			<groupId>com.excilys.formation</groupId>
+			<artifactId>yaeba-service-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.excilys.formation</groupId>
+			<artifactId>yaeba-service-impl</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
+
+
+</project>

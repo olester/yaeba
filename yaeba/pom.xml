@@ -130,6 +130,7 @@
 		<module>yaeba-service-api</module>
 		<module>yaeba-service-impl</module>
 		<module>yaeba-webapp</module>
+		<module>yaeba-ws-soap</module>
 	</modules>
 
 	<!-- INSTRUCTIONS DE COMPILATION, PROFILES ET GOAL -->
