@@ -47,7 +47,7 @@ public class OperationDaoImpl extends HibernateDaoSupport implements OperationDa
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public List<Operation> getOperationsNoCBByDate(Compte c, DateTime dateDebut, DateTime dateFin, int page, int nbResultats) {
-		int offset = (page * nbResultats) - nbResultats +1;
+		int offset = (page * nbResultats) - nbResultats + 1;
 		String queryString = "FROM Operation o WHERE o.compte = ? AND o.class<>OperationCarteBancaire AND o.dateCreation BETWEEN ? AND ? ORDER BY o.dateCreation DESC";
 		Query q = getSession().createQuery(queryString);
 		q.setParameter(0, c);
@@ -62,8 +62,10 @@ public class OperationDaoImpl extends HibernateDaoSupport implements OperationDa
 	@SuppressWarnings("rawtypes")
 	@Override
 	public long getNbOperationsNoCBByDate(Compte c, DateTime dateDebut, DateTime dateFin) {
-		List res = getHibernateTemplate().find("SELECT count(*) from Operation o WHERE o.compte = ? AND o.class<>OperationCarteBancaire AND o.dateCreation BETWEEN ? AND ?", c, dateDebut, dateFin);
-		return ((Long)res.get(0)).intValue();
+		List res = getHibernateTemplate().find(
+				"SELECT count(*) from Operation o WHERE o.compte = ? AND o.class<>OperationCarteBancaire AND o.dateCreation BETWEEN ? AND ?", c, dateDebut,
+				dateFin);
+		return ((Long) res.get(0)).intValue();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -82,7 +84,7 @@ public class OperationDaoImpl extends HibernateDaoSupport implements OperationDa
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<OperationVirementInterne> getVirementsInternes(Utilisateur u) {
-		return getHibernateTemplate().find("FROM OperationVirementInterne o WHERE o.compte.utilisateur=? AND o.montant<0", u);
+		return getHibernateTemplate().find("FROM OperationVirementInterne o WHERE o.compte.utilisateur=? AND o.montant<0 ORDER BY o.dateCreation DESC", u);
 	}
 
 }
