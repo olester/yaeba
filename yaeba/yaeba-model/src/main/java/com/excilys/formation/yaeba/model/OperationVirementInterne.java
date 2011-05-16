@@ -2,13 +2,10 @@ package com.excilys.formation.yaeba.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.joda.time.DateTime;
 
 @Entity
 @Table(name = "operationvirementinterne")
@@ -33,5 +30,5 @@ public class OperationVirementInterne extends Operation implements Serializable 
 	public void setCompteDistant(Compte compteDistant) {
 		this.compteDistant = compteDistant;
 	}
-	
+
 }
