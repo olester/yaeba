@@ -159,14 +159,17 @@ public class Compte implements Serializable {
 		if (numeroCompte == null) {
 			if (other.numeroCompte != null) return false;
 		} else if (!numeroCompte.equals(other.numeroCompte)) return false;
-		if (operations == null) {
-			if (other.operations != null) return false;
-		} else if (!operations.equals(other.operations)) return false;
 		if (Double.doubleToLongBits(soldeCourant) != Double.doubleToLongBits(other.soldeCourant)) return false;
 		if (utilisateur == null) {
 			if (other.utilisateur != null) return false;
 		} else if (!utilisateur.equals(other.utilisateur)) return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Compte [id=" + id + ", numeroCompte=" + numeroCompte + ", libelle=" + libelle + ", dateCreation=" + dateCreation + ", soldeCourant="
+				+ soldeCourant + ", utilisateur=" + utilisateur + ", cards=" + cards + "]";
 	}
 
 }

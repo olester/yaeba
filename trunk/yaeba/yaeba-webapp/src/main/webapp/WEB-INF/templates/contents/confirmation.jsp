@@ -8,9 +8,9 @@
 	<div class="entry">
 		<p>
 		<form action="save.html">
-			${virementBean.compteEmetteur}<br>
-			${virementBean.compteRecepteur}<br>
-			${virementBean.montant}<br>
+			${em}<br>
+			${rcpt}<br>
+			${montant}<br>
 			<input type="submit" value="<spring:message code='transfers.submit'/>">
 			<input type="button" value="<spring:message code='transfers.cancel'/>">
 		</form>

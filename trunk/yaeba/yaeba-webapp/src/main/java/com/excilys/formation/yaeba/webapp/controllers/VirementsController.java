@@ -71,17 +71,25 @@ public class VirementsController {
 		}
 
 		FlashScope.bind("virementBean").to(virementBean);
-		model.put("virementBean", virementBean);
+
+		for (Compte compte : comptes) {
+			if (compte.getId().equals(virementBean.getCompteEmetteur())) {
+				model.put("em", compte.getLibelle());
+			} else if (compte.getId().equals(virementBean.getCompteRecepteur())) {
+				model.put("rcpt", compte.getLibelle());
+			}
+		}
+		model.put("montant", virementBean.getMontant());
 
 		return "confirmation";
 	}
 
 	@RequestMapping("/confirmation.html")
 	public String confirmation(ModelMap model, HttpServletRequest request) {
-		VirementBean bean = (VirementBean) request.getAttribute("virementBean");
-		model.put("em", compteService.getCompteById(bean.getCompteEmetteur()));
-		model.put("rcpt", compteService.getCompteById(bean.getCompteRecepteur()));
-		model.put("montant", bean.getMontant());
+		// VirementBean bean = (VirementBean) request.getAttribute("virementBean");
+		// model.put("em", compteService.getCompteById(bean.getCompteEmetteur()));
+		// model.put("rcpt", compteService.getCompteById(bean.getCompteRecepteur()));
+		// model.put("montant", bean.getMontant());
 		return "confirmation";
 	}
 
