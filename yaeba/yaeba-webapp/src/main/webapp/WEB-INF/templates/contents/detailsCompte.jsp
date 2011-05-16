@@ -12,7 +12,7 @@
 	<h2 class="title">
 		<a href="#"><spring:message code="details.title" /> </a>
 	</h2>
-	<p class="meta">${libelle} | ${page} | ${nbPages}</p>
+	<p class="meta">${libelle}</p>
 	<div class="entry">
 		<c:choose>
 			<c:when test="${!compteEstVide}">
