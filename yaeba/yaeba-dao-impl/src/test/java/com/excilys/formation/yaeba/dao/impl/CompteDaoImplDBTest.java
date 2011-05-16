@@ -60,9 +60,10 @@ public class CompteDaoImplDBTest {
 		Utilisateur u = utilisateurDao.getUtilisateurById(99);
 		List<Compte> comptes = compteDao.getComptes(u);
 
-		assertEquals(2, comptes.size());
+		assertEquals(3, comptes.size());
 		assertEquals("testcompte", comptes.get(0).getLibelle());
 		assertEquals("testcompte2", comptes.get(1).getLibelle());
+		assertEquals("testcompte3", comptes.get(2).getLibelle());
 	}
 
 	@Test
@@ -71,7 +72,7 @@ public class CompteDaoImplDBTest {
 		Compte c = compteDao.getCompteByNumeroCompte(u, "4567");
 		assertFalse(compteDao.isEmpty(c));
 
-		c = compteDao.getCompteByNumeroCompte(u, "1234");
+		c = compteDao.getCompteByNumeroCompte(u, "123465");
 		assertTrue(compteDao.isEmpty(c));
 	}
 

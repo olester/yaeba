@@ -31,4 +31,8 @@
 	<!-- virement interne -->
 	<operation id="105" libelle="vir 99 -> 100" montant="500" datecreation="2003-01-11 09:12:12" compte_id="100" />
 	<operationvirementinterne id="105" comptedistant="99" />
+	
+		<!-- compte 101 vide -->
+	<compte id="101" datecreation="2001-09-11 11:45:12" numerocompte="123465" libelle="testcompte3" soldecourant="1100"
+		utilisateur_id="99" cards="false" />
 </dataset>
