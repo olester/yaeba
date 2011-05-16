@@ -32,7 +32,7 @@ import com.excilys.formation.yaeba.webapp.DateBean;
 @Controller
 @RequestMapping("user/comptes")
 public class ComptesController {
-	
+
 	public static final int NB_RESULTS = 7;
 
 	Logger l = LoggerFactory.getLogger(ComptesController.class);
@@ -144,7 +144,7 @@ public class ComptesController {
 			model.put("page", pageInt);
 			model.put("listeOperations", operationService.getOperationsNoCBByMoisAnnee(c, anneeInt, moisInt, pageInt, NB_RESULTS));
 			long nbRes = operationService.getNbOperationsNoCBByMoisAnnee(c, anneeInt, moisInt);
-			model.put("nbPages", nbRes / NB_RESULTS);
+			model.put("nbPages", Math.ceil(nbRes / (float) NB_RESULTS));
 
 			model.put("anneesDispo", anneesDispo);
 			model.put("moisDispo", moisDispo);
