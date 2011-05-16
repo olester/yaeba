@@ -47,7 +47,7 @@ public class OperationDaoImpl extends HibernateDaoSupport implements OperationDa
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public List<Operation> getOperationsNoCBByDate(Compte c, DateTime dateDebut, DateTime dateFin, int page, int nbResultats) {
-		int offset = (page * nbResultats) - nbResultats + 1;
+		int offset = (page - 1) * nbResultats;
 		String queryString = "FROM Operation o WHERE o.compte = ? AND o.class<>OperationCarteBancaire AND o.dateCreation BETWEEN ? AND ? ORDER BY o.dateCreation DESC";
 		Query q = getSession().createQuery(queryString);
 		q.setParameter(0, c);
