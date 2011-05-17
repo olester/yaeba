@@ -9,39 +9,37 @@
 		<a href="#"><spring:message code="transfers.title" /> </a>
 	</h2>
 	<p class="meta">
-		<spring:message code="inprogress.work" />
+		<spring:message code="transfers.subtitle" />
 	</p>
 	<div class="entry">
 
 		<form:form action="validateur.html" commandName="virements">
-			<spring:message code="transfers.txt" />
-			<br />
-			<form:select path="compteEmetteur">
-				<form:options items="${comptes}" itemValue="id" itemLabel="libelle" />
-			</form:select>
-
-			<br />
-			<br />
-			<spring:message code="transfers.txt2" />
-			<br />
-			<form:select path="compteRecepteur">
-				<form:options items="${comptes}" itemValue="id" itemLabel="libelle" />
-			</form:select>
-			<br />
-			<br />
-			<spring:message code="transfers.montant" />
-			<br />
-			<form:input path="montant" />
-			<br />
-			<br />
-			<input type="submit" value="<spring:message code='transfers.submit' />" />
-			<br />
-			<c:if test="${not empty message}">
-				<div style="color: red;">
-					<spring:message code="${message}" />
-				</div>
-			</c:if>
-
+			<p>
+				<spring:message code="transfers.txt" />
+				<br />
+				<form:select path="compteEmetteur">
+					<form:options items="${comptes}" itemValue="id" itemLabel="libelle" />
+				</form:select>
+				<br />
+				<br />
+				<spring:message code="transfers.txt2" />
+				<br />
+				<form:select path="compteRecepteur">
+					<form:options items="${comptes}" itemValue="id" itemLabel="libelle" />
+				</form:select>
+				<br />
+				<br />
+				<spring:message code="transfers.montant" />
+				<br />
+				<form:input path="montant" />
+				<br /> <br /> <input type="submit" value="<spring:message code='transfers.submit' />" /> <br />
+				<c:if test="${not empty message}">
+					<div style="color: red;">
+						<spring:message code="${message}" />
+					</div>
+					<br />
+				</c:if>
+			</p>
 		</form:form>
 		<p>
 			<a href="${pageContext.request.contextPath}/user/virements/historique.html"><spring:message code="histo.link" />
