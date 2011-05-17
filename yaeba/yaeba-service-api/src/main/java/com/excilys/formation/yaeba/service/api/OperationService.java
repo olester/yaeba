@@ -87,7 +87,7 @@ public interface OperationService {
 	List<OperationCarteBancaire> getOperationsCBByMoisAnnee(Compte c, int annee, int mois);
 
 	/**
-	 * Cette fonction recherche toutes les operations de type virement interne effectues par un utilisateur donne
+	 * Cette fonction recherche les operations de type virement interne effectues par un utilisateur donne dans les trente-six derniers mois
 	 * 
 	 * @param u
 	 *            l'utilisateur concerne

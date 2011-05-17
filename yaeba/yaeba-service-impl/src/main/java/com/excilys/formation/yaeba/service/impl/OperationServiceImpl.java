@@ -95,7 +95,9 @@ public class OperationServiceImpl implements OperationService {
 	 */
 	@Override
 	public List<OperationVirementInterne> getVirementsInternes(Utilisateur u) {
-		return operationDao.getVirementsInternes(u);
+		DateTime now = new DateTime();
+		DateTime ilYA36Mois = now.minusMonths(36);
+		return operationDao.getVirementsInternes(u, ilYA36Mois, now);
 	}
 
 	/* (non-Javadoc)
