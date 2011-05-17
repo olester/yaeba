@@ -19,62 +19,102 @@ import com.excilys.formation.yaeba.service.api.OperationService;
 import com.excilys.formation.yaeba.service.api.exception.PermissionRefuseeException;
 import com.excilys.formation.yaeba.service.api.exception.SoldeInsuffisantException;
 
+/**
+ * @author excilys
+ * 
+ */
 @Service
 @Transactional(readOnly = true)
 public class OperationServiceImpl implements OperationService {
 
+	/**
+	 * 
+	 */
 	@Autowired
 	private OperationDao operationDao;
 
+	/**
+	 * 
+	 */
 	@Autowired
 	private CompteService compteService;
 
+	/**
+	 * 
+	 */
 	@Autowired
 	private UtilisateurDao utilisateurDao;
 
+	/* (non-Javadoc)
+	 * @see com.excilys.formation.yaeba.service.api.OperationService#getOperationById(int)
+	 */
 	@Override
 	public Operation getOperationById(int id) {
 		return operationDao.getOperationById(id);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.formation.yaeba.service.api.OperationService#getOperationsByMoisAnnee(com.excilys.formation.yaeba.model.Compte, int, int)
+	 */
 	@Override
 	public List<Operation> getOperationsByMoisAnnee(Compte c, int annee, int mois) {
 		DateTime dt = new DateTime(annee, mois, 1, 0, 0, 0, 0);
 		return operationDao.getOperationsByDate(c, dt, dt.plusMonths(1));
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.formation.yaeba.service.api.OperationService#getOperationsNoCBByMoisAnnee(com.excilys.formation.yaeba.model.Compte, int, int, int, int)
+	 */
 	@Override
 	public List<Operation> getOperationsNoCBByMoisAnnee(Compte c, int annee, int mois, int page, int nbResultats) {
 		DateTime dt = new DateTime(annee, mois, 1, 0, 0, 0, 0);
 		return operationDao.getOperationsNoCBByDate(c, dt, dt.plusMonths(1), page, nbResultats);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.formation.yaeba.service.api.OperationService#getNbOperationsNoCBByMoisAnnee(com.excilys.formation.yaeba.model.Compte, int, int)
+	 */
 	@Override
 	public long getNbOperationsNoCBByMoisAnnee(Compte c, int annee, int mois) {
 		DateTime dt = new DateTime(annee, mois, 1, 0, 0, 0, 0);
 		return operationDao.getNbOperationsNoCBByDate(c, dt, dt.plusMonths(1));
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.formation.yaeba.service.api.OperationService#getOperationsCBByMoisAnnee(com.excilys.formation.yaeba.model.Compte, int, int)
+	 */
 	@Override
 	public List<OperationCarteBancaire> getOperationsCBByMoisAnnee(Compte c, int annee, int mois) {
 		DateTime dt = new DateTime(annee, mois, 1, 0, 0, 0, 0);
 		return operationDao.getOperationsCBByDate(c, dt, dt.plusMonths(1));
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.formation.yaeba.service.api.OperationService#getVirementsInternes(com.excilys.formation.yaeba.model.Utilisateur)
+	 */
 	@Override
 	public List<OperationVirementInterne> getVirementsInternes(Utilisateur u) {
 		return operationDao.getVirementsInternes(u);
 	}
 
-	@Override
+	/**
+	 * @param o
+	 */
+	// XXX cette fonction est elle utile?
 	@Transactional(readOnly = false)
-	public void create(Operation o) {
+	private void create(Operation o) {
 		operationDao.create(o);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.formation.yaeba.service.api.OperationService#createVirement(int, int, double)
+	 */
 	@Override
 	@Transactional(readOnly = false)
 	public void createVirement(int idCompteEmetteur, int idCompteRecepteur, double montant) throws SoldeInsuffisantException, PermissionRefuseeException {
+
+		// XXX il faut tester si les id correspondent a quelque chose: getCompteById renvoie NULL:
+		// ce qui fait quand meme une eventuelle 500 dans ce cas.
 
 		Compte em = compteService.getCompteById(idCompteEmetteur);
 

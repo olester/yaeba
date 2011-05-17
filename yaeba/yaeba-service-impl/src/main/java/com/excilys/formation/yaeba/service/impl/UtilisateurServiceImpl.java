@@ -9,26 +9,31 @@ import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.Utilisateur;
 import com.excilys.formation.yaeba.service.api.UtilisateurService;
 
+/**
+ * @author excilys
+ * 
+ */
 @Service
 @Transactional(readOnly = true)
 public class UtilisateurServiceImpl implements UtilisateurService {
 
+	/**
+	 * 
+	 */
 	@Autowired
 	private UtilisateurDao utilisateurDao;
 
-	public void setUtilisateurDao(UtilisateurDao utilisateurDao) {
-		this.utilisateurDao = utilisateurDao;
-	}
-
-	public Utilisateur getUtilisateurById(int id) {
-		return utilisateurDao.getUtilisateurById(id);
-	}
-
+	/* (non-Javadoc)
+	 * @see com.excilys.formation.yaeba.service.api.UtilisateurService#getUtilisateurByLoginFetchRoles(java.lang.String)
+	 */
 	@Override
 	public Utilisateur getUtilisateurByLoginFetchRoles(String login) {
 		return utilisateurDao.getUtilisateurByLoginFetchRoles(login);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.formation.yaeba.service.api.UtilisateurService#getOwner(com.excilys.formation.yaeba.model.Compte)
+	 */
 	@Override
 	public Utilisateur getOwner(Compte c) {
 		return utilisateurDao.getOwner(c);

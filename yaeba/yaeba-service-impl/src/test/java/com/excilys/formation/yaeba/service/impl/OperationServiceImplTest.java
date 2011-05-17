@@ -30,6 +30,8 @@ public class OperationServiceImplTest {
 	@InjectMocks
 	private OperationService operationService = new OperationServiceImpl();
 
+	// TODO : TESTER si on essaie de faire un virement av ec un identifiant ne correspondant a rien (mock renvoyant null)
+
 	@Test
 	@Ignore
 	public void testVirement() {
@@ -70,4 +72,5 @@ public class OperationServiceImplTest {
 
 		assertEquals(res, operations.size());
 	}
+
 }

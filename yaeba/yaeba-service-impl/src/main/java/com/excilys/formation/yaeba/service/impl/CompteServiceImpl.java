@@ -15,36 +15,61 @@ import com.excilys.formation.yaeba.service.api.CompteService;
 import com.excilys.formation.yaeba.service.api.OperationService;
 import com.excilys.formation.yaeba.service.api.exception.NoCardException;
 
+/**
+ * @author excilys
+ * 
+ */
 @Service
 @Transactional(readOnly = true)
 public class CompteServiceImpl implements CompteService {
 
+	/**
+	 * 
+	 */
 	@Autowired
 	private OperationService operationService;
 
+	/**
+	 * 
+	 */
 	@Autowired
 	private CompteDao compteDao;
 
+	/* (non-Javadoc)
+	 * @see com.excilys.formation.yaeba.service.api.CompteService#getCompteById(int)
+	 */
 	@Override
 	public Compte getCompteById(int id) {
 		return compteDao.getCompteById(id);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.formation.yaeba.service.api.CompteService#getCompteByNumeroCompte(com.excilys.formation.yaeba.model.Utilisateur, java.lang.String)
+	 */
 	@Override
 	public Compte getCompteByNumeroCompte(Utilisateur u, String numeroCompte) {
 		return compteDao.getCompteByNumeroCompte(u, numeroCompte);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.formation.yaeba.service.api.CompteService#getComptesByUtilisateur(com.excilys.formation.yaeba.model.Utilisateur)
+	 */
 	@Override
 	public List<Compte> getComptesByUtilisateur(Utilisateur u) {
 		return compteDao.getComptes(u);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.formation.yaeba.service.api.CompteService#isEmpty(com.excilys.formation.yaeba.model.Compte)
+	 */
 	@Override
 	public boolean isEmpty(Compte c) {
 		return compteDao.isEmpty(c);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.formation.yaeba.service.api.CompteService#getEncoursCarte(com.excilys.formation.yaeba.model.Compte)
+	 */
 	@Override
 	public double getEncoursCarte(Compte c) throws NoCardException {
 		if (!c.isCards()) throw new NoCardException(c);
@@ -57,6 +82,9 @@ public class CompteServiceImpl implements CompteService {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.formation.yaeba.service.api.CompteService#isApprovisionne(com.excilys.formation.yaeba.model.Compte, double)
+	 */
 	@Override
 	public boolean isApprovisionne(Compte c, double montant) {
 		return c.getSoldeCourant() >= montant;
