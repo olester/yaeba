@@ -109,7 +109,9 @@ public class OperationDaoImplDbTest {
 	public void testGetVirementsInternes() {
 		// Virements sans doublons (que les negatifs attaches au compte emetteur)
 		Utilisateur u = utilisateurDao.getUtilisateurById(99);
-		List<OperationVirementInterne> virements = operationDao.getVirementsInternes(u);
+		DateTime now = new DateTime();
+		DateTime d2000 = now.year().setCopy(2000);
+		List<OperationVirementInterne> virements = operationDao.getVirementsInternes(u, d2000, now);
 
 		assertEquals(1, virements.size());
 		assertEquals("vir 99 -> 100", virements.get(0).getLibelle());

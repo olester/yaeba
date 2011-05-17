@@ -83,8 +83,10 @@ public class OperationDaoImpl extends HibernateDaoSupport implements OperationDa
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<OperationVirementInterne> getVirementsInternes(Utilisateur u) {
-		return getHibernateTemplate().find("FROM OperationVirementInterne o WHERE o.compte.utilisateur=? AND o.montant<0 ORDER BY o.dateCreation DESC", u);
+	public List<OperationVirementInterne> getVirementsInternes(Utilisateur u, DateTime dateDebut, DateTime dateFin) {
+		return getHibernateTemplate().find(
+				"FROM OperationVirementInterne o WHERE o.compte.utilisateur=? AND o.montant<0 AND o.dateCreation BETWEEN ? AND ? ORDER BY o.dateCreation DESC",
+				u, dateDebut, dateFin);
 	}
 
 }

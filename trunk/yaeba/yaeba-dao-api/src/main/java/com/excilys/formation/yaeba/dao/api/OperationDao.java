@@ -24,7 +24,7 @@ public interface OperationDao {
 
 	List<OperationCarteBancaire> getOperationsCBByDate(Compte c, DateTime dateDebut, DateTime dateFin);
 
-	List<OperationVirementInterne> getVirementsInternes(Utilisateur u);
+	List<OperationVirementInterne> getVirementsInternes(Utilisateur u, DateTime dateDebut, DateTime dateFin);
 
 	void create(Operation o);
 }
