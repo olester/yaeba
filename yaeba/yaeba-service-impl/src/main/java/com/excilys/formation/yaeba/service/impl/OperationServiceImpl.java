@@ -97,15 +97,6 @@ public class OperationServiceImpl implements OperationService {
 		return operationDao.getVirementsInternes(u);
 	}
 
-	/**
-	 * @param o
-	 */
-	// XXX cette fonction est elle utile?
-	@Transactional(readOnly = false)
-	private void create(Operation o) {
-		operationDao.create(o);
-	}
-
 	/* (non-Javadoc)
 	 * @see com.excilys.formation.yaeba.service.api.OperationService#createVirement(int, int, double)
 	 */
@@ -151,8 +142,8 @@ public class OperationServiceImpl implements OperationService {
 		em.setSoldeCourant(em.getSoldeCourant() - montant);
 		rcpt.setSoldeCourant(rcpt.getSoldeCourant() + montant);
 
-		create(operation);
-		create(operationInverse);
+		operationDao.create(operation);
+		operationDao.create(operationInverse);
 
 	}
 

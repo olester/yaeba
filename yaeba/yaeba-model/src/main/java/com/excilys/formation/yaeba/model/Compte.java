@@ -34,7 +34,7 @@ public class Compte implements Serializable {
 	private DateTime dateCreation;
 	private double soldeCourant;
 	private Utilisateur utilisateur;
-	private boolean cards; // TODO refactoré ce nom en isAssociatedWithCards
+	private boolean associatedWithCards;
 	transient private double encoursCarte;
 
 	@Id
@@ -106,12 +106,12 @@ public class Compte implements Serializable {
 
 	@Column(name = "cards", nullable = false)
 	@Basic
-	public boolean isCards() {
-		return cards;
+	public boolean isAssociatedWithCards() {
+		return associatedWithCards;
 	}
 
-	public void setCards(boolean cards) {
-		this.cards = cards;
+	public void setAssociatedWithCards(boolean associatedWithCards) {
+		this.associatedWithCards = associatedWithCards;
 	}
 
 	@Transient
@@ -127,7 +127,7 @@ public class Compte implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (cards ? 1231 : 1237);
+		result = prime * result + (associatedWithCards ? 1231 : 1237);
 		result = prime * result + ((dateCreation == null) ? 0 : dateCreation.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((libelle == null) ? 0 : libelle.hashCode());
@@ -146,7 +146,7 @@ public class Compte implements Serializable {
 		if (obj == null) return false;
 		if (getClass() != obj.getClass()) return false;
 		Compte other = (Compte) obj;
-		if (cards != other.cards) return false;
+		if (associatedWithCards != other.associatedWithCards) return false;
 		if (dateCreation == null) {
 			if (other.dateCreation != null) return false;
 		} else if (!dateCreation.equals(other.dateCreation)) return false;
@@ -169,7 +169,7 @@ public class Compte implements Serializable {
 	@Override
 	public String toString() {
 		return "Compte [id=" + id + ", numeroCompte=" + numeroCompte + ", libelle=" + libelle + ", dateCreation=" + dateCreation + ", soldeCourant="
-				+ soldeCourant + ", utilisateur=" + utilisateur + ", cards=" + cards + "]";
+				+ soldeCourant + ", utilisateur=" + utilisateur + ", associatedWithCards=" + associatedWithCards + "]";
 	}
 
 }

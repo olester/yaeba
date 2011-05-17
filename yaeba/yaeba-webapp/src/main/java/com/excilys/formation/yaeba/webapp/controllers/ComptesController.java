@@ -56,7 +56,7 @@ public class ComptesController {
 
 		for (Compte c : comptes) {
 			try {
-				if (c.isCards()) c.setEncoursCarte(compteService.getEncoursCarte(c));
+				if (c.isAssociatedWithCards()) c.setEncoursCarte(compteService.getEncoursCarte(c));
 			} catch (NoCardException e) {
 				l.error(e.getMessage());
 			}

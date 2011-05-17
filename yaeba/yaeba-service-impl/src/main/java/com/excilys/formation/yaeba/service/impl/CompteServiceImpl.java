@@ -72,7 +72,7 @@ public class CompteServiceImpl implements CompteService {
 	 */
 	@Override
 	public double getEncoursCarte(Compte c) throws NoCardException {
-		if (!c.isCards()) throw new NoCardException(c);
+		if (!c.isAssociatedWithCards()) throw new NoCardException(c);
 		DateTime now = new DateTime();
 		List<OperationCarteBancaire> operationsCB = operationService.getOperationsCBByMoisAnnee(c, now.getYear(), now.getMonthOfYear());
 		double result = 0;

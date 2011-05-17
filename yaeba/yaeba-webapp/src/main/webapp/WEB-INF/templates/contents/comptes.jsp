@@ -34,7 +34,7 @@
 							<td><fmt:formatNumber value="${compte.soldeCourant}" pattern="#0.00 EUR" /></td>
 							
 							
-							<td><c:if test="${compte.cards}"><fmt:formatNumber value="${compte.encoursCarte}" pattern="#0.00 EUR" /></c:if></td>
+							<td><c:if test="${compte.associatedWithCards}"><fmt:formatNumber value="${compte.encoursCarte}" pattern="#0.00 EUR" /></c:if></td>
 							
 						</tr>
 						<c:set var="compteur" value="${compteur+1}" />
