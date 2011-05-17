@@ -149,7 +149,7 @@ public class Compte implements Serializable {
 		if (associatedWithCards != other.associatedWithCards) return false;
 		if (dateCreation == null) {
 			if (other.dateCreation != null) return false;
-		} else if (!dateCreation.equals(other.dateCreation)) return false;
+		} else if (dateCreation.getDayOfYear() != other.dateCreation.getDayOfYear() || dateCreation.getYear() != other.dateCreation.getYear()) return false;
 		if (id == null) {
 			if (other.id != null) return false;
 		} else if (!id.equals(other.id)) return false;

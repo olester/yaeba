@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.Utilisateur;
+import com.excilys.formation.yaeba.service.api.exception.IdCompteNotFoundException;
 import com.excilys.formation.yaeba.service.api.exception.NoCardException;
 
 /**
@@ -19,8 +20,10 @@ public interface CompteService {
 	 * @param id
 	 *            l'identifiant du compte
 	 * @return le compte qu'on cherchait (ou null si la recherche echoue)
+	 * @throws IdCompteNotFoundException
+	 *             Cette exception est levee si l'id ne correspond a aucun compte
 	 */
-	Compte getCompteById(int id);
+	Compte getCompteById(int id) throws IdCompteNotFoundException;
 
 	/**
 	 * Cette fonction renvoit les comptes appartenant a un utilisateur

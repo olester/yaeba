@@ -13,6 +13,7 @@ import com.excilys.formation.yaeba.model.OperationCarteBancaire;
 import com.excilys.formation.yaeba.model.Utilisateur;
 import com.excilys.formation.yaeba.service.api.CompteService;
 import com.excilys.formation.yaeba.service.api.OperationService;
+import com.excilys.formation.yaeba.service.api.exception.IdCompteNotFoundException;
 import com.excilys.formation.yaeba.service.api.exception.NoCardException;
 
 /**
@@ -39,8 +40,10 @@ public class CompteServiceImpl implements CompteService {
 	 * @see com.excilys.formation.yaeba.service.api.CompteService#getCompteById(int)
 	 */
 	@Override
-	public Compte getCompteById(int id) {
-		return compteDao.getCompteById(id);
+	public Compte getCompteById(int id) throws IdCompteNotFoundException {
+		Compte result = compteDao.getCompteById(id);
+		if (result == null) throw new IdCompteNotFoundException(id);
+		return result;
 	}
 
 	/* (non-Javadoc)
