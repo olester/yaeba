@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags"%>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-1.6.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-1.6.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jqueryRotate-2.1.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/toggle.js"></script>
 
