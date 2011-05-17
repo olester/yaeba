@@ -13,15 +13,16 @@
 		<form action="save.html">
 			<p>
 				<spring:message code="transfers.confirmation.txt1" />
-				'${em}'
+				'${virementCommand.compteEmetteurLibelle}'
 				<spring:message code="transfers.confirmation.txt2" />
-				'${rcpt}'
+				'${virementCommand.compteRecepteurLibelle}'
 				<spring:message code="transfers.confirmation.txt3" />
-				<fmt:formatNumber value="${montant}" pattern="#0.00 EUR" />
+				<fmt:formatNumber value="${virementCommand.montant}" pattern="#0.00 EUR" />
 				. <br>
 			</p>
-			<input type="submit" value="<spring:message code='transfers.submit'/>"> <input type="button"
-				value="<spring:message code='transfers.cancel'/>">
+			<input type="submit" value="<spring:message code='transfers.submit'/>" />
+			&nbsp;
+			<a href="virements.html" style="text-decoration: none;"><input type="button" value="<spring:message code='transfers.cancel'/>" /></a>
 		</form>
 	</div>
 </div>

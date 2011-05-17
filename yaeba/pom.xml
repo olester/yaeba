@@ -12,6 +12,7 @@
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<spring.security.version>3.0.5.RELEASE</spring.security.version>
 		<hibernate.version>3.6.4.Final</hibernate.version>
+		<hibernate.validator.version>4.1.0.Final</hibernate.validator.version>
 		<jadira.version>1.8</jadira.version>
 		<jpa2.version>1.0.0.Final</jpa2.version>
 		<javassist.version>3.14.0-GA</javassist.version>
@@ -456,6 +457,11 @@
 				<artifactId>hibernate-jpa-2.0-api</artifactId>
 				<version>${jpa2.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${hibernate.validator.version}</version>
+			</dependency>
 
 
 			<!-- DAO: HSQLDB et MYSQL -->
@@ -549,7 +555,7 @@
 				<artifactId>spring-test-dbunit</artifactId>
 				<version>${excilys.spring.test.dbunit}</version>
 			</dependency>
-			
+
 			<!-- Tests Mockito -->
 			<dependency>
 				<groupId>org.mockito</groupId>

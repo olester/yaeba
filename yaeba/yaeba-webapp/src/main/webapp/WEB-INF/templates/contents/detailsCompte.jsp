@@ -14,6 +14,12 @@
 	</h2>
 	<p class="meta">${libelle}</p>
 	<div class="entry">
+		<c:if test="${not empty messageSuccess}">
+			<div style="color: green;">
+				<spring:message code="${messageSuccess}" />
+			</div>
+			<br />
+		</c:if>
 		<c:choose>
 			<c:when test="${!compteEstVide}">
 				<form action="${pageContext.request.contextPath}/user/comptes/${numero}/choix.html" method="POST">
