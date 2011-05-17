@@ -36,7 +36,7 @@ public class OperationCarteBancaire extends Operation implements Serializable {
 		OperationCarteBancaire other = (OperationCarteBancaire) obj;
 		if (dateEffective == null) {
 			if (other.dateEffective != null) return false;
-		} else if (!dateEffective.equals(other.dateEffective)) return false;
+		} else if (dateEffective.getDayOfYear() != other.dateEffective.getDayOfYear() || dateEffective.getYear() != other.dateEffective.getYear()) return false;
 		return true;
 	}
 

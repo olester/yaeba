@@ -16,6 +16,7 @@ import com.excilys.formation.yaeba.model.OperationVirementInterne;
 import com.excilys.formation.yaeba.model.Utilisateur;
 import com.excilys.formation.yaeba.service.api.CompteService;
 import com.excilys.formation.yaeba.service.api.OperationService;
+import com.excilys.formation.yaeba.service.api.exception.IdCompteNotFoundException;
 import com.excilys.formation.yaeba.service.api.exception.PermissionRefuseeException;
 import com.excilys.formation.yaeba.service.api.exception.SoldeInsuffisantException;
 
@@ -102,10 +103,8 @@ public class OperationServiceImpl implements OperationService {
 	 */
 	@Override
 	@Transactional(readOnly = false)
-	public void createVirement(int idCompteEmetteur, int idCompteRecepteur, double montant) throws SoldeInsuffisantException, PermissionRefuseeException {
-
-		// XXX il faut tester si les id correspondent a quelque chose: getCompteById renvoie NULL:
-		// ce qui fait quand meme une eventuelle 500 dans ce cas.
+	public void createVirement(int idCompteEmetteur, int idCompteRecepteur, double montant) throws IdCompteNotFoundException, SoldeInsuffisantException,
+			PermissionRefuseeException {
 
 		Compte em = compteService.getCompteById(idCompteEmetteur);
 
@@ -126,18 +125,18 @@ public class OperationServiceImpl implements OperationService {
 		OperationVirementInterne operationInverse = new OperationVirementInterne();
 
 		// Operation compte emetteur
-		operationInverse.setCompte(em);
-		operationInverse.setCompteDistant(rcpt);
-		operationInverse.setDateCreation(dt);
-		operationInverse.setLibelle("Virement emis Compte n°" + operationInverse.getCompteDistant().getNumeroCompte());
-		operationInverse.setMontant(-(montant));
+		operation.setCompte(em);
+		operation.setCompteDistant(rcpt);
+		operation.setDateCreation(dt);
+		operation.setLibelle("Virement emis Compte n°" + operation.getCompteDistant().getNumeroCompte());
+		operation.setMontant(-(montant));
 
 		// Operation compte recu
-		operation.setCompte(rcpt);
-		operation.setCompteDistant(em);
-		operation.setDateCreation(dt);
-		operation.setLibelle("Virement recu Compte n°" + operation.getCompteDistant().getNumeroCompte());
-		operation.setMontant(montant);
+		operationInverse.setCompte(rcpt);
+		operationInverse.setCompteDistant(em);
+		operationInverse.setDateCreation(dt);
+		operationInverse.setLibelle("Virement recu Compte n°" + operationInverse.getCompteDistant().getNumeroCompte());
+		operationInverse.setMontant(montant);
 
 		em.setSoldeCourant(em.getSoldeCourant() - montant);
 		rcpt.setSoldeCourant(rcpt.getSoldeCourant() + montant);

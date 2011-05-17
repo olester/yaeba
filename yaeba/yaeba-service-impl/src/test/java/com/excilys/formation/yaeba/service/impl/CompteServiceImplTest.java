@@ -13,10 +13,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.excilys.formation.yaeba.dao.api.CompteDao;
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.OperationCarteBancaire;
 import com.excilys.formation.yaeba.service.api.CompteService;
 import com.excilys.formation.yaeba.service.api.OperationService;
+import com.excilys.formation.yaeba.service.api.exception.IdCompteNotFoundException;
 import com.excilys.formation.yaeba.service.api.exception.NoCardException;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -24,9 +26,26 @@ public class CompteServiceImplTest {
 
 	@Mock
 	private OperationService operationService;
+	@Mock
+	private CompteDao compteDao;
 
 	@InjectMocks
 	private CompteService compteService = new CompteServiceImpl();
+
+	@Test
+	public void testGetCompteById() throws IdCompteNotFoundException {
+		Compte c = new Compte();
+		c.setLibelle("testcoucou");
+		when(compteDao.getCompteById(98)).thenReturn(c);
+		assertEquals("testcoucou", compteService.getCompteById(98).getLibelle());
+	}
+
+	// Id qui n'existe pas
+	@Test(expected = IdCompteNotFoundException.class)
+	public void testGetCompteByIdNotFound() throws IdCompteNotFoundException {
+		when(compteDao.getCompteById(98)).thenReturn(null);
+		compteService.getCompteById(98);
+	}
 
 	// Compte sans carte
 	@Test(expected = NoCardException.class)

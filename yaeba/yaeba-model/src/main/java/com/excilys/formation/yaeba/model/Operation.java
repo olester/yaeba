@@ -104,7 +104,7 @@ public class Operation implements Serializable {
 		} else if (!compte.getId().equals(other.compte.getId())) return false;
 		if (dateCreation == null) {
 			if (other.dateCreation != null) return false;
-		} else if (!dateCreation.equals(other.dateCreation)) return false;
+		} else if (dateCreation.getDayOfYear() != other.dateCreation.getDayOfYear() || dateCreation.getYear() != other.dateCreation.getYear()) return false;
 		if (id == null) {
 			if (other.id != null) return false;
 		} else if (!id.equals(other.id)) return false;

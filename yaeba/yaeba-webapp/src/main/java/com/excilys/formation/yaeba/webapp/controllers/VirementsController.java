@@ -17,6 +17,7 @@ import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.Utilisateur;
 import com.excilys.formation.yaeba.service.api.CompteService;
 import com.excilys.formation.yaeba.service.api.OperationService;
+import com.excilys.formation.yaeba.service.api.exception.IdCompteNotFoundException;
 import com.excilys.formation.yaeba.service.api.exception.PermissionRefuseeException;
 import com.excilys.formation.yaeba.service.api.exception.SoldeInsuffisantException;
 import com.excilys.formation.yaeba.webapp.CustomUser;
@@ -59,13 +60,22 @@ public class VirementsController {
 		model.put("comptes", comptes);
 		model.put("utilisateur", u);
 
+		Compte c;
+
+		try {
+			c = compteService.getCompteById(virementBean.getCompteEmetteur());
+		} catch (IdCompteNotFoundException e) {
+			model.put("message", "transfers.error.notFoundAccount");
+			return "virements";
+		}
+
 		if (virementBean.getCompteRecepteur().equals(virementBean.getCompteEmetteur())) {
 			model.put("message", "transfers.error.equals");
 			return "virements";
 		} else if (virementBean.getMontant() <= 0) {
 			model.put("message", "transfers.error.amount");
 			return "virements";
-		} else if (!compteService.isApprovisionne(compteService.getCompteById(virementBean.getCompteEmetteur()), virementBean.getMontant())) {
+		} else if (!compteService.isApprovisionne(c, virementBean.getMontant())) {
 			model.put("message", "transfers.error.insufficient");
 			return "virements";
 		}
@@ -103,21 +113,28 @@ public class VirementsController {
 			return "redirect:/user/virements/virements.html";
 		}
 
+		Compte c;
+
 		// Sauvegarde des operations
 		try {
 			operationService.createVirement(virementBean.getCompteEmetteur(), virementBean.getCompteRecepteur(), virementBean.getMontant());
+			c = compteService.getCompteById(virementBean.getCompteEmetteur());
 		} catch (SoldeInsuffisantException e) {
 			model.put("message", "transfers.error.amount");
 			return "virements";
 		} catch (PermissionRefuseeException e) {
 			model.put("message", "transfers.error.deniedAccount");
 			return "virements";
+		} catch (IdCompteNotFoundException e) {
+			model.put("message", "transfers.error.notFoundAccount");
+			return "virements";
 		}
 
 		DateTime dateTime = new DateTime();
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("redirect:/user/comptes/").append(compteService.getCompteById(virementBean.getCompteEmetteur()).getNumeroCompte());
+
+		sb.append("redirect:/user/comptes/").append(c.getNumeroCompte());
 		sb.append("/").append(dateTime.getYear()).append("/").append(dateTime.getMonthOfYear()).append("/1/details.html");
 
 		return sb.toString();
