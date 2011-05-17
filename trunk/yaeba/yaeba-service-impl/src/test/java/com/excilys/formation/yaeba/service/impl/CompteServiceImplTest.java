@@ -32,7 +32,7 @@ public class CompteServiceImplTest {
 	@Test(expected = NoCardException.class)
 	public void testGetEncoursCarteNoCard() throws NoCardException {
 		Compte c = new Compte();
-		c.setCards(false);
+		c.setAssociatedWithCards(false);
 		compteService.getEncoursCarte(c);
 	}
 
@@ -40,7 +40,7 @@ public class CompteServiceImplTest {
 	@Test
 	public void testGetEncoursCarteSansOperation() throws NoCardException {
 		Compte c = new Compte();
-		c.setCards(true);
+		c.setAssociatedWithCards(true);
 
 		DateTime now = new DateTime();
 		List<OperationCarteBancaire> operationsCB = new ArrayList<OperationCarteBancaire>();
@@ -53,7 +53,7 @@ public class CompteServiceImplTest {
 	@Test
 	public void testGetEncoursCarte() throws NoCardException {
 		Compte c = new Compte();
-		c.setCards(true);
+		c.setAssociatedWithCards(true);
 
 		DateTime now = new DateTime();
 		List<OperationCarteBancaire> operationsCB = new ArrayList<OperationCarteBancaire>();
