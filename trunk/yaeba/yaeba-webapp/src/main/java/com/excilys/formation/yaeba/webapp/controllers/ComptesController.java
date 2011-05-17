@@ -41,12 +41,11 @@ public class ComptesController {
 	private OperationService operationService;
 	@Autowired
 	private CompteService compteService;
-	@Autowired
-	private DateBean dateBean;
 
 	@RequestMapping("/comptes.html")
 	public String redirectComptes(ModelMap model) {
 		DateTime dt = new DateTime();
+		DateBean dateBean = new DateBean();
 		dateBean.setAnnee(dt.getYear());
 		dateBean.setMois(dt.getMonthOfYear());
 		model.put("dateBean", dateBean);
@@ -96,6 +95,7 @@ public class ComptesController {
 		if (c != null) {
 			model.put("utilisateur", u);
 			model.put("numero", numeroCompte);
+			DateBean dateBean = new DateBean();
 			dateBean.setAnnee(anneeInt);
 			dateBean.setMois(moisInt);
 			model.put("dateBean", dateBean);

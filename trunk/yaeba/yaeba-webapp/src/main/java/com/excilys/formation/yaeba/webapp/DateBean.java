@@ -1,8 +1,5 @@
 package com.excilys.formation.yaeba.webapp;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class DateBean {
 
 	private int annee;

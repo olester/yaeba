@@ -4,14 +4,17 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.Utilisateur;
@@ -22,12 +25,14 @@ import com.excilys.formation.yaeba.service.api.exception.PermissionRefuseeExcept
 import com.excilys.formation.yaeba.service.api.exception.SoldeInsuffisantException;
 import com.excilys.formation.yaeba.webapp.CustomUser;
 import com.excilys.formation.yaeba.webapp.DateBean;
-import com.excilys.formation.yaeba.webapp.VirementBean;
+import com.excilys.formation.yaeba.webapp.VirementCommand;
 import com.excilys.utils.web.flash.FlashScope;
 
 @Controller
 @RequestMapping("/user/virements")
-public class VirementsController {
+public class VirementController {
+
+	private static final String VIREMENT_COMMAND_NAME = "virementCommand";
 
 	@Autowired
 	private CompteService compteService;
@@ -35,105 +40,108 @@ public class VirementsController {
 	@Autowired
 	private OperationService operationService;
 
-	@Autowired
 	private DateBean dateBean;
 
-	@ModelAttribute("virements")
-	public VirementBean getVirementObject() {
-		return new VirementBean();
-	}
-
-	@RequestMapping("/virements.html")
+	@RequestMapping(value = "/virements.html", method = RequestMethod.GET)
 	public String redirectVirements(ModelMap model, HttpServletRequest request) {
 		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
 		List<Compte> comptes = compteService.getComptesByUtilisateur(u);
 		model.put("comptes", comptes);
 		model.put("utilisateur", u);
+		model.put(VIREMENT_COMMAND_NAME, new VirementCommand());
 
 		return "virements";
 	}
 
-	@RequestMapping("/validateur.html")
-	public String redirectValidateur(ModelMap model, VirementBean virementBean, HttpServletRequest request) {
+	@RequestMapping(value = "/virements.html", method = RequestMethod.POST)
+	public String redirectValidateur(ModelMap model, @ModelAttribute @Valid final VirementCommand virementCommand, final BindingResult result,
+			HttpServletRequest request) {
+
 		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
 		List<Compte> comptes = compteService.getComptesByUtilisateur(u);
 		model.put("comptes", comptes);
 		model.put("utilisateur", u);
 
-		Compte c;
+		if (result.hasErrors()) {
+			return "virements";
+		}
+
+		Compte c = null;
 
 		try {
-			c = compteService.getCompteById(virementBean.getCompteEmetteur());
+			c = compteService.getCompteById(virementCommand.getCompteEmetteur());
 		} catch (IdCompteNotFoundException e) {
 			model.put("message", "transfers.error.notFoundAccount");
 			return "virements";
 		}
 
-		if (virementBean.getCompteRecepteur().equals(virementBean.getCompteEmetteur())) {
-			model.put("message", "transfers.error.equals");
-			return "virements";
-		} else if (virementBean.getMontant() <= 0) {
-			model.put("message", "transfers.error.amount");
-			return "virements";
-		} else if (!compteService.isApprovisionne(c, virementBean.getMontant())) {
-			model.put("message", "transfers.error.insufficient");
-			return "virements";
-		}
+		boolean isError = false;
 
-		FlashScope.bind("virementBean").to(virementBean);
+		if (virementCommand.getMontant() <= 0) {
+			model.put("messageAmount", "transfers.error.amount");
+			isError = true;
+		}
+		if (virementCommand.getCompteRecepteur().equals(virementCommand.getCompteEmetteur())) {
+			model.put("messageAccounts", "transfers.error.equals");
+			isError = true;
+		}
+		if (!compteService.isApprovisionne(c, virementCommand.getMontant())) {
+			model.put("messageInsufficient", "transfers.error.insufficient");
+			isError = true;
+		}
+		if (isError) return "virements";
 
 		for (Compte compte : comptes) {
-			if (compte.getId().equals(virementBean.getCompteEmetteur())) {
-				model.put("em", compte.getLibelle());
-			} else if (compte.getId().equals(virementBean.getCompteRecepteur())) {
-				model.put("rcpt", compte.getLibelle());
-			}
+			if (compte.getId().equals(virementCommand.getCompteEmetteur())) virementCommand.setCompteEmetteurLibelle(compte.getLibelle());
+			else if (compte.getId().equals(virementCommand.getCompteRecepteur())) virementCommand.setCompteRecepteurLibelle(compte.getLibelle());
 		}
-		model.put("montant", virementBean.getMontant());
 
-		return "confirmation";
+		FlashScope.bind(VIREMENT_COMMAND_NAME).to(virementCommand);
+
+		return "redirect:confirmation.html";
 	}
 
-	@RequestMapping("/confirmation.html")
+	@RequestMapping(value = "/confirmation.html")
 	public String confirmation(ModelMap model, HttpServletRequest request) {
-		// VirementBean bean = (VirementBean) request.getAttribute("virementBean");
-		// model.put("em", compteService.getCompteById(bean.getCompteEmetteur()));
-		// model.put("rcpt", compteService.getCompteById(bean.getCompteRecepteur()));
-		// model.put("montant", bean.getMontant());
-		return "confirmation";
+		String comingFrom = request.getHeader("referer");
+		VirementCommand virementCommand = (VirementCommand) request.getAttribute(VIREMENT_COMMAND_NAME);
+		if (comingFrom != null && virementCommand != null) {
+			FlashScope.bind(VIREMENT_COMMAND_NAME).to(virementCommand);
+			return "confirmation";
+		}
+		return "redirect:/error-404.html";
 	}
 
 	@RequestMapping("/save.html")
 	public String save(ModelMap model, HttpServletRequest request) {
 
-		VirementBean virementBean = (VirementBean) request.getAttribute("virementBean");
+		VirementCommand virementCommand = (VirementCommand) request.getAttribute(VIREMENT_COMMAND_NAME);
 
 		// On verifie que le bean est encore en session
-		if (virementBean == null) {
-			return "redirect:/user/virements/virements.html";
+		if (virementCommand == null) {
+			return "redirect:/error-404.html";
 		}
-
-		Compte c;
-
+		Compte c = null;
 		// Sauvegarde des operations
 		try {
-			operationService.createVirement(virementBean.getCompteEmetteur(), virementBean.getCompteRecepteur(), virementBean.getMontant());
-			c = compteService.getCompteById(virementBean.getCompteEmetteur());
+			operationService.createVirement(virementCommand.getCompteEmetteur(), virementCommand.getCompteRecepteur(), virementCommand.getMontant());
+			c = compteService.getCompteById(virementCommand.getCompteEmetteur());
+
 		} catch (SoldeInsuffisantException e) {
-			model.put("message", "transfers.error.amount");
+			model.put("messageTransferError", "transfers.error.amount");
 			return "virements";
 		} catch (PermissionRefuseeException e) {
-			model.put("message", "transfers.error.deniedAccount");
+			model.put("messageTransferError", "transfers.error.deniedAccount");
 			return "virements";
 		} catch (IdCompteNotFoundException e) {
 			model.put("message", "transfers.error.notFoundAccount");
 			return "virements";
 		}
 
+		FlashScope.bind("messageSuccess").to("transfers.success");
+
 		DateTime dateTime = new DateTime();
-
 		StringBuilder sb = new StringBuilder();
-
 		sb.append("redirect:/user/comptes/").append(c.getNumeroCompte());
 		sb.append("/").append(dateTime.getYear()).append("/").append(dateTime.getMonthOfYear()).append("/1/details.html");
 

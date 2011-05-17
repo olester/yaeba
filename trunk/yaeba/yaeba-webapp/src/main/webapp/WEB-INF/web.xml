@@ -45,7 +45,7 @@
 
 	<filter-mapping>
 		<filter-name>flashScopeFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>*.html</url-pattern>
 	</filter-mapping>
 
 	<servlet>
