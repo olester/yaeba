@@ -8,8 +8,14 @@
 	<h2 class="title">
 		<a href="#"><spring:message code="transfers.title" /> </a>
 	</h2>
-	<p class="meta"><spring:message code="histo.title" /></p>
+	<p class="meta">
+		<spring:message code="histo.title" />
+	</p>
 	<div class="entry">
+		<p>
+			<a href="${pageContext.request.contextPath}/user/virements/virements.html"><spring:message code="histo.back" />
+			</a>
+		</p>
 		<c:choose>
 			<c:when test="${not empty listeVirements}">
 				<p>
@@ -36,11 +42,13 @@
 									</c:otherwise>
 								</c:choose>
 							</td>
-							<td>
-								<%-- 							<c:if test="${operation.class.name='OperationCheque'}"> --%> <%-- 							<spring:message code="details.OPERATIONCHEQUE" /> ${operation.numeroCheque} --%>
-								<%-- 							</c:if> --%> ${virement.libelle}</td>
-							<td><a href="${pageContext.request.contextPath}/user/comptes/${virement.compte.numeroCompte}/${dateBean.annee}/${dateBean.mois}/1/details.html">${virement.compte.libelle} (${virement.compte.numeroCompte})</a></td>
-							<td><a href="${pageContext.request.contextPath}/user/comptes/${virement.compteDistant.numeroCompte}/${dateBean.annee}/${dateBean.mois}/1/details.html">${virement.compteDistant.libelle} (${virement.compteDistant.numeroCompte})</a></td>
+							<td>${virement.libelle}</td>
+							<td><a
+								href="${pageContext.request.contextPath}/user/comptes/${virement.compte.numeroCompte}/${dateBean.annee}/${dateBean.mois}/1/details.html">${virement.compte.libelle}
+									(${virement.compte.numeroCompte})</a></td>
+							<td><a
+								href="${pageContext.request.contextPath}/user/comptes/${virement.compteDistant.numeroCompte}/${dateBean.annee}/${dateBean.mois}/1/details.html">${virement.compteDistant.libelle}
+									(${virement.compteDistant.numeroCompte})</a></td>
 							<td><fmt:formatNumber value="${-virement.montant}" pattern="#0.00 EUR" /></td>
 						</tr>
 						<c:set var="compteur" value="${compteur+1}" />
@@ -55,10 +63,10 @@
 		</c:choose>
 
 		<br />
-		<!-- 		<p> -->
-		<%-- 			<a href="${pageContext.request.contextPath}/user/virements/virements.html"><spring:message code="transfers.back" /> </a> --%>
-		<!-- 		</p> -->
+		<p>
+			<a href="${pageContext.request.contextPath}/user/virements/virements.html"><spring:message code="histo.back" />
+			</a>
+		</p>
 
 	</div>
 </div>
-<div style="clear: both;">&nbsp;</div>

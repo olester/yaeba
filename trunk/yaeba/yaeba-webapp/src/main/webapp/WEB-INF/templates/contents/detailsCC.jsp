@@ -8,7 +8,10 @@
 	<h2 class="title">
 		<a href="#"><spring:message code="details.title" /> </a>
 	</h2>
-	<p class="meta">${compte.libelle} <spring:message code="details.cc.spec" /></p>
+	<p class="meta">
+		${compte.libelle}
+		<spring:message code="details.cc.spec" />
+	</p>
 	<div class="entry">
 		<p>
 			<spring:message code="details.text" />
@@ -79,7 +82,8 @@
 
 		<br /> <br />
 		<p>
-			<a href="${pageContext.request.contextPath}/user/comptes/${compte.numeroCompte}/${annee}/${mois}/1/details.html"><spring:message code="details.cc.back" /> </a>
+			<a href="${pageContext.request.contextPath}/user/comptes/${compte.numeroCompte}/${annee}/${mois}/1/details.html"><spring:message
+					code="details.cc.back" /> </a>
 		</p>
 		<p>
 			<a href="${pageContext.request.contextPath}/user/comptes.html"><spring:message code="details.back" /> </a>
@@ -87,4 +91,3 @@
 
 	</div>
 </div>
-<div style="clear: both;">&nbsp;</div>

@@ -39,7 +39,7 @@
 			</div>
 			<br />
 		</c:if>
-		
+
 		<spring:hasBindErrors name="virementCommand">
 			<c:forEach items="${errors.allErrors}" var="error">
 				<div style="color: red;">
@@ -48,7 +48,7 @@
 				<br />
 			</c:forEach>
 		</spring:hasBindErrors>
-		
+
 		<form:form commandName="virementCommand">
 			<p>
 				<spring:message code="transfers.txt" />
@@ -71,7 +71,7 @@
 				<br /> <br />
 				<spring:message code="transfers.montant" />
 				<br />
-				<form:input path="stringMontant" value="0.0"/>
+				<form:input path="stringMontant" value="0.0" />
 				<br /> <br /> <input type="submit" value="<spring:message code='transfers.submit' />" /> <br />
 			</p>
 		</form:form>
@@ -82,4 +82,3 @@
 
 	</div>
 </div>
-<div style="clear: both;">&nbsp;</div>

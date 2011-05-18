@@ -21,6 +21,7 @@
 		<div id="page">
 			<div id="content">
 				<tiles:insertAttribute name="content" />
+				<div style="clear: both;">&nbsp;</div>
 			</div>
 			<tiles:insertAttribute name="sidebar" />
 			<div style="clear: both;">&nbsp;</div>

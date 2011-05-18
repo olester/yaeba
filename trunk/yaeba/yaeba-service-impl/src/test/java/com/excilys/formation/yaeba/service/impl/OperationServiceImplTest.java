@@ -42,8 +42,6 @@ public class OperationServiceImplTest {
 	@InjectMocks
 	private OperationService operationService = new OperationServiceImpl();
 
-	// TODO : TESTER si on essaie de faire un virement av ec un identifiant ne correspondant a rien (mock renvoyant null)
-
 	@Test
 	public void testVirement() throws IdCompteNotFoundException, SoldeInsuffisantException, PermissionRefuseeException, MontantNegatifException {
 		Compte em = new Compte();

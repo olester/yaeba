@@ -106,11 +106,8 @@ public class OperationServiceImpl implements OperationService {
 	 */
 	@Override
 	@Transactional(readOnly = false)
-	public void createVirement(int idCompteEmetteur, int idCompteRecepteur, double montant) throws IdCompteNotFoundException,SoldeInsuffisantException, PermissionRefuseeException,
-			MontantNegatifException {
-
-		// XXX il faut tester si les id correspondent a quelque chose: getCompteById renvoie NULL:
-		// ce qui fait quand meme une eventuelle 500 dans ce cas.
+	public void createVirement(int idCompteEmetteur, int idCompteRecepteur, double montant) throws IdCompteNotFoundException, SoldeInsuffisantException,
+			PermissionRefuseeException, MontantNegatifException {
 
 		if (montant <= 0) throw new MontantNegatifException(montant);
 

@@ -109,11 +109,10 @@ public interface OperationService {
 	 *             Cette exception est levee si le solde du compte debiteur est insuffisant pour autoriser ce virement
 	 * @throws PermissionRefuseeException
 	 *             Cette exception est levee si les deux comptes n'appartiennent pas au meme utilisateur
-	 */
-	/*
-	 * Cette fonction plante tout si les ids ne correspondent a rien.
+	 * @throws MontantNegatifException
+	 *             Cette exception est levee si le montant saisi est negatif
 	 */
 
 	void createVirement(int idCompteEmetteur, int idCompteRecepteur, double montant) throws IdCompteNotFoundException, SoldeInsuffisantException,
-			PermissionRefuseeException,MontantNegatifException;
+			PermissionRefuseeException, MontantNegatifException;
 }

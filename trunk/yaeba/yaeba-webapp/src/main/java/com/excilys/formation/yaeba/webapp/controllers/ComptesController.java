@@ -74,8 +74,6 @@ public class ComptesController {
 	public String redirectDetailsCompte(@PathVariable("numeroCompte") String numeroCompte, @PathVariable("annee") int annee, @PathVariable("mois") int mois,
 			@PathVariable("page") int page, @RequestParam(value = "excel", defaultValue = "false", required = false) String excel, ModelMap model, Locale locale) {
 
-		// TODO A refactorer
-
 		// on teste si les arguments de l'url sont corrects.
 
 		if (annee < 0 || annee > new DateTime().getYear() || mois < 0 || mois > 12 || page <= 0) return "redirect:/error-400.html";
@@ -101,7 +99,7 @@ public class ComptesController {
 
 		// Calcul des dates aujourd'hui, il y a 36 mois, etc...
 		DateTime auj = new DateTime();
-		DateTime max = auj.minusMonths(36).isAfter(c.getDateCreation()) ? auj.minusMonths(36) : c.getDateCreation();
+		DateTime max = auj.minusMonths(36).isAfter(c.getDateCreation().minusMonths(1)) ? auj.minusMonths(36) : c.getDateCreation().minusMonths(1);
 		DateTime request = auj.monthOfYear().setCopy(mois).year().setCopy(annee);
 		if (request.isBefore(max)) {
 			model.clear();

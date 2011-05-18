@@ -20,10 +20,8 @@
 				<fmt:formatNumber value="${virementCommand.montant}" pattern="#0.00 EUR" />
 				. <br>
 			</p>
-			<input type="submit" value="<spring:message code='transfers.submit'/>" />
-			&nbsp;
-			<a href="virements.html" style="text-decoration: none;"><input type="button" value="<spring:message code='transfers.cancel'/>" /></a>
+			<input type="submit" value="<spring:message code='transfers.submit'/>" /> &nbsp; <a href="virements.html"
+				style="text-decoration: none;"><input type="button" value="<spring:message code='transfers.cancel'/>" /> </a>
 		</form>
 	</div>
 </div>
-<div style="clear: both;">&nbsp;</div>
