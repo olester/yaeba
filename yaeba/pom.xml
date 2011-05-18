@@ -36,6 +36,7 @@
 		<mockito.version>1.8.5</mockito.version>
 		<flashscope.version>1.0.0</flashscope.version>
 		<cxf.version>2.4.0</cxf.version>
+
 		<!-- <jax-rs.version>2.2.3</jax-rs.version> -->
 		<!-- versions des plugins -->
 		<eclipse.plugin.version>2.7</eclipse.plugin.version>
@@ -136,6 +137,7 @@
 		<module>yaeba-service-impl</module>
 		<module>yaeba-webapp</module>
 		<module>yaeba-ws-soap</module>
+		<module>yaeba-ws-rest</module>
 	</modules>
 
 	<!-- INSTRUCTIONS DE COMPILATION, PROFILES ET GOAL -->

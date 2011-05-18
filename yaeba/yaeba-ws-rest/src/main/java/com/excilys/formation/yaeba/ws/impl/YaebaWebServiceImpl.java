@@ -1,6 +1,9 @@
-package com.excilys.formation.yaeba.ws;
+package com.excilys.formation.yaeba.ws.impl;
 
-import javax.jws.WebService;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,10 +16,13 @@ import com.excilys.formation.yaeba.service.api.exception.IdCompteNotFoundExcepti
 import com.excilys.formation.yaeba.service.api.exception.MontantNegatifException;
 import com.excilys.formation.yaeba.service.api.exception.PermissionRefuseeException;
 import com.excilys.formation.yaeba.service.api.exception.SoldeInsuffisantException;
+import com.excilys.formation.yaeba.ws.InfoCompte;
+import com.excilys.formation.yaeba.ws.InfoVirement;
+import com.excilys.formation.yaeba.ws.api.YaebaWebService;
 import com.excilys.formation.yaeba.ws.converters.CompteConverter;
 
-@WebService(endpointInterface = "com.excilys.formation.yaeba.ws.Virement")
-public class VirementImpl implements Virement {
+@Path("/")
+public class YaebaWebServiceImpl implements YaebaWebService {
 
 	@Autowired
 	CompteService compteService;
@@ -27,12 +33,25 @@ public class VirementImpl implements Virement {
 	@Autowired
 	CompteConverter compteConverter;
 
-	Logger log = LoggerFactory.getLogger(VirementImpl.class);
+	Logger log = LoggerFactory.getLogger(YaebaWebServiceImpl.class);
 
 	@Override
-	public InfoVirement passerVirement(String compteCrediteur, String compteDebiteur, double montant) {
-		Compte cCrediteur = compteService.getCompteByNumeroCompte(compteCrediteur);
-		Compte cDebiteur = compteService.getCompteByNumeroCompte(compteDebiteur);
+	@GET
+	@Produces("application/json")
+	@Path("/getCompteByNumero/{numero}")
+	public InfoCompte getCompteByNumero(@PathParam("numero") String numero) {
+		com.excilys.formation.yaeba.model.Compte c = compteService.getCompteByNumeroCompte(numero);
+		return c != null ? compteConverter.convert(c) : new InfoCompte();
+	}
+
+	@Override
+	@GET
+	@Produces("application/json")
+	@Path("/virement/debiteur/{debiteur}/crediteur/{crediteur}/montant/{montant}")
+	public InfoVirement createVirement(@PathParam("debiteur") String debiteur, @PathParam("crediteur") String crediteur, @PathParam("montant") double montant) {
+		// TODO Auto-generated method stub
+		Compte cCrediteur = compteService.getCompteByNumeroCompte(crediteur);
+		Compte cDebiteur = compteService.getCompteByNumeroCompte(debiteur);
 
 		try {
 			operationService.createVirement(cDebiteur.getId(), cCrediteur.getId(), montant);
