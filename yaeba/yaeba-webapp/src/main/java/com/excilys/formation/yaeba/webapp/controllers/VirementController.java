@@ -154,10 +154,7 @@ public class VirementController {
 		model.put("listeVirements", operationService.getVirementsInternes(u));
 		model.put("locale", locale.getLanguage());
 
-		DateTime dt = new DateTime();
-		DateBean dateBean = new DateBean();
-		dateBean.setAnnee(dt.getYear());
-		dateBean.setMois(dt.getMonthOfYear());
+		DateBean dateBean = new DateBean(new DateTime());
 		model.put("dateBean", dateBean);
 
 		return "historique";
