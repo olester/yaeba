@@ -3,9 +3,11 @@
 
 <div class="post">
 	<h2 class="title">
-		<a href="#"><spring:message code="admin.title" /></a>
+		<a href="#"><spring:message code="admin.title" /> </a>
 	</h2>
-	<p class="meta"><spring:message code="inprogress.work" /></p>
+	<p class="meta">
+		<spring:message code="inprogress.work" />
+	</p>
 	<div class="entry">
 		<p>
 			<spring:message code="inprogress.unavailable" />
@@ -13,4 +15,3 @@
 
 	</div>
 </div>
-<div style="clear: both;">&nbsp;</div>
