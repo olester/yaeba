@@ -36,9 +36,8 @@
 		<mockito.version>1.8.5</mockito.version>
 		<flashscope.version>1.0.0</flashscope.version>
 		<cxf.version>2.4.0</cxf.version>
-		<jax-ws.version>2.2.3</jax-ws.version>
 <!-- 		<jax-rs.version>2.2.3</jax-rs.version> -->
-		<jax-b.version>2.1</jax-b.version>
+		<jax-b.version>2.2.2</jax-b.version>
 		<!-- versions des plugins -->
 		<eclipse.plugin.version>2.7</eclipse.plugin.version>
 		<compiler.plugin.version>2.3.2</compiler.plugin.version>
@@ -613,12 +612,7 @@
 				<version>${cxf.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.sun.xml.ws</groupId>
-				<artifactId>jaxws-rt</artifactId>
-				<version>${jax-ws.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.xml</groupId>
+				<groupId>javax.xml.bind</groupId>
 				<artifactId>jaxb-api</artifactId>
 				<version>${jax-b.version}</version>
 			</dependency>
