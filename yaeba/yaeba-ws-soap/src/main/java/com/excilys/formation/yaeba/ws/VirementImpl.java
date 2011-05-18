@@ -44,8 +44,9 @@ public class VirementImpl implements Virement {
 		}
 
 		InfoVirement virement = new InfoVirement();
-		virement.setCrediteur(CompteConverter.compteToInfoCompte(cCrediteur));
-		virement.setDebiteur(CompteConverter.compteToInfoCompte(cDebiteur));
+		CompteConverter compteConverter = new CompteConverter();
+		virement.setCrediteur(compteConverter.convert(cCrediteur));
+		virement.setDebiteur(compteConverter.convert(cDebiteur));
 
 		return virement;
 	}

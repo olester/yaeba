@@ -22,6 +22,6 @@ public class CompteImpl implements Compte {
 	@WebMethod
 	public InfoCompte getCompteByNumero(String numero) {
 		com.excilys.formation.yaeba.model.Compte c = compteService.getCompteByNumeroCompte(numero);
-		return CompteConverter.compteToInfoCompte(c);
+		return new CompteConverter().convert(c);
 	}
 }
