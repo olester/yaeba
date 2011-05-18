@@ -25,6 +25,7 @@ import com.excilys.formation.yaeba.model.Utilisateur;
 import com.excilys.formation.yaeba.service.api.CompteService;
 import com.excilys.formation.yaeba.service.api.OperationService;
 import com.excilys.formation.yaeba.service.api.exception.IdCompteNotFoundException;
+import com.excilys.formation.yaeba.service.api.exception.MontantNegatifException;
 import com.excilys.formation.yaeba.service.api.exception.PermissionRefuseeException;
 import com.excilys.formation.yaeba.service.api.exception.SoldeInsuffisantException;
 
@@ -44,7 +45,7 @@ public class OperationServiceImplTest {
 	// TODO : TESTER si on essaie de faire un virement av ec un identifiant ne correspondant a rien (mock renvoyant null)
 
 	@Test
-	public void testVirement() throws IdCompteNotFoundException, SoldeInsuffisantException, PermissionRefuseeException {
+	public void testVirement() throws IdCompteNotFoundException, SoldeInsuffisantException, PermissionRefuseeException, MontantNegatifException {
 		Compte em = new Compte();
 		em.setLibelle("compte1");
 		em.setNumeroCompte("0123");
@@ -91,7 +92,8 @@ public class OperationServiceImplTest {
 
 	// Permission refusee
 	@Test(expected = PermissionRefuseeException.class)
-	public void testVirementPermissionRefusee() throws IdCompteNotFoundException, SoldeInsuffisantException, PermissionRefuseeException {
+	public void testVirementPermissionRefusee() throws IdCompteNotFoundException, SoldeInsuffisantException, PermissionRefuseeException,
+			MontantNegatifException {
 		Compte em = new Compte();
 		em.setLibelle("compte1");
 		Compte rcpt = new Compte();
@@ -113,7 +115,7 @@ public class OperationServiceImplTest {
 
 	// Solde insuffisant
 	@Test(expected = SoldeInsuffisantException.class)
-	public void testVirementNonApprovisionne() throws IdCompteNotFoundException, SoldeInsuffisantException, PermissionRefuseeException {
+	public void testVirementNonApprovisionne() throws IdCompteNotFoundException, SoldeInsuffisantException, PermissionRefuseeException, MontantNegatifException {
 		Compte em = new Compte();
 		Compte rcpt = new Compte();
 		when(compteService.getCompteById(98)).thenReturn(em);
@@ -124,14 +126,14 @@ public class OperationServiceImplTest {
 
 	// Id de compte inexistant
 	@Test(expected = IdCompteNotFoundException.class)
-	public void testVirementIdNotFound() throws IdCompteNotFoundException, SoldeInsuffisantException, PermissionRefuseeException {
+	public void testVirementIdNotFound() throws IdCompteNotFoundException, SoldeInsuffisantException, PermissionRefuseeException, MontantNegatifException {
 		when(compteService.getCompteById(98)).thenThrow(new IdCompteNotFoundException(98));
 		operationService.createVirement(98, 97, 10);
 	}
 
 	// Id de compte inexistant pour le compte crediteur
 	@Test(expected = IdCompteNotFoundException.class)
-	public void testVirementIdNotFound2() throws IdCompteNotFoundException, SoldeInsuffisantException, PermissionRefuseeException {
+	public void testVirementIdNotFound2() throws IdCompteNotFoundException, SoldeInsuffisantException, PermissionRefuseeException, MontantNegatifException {
 		Compte em = new Compte();
 		em.setSoldeCourant(500);
 		when(compteService.getCompteById(98)).thenReturn(em);

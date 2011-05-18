@@ -21,6 +21,7 @@ import com.excilys.formation.yaeba.model.Utilisateur;
 import com.excilys.formation.yaeba.service.api.CompteService;
 import com.excilys.formation.yaeba.service.api.OperationService;
 import com.excilys.formation.yaeba.service.api.exception.IdCompteNotFoundException;
+import com.excilys.formation.yaeba.service.api.exception.MontantNegatifException;
 import com.excilys.formation.yaeba.service.api.exception.PermissionRefuseeException;
 import com.excilys.formation.yaeba.service.api.exception.SoldeInsuffisantException;
 import com.excilys.formation.yaeba.webapp.CustomUser;
@@ -130,6 +131,9 @@ public class VirementController {
 			return "virements";
 		} catch (PermissionRefuseeException e) {
 			model.put("messageTransferError", "transfers.error.deniedAccount");
+			return "virements";
+		} catch (MontantNegatifException e) {
+			model.put("message", "transfers.error.amount");
 			return "virements";
 		} catch (IdCompteNotFoundException e) {
 			model.put("message", "transfers.error.notFoundAccount");
