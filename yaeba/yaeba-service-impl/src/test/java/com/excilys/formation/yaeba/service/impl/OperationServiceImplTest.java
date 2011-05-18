@@ -122,6 +122,12 @@ public class OperationServiceImplTest {
 		operationService.createVirement(98, 97, 10);
 	}
 
+	// Montant negatif
+	@Test(expected = MontantNegatifException.class)
+	public void testVirementMontantNegatif() throws IdCompteNotFoundException, SoldeInsuffisantException, PermissionRefuseeException, MontantNegatifException {
+		operationService.createVirement(98, 97, -10);
+	}
+
 	// Id de compte inexistant
 	@Test(expected = IdCompteNotFoundException.class)
 	public void testVirementIdNotFound() throws IdCompteNotFoundException, SoldeInsuffisantException, PermissionRefuseeException, MontantNegatifException {
