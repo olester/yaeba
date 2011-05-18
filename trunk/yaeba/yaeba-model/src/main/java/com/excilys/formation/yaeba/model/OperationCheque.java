@@ -10,10 +10,8 @@ import javax.persistence.Table;
 @Table(name = "operationcheque")
 public class OperationCheque extends Operation implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -330978500644908892L;
+
 	private int numeroCheque;
 
 	@Override

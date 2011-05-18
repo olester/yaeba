@@ -3,6 +3,8 @@ package com.excilys.formation.yaeba.service.impl;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,15 +26,11 @@ import com.excilys.formation.yaeba.service.api.exception.NoCardException;
 @Transactional(readOnly = true)
 public class CompteServiceImpl implements CompteService {
 
-	/**
-	 * 
-	 */
+	Logger logger = LoggerFactory.getLogger(CompteServiceImpl.class);
+
 	@Autowired
 	private OperationService operationService;
 
-	/**
-	 * 
-	 */
 	@Autowired
 	private CompteDao compteDao;
 
@@ -42,7 +40,12 @@ public class CompteServiceImpl implements CompteService {
 	@Override
 	public Compte getCompteById(int id) throws IdCompteNotFoundException {
 		Compte result = compteDao.getCompteById(id);
-		if (result == null) throw new IdCompteNotFoundException(id);
+		if (result == null) {
+			StringBuffer sb = new StringBuffer();
+			sb.append("On ne trouve pas l'id compte : ").append(id);
+			logger.warn(sb.toString());
+			throw new IdCompteNotFoundException(id);
+		}
 		return result;
 	}
 
@@ -75,7 +78,12 @@ public class CompteServiceImpl implements CompteService {
 	 */
 	@Override
 	public double getEncoursCarte(Compte c) throws NoCardException {
-		if (!c.isAssociatedWithCards()) throw new NoCardException(c);
+		if (!c.isAssociatedWithCards()) {
+			StringBuffer sb = new StringBuffer();
+			sb.append("On recherche l'encours carte du compte sans carte : ").append(c.getId()).append(" (n°").append(c.getNumeroCompte()).append(")");
+			logger.warn(sb.toString());
+			throw new NoCardException(c);
+		}
 		DateTime now = new DateTime();
 		List<OperationCarteBancaire> operationsCB = operationService.getOperationsCBByMoisAnnee(c, now.getYear(), now.getMonthOfYear());
 		double result = 0;

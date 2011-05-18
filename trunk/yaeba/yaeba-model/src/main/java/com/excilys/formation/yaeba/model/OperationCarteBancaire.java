@@ -13,6 +13,7 @@ import org.joda.time.DateTime;
 public class OperationCarteBancaire extends Operation implements Serializable {
 
 	private static final long serialVersionUID = 959175591783754961L;
+
 	private DateTime dateEffective;
 
 	@Column(name = "dateeffective", nullable = false)

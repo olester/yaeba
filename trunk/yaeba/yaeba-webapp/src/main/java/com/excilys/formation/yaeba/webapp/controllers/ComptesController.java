@@ -37,7 +37,7 @@ public class ComptesController {
 
 	public static final int NB_RESULTS = 7;
 
-	Logger l = LoggerFactory.getLogger(ComptesController.class);
+	Logger logger = LoggerFactory.getLogger(ComptesController.class);
 
 	@Autowired
 	private OperationService operationService;
@@ -62,7 +62,7 @@ public class ComptesController {
 			try {
 				if (c.isAssociatedWithCards()) c.setEncoursCarte(compteService.getEncoursCarte(c));
 			} catch (NoCardException e) {
-				l.error(e.getMessage());
+				logger.error(e.getMessage());
 			}
 		}
 		model.put("comptes", comptes);

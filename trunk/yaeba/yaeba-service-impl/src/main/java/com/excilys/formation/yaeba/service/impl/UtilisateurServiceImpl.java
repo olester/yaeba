@@ -17,9 +17,6 @@ import com.excilys.formation.yaeba.service.api.UtilisateurService;
 @Transactional(readOnly = true)
 public class UtilisateurServiceImpl implements UtilisateurService {
 
-	/**
-	 * 
-	 */
 	@Autowired
 	private UtilisateurDao utilisateurDao;
 

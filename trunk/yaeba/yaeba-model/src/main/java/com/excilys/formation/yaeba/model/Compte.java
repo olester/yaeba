@@ -23,10 +23,8 @@ import org.joda.time.DateTime;
 @Table(name = "compte")
 public class Compte implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3782823641514579337L;
+
 	private Integer id;
 	private String numeroCompte;
 	private String libelle;

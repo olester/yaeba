@@ -3,6 +3,8 @@ package com.excilys.formation.yaeba.service.impl;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,21 +31,14 @@ import com.excilys.formation.yaeba.service.api.exception.SoldeInsuffisantExcepti
 @Transactional(readOnly = true)
 public class OperationServiceImpl implements OperationService {
 
-	/**
-	 * 
-	 */
+	Logger logger = LoggerFactory.getLogger(OperationServiceImpl.class);
+
 	@Autowired
 	private OperationDao operationDao;
 
-	/**
-	 * 
-	 */
 	@Autowired
 	private CompteService compteService;
 
-	/**
-	 * 
-	 */
 	@Autowired
 	private UtilisateurDao utilisateurDao;
 
@@ -109,17 +104,32 @@ public class OperationServiceImpl implements OperationService {
 	public void createVirement(int idCompteEmetteur, int idCompteRecepteur, double montant) throws IdCompteNotFoundException, SoldeInsuffisantException,
 			PermissionRefuseeException, MontantNegatifException {
 
-		if (montant <= 0) throw new MontantNegatifException(montant);
+		if (montant <= 0) {
+			StringBuffer sb = new StringBuffer();
+			sb.append("On cree un virement avec un montant negatif egal a ").append(montant);
+			sb.append(" entre les comptes ").append(idCompteEmetteur).append(" et ").append(idCompteRecepteur);
+			logger.warn(sb.toString());
+			throw new MontantNegatifException(montant);
+		}
 
 		Compte em = compteService.getCompteById(idCompteEmetteur);
 
 		if (!compteService.isApprovisionne(em, montant)) {
+			StringBuffer sb = new StringBuffer();
+			sb.append("On cree un virement depuis un compte non approvisionne : ").append(em.getId()).append(" (n°").append(em.getNumeroCompte()).append(")");
+			sb.append(" pour un montant de ").append(montant);
+			logger.warn(sb.toString());
 			throw new SoldeInsuffisantException(em, montant);
 		}
 
 		Compte rcpt = compteService.getCompteById(idCompteRecepteur);
 
 		if (!utilisateurDao.getOwner(em).equals(utilisateurDao.getOwner(rcpt))) {
+			StringBuffer sb = new StringBuffer();
+			sb.append("On cree un virement entre deux comptes n'appartenant pas au meme proprietaire : ").append(em.getId()).append(" (n°")
+					.append(em.getNumeroCompte()).append(")");
+			sb.append(" et ").append(rcpt.getId()).append(" (n°").append(rcpt.getNumeroCompte()).append(")");
+			logger.warn(sb.toString());
 			throw new PermissionRefuseeException(em, rcpt);
 		}
 
@@ -148,6 +158,5 @@ public class OperationServiceImpl implements OperationService {
 
 		operationDao.create(operation);
 		operationDao.create(operationInverse);
-
 	}
 }

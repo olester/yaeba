@@ -11,10 +11,8 @@ import javax.persistence.Table;
 @Table(name = "operationvirementinterne")
 public class OperationVirementInterne extends Operation implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3815970073513291893L;
+
 	private Compte compteDistant;
 
 	@ManyToOne(targetEntity = Compte.class)

@@ -1,15 +1,19 @@
 package com.excilys.formation.yaeba.webapp;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
-public class VirementCommand {
+public class VirementCommand implements Serializable {
 
-	@NotNull(message = "transfers.error.unchosen1")
+	private static final long serialVersionUID = 1218778930018603952L;
+
+	@NotNull(message = "transfers.error.unchosenTransmitter")
 	private Integer compteEmetteur;
 	private String compteEmetteurLibelle;
 
-	@NotNull(message = "transfers.error.unchosen2")
+	@NotNull(message = "transfers.error.unchosenReceiver")
 	private Integer compteRecepteur;
 	private String compteRecepteurLibelle;
 
