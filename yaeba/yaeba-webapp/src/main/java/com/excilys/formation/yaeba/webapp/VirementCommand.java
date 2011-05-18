@@ -5,11 +5,11 @@ import javax.validation.constraints.NotNull;
 
 public class VirementCommand {
 
-	@NotNull(message = "transfers.error.unchosen")
+	@NotNull(message = "transfers.error.unchosen1")
 	private Integer compteEmetteur;
 	private String compteEmetteurLibelle;
 
-	@NotNull(message = "transfers.error.unchosen")
+	@NotNull(message = "transfers.error.unchosen2")
 	private Integer compteRecepteur;
 	private String compteRecepteurLibelle;
 
