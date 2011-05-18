@@ -1,6 +1,7 @@
 package com.excilys.formation.yaeba.selenium;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -183,4 +184,73 @@ public class UserEnTest {
 		assertEquals("2010", selenium.getValue("annee"));
 	}
 
+	/**
+	 * Transfers tests
+	 */
+
+	@Test
+	public void testVirementMontantNul() throws Exception {
+		selenium.click("link=Transfers");
+		selenium.waitForPageToLoad("30000");
+		selenium.select("compteEmetteur", "label=Compte courant");
+		selenium.click("//input[@value='Confirm']");
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Please, choose a positive amount"));
+	}
+
+	@Test
+	public void testVirementMontantNegatif() throws Exception {
+		selenium.click("link=Transfers");
+		selenium.waitForPageToLoad("30000");
+		selenium.select("compteEmetteur", "label=Compte courant");
+		selenium.type("stringMontant", "-10.0");
+		selenium.click("//input[@value='Confirm']");
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Please, choose a positive amount"));
+	}
+
+	@Test
+	public void testVirementMontantInvalide() throws Exception {
+		selenium.click("link=Transfers");
+		selenium.waitForPageToLoad("30000");
+		selenium.select("compteEmetteur", "label=Compte courant");
+		selenium.type("stringMontant", "mille euros");
+		selenium.click("//input[@value='Confirm']");
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Please, enter a real number"));
+	}
+
+	@Test
+	public void testVirementCompte1NonSelect() throws Exception {
+		selenium.click("link=Transfers");
+		selenium.waitForPageToLoad("30000");
+		selenium.select("compteRecepteur", "label=Compte courant");
+		selenium.type("stringMontant", "10.0");
+		selenium.click("//input[@value='Confirm']");
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Please, choose an source account"));
+	}
+
+	@Test
+	public void testVirementCompte1et2NonSelect() throws Exception {
+		selenium.click("link=Transfers");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//input[@value='Confirm']");
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Please, choose an destination account"));
+		assertTrue(selenium.isTextPresent("Please, choose an source account"));
+	}
+
+	@Test
+	public void testVirementComptesIdentiques() throws Exception {
+		selenium.click("link=Transfers");
+		selenium.waitForPageToLoad("30000");
+		selenium.select("compteEmetteur", "label=Compte courant");
+		selenium.click("//input[@value='Confirm']");
+		selenium.waitForPageToLoad("30000");
+		selenium.select("compteRecepteur", "label=Compte courant");
+		selenium.click("//input[@value='Confirm']");
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Please, choose two different accounts"));
+	}
 }
