@@ -40,8 +40,6 @@ public class VirementController {
 	@Autowired
 	private OperationService operationService;
 
-	private DateBean dateBean;
-
 	@RequestMapping(value = "/virements.html", method = RequestMethod.GET)
 	public String redirectVirements(ModelMap model, HttpServletRequest request) {
 		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
@@ -157,6 +155,7 @@ public class VirementController {
 		model.put("locale", locale.getLanguage());
 
 		DateTime dt = new DateTime();
+		DateBean dateBean = new DateBean();
 		dateBean.setAnnee(dt.getYear());
 		dateBean.setMois(dt.getMonthOfYear());
 		model.put("dateBean", dateBean);
