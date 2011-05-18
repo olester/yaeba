@@ -1,5 +1,7 @@
 package com.excilys.formation.yaeba.webapp;
 
+import org.joda.time.DateTime;
+
 public class DateBean {
 
 	private int annee;
@@ -7,7 +9,12 @@ public class DateBean {
 
 	public DateBean() {
 	}
-
+	
+	public DateBean(DateTime dt) {
+		this.annee = dt.getYear();
+		this.mois = dt.getMonthOfYear();
+	}
+	
 	public int getAnnee() {
 		return annee;
 	}

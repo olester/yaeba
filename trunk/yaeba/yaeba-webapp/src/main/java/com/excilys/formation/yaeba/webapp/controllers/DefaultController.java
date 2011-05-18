@@ -25,6 +25,15 @@ public class DefaultController {
 		return "login";
 	}
 
+	/**
+	 * Cette methode gere les cas d'erreur. Seules les erreurs 500, 403, 400 et 404 sont gerees. Dans le cas d'une autre erreur, une 404 sera generee.
+	 * 
+	 * @param code
+	 *            le code d'erreur recupere dans l'url (route par spring)
+	 * @param model
+	 *            la hashmap passee par spring
+	 * @return la redirection spring vers tiles
+	 */
 	@RequestMapping("/error-{code}.html")
 	public String redirectError(@PathVariable("code") String code, ModelMap model) {
 		int codeInt;
@@ -33,7 +42,7 @@ public class DefaultController {
 		} catch (NumberFormatException e) {
 			return "error-404";
 		}
-		if (codeInt == 403 || codeInt == 404 || codeInt == 500) return "error-" + codeInt;
+		if (codeInt == 403 || codeInt == 404 || codeInt == 500 || codeInt == 400) return "error-" + codeInt;
 		return "error-404";
 	}
 

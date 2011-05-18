@@ -1,5 +1,6 @@
 package com.excilys.formation.yaeba.webapp.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.excilys.formation.yaeba.model.Compte;
+import com.excilys.formation.yaeba.model.Operation;
 import com.excilys.formation.yaeba.model.OperationCarteBancaire;
 import com.excilys.formation.yaeba.model.Utilisateur;
 import com.excilys.formation.yaeba.service.api.CompteService;
@@ -44,15 +46,18 @@ public class ComptesController {
 
 	@RequestMapping("/comptes.html")
 	public String redirectComptes(ModelMap model) {
-		DateTime dt = new DateTime();
-		DateBean dateBean = new DateBean();
-		dateBean.setAnnee(dt.getYear());
-		dateBean.setMois(dt.getMonthOfYear());
+
+		// on recupere la date du jour
+		DateBean dateBean = new DateBean(new DateTime());
 		model.put("dateBean", dateBean);
 
+		// on recupere l'utilisateur courant
 		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
-		List<Compte> comptes = compteService.getComptesByUtilisateur(u);
+		model.put("utilisateur", u);
 
+		// on recupere la liste des comptes.
+		// et on calcule l'encours carte pour les comptes associes a une carte.
+		List<Compte> comptes = compteService.getComptesByUtilisateur(u);
 		for (Compte c : comptes) {
 			try {
 				if (c.isAssociatedWithCards()) c.setEncoursCarte(compteService.getEncoursCarte(c));
@@ -60,104 +65,109 @@ public class ComptesController {
 				l.error(e.getMessage());
 			}
 		}
-
 		model.put("comptes", comptes);
 
-		model.put("utilisateur", u);
 		return "comptes";
 	}
 
 	@RequestMapping("/{numeroCompte}/{annee}/{mois}/{page}/details.html")
-	public String redirectDetailsCompte(@PathVariable("numeroCompte") String numeroCompte, @PathVariable("annee") String annee,
-			@PathVariable("mois") String mois, @PathVariable("page") String page,
-			@RequestParam(value = "excel", defaultValue = "false", required = false) String excel, ModelMap model, Locale locale) {
+	public String redirectDetailsCompte(@PathVariable("numeroCompte") String numeroCompte, @PathVariable("annee") int annee, @PathVariable("mois") int mois,
+			@PathVariable("page") int page, @RequestParam(value = "excel", defaultValue = "false", required = false) String excel, ModelMap model, Locale locale) {
 
 		// TODO A refactorer
 
-		int anneeInt;
-		int moisInt;
-		int pageInt;
+		// on teste si les arguments de l'url sont corrects.
 
-		try {
-			anneeInt = Integer.parseInt(annee);
-			moisInt = Integer.parseInt(mois);
-			pageInt = Integer.parseInt(page);
-			if (anneeInt < 0 || anneeInt > new DateTime().getYear()) throw new NumberFormatException();
-			if (moisInt < 0 || moisInt > 12) throw new NumberFormatException();
-			if (pageInt <= 0) throw new NumberFormatException();
-		} catch (NumberFormatException e) {
+		if (annee < 0 || annee > new DateTime().getYear() || mois < 0 || mois > 12 || page <= 0) return "redirect:/error-400.html";
+
+		// on recupere l'utilisateur courant
+		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
+		model.put("utilisateur", u);
+
+		// on recupere le compte dont on cherche a afficher les details.
+		model.put("numero", numeroCompte);
+		Compte c = compteService.getCompteByNumeroCompte(u, numeroCompte);
+		if (c == null) {
+			model.clear();
+			return "redirect:/error-404.html";
+		}
+		model.put("libelle", c.getLibelle());
+
+		// on ajoute la date courante
+		DateBean dateBean = new DateBean();
+		dateBean.setAnnee(annee);
+		dateBean.setMois(mois);
+		model.put("dateBean", dateBean);
+
+		// Calcul des dates aujourd'hui, il y a 36 mois, etc...
+		DateTime auj = new DateTime();
+		DateTime max = auj.minusMonths(36).isAfter(c.getDateCreation()) ? auj.minusMonths(36) : c.getDateCreation();
+		DateTime request = auj.monthOfYear().setCopy(mois).year().setCopy(annee);
+		if (request.isBefore(max)) {
+			model.clear();
 			return "redirect:/error-404.html";
 		}
 
-		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
-		Compte c = compteService.getCompteByNumeroCompte(u, numeroCompte);
+		// -- Actualisation des listes déroulantes
+		Set<Integer> anneesDispo = new TreeSet<Integer>();
+		Set<Integer> moisDispo = new TreeSet<Integer>();
+		int maxMois = Months.monthsBetween(max, auj).getMonths();
+		for (int i = maxMois; i >= 0; i--) {
+			DateTime dateI = auj.minusMonths(i);
+			if (dateI.getYear() == annee) moisDispo.add(dateI.getMonthOfYear());
+			if (!anneesDispo.contains(dateI.getYear())) anneesDispo.add(dateI.getYear());
+		}
+		model.put("anneesDispo", anneesDispo);
+		model.put("moisDispo", moisDispo);
 
-		if (c != null) {
-			model.put("utilisateur", u);
-			model.put("numero", numeroCompte);
-			DateBean dateBean = new DateBean();
-			dateBean.setAnnee(anneeInt);
-			dateBean.setMois(moisInt);
-			model.put("dateBean", dateBean);
-			model.put("libelle", c.getLibelle());
-
-			// -- Actualisation des listes déroulantes
-			Set<Integer> anneesDispo = new TreeSet<Integer>();
-			Set<Integer> moisDispo = new TreeSet<Integer>();
-
-			DateTime auj = new DateTime();
-			DateTime dateCreation = c.getDateCreation();
-			Months d = Months.monthsBetween(dateCreation, auj);
-			int maxMois = Math.min(36, d.getMonths());
-
-			DateTime dtMax = c.getDateCreation();
-			if (dtMax.compareTo(auj.minusMonths(36)) < 0) dtMax = auj.minusMonths(36);
-			if (anneeInt < dtMax.getYear() || (anneeInt == dtMax.getYear() && moisInt < dtMax.getMonthOfYear())) {
-				model.clear();
-				return "redirect:/error-404.html";
-			}
-
-			if (anneeInt == dateCreation.getYear()) moisDispo.add(dateCreation.getMonthOfYear());
-
-			for (int i = maxMois; i >= 0; i--) {
-				DateTime dateI = auj.minusMonths(i);
-				if (dateI.getYear() == anneeInt) moisDispo.add(dateI.getMonthOfYear());
-				if (!anneesDispo.contains(dateI.getYear())) anneesDispo.add(dateI.getYear());
-			}
-			// ---------------------------------------
-
-			List<OperationCarteBancaire> listeOperationsCB = operationService.getOperationsCBByMoisAnnee(c, anneeInt, moisInt);
-			model.put("nbCB", listeOperationsCB.size());
-			if (!listeOperationsCB.isEmpty()) {
-				float sommeCB = 0;
-				for (OperationCarteBancaire o : listeOperationsCB)
-					sommeCB += o.getMontant();
-				model.put("sommeCB", sommeCB);
-				model.put("listeOperationsCB", listeOperationsCB);
-			}
-
-			if (excel.equals("true")) {
-				model.put("listeOperations", operationService.getOperationsByMoisAnnee(c, anneeInt, moisInt));
-				return "ExcelBean";
-			}
-
-			model.put("locale", locale.getLanguage());
-
-			model.put("compteEstVide", compteService.isEmpty(c));
-			model.put("page", pageInt);
-			model.put("listeOperations", operationService.getOperationsNoCBByMoisAnnee(c, anneeInt, moisInt, pageInt, NB_RESULTS));
-			long nbRes = operationService.getNbOperationsNoCBByMoisAnnee(c, anneeInt, moisInt);
-			model.put("nbPages", Math.ceil(nbRes / (float) NB_RESULTS));
-
-			model.put("anneesDispo", anneesDispo);
-			model.put("moisDispo", moisDispo);
-
-			return "detailsCompte";
+		// on charge les informations relatives aux cartes bancaires (nombre d'operations, liste des operations, somme des operations)
+		List<OperationCarteBancaire> listeOperationsCB = operationService.getOperationsCBByMoisAnnee(c, annee, mois);
+		model.put("nbCB", listeOperationsCB.size());
+		if (!listeOperationsCB.isEmpty()) {
+			float sommeCB = 0;
+			for (OperationCarteBancaire o : listeOperationsCB)
+				sommeCB += o.getMontant();
+			model.put("sommeCB", sommeCB);
+			model.put("listeOperationsCB", listeOperationsCB);
 		}
 
-		return "redirect:/error-404.html";
+		// on redirige vers l'excelBean si l'utilisateur a demandé a avoir une feuille excel
+		if (excel.equals("true")) {
+			model.put("listeOperations", operationService.getOperationsByMoisAnnee(c, annee, mois));
+			return "ExcelBean";
+		}
+
+		// on ajoute diverses informations (locale, page courante,
+		model.put("locale", locale.getLanguage());
+		model.put("page", page);
+
+		// on verifie si le compte est vide, et on appelle les services si celui-ci ne l'est pas.
+		// on ajoute ensuite la liste des operations sauf CB et le nombre de pages
+		boolean estVide = compteService.isEmpty(c);
+		model.put("compteEstVide", estVide);
+		if (!estVide) {
+			model.put("listeOperations", operationService.getOperationsNoCBByMoisAnnee(c, annee, mois, page, NB_RESULTS));
+			long nbRes = operationService.getNbOperationsNoCBByMoisAnnee(c, annee, mois);
+			model.put("nbPages", Math.ceil(nbRes / (float) NB_RESULTS));
+		} else {
+			model.put("listeOperations", new ArrayList<Operation>());
+			model.put("nbPages", 0);
+		}
+
+		return "detailsCompte";
 	}
 
+	/**
+	 * Fonction servant a mapper le choix du mois et de l\'annee lors de la selection par l\'utilisateur sur le detail d\'un compte.
+	 * 
+	 * @param request
+	 *            parametres passes en POST par le formulaire
+	 * @param numeroCompte
+	 *            Numero du compte courant dans l\'URL
+	 * @param model
+	 *            ModelMap
+	 * @return redirection vers le detail du compte au mois et a l\'annee selectionne.
+	 */
 	@RequestMapping(value = "/{numeroCompte}/choix.html", method = RequestMethod.POST)
 	public String redirectChoixDate(HttpServletRequest request, @PathVariable("numeroCompte") String numeroCompte, ModelMap model) {
 		String annee = request.getParameter("annee");
@@ -175,7 +185,11 @@ public class ComptesController {
 			}
 		}
 
-		return "redirect:/user/comptes/" + numeroCompte + "/" + annee + "/" + mois + "/1/details.html";
+		StringBuilder sb = new StringBuilder();
+		sb.append("redirect:/user/comptes/").append(numeroCompte);
+		sb.append("/").append(annee).append("/").append(mois).append("/1/details.html");
+
+		return sb.toString();
 	}
 
 }
