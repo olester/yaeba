@@ -38,7 +38,40 @@
 			<artifactId>yaeba-service-impl</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- EXTERNES -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-rt</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.xml</groupId>
+			<artifactId>jaxb-api</artifactId>
+		</dependency>
 	</dependencies>
 
-
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>eviware</groupId>
+				<artifactId>maven-soapui-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<projectFile>yaeba-ws-soapui-project.xml</projectFile>
+					<host>http://localhost:8079/yaeba-ws-soap</host>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

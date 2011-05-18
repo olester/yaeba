@@ -92,4 +92,9 @@ public class CompteServiceImpl implements CompteService {
 	public boolean isApprovisionne(Compte c, double montant) {
 		return c.getSoldeCourant() >= montant;
 	}
+
+	@Override
+	public Compte getCompteByNumeroCompte(String numeroCompte) {
+		return compteDao.getCompteByNumeroCompte(numeroCompte);
+	}
 }

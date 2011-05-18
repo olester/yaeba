@@ -55,6 +55,15 @@ public interface CompteService {
 	Compte getCompteByNumeroCompte(Utilisateur u, String numeroCompte);
 
 	/**
+	 * Cette fonction recherche le compte qui correspond a un numero de compte (uniquement pour les web services)
+	 * 
+	 * @param numeroCompte
+	 *            le numero du compte
+	 * @return le compte correspondant (ou null si l'utilisateur ne possede pas le compte demande, ou si le numero de compte n'existe pas)
+	 */
+	Compte getCompteByNumeroCompte(String numeroCompte);
+
+	/**
 	 * Cette fonction calcule l'encours carte d'un compte
 	 * 
 	 * @param c

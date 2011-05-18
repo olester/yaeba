@@ -11,6 +11,8 @@ public interface CompteDao {
 
 	Compte getCompteByNumeroCompte(Utilisateur u, String numeroCompte);
 
+	Compte getCompteByNumeroCompte(String numeroCompte);
+
 	List<Compte> getComptes(Utilisateur u);
 
 	boolean isEmpty(Compte c);

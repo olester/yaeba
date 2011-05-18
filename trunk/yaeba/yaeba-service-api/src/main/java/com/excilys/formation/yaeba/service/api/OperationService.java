@@ -8,6 +8,7 @@ import com.excilys.formation.yaeba.model.OperationCarteBancaire;
 import com.excilys.formation.yaeba.model.OperationVirementInterne;
 import com.excilys.formation.yaeba.model.Utilisateur;
 import com.excilys.formation.yaeba.service.api.exception.IdCompteNotFoundException;
+import com.excilys.formation.yaeba.service.api.exception.MontantNegatifException;
 import com.excilys.formation.yaeba.service.api.exception.PermissionRefuseeException;
 import com.excilys.formation.yaeba.service.api.exception.SoldeInsuffisantException;
 
@@ -112,6 +113,7 @@ public interface OperationService {
 	/*
 	 * Cette fonction plante tout si les ids ne correspondent a rien.
 	 */
+
 	void createVirement(int idCompteEmetteur, int idCompteRecepteur, double montant) throws IdCompteNotFoundException, SoldeInsuffisantException,
-			PermissionRefuseeException;
+			PermissionRefuseeException,MontantNegatifException;
 }
