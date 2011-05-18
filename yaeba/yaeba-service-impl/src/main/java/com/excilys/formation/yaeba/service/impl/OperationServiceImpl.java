@@ -17,6 +17,7 @@ import com.excilys.formation.yaeba.model.Utilisateur;
 import com.excilys.formation.yaeba.service.api.CompteService;
 import com.excilys.formation.yaeba.service.api.OperationService;
 import com.excilys.formation.yaeba.service.api.exception.IdCompteNotFoundException;
+import com.excilys.formation.yaeba.service.api.exception.MontantNegatifException;
 import com.excilys.formation.yaeba.service.api.exception.PermissionRefuseeException;
 import com.excilys.formation.yaeba.service.api.exception.SoldeInsuffisantException;
 
@@ -105,8 +106,13 @@ public class OperationServiceImpl implements OperationService {
 	 */
 	@Override
 	@Transactional(readOnly = false)
-	public void createVirement(int idCompteEmetteur, int idCompteRecepteur, double montant) throws IdCompteNotFoundException, SoldeInsuffisantException,
-			PermissionRefuseeException {
+	public void createVirement(int idCompteEmetteur, int idCompteRecepteur, double montant) throws IdCompteNotFoundException,SoldeInsuffisantException, PermissionRefuseeException,
+			MontantNegatifException {
+
+		// XXX il faut tester si les id correspondent a quelque chose: getCompteById renvoie NULL:
+		// ce qui fait quand meme une eventuelle 500 dans ce cas.
+
+		if (montant <= 0) throw new MontantNegatifException(montant);
 
 		Compte em = compteService.getCompteById(idCompteEmetteur);
 
@@ -147,5 +153,4 @@ public class OperationServiceImpl implements OperationService {
 		operationDao.create(operationInverse);
 
 	}
-
 }

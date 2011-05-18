@@ -46,4 +46,11 @@ public class CompteDaoImpl extends HibernateDaoSupport implements CompteDao {
 		return compte.isEmpty();
 	}
 
+	@Override
+	public Compte getCompteByNumeroCompte(String numeroCompte) {
+		List<Compte> comptes = getHibernateTemplate().find("FROM Compte c WHERE c.numeroCompte = ?", numeroCompte);
+		if (!comptes.isEmpty()) return comptes.get(0);
+		return null;
+	}
+
 }
