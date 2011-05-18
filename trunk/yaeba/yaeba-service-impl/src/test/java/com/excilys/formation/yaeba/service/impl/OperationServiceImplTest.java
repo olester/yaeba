@@ -129,6 +129,17 @@ public class OperationServiceImplTest {
 		operationService.createVirement(98, 97, 10);
 	}
 
+	// Id de compte inexistant pour le compte crediteur
+	@Test(expected = IdCompteNotFoundException.class)
+	public void testVirementIdNotFound2() throws IdCompteNotFoundException, SoldeInsuffisantException, PermissionRefuseeException {
+		Compte em = new Compte();
+		em.setSoldeCourant(500);
+		when(compteService.getCompteById(98)).thenReturn(em);
+		when(compteService.isApprovisionne(em, 10)).thenReturn(true);
+		when(compteService.getCompteById(97)).thenThrow(new IdCompteNotFoundException(97));
+		operationService.createVirement(98, 97, 10);
+	}
+
 	@Test
 	public void testGetNbOperationsNoCBByMoisAnnee() {
 		Compte c = new Compte();
