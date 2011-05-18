@@ -16,12 +16,14 @@ public class CompteImpl implements Compte {
 	@Autowired
 	CompteService compteService;
 
+	@Autowired
+	CompteConverter compteConverter;
+
 	Logger log = LoggerFactory.getLogger(CompteImpl.class);
 
 	@Override
 	@WebMethod
 	public InfoCompte getCompteByNumero(String numero) {
-		com.excilys.formation.yaeba.model.Compte c = compteService.getCompteByNumeroCompte(numero);
-		return new CompteConverter().convert(c);
+		return compteConverter.convert(compteService.getCompteByNumeroCompte(numero));
 	}
 }
