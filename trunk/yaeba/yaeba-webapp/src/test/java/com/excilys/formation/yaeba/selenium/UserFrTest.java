@@ -228,7 +228,7 @@ public class UserFrTest {
 		selenium.type("stringMontant", "10.0");
 		selenium.click("//input[@value='Confirmer']");
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Veuillez sélectionner un compte émetteur"));
+		assertTrue(selenium.isTextPresent("Veuillez sélectionner un compte débiteur"));
 	}
 
 	@Test
@@ -237,8 +237,8 @@ public class UserFrTest {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Confirmer']");
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Veuillez sélectionner un compte récepteur"));
-		assertTrue(selenium.isTextPresent("Veuillez sélectionner un compte émetteur"));
+		assertTrue(selenium.isTextPresent("Veuillez sélectionner un compte créditeur"));
+		assertTrue(selenium.isTextPresent("Veuillez sélectionner un compte débiteur"));
 	}
 
 	@Test

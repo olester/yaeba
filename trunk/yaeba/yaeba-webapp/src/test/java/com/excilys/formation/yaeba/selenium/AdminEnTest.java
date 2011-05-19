@@ -214,7 +214,7 @@ public class AdminEnTest {
 		selenium.type("stringMontant", "10.0");
 		selenium.click("//input[@value='Confirm']");
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Please, choose an source account"));
+		assertTrue(selenium.isTextPresent("Please, choose a source account"));
 	}
 
 	@Test
@@ -223,8 +223,8 @@ public class AdminEnTest {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Confirm']");
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Please, choose an destination account"));
-		assertTrue(selenium.isTextPresent("Please, choose an source account"));
+		assertTrue(selenium.isTextPresent("Please, choose a destination account"));
+		assertTrue(selenium.isTextPresent("Please, choose a source account"));
 	}
 
 	@Test
