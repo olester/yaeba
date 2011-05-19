@@ -1,10 +1,12 @@
 package com.excilys.formation.yaeba.ws.converters;
 
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.ws.InfoCompte;
 
+@Component
 public class CompteConverter implements Converter<Compte, InfoCompte> {
 
 	@Override
