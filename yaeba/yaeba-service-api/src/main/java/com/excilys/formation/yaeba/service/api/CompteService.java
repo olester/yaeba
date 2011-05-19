@@ -6,6 +6,7 @@ import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.Utilisateur;
 import com.excilys.formation.yaeba.service.api.exception.IdCompteNotFoundException;
 import com.excilys.formation.yaeba.service.api.exception.NoCardException;
+import com.excilys.formation.yaeba.service.api.exception.NumeroCompteNotFoundException;
 
 /**
  * Il s'agit de l'interface de l'ensemble des services concernant les comptes
@@ -60,8 +61,9 @@ public interface CompteService {
 	 * @param numeroCompte
 	 *            le numero du compte
 	 * @return le compte correspondant (ou null si l'utilisateur ne possede pas le compte demande, ou si le numero de compte n'existe pas)
+	 * @throws NumeroCompteNotFoundException
 	 */
-	Compte getCompteByNumeroCompte(String numeroCompte);
+	Compte getCompteByNumeroCompte(String numeroCompte) throws NumeroCompteNotFoundException;
 
 	/**
 	 * Cette fonction calcule l'encours carte d'un compte
