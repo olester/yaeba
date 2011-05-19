@@ -96,7 +96,7 @@
 		<!-- Export Excel -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-scratchpad</artifactId>
+			<artifactId>poi</artifactId>
 		</dependency>
 
 		<!-- Servlet -->
