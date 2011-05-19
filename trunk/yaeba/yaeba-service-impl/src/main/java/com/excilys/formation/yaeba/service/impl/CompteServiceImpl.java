@@ -17,6 +17,7 @@ import com.excilys.formation.yaeba.service.api.CompteService;
 import com.excilys.formation.yaeba.service.api.OperationService;
 import com.excilys.formation.yaeba.service.api.exception.IdCompteNotFoundException;
 import com.excilys.formation.yaeba.service.api.exception.NoCardException;
+import com.excilys.formation.yaeba.service.api.exception.NumeroCompteNotFoundException;
 
 /**
  * @author excilys
@@ -102,7 +103,14 @@ public class CompteServiceImpl implements CompteService {
 	}
 
 	@Override
-	public Compte getCompteByNumeroCompte(String numeroCompte) {
-		return compteDao.getCompteByNumeroCompte(numeroCompte);
+	public Compte getCompteByNumeroCompte(String numeroCompte) throws NumeroCompteNotFoundException {
+		Compte result = compteDao.getCompteByNumeroCompte(numeroCompte);
+		if (result == null) {
+			StringBuffer sb = new StringBuffer();
+			sb.append("On ne trouve pas le numero de compte : ").append(numeroCompte);
+			logger.warn(sb.toString());
+			throw new NumeroCompteNotFoundException(numeroCompte);
+		}
+		return result;
 	}
 }
