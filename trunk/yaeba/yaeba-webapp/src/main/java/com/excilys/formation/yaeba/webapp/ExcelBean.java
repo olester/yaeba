@@ -21,6 +21,7 @@ import com.excilys.formation.yaeba.model.Utilisateur;
 
 public class ExcelBean extends AbstractExcelView {
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	protected void buildExcelDocument(Map model, HSSFWorkbook workbook, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -31,7 +32,7 @@ public class ExcelBean extends AbstractExcelView {
 		String libelle = (String) model.get("libelle");
 		DateBean dateBean = (DateBean) model.get("dateBean");
 
-		List<Operation> listeOperations = (List) model.get("listeOperations");
+		List<Operation> listeOperations = (List<Operation>) model.get("listeOperations");
 
 		float sommeCB = (Float) model.get("sommeCB");
 
