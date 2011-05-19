@@ -30,12 +30,11 @@ import com.excilys.formation.yaeba.service.api.OperationService;
 import com.excilys.formation.yaeba.service.api.exception.NoCardException;
 import com.excilys.formation.yaeba.webapp.CustomUser;
 import com.excilys.formation.yaeba.webapp.DateBean;
+import com.excilys.formation.yaeba.webapp.StaticParam;
 
 @Controller
 @RequestMapping("user/comptes")
 public class ComptesController {
-
-	public static final int NB_RESULTS = 7;
 
 	Logger logger = LoggerFactory.getLogger(ComptesController.class);
 
@@ -53,7 +52,7 @@ public class ComptesController {
 
 		// on recupere l'utilisateur courant
 		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
-		model.put("utilisateur", u);
+		model.put(StaticParam.UTILISATEUR_NAME, u);
 
 		// on recupere la liste des comptes.
 		// et on calcule l'encours carte pour les comptes associes a une carte.
@@ -65,9 +64,9 @@ public class ComptesController {
 				logger.error(e.getMessage());
 			}
 		}
-		model.put("comptes", comptes);
+		model.put(StaticParam.COMPTE_NAME, comptes);
 
-		return "comptes";
+		return StaticParam.COMPTE_NAME;
 	}
 
 	@RequestMapping("/{numeroCompte}/{annee}/{mois}/{page}/details.html")
@@ -80,7 +79,7 @@ public class ComptesController {
 
 		// on recupere l'utilisateur courant
 		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
-		model.put("utilisateur", u);
+		model.put(StaticParam.UTILISATEUR_NAME, u);
 
 		// on recupere le compte dont on cherche a afficher les details.
 		model.put("numero", numeroCompte);
@@ -144,9 +143,9 @@ public class ComptesController {
 		boolean estVide = compteService.isEmpty(c);
 		model.put("compteEstVide", estVide);
 		if (!estVide) {
-			model.put("listeOperations", operationService.getOperationsNoCBByMoisAnnee(c, annee, mois, page, NB_RESULTS));
+			model.put("listeOperations", operationService.getOperationsNoCBByMoisAnnee(c, annee, mois, page, StaticParam.NB_RESULTS));
 			long nbRes = operationService.getNbOperationsNoCBByMoisAnnee(c, annee, mois);
-			model.put("nbPages", Math.ceil(nbRes / (float) NB_RESULTS));
+			model.put("nbPages", Math.ceil(nbRes / (float) StaticParam.NB_RESULTS));
 		} else {
 			model.put("listeOperations", new ArrayList<Operation>());
 			model.put("nbPages", 0);
