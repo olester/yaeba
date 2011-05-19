@@ -130,7 +130,7 @@ public class ComptesController {
 
 		// on redirige vers l'excelBean si l'utilisateur a demandé a avoir une feuille excel
 		if (excel.equals("true")) {
-			model.put("listeOperations", operationService.getOperationsByMoisAnnee(c, annee, mois));
+			model.put(StaticParam.OPERATIONS_LIST, operationService.getOperationsByMoisAnnee(c, annee, mois));
 			return "ExcelBean";
 		}
 
@@ -143,12 +143,12 @@ public class ComptesController {
 		boolean estVide = compteService.isEmpty(c);
 		model.put("compteEstVide", estVide);
 		if (!estVide) {
-			model.put("listeOperations", operationService.getOperationsNoCBByMoisAnnee(c, annee, mois, page, StaticParam.NB_RESULTS));
+			model.put(StaticParam.OPERATIONS_LIST, operationService.getOperationsNoCBByMoisAnnee(c, annee, mois, page, StaticParam.NB_RESULTS));
 			long nbRes = operationService.getNbOperationsNoCBByMoisAnnee(c, annee, mois);
-			model.put("nbPages", Math.ceil(nbRes / (float) StaticParam.NB_RESULTS));
+			model.put(StaticParam.NB_PAGES, Math.ceil(nbRes / (float) StaticParam.NB_RESULTS));
 		} else {
-			model.put("listeOperations", new ArrayList<Operation>());
-			model.put("nbPages", 0);
+			model.put(StaticParam.OPERATIONS_LIST, new ArrayList<Operation>());
+			model.put(StaticParam.NB_PAGES, 0);
 		}
 
 		return "detailsCompte";

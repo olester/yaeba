@@ -69,7 +69,7 @@ public class VirementController {
 		try {
 			c = compteService.getCompteById(virementCommand.getCompteEmetteur());
 		} catch (IdCompteNotFoundException e) {
-			model.put("message", "transfers.error.notFoundAccount");
+			model.put(StaticParam.MESSAGE_NAME, "transfers.error.notFoundAccount");
 			return StaticParam.VIREMENT_COMMAND;
 		}
 
@@ -126,16 +126,16 @@ public class VirementController {
 			c = compteService.getCompteById(virementCommand.getCompteEmetteur());
 
 		} catch (SoldeInsuffisantException e) {
-			model.put("messageTransferError", "transfers.error.amount");
+			model.put(StaticParam.MESSAGE_ERROR_NAME, "transfers.error.amount");
 			return StaticParam.VIREMENT_COMMAND;
 		} catch (PermissionRefuseeException e) {
-			model.put("messageTransferError", "transfers.error.deniedAccount");
+			model.put(StaticParam.MESSAGE_ERROR_NAME, "transfers.error.deniedAccount");
 			return StaticParam.VIREMENT_COMMAND;
 		} catch (MontantNegatifException e) {
-			model.put("message", "transfers.error.amount");
+			model.put(StaticParam.MESSAGE_NAME, "transfers.error.amount");
 			return StaticParam.VIREMENT_COMMAND;
 		} catch (IdCompteNotFoundException e) {
-			model.put("message", "transfers.error.notFoundAccount");
+			model.put(StaticParam.MESSAGE_NAME, "transfers.error.notFoundAccount");
 			return StaticParam.VIREMENT_COMMAND;
 		}
 
