@@ -57,7 +57,6 @@ public class YaebaWebServiceImpl implements YaebaWebService {
 	@Produces("application/json")
 	@Path("/virement/debiteur/{debiteur}/crediteur/{crediteur}/montant/{montant}")
 	public InfoVirement createVirement(@PathParam("debiteur") String debiteur, @PathParam("crediteur") String crediteur, @PathParam("montant") double montant) {
-		// TODO Auto-generated method stub
 
 		Compte cCrediteur;
 		Compte cDebiteur;
