@@ -11,6 +11,7 @@ import com.excilys.formation.yaeba.service.api.CompteService;
 import com.excilys.formation.yaeba.service.api.OperationService;
 import com.excilys.formation.yaeba.service.api.exception.IdCompteNotFoundException;
 import com.excilys.formation.yaeba.service.api.exception.MontantNegatifException;
+import com.excilys.formation.yaeba.service.api.exception.NumeroCompteNotFoundException;
 import com.excilys.formation.yaeba.service.api.exception.PermissionRefuseeException;
 import com.excilys.formation.yaeba.service.api.exception.SoldeInsuffisantException;
 import com.excilys.formation.yaeba.ws.converters.CompteConverter;
@@ -31,10 +32,12 @@ public class VirementImpl implements Virement {
 
 	@Override
 	public InfoVirement passerVirement(String compteCrediteur, String compteDebiteur, double montant) {
-		Compte cCrediteur = compteService.getCompteByNumeroCompte(compteCrediteur);
-		Compte cDebiteur = compteService.getCompteByNumeroCompte(compteDebiteur);
+		Compte cCrediteur = null;
+		Compte cDebiteur = null;
 
 		try {
+			cCrediteur = compteService.getCompteByNumeroCompte(compteCrediteur);
+			cDebiteur = compteService.getCompteByNumeroCompte(compteDebiteur);
 			operationService.createVirement(cDebiteur.getId(), cCrediteur.getId(), montant);
 		} catch (PermissionRefuseeException e) {
 			log.error(e.getMessage());
@@ -43,6 +46,8 @@ public class VirementImpl implements Virement {
 		} catch (MontantNegatifException e) {
 			log.error(e.getMessage());
 		} catch (IdCompteNotFoundException e) {
+			log.error(e.getMessage());
+		} catch (NumeroCompteNotFoundException e) {
 			log.error(e.getMessage());
 		}
 
