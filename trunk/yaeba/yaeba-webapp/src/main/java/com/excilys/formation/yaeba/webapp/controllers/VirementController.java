@@ -8,7 +8,6 @@ import javax.validation.Valid;
 
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -24,9 +23,9 @@ import com.excilys.formation.yaeba.service.api.exception.IdCompteNotFoundExcepti
 import com.excilys.formation.yaeba.service.api.exception.MontantNegatifException;
 import com.excilys.formation.yaeba.service.api.exception.PermissionRefuseeException;
 import com.excilys.formation.yaeba.service.api.exception.SoldeInsuffisantException;
-import com.excilys.formation.yaeba.webapp.CustomUser;
 import com.excilys.formation.yaeba.webapp.DateBean;
 import com.excilys.formation.yaeba.webapp.StaticParam;
+import com.excilys.formation.yaeba.webapp.UtilisateurUtils;
 import com.excilys.formation.yaeba.webapp.VirementCommand;
 import com.excilys.utils.web.flash.FlashScope;
 
@@ -42,7 +41,7 @@ public class VirementController {
 
 	@RequestMapping(value = "/virements.html", method = RequestMethod.GET)
 	public String redirectVirements(ModelMap model, HttpServletRequest request) {
-		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
+		Utilisateur u = UtilisateurUtils.getUtilisateur();
 		List<Compte> comptes = compteService.getComptesByUtilisateur(u);
 		model.put(StaticParam.COMPTE_NAME, comptes);
 		model.put(StaticParam.UTILISATEUR_NAME, u);
@@ -55,7 +54,7 @@ public class VirementController {
 	public String redirectValidateur(ModelMap model, @ModelAttribute @Valid final VirementCommand virementCommand, final BindingResult result,
 			HttpServletRequest request) {
 
-		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
+		Utilisateur u = UtilisateurUtils.getUtilisateur();
 		List<Compte> comptes = compteService.getComptesByUtilisateur(u);
 		model.put(StaticParam.COMPTE_NAME, comptes);
 		model.put(StaticParam.UTILISATEUR_NAME, u);
@@ -151,7 +150,7 @@ public class VirementController {
 
 	@RequestMapping("/historique.html")
 	public String redirectHistorique(ModelMap model, Locale locale) {
-		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
+		Utilisateur u = UtilisateurUtils.getUtilisateur();
 		model.put(StaticParam.UTILISATEUR_NAME, u);
 
 		model.put("listeVirements", operationService.getVirementsInternes(u));
