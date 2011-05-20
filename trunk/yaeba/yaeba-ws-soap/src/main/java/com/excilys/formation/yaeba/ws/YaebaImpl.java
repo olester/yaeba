@@ -28,7 +28,7 @@ public class YaebaImpl implements Yaeba {
 	@Autowired
 	OperationService operationService;
 
-	Logger logger = LoggerFactory.getLogger(YaebaImpl.class);
+	private final static Logger logger = LoggerFactory.getLogger(YaebaImpl.class);
 
 	@Override
 	public InfoCompte getCompteByNumero(String numero) {

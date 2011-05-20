@@ -31,7 +31,7 @@ import com.excilys.formation.yaeba.service.api.exception.SoldeInsuffisantExcepti
 @Transactional(readOnly = true)
 public class OperationServiceImpl implements OperationService {
 
-	Logger logger = LoggerFactory.getLogger(OperationServiceImpl.class);
+	private final static Logger logger = LoggerFactory.getLogger(OperationServiceImpl.class);
 
 	@Autowired
 	private OperationDao operationDao;

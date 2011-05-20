@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.joda.time.DateTime;
-import org.joda.time.Months;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +34,7 @@ import com.excilys.formation.yaeba.webapp.UtilisateurUtils;
 @RequestMapping("user/comptes")
 public class ComptesController {
 
-	Logger logger = LoggerFactory.getLogger(ComptesController.class);
+	private final static Logger logger = LoggerFactory.getLogger(ComptesController.class);
 
 	@Autowired
 	private OperationService operationService;
@@ -76,7 +75,7 @@ public class ComptesController {
 		if (page <= 0) return "redirect:/error-400.html";
 
 		// on appelle la methode de calcul qui remplit le model
-		HashMap<String, Object> map = remplirModel(numeroCompte, annee, mois, model, locale);
+		Map<String, Object> map = remplirModel(numeroCompte, annee, mois, model, locale);
 		model = (ModelMap) map.get("model");
 		if (!((String) map.get("retour")).equals("")) return (String) map.get("retour");
 		Compte c = (Compte) map.get("compte");
@@ -106,7 +105,7 @@ public class ComptesController {
 			ModelMap model, Locale locale) {
 
 		// on appelle la methode de calcul qui remplit le model
-		HashMap<String, Object> map = remplirModel(numeroCompte, annee, mois, model, locale);
+		Map<String, Object> map = remplirModel(numeroCompte, annee, mois, model, locale);
 		model = (ModelMap) map.get("model");
 		if (!((String) map.get("retour")).equals("")) return (String) map.get("retour");
 		Compte c = (Compte) map.get("compte");
@@ -116,10 +115,10 @@ public class ComptesController {
 		return "ExcelBean";
 	}
 
-	private HashMap<String, Object> remplirModel(String numeroCompte, int annee, int mois, ModelMap model, Locale locale) {
+	private Map<String, Object> remplirModel(String numeroCompte, int annee, int mois, ModelMap model, Locale locale) {
 
 		// on cree la hashmap qui servira a retourner le model modifie
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		String retour = "";
 
 		// on teste si les arguments de l'url sont corrects.
@@ -144,26 +143,15 @@ public class ComptesController {
 		dateBean.setMois(mois);
 		model.put("dateBean", dateBean);
 
-		// on calcule les dates aujourd'hui, il y a 36 mois, etc...
-		DateTime auj = new DateTime();
-		DateTime max = auj.minusMonths(36).isAfter(c.getDateCreation().minusMonths(1)) ? auj.minusMonths(36) : c.getDateCreation().minusMonths(1);
-		DateTime request = auj.monthOfYear().setCopy(mois).year().setCopy(annee);
-		if (request.isBefore(max)) {
+		Map<String, Set<Integer>> anneesMoisDispo = compteService.calculAnneeMoisDispo(c, mois, annee);
+
+		if (anneesMoisDispo == null) {
 			model.clear();
 			retour = "redirect:/error-404.html";
 		}
 
-		// on actualise les listes déroulantes
-		Set<Integer> anneesDispo = new TreeSet<Integer>();
-		Set<Integer> moisDispo = new TreeSet<Integer>();
-		int maxMois = Months.monthsBetween(max, auj).getMonths();
-		for (int i = maxMois; i >= 0; i--) {
-			DateTime dateI = auj.minusMonths(i);
-			if (dateI.getYear() == annee) moisDispo.add(dateI.getMonthOfYear());
-			if (!anneesDispo.contains(dateI.getYear())) anneesDispo.add(dateI.getYear());
-		}
-		model.put("anneesDispo", anneesDispo);
-		model.put("moisDispo", moisDispo);
+		model.put("anneesDispo", anneesMoisDispo.get("anneesDispo"));
+		model.put("moisDispo", anneesMoisDispo.get("moisDispo"));
 
 		// on charge les informations relatives aux cartes bancaires (nombre d'operations, liste des operations, somme des operations)
 		List<OperationCarteBancaire> listeOperationsCB = operationService.getOperationsCBByMoisAnnee(c, annee, mois);
