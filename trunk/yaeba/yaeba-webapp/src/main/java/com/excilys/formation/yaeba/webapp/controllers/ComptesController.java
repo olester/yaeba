@@ -185,8 +185,6 @@ public class ComptesController {
 		StringBuilder sb = new StringBuilder();
 		sb.append("redirect:/user/comptes/").append(numeroCompte);
 		sb.append("/").append(annee).append("/").append(mois).append("/1/details.html");
-
 		return sb.toString();
 	}
-
 }
