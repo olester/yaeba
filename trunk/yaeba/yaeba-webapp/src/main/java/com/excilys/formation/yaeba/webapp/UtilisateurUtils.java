@@ -4,11 +4,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.excilys.formation.yaeba.model.Utilisateur;
 
-public final class UtilisateurUtils {
-
-	private static final Utilisateur utilisateur = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
+public class UtilisateurUtils {
 
 	public static Utilisateur getUtilisateur() {
-		return utilisateur;
+		return ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
 	}
 }
