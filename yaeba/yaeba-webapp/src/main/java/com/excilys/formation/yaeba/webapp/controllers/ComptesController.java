@@ -1,6 +1,7 @@
 package com.excilys.formation.yaeba.webapp.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -18,7 +19,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.Operation;
@@ -70,11 +70,60 @@ public class ComptesController {
 
 	@RequestMapping("/{numeroCompte}/{annee}/{mois}/{page}/details.html")
 	public String redirectDetailsCompte(@PathVariable("numeroCompte") String numeroCompte, @PathVariable("annee") int annee, @PathVariable("mois") int mois,
-			@PathVariable("page") int page, @RequestParam(value = "excel", defaultValue = "false", required = false) String excel, ModelMap model, Locale locale) {
+			@PathVariable("page") int page, ModelMap model, Locale locale) {
 
 		// on teste si les arguments de l'url sont corrects.
+		if (page <= 0) return "redirect:/error-400.html";
 
-		if (annee < 0 || annee > new DateTime().getYear() || mois < 0 || mois > 12 || page <= 0) return "redirect:/error-400.html";
+		// on appelle la methode de calcul qui remplit le model
+		HashMap<String, Object> map = remplirModel(numeroCompte, annee, mois, model, locale);
+		model = (ModelMap) map.get("model");
+		if (!((String) map.get("retour")).equals("")) return (String) map.get("retour");
+		Compte c = (Compte) map.get("compte");
+
+		// on ajoute diverses informations (locale, page courante)
+		model.put("locale", locale.getLanguage());
+		model.put("page", page);
+
+		// on verifie si le compte est vide, et on appelle les services si celui-ci ne l'est pas.
+		// on ajoute ensuite la liste des operations sauf CB et le nombre de pages
+		boolean estVide = compteService.isEmpty(c);
+		model.put("compteEstVide", estVide);
+		if (!estVide) {
+			model.put(StaticParam.OPERATIONS_LIST, operationService.getOperationsNoCBByMoisAnnee(c, annee, mois, page, StaticParam.NB_RESULTS));
+			long nbRes = operationService.getNbOperationsNoCBByMoisAnnee(c, annee, mois);
+			model.put(StaticParam.NB_PAGES, Math.ceil(nbRes / (float) StaticParam.NB_RESULTS));
+		} else {
+			model.put(StaticParam.OPERATIONS_LIST, new ArrayList<Operation>());
+			model.put(StaticParam.NB_PAGES, 0);
+		}
+
+		return "detailsCompte";
+	}
+
+	@RequestMapping("/{numeroCompte}/{annee}/{mois}/excel.html")
+	public String redirectExcel(@PathVariable("numeroCompte") String numeroCompte, @PathVariable("annee") int annee, @PathVariable("mois") int mois,
+			ModelMap model, Locale locale) {
+
+		// on appelle la methode de calcul qui remplit le model
+		HashMap<String, Object> map = remplirModel(numeroCompte, annee, mois, model, locale);
+		model = (ModelMap) map.get("model");
+		if (!((String) map.get("retour")).equals("")) return (String) map.get("retour");
+		Compte c = (Compte) map.get("compte");
+
+		// on redirige vers l'excelBean si l'utilisateur a demandé a avoir une feuille excel
+		model.put(StaticParam.OPERATIONS_LIST, operationService.getOperationsByMoisAnnee(c, annee, mois));
+		return "ExcelBean";
+	}
+
+	private HashMap<String, Object> remplirModel(String numeroCompte, int annee, int mois, ModelMap model, Locale locale) {
+
+		// on cree la hashmap qui servira a retourner le model modifie
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		String retour = "";
+
+		// on teste si les arguments de l'url sont corrects.
+		if (annee < 0 || annee > new DateTime().getYear() || mois < 0 || mois > 12) retour = "redirect:/error-400.html";
 
 		// on recupere l'utilisateur courant
 		Utilisateur u = UtilisateurUtils.getUtilisateur();
@@ -85,7 +134,7 @@ public class ComptesController {
 		Compte c = compteService.getCompteByNumeroCompte(u, numeroCompte);
 		if (c == null) {
 			model.clear();
-			return "redirect:/error-404.html";
+			retour = "redirect:/error-404.html";
 		}
 		model.put("libelle", c.getLibelle());
 
@@ -95,16 +144,16 @@ public class ComptesController {
 		dateBean.setMois(mois);
 		model.put("dateBean", dateBean);
 
-		// Calcul des dates aujourd'hui, il y a 36 mois, etc...
+		// on calcule les dates aujourd'hui, il y a 36 mois, etc...
 		DateTime auj = new DateTime();
 		DateTime max = auj.minusMonths(36).isAfter(c.getDateCreation().minusMonths(1)) ? auj.minusMonths(36) : c.getDateCreation().minusMonths(1);
 		DateTime request = auj.monthOfYear().setCopy(mois).year().setCopy(annee);
 		if (request.isBefore(max)) {
 			model.clear();
-			return "redirect:/error-404.html";
+			retour = "redirect:/error-404.html";
 		}
 
-		// -- Actualisation des listes déroulantes
+		// on actualise les listes déroulantes
 		Set<Integer> anneesDispo = new TreeSet<Integer>();
 		Set<Integer> moisDispo = new TreeSet<Integer>();
 		int maxMois = Months.monthsBetween(max, auj).getMonths();
@@ -125,32 +174,14 @@ public class ComptesController {
 				sommeCB += o.getMontant();
 			model.put("sommeCB", sommeCB);
 			model.put("listeOperationsCB", listeOperationsCB);
-		}
+		} else
+			model.put("sommeCB", 0f);
 
-		// on redirige vers l'excelBean si l'utilisateur a demandé a avoir une feuille excel
-		if (excel.equals("true")) {
-			model.put(StaticParam.OPERATIONS_LIST, operationService.getOperationsByMoisAnnee(c, annee, mois));
-			return "ExcelBean";
-		}
+		map.put("model", model);
+		map.put("retour", retour);
+		map.put("compte", c);
 
-		// on ajoute diverses informations (locale, page courante,
-		model.put("locale", locale.getLanguage());
-		model.put("page", page);
-
-		// on verifie si le compte est vide, et on appelle les services si celui-ci ne l'est pas.
-		// on ajoute ensuite la liste des operations sauf CB et le nombre de pages
-		boolean estVide = compteService.isEmpty(c);
-		model.put("compteEstVide", estVide);
-		if (!estVide) {
-			model.put(StaticParam.OPERATIONS_LIST, operationService.getOperationsNoCBByMoisAnnee(c, annee, mois, page, StaticParam.NB_RESULTS));
-			long nbRes = operationService.getNbOperationsNoCBByMoisAnnee(c, annee, mois);
-			model.put(StaticParam.NB_PAGES, Math.ceil(nbRes / (float) StaticParam.NB_RESULTS));
-		} else {
-			model.put(StaticParam.OPERATIONS_LIST, new ArrayList<Operation>());
-			model.put(StaticParam.NB_PAGES, 0);
-		}
-
-		return "detailsCompte";
+		return map;
 	}
 
 	/**
