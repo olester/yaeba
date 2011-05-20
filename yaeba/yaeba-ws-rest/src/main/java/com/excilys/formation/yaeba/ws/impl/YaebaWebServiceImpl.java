@@ -35,7 +35,7 @@ public class YaebaWebServiceImpl implements YaebaWebService {
 	@Autowired
 	CompteConverter compteConverter;
 
-	Logger logger = LoggerFactory.getLogger(YaebaWebServiceImpl.class);
+	private final static Logger logger = LoggerFactory.getLogger(YaebaWebServiceImpl.class);
 
 	@Override
 	@GET

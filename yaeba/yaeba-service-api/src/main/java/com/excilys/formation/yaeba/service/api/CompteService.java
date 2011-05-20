@@ -1,6 +1,8 @@
 package com.excilys.formation.yaeba.service.api;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import com.excilys.formation.yaeba.model.Compte;
 import com.excilys.formation.yaeba.model.Utilisateur;
@@ -86,4 +88,21 @@ public interface CompteService {
 	 * @return vrai si le solde du compte est superieur ou egal au montant specifie
 	 */
 	boolean isApprovisionne(Compte c, double montant);
+
+	/**
+	 * Cette fonction renvoie deux Set d'integer correspondant respectivement a un set des mois disponible et aux années disponibles
+	 * 
+	 * @param c
+	 *            le compte sur lequel s'applique le calcul
+	 * 
+	 * @param mois
+	 *            mois demandé
+	 * 
+	 * @param annee
+	 *            année demandée
+	 * 
+	 * @return les années et mois disponibles, ou null si l'année et le mois demandé sont avant les 36 mois glissants
+	 */
+	Map<String, Set<Integer>> calculAnneeMoisDispo(Compte c, int mois, int annee);
+
 }

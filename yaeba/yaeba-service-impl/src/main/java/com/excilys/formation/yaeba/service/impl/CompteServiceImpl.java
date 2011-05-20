@@ -1,8 +1,13 @@
 package com.excilys.formation.yaeba.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.joda.time.DateTime;
+import org.joda.time.Months;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +32,7 @@ import com.excilys.formation.yaeba.service.api.exception.NumeroCompteNotFoundExc
 @Transactional(readOnly = true)
 public class CompteServiceImpl implements CompteService {
 
-	Logger logger = LoggerFactory.getLogger(CompteServiceImpl.class);
+	private final static Logger logger = LoggerFactory.getLogger(CompteServiceImpl.class);
 
 	@Autowired
 	private OperationService operationService;
@@ -112,5 +117,32 @@ public class CompteServiceImpl implements CompteService {
 			throw new NumeroCompteNotFoundException(numeroCompte);
 		}
 		return result;
+	}
+
+	@Override
+	public Map<String, Set<Integer>> calculAnneeMoisDispo(Compte c, int mois, int annee) {
+
+		// Calcul des dates aujourd'hui, il y a 36 mois, etc...
+		DateTime auj = new DateTime();
+		DateTime max = auj.minusMonths(36).isAfter(c.getDateCreation().minusMonths(1)) ? auj.minusMonths(36) : c.getDateCreation().minusMonths(1);
+		DateTime request = auj.monthOfYear().setCopy(mois).year().setCopy(annee);
+		if (request.isBefore(max)) {
+			return null;
+		}
+
+		// -- Actualisation des listes déroulantes
+		Set<Integer> anneesDispo = new TreeSet<Integer>();
+		Set<Integer> moisDispo = new TreeSet<Integer>();
+		int maxMois = Months.monthsBetween(max, auj).getMonths();
+		for (int i = maxMois; i >= 0; i--) {
+			DateTime dateI = auj.minusMonths(i);
+			if (dateI.getYear() == annee) moisDispo.add(dateI.getMonthOfYear());
+			if (!anneesDispo.contains(dateI.getYear())) anneesDispo.add(dateI.getYear());
+		}
+		Map<String, Set<Integer>> map = new HashMap<String, Set<Integer>>();
+		map.put("moisDispo", moisDispo);
+		map.put("anneesDispo", anneesDispo);
+
+		return map;
 	}
 }
