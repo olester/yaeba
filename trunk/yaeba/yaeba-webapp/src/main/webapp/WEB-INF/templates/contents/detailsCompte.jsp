@@ -46,9 +46,9 @@
 						<div style="float: right; margin-top: -46px; margin-right: 40px;">
 							<p>
 								<a
-									href="${pageContext.request.contextPath}/user/comptes/${numero}/${dateBean.annee}/${dateBean.mois}/${page}/details.html?excel=true"><img
+									href="${pageContext.request.contextPath}/user/comptes/${numero}/${dateBean.annee}/${dateBean.mois}/excel.html"><img
 									style="vertical-align: middle;" src="${pageContext.request.contextPath}/images/excel.png" /> </a> <a
-									href="${pageContext.request.contextPath}/user/comptes/${numero}/${dateBean.annee}/${dateBean.mois}/${page}/details.html?excel=true"><spring:message
+									href="${pageContext.request.contextPath}/user/comptes/${numero}/${dateBean.annee}/${dateBean.mois}/excel.html"><spring:message
 										code="details.export" /> </a>
 							</p>
 						</div>
