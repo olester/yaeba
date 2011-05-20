@@ -9,22 +9,22 @@
 	<!-- <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" /> -->
 	<!-- <import resource="classpath:META-INF/cxf/cxf-servlet.xml" /> -->
 
-	<bean id="myVirementImpl" class="com.excilys.formation.yaeba.ws.VirementImpl" />
+	<bean id="yaebaImpl" class="com.excilys.formation.yaeba.ws.YaebaImpl" />
 
-	<jaxws:endpoint xmlns:tns="http://com/excilys/formation/yaeba/ws" id="virement" implementor="#myVirementImpl"
-		wsdlLocation="wsdl/compte.wsdl" endpointName="tns:VirementSOAP" serviceName="tns:Virement" address="/VirementSOAP">
+	<jaxws:endpoint xmlns:tns="http://com/excilys/formation/yaeba/ws" id="yaeba" implementor="#yaebaImpl"
+		wsdlLocation="wsdl/yaeba.wsdl" endpointName="tns:YaebaWS" serviceName="tns:Yaeba" address="/YaebaWS">
 		<jaxws:features>
 			<bean class="org.apache.cxf.feature.LoggingFeature" />
 		</jaxws:features>
 	</jaxws:endpoint>
 
-	<bean id="myCompteImpl" class="com.excilys.formation.yaeba.ws.CompteImpl" />
+<!-- 	<bean id="myCompteImpl" class="com.excilys.formation.yaeba.ws.CompteImpl" /> -->
 
-	<jaxws:endpoint xmlns:tns="http://com/excilys/formation/yaeba/ws" id="compte" implementor="#myCompteImpl"
-		wsdlLocation="wsdl/compte.wsdl" endpointName="tns:CompteSOAP" serviceName="tns:Compte" address="/CompteSOAP">
-		<jaxws:features>
-			<bean class="org.apache.cxf.feature.LoggingFeature" />
-		</jaxws:features>
-	</jaxws:endpoint>
+<!-- 	<jaxws:endpoint xmlns:tns="http://com/excilys/formation/yaeba/ws" id="compte" implementor="#myCompteImpl" -->
+<!-- 		wsdlLocation="wsdl/compte.wsdl" endpointName="tns:CompteSOAP" serviceName="tns:Compte" address="/CompteSOAP"> -->
+<!-- 		<jaxws:features> -->
+<!-- 			<bean class="org.apache.cxf.feature.LoggingFeature" /> -->
+<!-- 		</jaxws:features> -->
+<!-- 	</jaxws:endpoint> -->
 
 </beans>
