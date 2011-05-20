@@ -13,7 +13,6 @@ import org.joda.time.Months;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,9 +27,9 @@ import com.excilys.formation.yaeba.model.Utilisateur;
 import com.excilys.formation.yaeba.service.api.CompteService;
 import com.excilys.formation.yaeba.service.api.OperationService;
 import com.excilys.formation.yaeba.service.api.exception.NoCardException;
-import com.excilys.formation.yaeba.webapp.CustomUser;
 import com.excilys.formation.yaeba.webapp.DateBean;
 import com.excilys.formation.yaeba.webapp.StaticParam;
+import com.excilys.formation.yaeba.webapp.UtilisateurUtils;
 
 @Controller
 @RequestMapping("user/comptes")
@@ -51,7 +50,7 @@ public class ComptesController {
 		model.put("dateBean", dateBean);
 
 		// on recupere l'utilisateur courant
-		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
+		Utilisateur u = UtilisateurUtils.getUtilisateur();
 		model.put(StaticParam.UTILISATEUR_NAME, u);
 
 		// on recupere la liste des comptes.
@@ -78,7 +77,7 @@ public class ComptesController {
 		if (annee < 0 || annee > new DateTime().getYear() || mois < 0 || mois > 12 || page <= 0) return "redirect:/error-400.html";
 
 		// on recupere l'utilisateur courant
-		Utilisateur u = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUtilisateur();
+		Utilisateur u = UtilisateurUtils.getUtilisateur();
 		model.put(StaticParam.UTILISATEUR_NAME, u);
 
 		// on recupere le compte dont on cherche a afficher les details.
