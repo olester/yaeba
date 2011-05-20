@@ -290,7 +290,7 @@
 								<sourceRoot>${project.build.directory}/generated/cxf</sourceRoot>
 								<wsdlOptions>
 									<wsdlOption>
-										<wsdl>${basedir}/src/main/resources/compte.wsdl</wsdl>
+										<wsdl>${basedir}/src/main/resources/yaeba.wsdl</wsdl>
 									</wsdlOption>
 								</wsdlOptions>
 							</configuration>
