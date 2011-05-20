@@ -11,6 +11,7 @@ import com.excilys.formation.yaeba.service.api.CompteService;
 import com.excilys.formation.yaeba.service.api.OperationService;
 import com.excilys.formation.yaeba.service.api.exception.IdCompteNotFoundException;
 import com.excilys.formation.yaeba.service.api.exception.MontantNegatifException;
+import com.excilys.formation.yaeba.service.api.exception.NumeroCompteNotFoundException;
 import com.excilys.formation.yaeba.service.api.exception.PermissionRefuseeException;
 import com.excilys.formation.yaeba.service.api.exception.SoldeInsuffisantException;
 import com.excilys.formation.yaeba.ws.converters.CompteConverter;
@@ -31,16 +32,25 @@ public class YaebaImpl implements Yaeba {
 
 	@Override
 	public InfoCompte getCompteByNumero(String numero) {
-		return compteConverter.convert(compteService.getCompteByNumeroCompte(numero));
+		InfoCompte result = null;
+		try {
+			result = compteConverter.convert(compteService.getCompteByNumeroCompte(numero));
+		} catch (NumeroCompteNotFoundException e) {
+			logger.error(e.getMessage());
+		}
+		return result;
 	}
 
 	@Override
 	public InfoVirement passerVirement(String crediteur, String debiteur, double montant) {
-		Compte cCrediteur = compteService.getCompteByNumeroCompte(crediteur);
-		Compte cDebiteur = compteService.getCompteByNumeroCompte(debiteur);
-
+		Compte cCrediteur = null;
+		Compte cDebiteur = null;
 		try {
+			cCrediteur = compteService.getCompteByNumeroCompte(crediteur);
+			cDebiteur = compteService.getCompteByNumeroCompte(debiteur);
 			operationService.createVirement(cDebiteur.getId(), cCrediteur.getId(), montant);
+		} catch (NumeroCompteNotFoundException e) {
+			logger.error(e.getMessage());
 		} catch (PermissionRefuseeException e) {
 			logger.error(e.getMessage());
 		} catch (SoldeInsuffisantException e) {
