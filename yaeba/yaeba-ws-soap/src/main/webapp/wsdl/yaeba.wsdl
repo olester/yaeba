@@ -19,23 +19,6 @@
 				</xsd:complexType>
 			</xsd:element>
 
-<!-- 			<xsd:element name="passerVirement"> -->
-<!-- 				<xsd:complexType> -->
-<!-- 					<xsd:sequence> -->
-<!-- 						<xsd:element name="crediteur" type="xsd:string"></xsd:element> -->
-<!-- 						<xsd:element name="debiteur" type="xsd:string"></xsd:element> -->
-<!-- 						<xsd:element name="montant" type="xsd:double"></xsd:element> -->
-<!-- 					</xsd:sequence> -->
-<!-- 				</xsd:complexType> -->
-<!-- 			</xsd:element> -->
-<!-- 			<xsd:element name="passerVirementResponse"> -->
-<!-- 				<xsd:complexType> -->
-<!-- 					<xsd:sequence> -->
-<!-- 						<xsd:element name="virement" type="tns:infoVirement"></xsd:element> -->
-<!-- 					</xsd:sequence> -->
-<!-- 				</xsd:complexType> -->
-<!-- 			</xsd:element> -->
-
 			<xsd:complexType name="infoCompte">
 				<xsd:sequence>
 					<xsd:element name="id" type="xsd:int"/>
@@ -47,9 +30,7 @@
 					<xsd:element name="utilisateur" type="tns:infoUtilisateur"/>
 				</xsd:sequence>
 			</xsd:complexType>
-
-<!-- 			<xsd:complexType name="compteDetails"></xsd:complexType> -->
-
+			
 			<xsd:complexType name="infoUtilisateur">
 				<xsd:sequence>
 					<xsd:element name="id" type="xsd:int"/>
@@ -131,7 +112,7 @@
 		</wsdl:operation>
 	</wsdl:binding>
 	
-	<wsdl:service name="YaebaWebService">
+	<wsdl:service name="Yaeba">
 		<wsdl:port binding="tns:YaebaWS" name="YaebaWS">
 			<soap:address location="http://www.example.org/"/>
 		</wsdl:port>
