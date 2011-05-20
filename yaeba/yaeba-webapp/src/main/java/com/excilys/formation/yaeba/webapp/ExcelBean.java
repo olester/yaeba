@@ -205,57 +205,5 @@ public class ExcelBean extends AbstractExcelView {
 		sheet.autoSizeColumn((short) 2);
 		sheet.autoSizeColumn((short) 3);
 		sheet.autoSizeColumn((short) 4);
-
-		// HSSFSheet sheet = workbook.createSheet("Revenue Report");
-		// sheet.setColumnWidth((short) 0, (short) (30 * 256));
-		// sheet.setColumnWidth((short) 1, (short) (30 * 256));
-		//
-		// // Styles css
-		// HSSFFont fBold = workbook.createFont();
-		// fBold.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
-		// HSSFCellStyle csBold = workbook.createCellStyle();
-		// csBold.setFont(fBold);
-		// HSSFFont fTitle = workbook.createFont();
-		// fTitle.setFontHeightInPoints((short) 14);
-		// fTitle.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
-		// HSSFCellStyle csTitle = workbook.createCellStyle();
-		// csTitle.setFont(fTitle);
-		// csTitle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
-		// HSSFCellStyle dateStyle = workbook.createCellStyle();
-		// dateStyle.setDataFormat(HSSFDataFormat.getBuiltinFormat("m/d/yy"));
-		//
-		// // Titre
-		// HSSFRow title = sheet.createRow(0);
-		// title.createCell((short) 0).setCellValue("Operations details for the account '" + model.get("libelle") + "'");
-		// getCell(sheet, 0, 0).setCellStyle(csTitle);
-		//
-		// // Infos
-		// HSSFRow header = sheet.createRow(1);
-		// header.createCell((short) 0).setCellValue("Account owner :");
-		// getCell(sheet, 1, 0).setCellStyle(csBold);
-		// Utilisateur u = (Utilisateur) model.get("utilisateur");
-		// header.createCell((short) 1).setCellValue(u.getNom().toUpperCase() + " " + u.getPrenom());
-		// header = sheet.createRow(2);
-		// header.createCell((short) 0).setCellValue("Account label :");
-		// getCell(sheet, 2, 0).setCellStyle(csBold);
-		// header.createCell((short) 1).setCellValue((String) model.get("libelle"));
-		// header = sheet.createRow(3);
-		// header.createCell((short) 0).setCellValue("Account number :");
-		// getCell(sheet, 3, 0).setCellStyle(csBold);
-		// header.createCell((short) 1).setCellValue((String) model.get("numero"));
-
-		// header = sheet.createRow(3);
-		// header.createCell((short) 0).setCellValue("For the month :");
-		// getCell(sheet, 3, 0).setCellStyle(csBold);
-		// header.createCell((short) 1).setCellValue(dateBean.getMois() + "/" + dateBean.getAnnee());
-
-		// int rowNum = 1;
-		// for (Map.Entry<String, String> entry : revenueData.entrySet()) {
-		// //create the row data
-		// HSSFRow row = sheet.createRow(rowNum++);
-		// row.createCell(0).setCellValue(entry.getKey());
-		// row.createCell(1).setCellValue(entry.getValue());
-		//
-		// }
 	}
 }
