@@ -2,7 +2,7 @@ package com.excilys.formation.yaeba.ws;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "compte")
+@XmlRootElement(name = "virement")
 public class InfoVirement {
 
 	protected InfoCompte debiteur;
