@@ -1,0 +1,1 @@
+Yaeba is an eBanking Application developed by the Yaeba team, from Excilys.
